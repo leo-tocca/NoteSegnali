@@ -1,0 +1,258 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\hypersetup{
+	pdftitle={Dimostrazioni e quesiti per primo parziale di Teoria dei Segnali},
+	pdfauthor={Leonardo Toccafondi},
+	hidelinks,
+	pdfcreator={LaTeX via pandoc}}
+
+\title{Dimostrazioni e quesiti per primo parziale di Teoria dei Segnali}
+\author{}
+\date{}
+
+\begin{document}
+	\maketitle
+
+\hypertarget{quesiti}{%
+\subsection{QUESITI}\label{quesiti}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+
+\item
+	Un segnale deterministico a tempo continuo s(t) periodico ha Energia e Potenza finite e/o infinite ?
+	
+\item
+Si definisca la Potenza istantanea di un segnale deterministico a
+tempo continuo $s(t)$
+
+\item 
+Si definisca la potenza media di un segnale deterministico a tempo continuo $s(t)$
+
+\item
+Calcolare Energia e Potenza media del segnale a tempo continuo
+\(x(t) = Ae ^{-t} u(t)\).
+
+\item
+Calcolare l'energia del segnale x(t) = sinc(t).
+
+\item
+Calcolare Energia e Potenza media di un segnale a tempo continuo
+sinusoidale di ampiezza 2 e di periodo 2 secondi.
+\item
+Calcolare Energia e Potenza media di un segnale a tempo continuo
+sinusoidale di ampiezza A e di periodo T.
+
+\item
+Calcolare Energia e Potenza media di un segnale a tempo continuo
+costante
+
+\item
+Giustificare la seguente affermazione: ``Lo spettro di ampiezza di un
+segnale tempo-continuo aperiodico reale è una funzione pari''.
+
+
+\item
+Calcolare la quantità
+\(\displaystyle \int_{- \infty}^{\infty} sinc(t) dt\)
+	
+\item 
+Tra onda quadra e onda triangolare, quale dei due segnali ha coefficienti della serie di Fourier con modulo che
+va a zero più velocemente al crescere di n?
+
+\item
+Tra la rampa e l'onda triangolare, quale dei due segnali ha
+coefficienti della serie di Fourier con modulo che va a zero più
+velocemente al crescere di n, e perché?
+
+\item 
+Se il segnale periodico x(t) è reale e dispari, allora la serie di Fourier si semplifica in modo tale che ...
+
+
+\item 
+Se il segnale periodico $x(t)$ è reale e pari, allora la serie di Fourier si semplifica in modo tale che ...
+
+
+\item
+Elencare le Condizioni di Dirichlet per la convergenza della serie di
+Fourier
+
+\item
+Quali sono le proprietà della serie di Fourier di un segnale periodico
+pari
+
+\item 
+Se il segnale aperiodico $x(t)$ è pari, allora la sua trasformata di Fourier è	
+
+
+
+\item 
+Se il segnale aperiodico $x(t)$ è reale e pari, allora la sua trasformata di Fourier è
+
+\item 
+Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(at)$ con $|a|>1$ risulta modificata in modo
+che ...
+
+
+
+\item
+  Se il segnale aperiodico x(t) è reale e dispari, allora la sua
+  trasformata di Fourier è\ldots{}
+\item
+  In cosa differiscono le trasformate di Fourier di
+  \(rect (\frac{t}{T})\) e di \(rect (\frac{t-5}{T})\)? Spiegare le
+  differenze sia per lo spettro di ampiezza che per lo spettro di fase.
+
+
+\item
+  Se \(x(t)\) è un segnale complesso e \(X(f)\) la sua trasformata di
+  Fourier, quale è la trasformata di Fourier della parte reale di
+  \(x(t\))? Giustificare la risposta
+\item
+  Quale è la trasformata di Fourier di $ e ^{-j2 \pi t}$?
+  Giustificare la risposta
+\item
+  Se \(x(t) \leftrightarrow X(f)\) sono una funzione e la sua
+  trasformata di Fourier, qual è la trasformata di Fourier di \(x(-t)\)?
+  Giustificare la risposta
+
+
+
+
+
+
+\item
+  In cosa differiscono le trasformate di Fourier di $rect(\frac{t}{T})$ e
+  di $rect(\frac{t}{2T})$ ? Spiegare le differenze sia per lo spettro di
+  ampiezza che per lo spettro di fase.
+
+
+\item
+  Se il segnale periodico x(t) è reale, quali proprietà hanno
+  rispettivamente lo spettro di ampiezza e lo spettro di fase?
+
+
+\item
+  Se il segnale aperiodico x(t) è dispari, allora la sua trasformata di
+  Fourier è
+
+
+\item
+Un sistema a tempo continuo si definisce causale se\ldots{} Fare poi
+un esempio di sistema causale e uno di sistema non causale.
+
+\item
+Un sistema a tempo continuo si definisce stabile se
+
+\item
+Dato un sistema LTI con risposta impulsiva $h(t) = \delta (t - 1) +\delta (t - 2)$,
+disegnare l'uscita quando il suo ingresso è il segnale $x(t) = u(t)$  
+\item 
+La risposta impulsiva di un sistema LTI causale è
+\item
+La risposta impulsiva di un sistema LTI causale soddisfa la seguente
+condizione:
+\item
+Un sistema che produce in uscita il valore assoluto del segnale al suo
+ingresso è un sistema lineare? Si argomenti la risposta con almeno un
+esempio.
+\item
+Se un sistema LTI tempo-continuo ha una risposta impulsiva con energia
+finita, possiamo affermare che il sistema è stabile? Giustificare la
+risposta.
+\item
+  Un processo aleatorio si definisce stazionario in senso lato se
+\item
+  Elencare le proprietà che definiscono un processo aleatorio
+  stazionario in senso lato (WSS).
+\item
+Quale è la risposta in frequenza di un sistema LTI retto
+dall'equazione differenziale $y(t) - \frac{d^{2}y(t)}{dt^2} = x(t)$?
+\item
+Definire la densità spettrale di potenza di un segnale \(x(t)\) a
+potenza finita.
+  
+\end{enumerate}
+
+\hypertarget{dimostrazioni}{%
+\subsection{DIMOSTRAZIONI}\label{dimostrazioni}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Enunciare e dimostrare il Teorema di dualità della Trasformata
+  continua di Fourier
+\item
+  Enunciare e dimostrare il Teorema del cambiamento di scala della
+  Trasformata continua di Fourier
+\item
+  Enunciare e dimostrare il Teorema di integrazione completo della
+  Trasformata continua di Fourier
+\item
+  Enunciare e dimostrare il Teorema di Parseval
+\item
+  Dimostrare che se un segnale periodico è reale, allora i coefficienti
+  della sua espansione in serie di Fourier (nella sua forma complessa)
+  sono caratterizzati da una simmetria Hermitiana.
+\item
+  Dato un segnale x(t), enunciare e dimostrare la formula somma di
+  Poisson che lega i coeffcienti della serie di Fourier di \(\displaystyle y(t) = \sum_{n = -\infty}^{\infty} x(t - nT)\)
+  alla trasformata (aperiodica) di Fourier di x(t).
+\item
+  Dimostrare che la trasformata di Fourier del prodotto di funzioni
+  \(x(t) \cdot y(t)\) è la convoluzione di \(X(f)\) con \(Y (f)\).
+\item
+  Enunciare e dimostrare il teorema di integrazione completo della
+  trasformata continua di Fourier.
+\item
+  Enunciare il criterio di Dirichlet della serie di Fourier
+\item
+  Enunciare il Teorema di Wiener-Khintchine
+\end{enumerate}
+
+\end{document}
