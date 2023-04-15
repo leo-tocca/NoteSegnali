@@ -92,9 +92,16 @@ sinusoidale di ampiezza A e di periodo T.
 Calcolare Energia e Potenza media di un segnale a tempo continuo
 costante
 
+\item 
+Sotto quali condizioni un segnale deterministico a tempo continuo s(t) ha Potenza media finita?
+
 \item
 Giustificare la seguente affermazione: ``Lo spettro di ampiezza di un
 segnale tempo-continuo aperiodico reale è una funzione pari''.
+
+\item
+Giustificare la seguente affermazione: ``Lo spettro di fase di un
+	segnale tempo-continuo aperiodico reale è una funzione dispari''.
 
 
 \item
@@ -110,8 +117,16 @@ Tra la rampa e l'onda triangolare, quale dei due segnali ha
 coefficienti della serie di Fourier con modulo che va a zero più
 velocemente al crescere di n, e perché?
 
+\item
+Quali sono le proprietà della serie di Fourier di un segnale periodico
+pari
+
+\item
+Quali sono le proprietà della serie di Fourier di un segnale periodico
+dispari
+
 \item 
-Se il segnale periodico x(t) è reale e dispari, allora la serie di Fourier si semplifica in modo tale che ...
+Se il segnale periodico $x(t)$ è reale e dispari, allora la serie di Fourier si semplifica in modo tale che ...
 
 
 \item 
@@ -122,27 +137,33 @@ Se il segnale periodico $x(t)$ è reale e pari, allora la serie di Fourier si se
 Elencare le Condizioni di Dirichlet per la convergenza della serie di
 Fourier
 
-\item
-Quali sono le proprietà della serie di Fourier di un segnale periodico
-pari
+\item 
+Elencare le Condizioni di Dirichlet per la convergenza della trasformata di Fourier
+
+
 
 \item 
 Se il segnale aperiodico $x(t)$ è pari, allora la sua trasformata di Fourier è	
 
-
+\item 
+Se il segnale aperiodico $x(t)$ è dispari, allora la sua trasformata di Fourier è
 
 \item 
 Se il segnale aperiodico $x(t)$ è reale e pari, allora la sua trasformata di Fourier è
+
+\item
+Se il segnale aperiodico $x(t)$ è reale e dispari, allora la sua
+trasformata di Fourier è\ldots{}
 
 \item 
 Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(at)$ con $|a|>1$ risulta modificata in modo
 che ...
 
+\item 
+Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(at)$ con $|a|<1$ risulta modificata in modo che ...
 
 
-\item
-  Se il segnale aperiodico x(t) è reale e dispari, allora la sua
-  trasformata di Fourier è\ldots{}
+
 \item
   In cosa differiscono le trasformate di Fourier di
   \(rect (\frac{t}{T})\) e di \(rect (\frac{t-5}{T})\)? Spiegare le
@@ -153,6 +174,11 @@ che ...
   Se \(x(t)\) è un segnale complesso e \(X(f)\) la sua trasformata di
   Fourier, quale è la trasformata di Fourier della parte reale di
   \(x(t\))? Giustificare la risposta
+  
+  \item
+  Se \(x(t)\) è un segnale complesso e \(X(f)\) la sua trasformata di
+  Fourier, quale è la trasformata di Fourier della parte immaginaria di
+  \(x(t\))? Giustificare la risposta
 \item
   Quale è la trasformata di Fourier di $ e ^{-j2 \pi t}$?
   Giustificare la risposta
@@ -160,9 +186,6 @@ che ...
   Se \(x(t) \leftrightarrow X(f)\) sono una funzione e la sua
   trasformata di Fourier, qual è la trasformata di Fourier di \(x(-t)\)?
   Giustificare la risposta
-
-
-
 
 
 
@@ -175,11 +198,6 @@ che ...
 \item
   Se il segnale periodico x(t) è reale, quali proprietà hanno
   rispettivamente lo spettro di ampiezza e lo spettro di fase?
-
-
-\item
-  Se il segnale aperiodico x(t) è dispari, allora la sua trasformata di
-  Fourier è
 
 
 \item
@@ -205,17 +223,18 @@ esempio.
 Se un sistema LTI tempo-continuo ha una risposta impulsiva con energia
 finita, possiamo affermare che il sistema è stabile? Giustificare la
 risposta.
-\item
-  Un processo aleatorio si definisce stazionario in senso lato se
-\item
-  Elencare le proprietà che definiscono un processo aleatorio
-  stazionario in senso lato (WSS).
+
 \item
 Quale è la risposta in frequenza di un sistema LTI retto
 dall'equazione differenziale $y(t) - \frac{d^{2}y(t)}{dt^2} = x(t)$?
 \item
 Definire la densità spettrale di potenza di un segnale \(x(t)\) a
 potenza finita.
+\item
+Un processo aleatorio si definisce stazionario in senso lato se
+\item
+Elencare le proprietà che definiscono un processo aleatorio
+stazionario in senso lato (WSS).
   
 \end{enumerate}
 
@@ -224,6 +243,11 @@ potenza finita.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+
+\item
+Dimostrare che se un segnale periodico è reale, allora i coefficienti
+della sua espansione in serie di Fourier (nella sua forma complessa)
+sono caratterizzati da una simmetria Hermitiana.
 \item
   Enunciare e dimostrare il Teorema di dualità della Trasformata
   continua di Fourier
@@ -233,12 +257,8 @@ potenza finita.
 \item
   Enunciare e dimostrare il Teorema di integrazione completo della
   Trasformata continua di Fourier
-\item
-  Enunciare e dimostrare il Teorema di Parseval
-\item
-  Dimostrare che se un segnale periodico è reale, allora i coefficienti
-  della sua espansione in serie di Fourier (nella sua forma complessa)
-  sono caratterizzati da una simmetria Hermitiana.
+
+
 \item
   Dato un segnale x(t), enunciare e dimostrare la formula somma di
   Poisson che lega i coeffcienti della serie di Fourier di \(\displaystyle y(t) = \sum_{n = -\infty}^{\infty} x(t - nT)\)
@@ -246,13 +266,195 @@ potenza finita.
 \item
   Dimostrare che la trasformata di Fourier del prodotto di funzioni
   \(x(t) \cdot y(t)\) è la convoluzione di \(X(f)\) con \(Y (f)\).
+
 \item
-  Enunciare e dimostrare il teorema di integrazione completo della
-  trasformata continua di Fourier.
-\item
-  Enunciare il criterio di Dirichlet della serie di Fourier
+Enunciare e dimostrare il Teorema di Parseval
 \item
   Enunciare il Teorema di Wiener-Khintchine
 \end{enumerate}
 
+\newpage
+
+\hypertarget{risposte-quesiti}{%
+	\subsection{RISPOSTE QUESITI}\label{risposte-quesiti}}
+
+\begin{enumerate}
+	\def\labelenumi{\arabic{enumi}.} 
+	\item
+	Un segnale deterministico a tempo continuo \(s(t)\) periodico ha
+	potenza finita (somma di infinite aree) e energia infinita(pari alla potenza media calcolata in un singolo periodo).
+	\item
+	La potenza istantanea di un segnale deterministico a tempo continuo
+	\(s(t)\) è definita come \(P(t) = |s(t)|^2\).
+	\item
+	La potenza media di un segnale deterministico a tempo continuo s(t) è
+	definita come $ \displaystyle \lim_{s\to\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} s^2(t)dt$, dove T è il 	periodo del segnale.
+	\item
+	Per il segnale $x(t) = Ae^{-t}u(t),$ l'energia è $ E = \int_0^\infty |Ae^{t}|^2 dt = A^2 \int_0^\infty e^{-
+		2t} dt = \frac{A^2}{2}$ e la potenza media è infinita poiché il segnale non è periodico.
+	\item
+	L'energia del segnale \(x(t) = sinc(t)\) è pari ad uno, in quanto utilizzando il teorema di Parseval,
+	$\int_{-\infty}^{+\infty}|x(t)|^2dt = \int_{-\infty}^{+\infty}|X(f)|^2df$, e la trasformata 
+	di $sinc(t)$ è pari a $rect(f)$, pari ad un rettangolo di altezza e base 1.
+	\(E = \int_{-\infty}^\infty (\frac{sin(\pi t)}{( \pi t)})^2 dt = 1.\)
+	\item
+	Per un segnale sinusoidale di ampiezza 2 e periodo 2 secondi,
+	l'energia è infinita perché il segnale è periodico e la potenza media
+	è \(P_m = \frac{1}{2} * (2^2) = 2.\)
+	\item
+	Per un segnale sinusoidale di ampiezza A e periodo T, l'energia è
+	infinita perché il segnale è periodico e la potenza media è
+	\(P_m = \frac{1}{2} * A^2\).
+	\item
+	Per un segnale costante, l'energia è infinita perché il segnale è
+	periodico e la potenza media è \(P_m = C^2,\) dove C è il valore
+	costante.
+	\item
+	Un segnale deterministico a tempo continuo \(s(t)\) ha potenza media
+	finita se: \newline $ \displaystyle \lim_{s\to\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} s^2(t)dt < \infty$.
+	\item
+	Lo spettro di ampiezza di un segnale tempo-continuo aperiodico reale è
+	una funzione pari perché la trasformata di Fourier di un segnale reale
+	ha componenti simmetriche rispetto all'asse delle ordinate.
+	\item
+	Lo spettro di fase di un segnale tempo-continuo aperiodico reale è una
+	funzione dispari perché la fase della trasformata di Fourier di un
+	segnale reale è uguale all'opposto della fase della sua componente
+	coniugata.
+	\item
+	$ \displaystyle \int_{-\infty}^\infty sinc(t)dt = 1$, in quanto integrale di una
+	funzione sinc normalizzata.
+	\item
+	L'onda triangolare, in quanto non presentando discontinuità, a differenza del segnale onda quadra), nella sua ricostruzione del segnale le componenti ad alta frequenza hanno importanza minore.
+	\item
+L'onda triangolare, in quanto non presentando discontinuità, a differenza del segnale dente di sega), nella sua ricostruzione del segnale le componenti ad alta frequenza hanno importanza minore.
+	\item
+	Le proprietà della serie di Fourier di un segnale periodico pari sono:
+	solo coefficienti \(a_0\) e \(a_n\) diversi da zero, e tutti i
+	coefficienti \(b_n\) sono nulli.
+	\item
+	Le proprietà della serie di Fourier di un segnale periodico dispari
+	sono: tutti i coefficienti \(a_0\) e \(a_n\) sono nulli, e solo i
+	coefficienti \(b_n\) sono diversi da zero.
+	\item
+	Se il segnale periodico \(x(t)\) è reale e dispari, la serie di
+	Fourier si semplifica in modo tale che tutti i coefficienti \(a_n\)
+	sono nulli e la serie contiene solo termini con seno.
+	\item
+	Se il segnale periodico \(x(t)\) è reale e pari, la serie di Fourier
+	si semplifica in modo tale che tutti i coefficienti \(b_n\) sono nulli
+	e la serie contiene solo termini con coseno.
+	\item
+	Le Condizioni di Dirichlet per la convergenza della serie di Fourier
+	sono:
+	
+	\begin{enumerate}
+		\def\labelenumii{(\alph{enumii})}
+		\tightlist
+		\item
+		la funzione deve essere assolutamente integrabile sul periodo $T_0$: $\displaystyle \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x(t)| dt < +\infty$
+		\item
+		la funzione deve essere continua o presentare un numero finito di discontinuità di prima specie
+		\item
+		la funzione deve avere un numero finito di massimi e minimi
+		all'interno di un periodo. Oppure  $x(t)$ derivabile rispetto al tempo nel periodo $T_0$, esclusi al più un numero finito di disconuità di prima specie.
+	\end{enumerate}
+	\item
+	Le Condizioni di Dirichlet per la convergenza della trasformata di
+	Fourier sono simili a quelle per la serie di Fourier:
+	
+	\begin{enumerate}
+		\def\labelenumii{(\alph{enumii})}
+		\tightlist
+		\item
+		la funzione deve essere assolutamente sommabile: $\displaystyle \int_{-\infty}^{\infty} |x(t)| dt < +\infty$
+		\item
+		se in qualunque intervallo finito $(t_1, t_2)$ è continua o presenta un numero finito di discontinuità di prima specie
+		\item
+		 se in qualunque intervallo finito $(t_1, t_2)$ la funzione ha	 un numero finito di massimi e minimi.
+	\end{enumerate}
+	\item
+	La trasformata è pari a sua volta.
+	\item
+	La trasformata è dispari a sua volta.
+	\item
+	Se il segnale aperiodico \(x(t)\) è reale e pari, la sua trasformata
+	di Fourier è reale e pari.
+	\item
+	Se il segnale aperiodico \(x(t)\) è reale e dispari, la sua
+	trasformata di Fourier è immaginaria pura e dispari.
+	\item
+Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(at)$ con$ |a| > 1$ è$ \frac{1}{a} X(-\frac{f}{a})$. Quindi per il teorema del cambiamento di scala abbiamo una dilatazione in
+	\item
+Se la trasformata di Fourier di $x(t$) è $X(f)$, allora la trasformata di $x(at)$ con $|a| < 1 $è $\frac{1}{|a|} X(\frac{f}{|a|})$.
+	\item
+	Le trasformate di Fourier di \(rect (\frac{t}{T})\) e di
+	\(rect (\frac{t-5}{T})\) differiscono solo per la fase. Lo spettro di
+	ampiezza è lo stesso, mentre lo spettro di fase di
+	\(rect (\frac{t-5}{T})\) ha una componente lineare aggiuntiva rispetto
+	a \(rect (\frac{t}{T})\).
+	\item
+	Se \(x(t)\) è un segnale complesso e\$ X(f)\$ la sua trasformata di
+	Fourier, la trasformata di Fourier della parte reale di \(x(t)\) è
+	\(\frac{X(f) + X^*(-f)}{2}\).
+	\item
+	Se \(x(t)\) è un segnale complesso e \$X(f) \$la sua trasformata di
+	Fourier, la trasformata di Fourier della parte immaginaria di \(x(t)\)
+	è \(\frac{-jX(f) + jX^*(-f)}{2}\).
+	\item
+	La trasformata di Fourier di \(e^{(-j2\pi t)}\) è un impulso di Dirac
+	centrato in \(f = 1\).
+	\item
+	\(x(t) \leftrightarrow X(f)\) sono una funzione e la sua trasformata
+	di Fourier, la trasformata di Fourier di \(x(-t)\) è \(X^*(-f)\).
+	\item
+	Le trasformate di Fourier di \(rect(\frac{t}{T})\) e di
+	\(rect(\frac{t}{2T})\) differiscono sia per lo spettro di ampiezza che
+	per lo spettro di fase. Lo spettro di ampiezza di
+	\(rect(\frac{t}{2T})\)) ha larghezza doppia rispetto a
+	\(rect(\frac{t}{T})\), mentre la fase rimane la stessa.
+	\item
+	Se il segnale periodico \(x(t)\) è reale, lo spettro di ampiezza è
+	pari e lo spettro di fase è dispari.
+	\item
+	Un sistema a tempo continuo si definisce causale se la sua risposta
+	impulsiva \(h(t)\) è nulla per \(t < 0\). Un esempio di sistema
+	causale è un filtro passa-basso RC, mentre un esempio di sistema non
+	causale è un filtro ideale passa-basso.
+	\item
+	Un sistema a tempo continuo si definisce stabile se la sua risposta
+	impulsiva è assolutamente integrabile, ovvero se
+	\(\int_{-\infty}^\infty |h(t) dt < \infty\).
+	\item
+	Dato un sistema LTI con risposta impulsiva
+	\(h(t) = \delta(t - 1) + \delta(t - 2)\), l'uscita quando il suo
+	ingresso è il segnale \(x(t) = u(t)\) sarà
+	\(y(t) = u(t - 1) + u(t - 2).\)
+	\item
+	La risposta impulsiva di un sistema LTI causale è una funzione
+	\(h(t)\) tale che \(h(t) = 0\) per \(t < 0\).
+	\item
+	La risposta impulsiva di un sistema LTI causale soddisfa la condizione
+	\(h(t) = 0\) per \(t < 0\).
+	\item
+	Un sistema che produce in uscita il valore assoluto del segnale al suo
+	ingresso non è un sistema lineare. Ad esempio, considerando i segnali
+	\(x_1(t) = t\) e \(x_2(t) = -t\), il sistema produce \(y_1(t) = |t|\)
+	e \(y_2(t) = |-t| = t\). Tuttavia, \(y_1(t) + y_2(t) = 2t\), mentre il
+	sistema applicato alla somma dei segnali in ingresso produce
+	\(|t - t| = 0\), che non è uguale a \(2t\).
+	\item
+	Se un sistema LTI tempo-continuo ha una risposta impulsiva con energia
+	finita, possiamo affermare che il sistema è stabile, perché l'energia
+	finita implica che la risposta impulsiva è assolutamente integrabile.
+	\item
+	La risposta in frequenza di un sistema LTI retto dall'equazione
+	differenziale \(y(t) - \frac{d^{2}y(t)}{dt^2} = x(t)\) è
+	\(H(f) = 1 + (2 \pi f)^2\).
+	\item
+	La densità spettrale di potenza di un segnale \(x(t)\) a potenza
+	finita è definita come la trasformata di Fourier dell'autocorrelazione
+	del segnale: \(S_{xx}(f) = F[R_{xx}(\tau)]\), dove \(R_{xx}(\tau)\) è
+	l'autocorrelazione del segnale \(x(t)\).
+\end{enumerate}
 \end{document}
