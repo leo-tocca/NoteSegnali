@@ -388,7 +388,7 @@ L'onda triangolare, non presentando discontinuità, (a differenza del segnale de
 	\item
 Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(\alpha t)$ con$ |\alpha| > 1$ è $\displaystyle \frac{1}{\alpha} X(\frac{f}{\alpha})$. Quindi per il teorema del cambiamento di scala, con una compressione nel tempo abbiamo una dilatazione in frequenza.
 	\item
-Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(\alpha t)$ con$ |\alpha| < 1$ è $\displaystyle \frac{1}{\alpha} X(-\frac{f}{\alpha})$. Quindi per il teorema del cambiamento di scala, con una dilatazione nel tempo abbiamo una compressione in frequenza.
+Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(\alpha t)$ con$ |\alpha| < 1$ è $\displaystyle \frac{1}{|\alpha|} X(\frac{f}{\alpha})$. Quindi per il teorema del cambiamento di scala, con una dilatazione nel tempo abbiamo una compressione in frequenza.
 	\item
 	Le trasformate di Fourier di \(rect (\frac{t}{T})\) e di
 	\(rect (\frac{t-5}{T})\) differiscono solo per la fase. Lo spettro di
@@ -463,9 +463,17 @@ Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(\a
 	$\displaystyle Y(f)(1-(j2\pi f)^2)=X(f)$. Sapendo che $Y(f)=X(f)H(f)$, \newline
 	$\displaystyle H(f)X(f)(1+4\pi^2 f^2)=H(f) \to H(f)=\frac{1}{1+4\pi^2 f^2}$
 	\item
-	La densità spettrale di potenza di un segnale \(x(t)\) a potenza
-	finita è definita come la trasformata di Fourier dell'autocorrelazione
-	del segnale: \(S_{xx}(f) = F[R_{xx}(\tau)]\), dove \(R_{xx}(\tau)\) è
-	l'autocorrelazione del segnale \(x(t)\).
+	La densità spettrale di potenza di un segnale \(x(t)\) è definita come: \newline
+	$\displaystyle S_x(f) \triangleq \lim_{T \to \infty} \frac{E_{X_T}(f)}{T} = \lim_{T \to \infty} \frac{|X_T(f)|^2}{T}$ \newline
+	Per il teorema di Wiener-Khintchine afferma però che la densità spettrale di potenza$^*$ è uguale alla trasformata di Fourier della funzione di autocorrelazione così modificata: \newline
+	
+		$\displaystyle R_x(\tau) \triangleq  \lim_{T \to \infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)x(t-\tau)$
+		\newline
+		
+		La densità spettrale di potenza è:
+		\newline
+		
+		 $ \displaystyle S_x(f)= \int_{-\infty}^{\infty} R_x(\tau)e^{-j2 \pi f \tau} d\tau = 2\int_{0}^{\infty}  R_x(\tau) cos(2 \pi f \tau) d\tau$ \newline
+		
 \end{enumerate}
 \end{document}
