@@ -41,12 +41,15 @@ author:
 31. Dato il segnale campionato $x_c(t)$ ottenuto campionando il segnale analogico di partenza $x(t)$, scrivere la relazione che lega lo spettro di $x_c(t)$ allo spettro di $x(t)$.
 32. Enunciare e spiegare la condizione di convergenza della Trasformata di Fourier per sequenze
 33. Spiegare il ruolo svolto da un codificatore di sorgente nella catena di trasmissione digitale.
-
+34. Spiegare la differenza tra un quantizzatore uniforme (a passo $\delta$ e a $B$ bit) di tipo midtread e uno di tipo midrise
+35. Scrivere la risposta impulsiva di un sistema discreto che implementa una finestra mobile
+36. Scrivere la proprietà di traslazione in frequenza della DFT
+37. 
 
 ## DIMOSTRAZIONI
 
 1. Enunciare e dimostrare il Teorema del prodotto della TDF di una sequenza
-2. Enunciare e dimostrare la relazione che esiste tra la trasformata di Fourier di una sequenza $x[n]$ ottenuta per campionamento di un segnale continuo $x(t)$, e la Trasformata di Fourier di $x(t)$stesso
+2. Enunciare e dimostrare la relazione che esiste tra la trasformata di Fourier di una sequenza $x[n]$ ottenuta per campionamento di un segnale continuo $x(t)$, e la Trasformata di Fourier di $x(t)$ stesso
 3. Dimostrare che dalla relazione di antitrasformata discreta di Fourier discende la relazione di trasformata discreta di Fourier
 4. Enunciare e dimostrare il Teorema della convoluzione della Trasformata discreta di Fourier
 5. Data la sequenza x[n], avente come trasformata Z la funzione $X(z)$, quale è la trasformata Z della sequenza $y[n] = n x[n]$? Dimostrare il risultato. $*$
