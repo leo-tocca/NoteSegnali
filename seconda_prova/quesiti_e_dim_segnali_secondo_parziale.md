@@ -41,10 +41,9 @@ author:
 31. Dato il segnale campionato $x_c(t)$ ottenuto campionando il segnale analogico di partenza $x(t)$, scrivere la relazione che lega lo spettro di $x_c(t)$ allo spettro di $x(t)$.
 32. Enunciare e spiegare la condizione di convergenza della Trasformata di Fourier per sequenze
 33. Spiegare il ruolo svolto da un codificatore di sorgente nella catena di trasmissione digitale.
-34. Spiegare la differenza tra un quantizzatore uniforme (a passo $\delta$ e a $B$ bit) di tipo midtread e uno di tipo midrise
+34. Spiegare la differenza tra un quantizzatore uniforme (a passo $\Delta$ e a $B$ bit) di tipo midtread e uno di tipo midrise
 35. Scrivere la risposta impulsiva di un sistema discreto che implementa una finestra mobile
 36. Scrivere la proprietà di traslazione in frequenza della DFT
-37. 
 
 ## DIMOSTRAZIONI
 
@@ -56,3 +55,12 @@ author:
 6. Enunciare e dimostrare il teorema di Parseval nella sua forma valida per sequenze aperiodiche e relative trasformate di Fourier per sequenze.
 7. Dimostrare che la trasformata Z della convoluzione di due sequenze coincide con il prodotto delle relative trasformate Z.
 8. Dimostrare che, data una sequenza $x[n]$ di $N$ campioni, definendo la sequenza DFT mediante la formula
+ $$
+ \displaystyle
+ X[K] = \sum_{n=0}^{N-1} x[n] = e^{-j \frac{2\pi}{N} kn}, \ \ \ k = 0, 1 , \dots, N-1
+ $$
+ allora la sequenza $x[n]$ è ricavabile da 
+ $$
+ \displaystyle
+ x[n] = \frac{1}{N} \sum_{n=0}^{N-1} X[K] = e^{j \frac{2\pi}{N} kn}
+ $$
