@@ -51,7 +51,7 @@ author:
 ##### Quantizzazione
 32. Spiegare la differenza tra un quantizzatore uniforme (a passo $\Delta$ e a $B$ bit) di tipo midtread e uno di tipo midrise
 33. Dato un quantizzatore uniforme, scrivere le relazioni che permettono di trovare il valore quantizzato $\hat{x}(nT)$ a partire dal campione $x(nT)$ nel caso dell'operazione di arrotondamento e di troncamento
-34. Enunciare le ipotesi che usualmente vengono assunte per il rumore di quantizzazione. Giustificare la seguente affermazione: "Quantizzando un segnale sinusoidale di ampiezza unitaria con un convertitore analogico-digitale avente $B$ bit di quantizzazione e dinamica $[−1, 1]$ si ottiene un rapporto segnale-rumore 0(espresso in $dB$) dato da $SN R ≈ 6.02B + 1.76$".
+34. Enunciare le ipotesi che usualmente vengono assunte per il rumore di quantizzazione. Giustificare la seguente affermazione: "Quantizzando un segnale sinusoidale di ampiezza unitaria con un convertitore analogico-digitale avente $B$ bit di quantizzazione e dinamica $[-1, 1]$ si ottiene un rapporto segnale-rumore 0(espresso in $dB$) dato da $SN R ≈ 6.02B + 1.76$".
 
 ##### Sistemi di comunicazione digitale
 34. Spiegare il ruolo svolto dal codificatore di canale in un sistema di comunicazione digitale
