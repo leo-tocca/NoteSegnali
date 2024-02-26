@@ -68,7 +68,7 @@ titlepage: false
 7.  Enunciare e dimostrare il Teorema di Parseval
 8.  Enunciare il Teorema di Wiener-Khintchine
 
-\\newpage
+\newpage
 
 ## RISPOSTE QUESITI
 

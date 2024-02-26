@@ -1,21 +1,72 @@
+%%
+% Copyright (c) 2017 - 2023, Pascal Wagler;
+% Copyright (c) 2014 - 2023, John MacFarlane
+%
+% All rights reserved.
+%
+% Redistribution and use in source and binary forms, with or without
+% modification, are permitted provided that the following conditions
+% are met:
+%
+% - Redistributions of source code must retain the above copyright
+% notice, this list of conditions and the following disclaimer.
+%
+% - Redistributions in binary form must reproduce the above copyright
+% notice, this list of conditions and the following disclaimer in the
+% documentation and/or other materials provided with the distribution.
+%
+% - Neither the name of John MacFarlane nor the names of other
+% contributors may be used to endorse or promote products derived
+% from this software without specific prior written permission.
+%
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+% "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+% LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+% FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+% COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+% INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+% BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+% LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+% CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+% LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+% ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+% POSSIBILITY OF SUCH DAMAGE.
+%%
+
+%%
+% This is the Eisvogel pandoc LaTeX template.
+%
+% For usage information and examples visit the official GitHub page:
+% https://github.com/Wandmalfarbe/pandoc-latex-template
+%%
+
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names,table}{xcolor}
 %
-\documentclass[12pt
-]{article}
-\usepackage{lmodern}
-\usepackage[a4paper, total={6in, 10in}]{geometry}
-\usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\documentclass[
+  paper=a4,
+  ,captions=tableheading
+]{scrartcl}
+\usepackage{amsmath,amssymb}
+% Use setspace anyway because we change the default line spacing.
+% The spacing is changed early to affect the titlepage and the TOC.
+\usepackage{setspace}
+\setstretch{1.2}
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -34,218 +85,359 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
+\definecolor{default-linkcolor}{HTML}{A50000}
+\definecolor{default-filecolor}{HTML}{A50000}
+\definecolor{default-citecolor}{HTML}{4077C0}
+\definecolor{default-urlcolor}{HTML}{4077C0}
+\usepackage[margin=2.5cm,includehead=true,includefoot=true,centering,]{geometry}
+% add backlinks to footnote references, cf. https://tex.stackexchange.com/questions/302266/make-footnote-clickable-both-ways
+\usepackage{footnotebackref}
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
-
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{italian}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
 \hypersetup{
-	pdftitle={Dimostrazioni e quesiti per primo parziale di Teoria dei Segnali},
-	pdfauthor={Leonardo Toccafondi},
-	hidelinks,
-	pdfcreator={LaTeX via pandoc}}
-
-\title{Dimostrazioni e quesiti per primo parziale di Teoria dei Segnali}
+  pdftitle={Quesiti e dimostrazioni (con soluzioni) per primo parziale di Teoria dei Segnali},
+  pdflang={it},
+  pdfsubject={Segnali},
+  hidelinks,
+  breaklinks=true,
+  pdfcreator={LaTeX via pandoc with the Eisvogel template}}
+\title{Quesiti e dimostrazioni (con soluzioni) per primo parziale di
+Teoria dei Segnali}
 \author{}
-\date{}
+\date{2024-02-22}
+
+
+
+%%
+%% added
+%%
+
+
+%
+% for the background color of the title page
+%
+
+%
+% break urls
+%
+\PassOptionsToPackage{hyphens}{url}
+
+%
+% When using babel or polyglossia with biblatex, loading csquotes is recommended
+% to ensure that quoted texts are typeset according to the rules of your main language.
+%
+\usepackage{csquotes}
+
+%
+% captions
+%
+\definecolor{caption-color}{HTML}{777777}
+\usepackage[font={stretch=1.2}, textfont={color=caption-color}, position=top, skip=4mm, labelfont=bf, singlelinecheck=false, justification=raggedright]{caption}
+\setcapindent{0em}
+
+%
+% blockquote
+%
+\definecolor{blockquote-border}{RGB}{221,221,221}
+\definecolor{blockquote-text}{RGB}{119,119,119}
+\usepackage{mdframed}
+\newmdenv[rightline=false,bottomline=false,topline=false,linewidth=3pt,linecolor=blockquote-border,skipabove=\parskip]{customblockquote}
+\renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
+\item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
+
+%
+% Source Sans Pro as the default font family
+% Source Code Pro for monospace text
+%
+% 'default' option sets the default
+% font family to Source Sans Pro, not \sfdefault.
+%
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+    \usepackage[default]{sourcesanspro}
+  \usepackage{sourcecodepro}
+  \else % if not pdftex
+    \usepackage[default]{sourcesanspro}
+  \usepackage{sourcecodepro}
+
+  % XeLaTeX specific adjustments for straight quotes: https://tex.stackexchange.com/a/354887
+  % This issue is already fixed (see https://github.com/silkeh/latex-sourcecodepro/pull/5) but the
+  % fix is still unreleased.
+  % TODO: Remove this workaround when the new version of sourcecodepro is released on CTAN.
+  \ifxetex
+    \makeatletter
+    \defaultfontfeatures[\ttfamily]
+      { Numbers   = \sourcecodepro@figurestyle,
+        Scale     = \SourceCodePro@scale,
+        Extension = .otf }
+    \setmonofont
+      [ UprightFont    = *-\sourcecodepro@regstyle,
+        ItalicFont     = *-\sourcecodepro@regstyle It,
+        BoldFont       = *-\sourcecodepro@boldstyle,
+        BoldItalicFont = *-\sourcecodepro@boldstyle It ]
+      {SourceCodePro}
+    \makeatother
+  \fi
+  \fi
+
+%
+% heading color
+%
+\definecolor{heading-color}{RGB}{40,40,40}
+\addtokomafont{section}{\color{heading-color}}
+% When using the classes report, scrreprt, book,
+% scrbook or memoir, uncomment the following line.
+%\addtokomafont{chapter}{\color{heading-color}}
+
+%
+% variables for title, author and date
+%
+\usepackage{titling}
+\title{Quesiti e dimostrazioni (con soluzioni) per primo parziale di
+Teoria dei Segnali}
+\author{}
+\date{2024-02-22}
+
+%
+% tables
+%
+
+%
+% remove paragraph indentation
+%
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+
+%
+%
+% Listings
+%
+%
+
+
+%
+% header and footer
+%
+\usepackage[headsepline,footsepline]{scrlayer-scrpage}
+
+\newpairofpagestyles{eisvogel-header-footer}{
+  \clearpairofpagestyles
+  \ihead*{Quesiti e dimostrazioni (con soluzioni) per primo parziale di
+Teoria dei Segnali}
+  \chead*{}
+  \ohead*{2024-02-22}
+  \ifoot*{}
+  \cfoot*{}
+  \ofoot*{\thepage}
+  \addtokomafont{pageheadfoot}{\upshape}
+}
+\pagestyle{eisvogel-header-footer}
+
+
+
+%% custom packages
+\usepackage{mathtools}
+\usepackage[thinc]{esdiff}
+\usepackage{physics}
+\usepackage{wrapfig}
+%\usepackage{titlesec}
+
+%%
+%% end added
+%%
 
 \begin{document}
-	\maketitle
 
-\hypertarget{quesiti}{%
-\subsection{QUESITI}\label{quesiti}}
+%%
+%% begin titlepage
+%%
+
+%%
+%% end titlepage
+%%
+
+% \maketitle
+
+
+\subsection{QUESITI}\label{quesiti}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-
+\tightlist
 \item
-	Un segnale deterministico a tempo continuo s(t) periodico ha Energia e Potenza finite e/o infinite ?
-	
+  Un segnale deterministico a tempo continuo \(s(t)\) periodico ha
+  Energia e Potenza finite e/o infinite?
 \item
-Si definisca la Potenza istantanea di un segnale deterministico a
-tempo continuo $s(t)$
-
-\item 
-Si definisca la potenza media di un segnale deterministico a tempo continuo $s(t)$
-
+  Si definisca la Potenza istantanea di un segnale deterministico a
+  tempo continuo \(s(t)\)
 \item
-Calcolare Energia e Potenza media del segnale a tempo continuo
-\(x(t) = Ae ^{-t} u(t)\).
-
+  Si definisca la potenza media di un segnale deterministico a tempo
+  continuo \(s(t)\)
 \item
-Calcolare l'energia del segnale x(t) = sinc(t).
-
+  Calcolare Energia e Potenza media del segnale a tempo continuo
+  \(x(t) = Ae ^{-t} u(t)\).
 \item
-Calcolare Energia e Potenza media di un segnale a tempo continuo
-sinusoidale di ampiezza 2 e di periodo 2 secondi.
+  Calcolare l'energia del segnale \(x(t) = sinc(t)\).
 \item
-Calcolare Energia e Potenza media di un segnale a tempo continuo
-sinusoidale di ampiezza A e di periodo T.
-
+  Calcolare Energia e Potenza media di un segnale a tempo continuo
+  sinusoidale di ampiezza 2 e di periodo 2 secondi.
 \item
-Calcolare Energia e Potenza media di un segnale a tempo continuo
-costante
-
-\item 
-Sotto quali condizioni un segnale deterministico a tempo continuo s(t) ha Potenza media finita?
-
+  Calcolare Energia e Potenza media di un segnale a tempo continuo
+  sinusoidale di ampiezza \(A\) e di periodo \(T\).
 \item
-Giustificare la seguente affermazione: ``Lo spettro di ampiezza di un
-segnale tempo-continuo aperiodico reale è una funzione pari''.
-
+  Calcolare Energia e Potenza media di un segnale a tempo continuo
+  costante
 \item
-Giustificare la seguente affermazione: ``Lo spettro di fase di un
-	segnale tempo-continuo aperiodico reale è una funzione dispari''.
-
-
+  Sotto quali condizioni un segnale deterministico a tempo continuo
+  \(s(t)\) ha Potenza media finita?
 \item
-Calcolare la quantità
-\(\displaystyle \int_{- \infty}^{\infty} sinc(t) dt\)
-	
-\item 
-Tra onda quadra e onda triangolare, quale dei due segnali ha coefficienti della serie di Fourier con modulo che
-va a zero più velocemente al crescere di n?
-
+  Giustificare la seguente affermazione: ``Lo spettro di ampiezza di un
+  segnale tempo-continuo aperiodico reale è una funzione pari''.
 \item
-Tra la rampa e l'onda triangolare, quale dei due segnali ha
-coefficienti della serie di Fourier con modulo che va a zero più
-velocemente al crescere di n, e perché?
-
+  Giustificare la seguente affermazione: ``Lo spettro di fase di un
+  segnale tempo-continuo aperiodico reale è una funzione dispari''.
 \item
-Quali sono le proprietà della serie di Fourier di un segnale periodico
-pari
-
+  Calcolare la quantità \(\int_{- \infty}^{\infty} sinc(t) dt\)
 \item
-Quali sono le proprietà della serie di Fourier di un segnale periodico
-dispari
-
-\item 
-Se il segnale periodico $x(t)$ è reale e pari, allora la serie di Fourier si semplifica in modo tale che ...
-
-
-\item 
-Se il segnale periodico $x(t)$ è reale e dispari, allora la serie di Fourier si semplifica in modo tale che ...
-
-
+  Tra onda quadra e onda triangolare, quale dei due segnali ha
+  coefficienti della serie di Fourier con modulo che va a zero più
+  velocemente al crescere di \(n\) e perché?
 \item
-Elencare le Condizioni di Dirichlet per la convergenza della serie di
-Fourier
-
-\item 
-Elencare le Condizioni di Dirichlet per la convergenza della trasformata di Fourier
-
-
-
-\item 
-Se il segnale aperiodico $x(t)$ è pari, allora la sua trasformata di Fourier è	
-
-\item 
-Se il segnale aperiodico $x(t)$ è dispari, allora la sua trasformata di Fourier è
-
-\item 
-Se il segnale aperiodico $x(t)$ è reale e pari, allora la sua trasformata di Fourier è
-
+  Tra la rampa e l'onda triangolare, quale dei due segnali ha
+  coefficienti della serie di Fourier con modulo che va a zero più
+  velocemente al crescere di \(n\), e perché?
 \item
-Se il segnale aperiodico $x(t)$ è reale e dispari, allora la sua
-trasformata di Fourier è\ldots{}
-
-\item 
-Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(\alpha t)$ con $|\alpha|>1$ risulta modificata in modo
-che ...
-
-\item 
-Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(\alpha t)$ con $|\alpha|>1$ risulta modificata in modo che ...
-
-
-
+  Quali sono le proprietà della serie di Fourier di un segnale periodico
+  pari
+\item
+  Quali sono le proprietà della serie di Fourier di un segnale periodico
+  dispari
+\item
+  Se il segnale periodico \(x(t)\) è reale e pari, allora la serie di
+  Fourier si semplifica in modo tale che \ldots{}
+\item
+  Se il segnale periodico \(x(t)\) è reale e dispari, allora la serie di
+  Fourier si semplifica in modo tale che \ldots{}
+\item
+  Elencare le Condizioni di Dirichlet per la convergenza della serie di
+  Fourier
+\item
+  Elencare le Condizioni di Dirichlet per la convergenza della
+  trasformata di Fourier
+\item
+  Se il segnale aperiodico \(x(t)\) è pari, allora la sua trasformata di
+  Fourier è
+\item
+  Se il segnale aperiodico \(x(t)\) è dispari, allora la sua trasformata
+  di Fourier è
+\item
+  Se il segnale aperiodico \(x(t)\) è reale e pari, allora la sua
+  trasformata di Fourier è
+\item
+  Se il segnale aperiodico \(x(t)\) è reale e dispari, allora la sua
+  trasformata di Fourier è\ldots{}
+\item
+  Se la trasformata di Fourier di \(x(t)\) è \(X(f)\), allora la
+  trasformata di \(x(\alpha t)\) con \(|\alpha|>1\) risulta modificata
+  in modo che \ldots{}
+\item
+  Se la trasformata di Fourier di \(x(t)\) è \(X(f)\), allora la
+  trasformata di \(x(\alpha t)\) con \(|\alpha|>1\) risulta modificata
+  in modo che \ldots{}
 \item
   In cosa differiscono le trasformate di Fourier di
   \(rect (\frac{t}{T})\) e di \(rect (\frac{t-5}{T})\)? Spiegare le
   differenze sia per lo spettro di ampiezza che per lo spettro di fase.
-
-
+\item
+  In cosa differiscono le trasformate di Fourier di \(rect(frac{t}{T})\)
+  e di \(rect(\frac{t}{4T})\)? Spiegare le differenze sia per lo spettro
+  di ampiezza che per lo spettro di fase
 \item
   Se \(x(t)\) è un segnale complesso e \(X(f)\) la sua trasformata di
   Fourier, quale è la trasformata di Fourier della parte reale di
   \(x(t\))? Giustificare la risposta
-  
-  \item
+\item
   Se \(x(t)\) è un segnale complesso e \(X(f)\) la sua trasformata di
   Fourier, quale è la trasformata di Fourier della parte immaginaria di
   \(x(t\))? Giustificare la risposta
 \item
-  Quale è la trasformata di Fourier di $ e ^{-j2 \pi t}$?
-  Giustificare la risposta
+  Quale è la trasformata di Fourier di \(e ^{-j2 \pi t}\)? Giustificare
+  la risposta
 \item
   Se \(x(t) \leftrightarrow X(f)\) sono una funzione e la sua
   trasformata di Fourier, qual è la trasformata di Fourier di \(x(-t)\)?
   Giustificare la risposta
-
-
-
 \item
-  In cosa differiscono le trasformate di Fourier di $rect(\frac{t}{T})$ e
-  di $rect(\frac{t}{2T})$ ? Spiegare le differenze sia per lo spettro di
-  ampiezza che per lo spettro di fase.
-
-
+  In cosa differiscono le trasformate di Fourier di
+  \(rect(\frac{t}{T})\) e di \(rect(\frac{t}{2T})\)? Spiegare le
+  differenze sia per lo spettro di ampiezza che per lo spettro di fase.
 \item
   Se il segnale periodico x(t) è reale, quali proprietà hanno
   rispettivamente lo spettro di ampiezza e lo spettro di fase?
-
-
 \item
-Un sistema a tempo continuo si definisce causale se\ldots{} Fare poi
-un esempio di sistema causale e uno di sistema non causale.
-
+  Un sistema a tempo continuo si definisce causale se\ldots{} Fare poi
+  un esempio di sistema causale e uno di sistema non causale.
 \item
-Un sistema a tempo continuo si definisce stabile se
-
+  Un sistema a tempo continuo si definisce stabile se
 \item
-Dato un sistema LTI con risposta impulsiva $h(t) = \delta (t - 1) +\delta (t - 2)$,
-disegnare l'uscita quando il suo ingresso è il segnale $x(t) = u(t)$  
-\item 
-La risposta impulsiva di un sistema LTI causale è
+  Dato un sistema LTI con risposta impulsiva
+  \(h(t) = \delta (t - 1) +\delta (t - 2)\), disegnare l'uscita quando
+  il suo ingresso è il segnale \(x(t) = u(t)\)
 \item
-La risposta impulsiva di un sistema LTI causale soddisfa la seguente
-condizione:
+  La risposta impulsiva di un sistema LTI causale è\ldots{}
 \item
-Un sistema che produce in uscita il valore assoluto del segnale al suo
-ingresso è un sistema lineare? Si argomenti la risposta con almeno un
-esempio.
+  La risposta impulsiva di un sistema LTI causale soddisfa la seguente
+  condizione:
 \item
-Se un sistema LTI tempo-continuo ha una risposta impulsiva con energia finita, possiamo affermare che il sistema è stabile? Giustificare la risposta.
-
+  Un sistema che produce in uscita il valore assoluto del segnale al suo
+  ingresso è un sistema lineare? Si argomenti la risposta con almeno un
+  esempio.
 \item
-Quale è la risposta in frequenza di un sistema LTI retto
-dall'equazione differenziale $y(t) - \frac{d^{2}y(t)}{dt^2} = x(t)$?
+  Se un sistema LTI tempo-continuo ha una risposta impulsiva con energia
+  finita, possiamo affermare che il sistema è stabile? Giustificare la
+  risposta.
 \item
-Definire la densità spettrale di potenza di un segnale \(x(t)\) a
-potenza finita.
+  Quale è la risposta in frequenza di un sistema LTI retto
+  dall'equazione differenziale \(y(t) - \frac{d^{2}y(t)}{dt^2} = x(t)\)?
 \item
-Un processo aleatorio si definisce stazionario in senso lato se
+  Definire la densità spettrale di potenza di un segnale \(x(t)\) a
+  potenza finita.
 \item
-Elencare le proprietà che definiscono un processo aleatorio
-stazionario in senso lato (WSS).
-  
+  Un processo aleatorio si definisce stazionario in senso lato se
+\item
+  Elencare le proprietà che definiscono un processo aleatorio
+  stazionario in senso lato (WSS).
+\item
+  Enunciare le proprietà che devono essere soddisfatte affinché un
+  processo aleatorio sia stazionario in senso lato
 \end{enumerate}
 
-\hypertarget{dimostrazioni}{%
-\subsection{DIMOSTRAZIONI}\label{dimostrazioni}}
+\subsection{DIMOSTRAZIONI}\label{dimostrazioni}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-
+\tightlist
 \item
-Dimostrare che se un segnale periodico è reale, allora i coefficienti
-della sua espansione in serie di Fourier (nella sua forma complessa)
-sono caratterizzati da una simmetria Hermitiana.
+  Dimostrare che se un segnale periodico è reale, allora i coefficienti
+  della sua espansione in serie di Fourier (nella sua forma complessa)
+  sono caratterizzati da una simmetria Hermitiana.
 \item
   Enunciare e dimostrare il Teorema di dualità della Trasformata
   continua di Fourier
@@ -255,225 +447,261 @@ sono caratterizzati da una simmetria Hermitiana.
 \item
   Enunciare e dimostrare il Teorema di integrazione completo della
   Trasformata continua di Fourier
-
-
 \item
   Dato un segnale x(t), enunciare e dimostrare la formula somma di
-  Poisson che lega i coeffcienti della serie di Fourier di \(\displaystyle y(t) = \sum_{n = -\infty}^{\infty} x(t - nT)\)
-  alla trasformata (aperiodica) di Fourier di x(t).
+  Poisson che lega i coeffcienti della serie di Fourier di
+  \(\displaystyle y(t) = \sum_{n = -\infty}^{\infty} x(t - nT)\) alla
+  trasformata (aperiodica) di Fourier di x(t).
 \item
   Dimostrare che la trasformata di Fourier del prodotto di funzioni
   \(x(t) \cdot y(t)\) è la convoluzione di \(X(f)\) con \(Y (f)\).
-
 \item
-Enunciare e dimostrare il Teorema di Parseval
+  Enunciare e dimostrare il Teorema di Parseval
 \item
   Enunciare il Teorema di Wiener-Khintchine
 \end{enumerate}
 
 \newpage
 
-\hypertarget{risposte-quesiti}{%
-	\subsection{RISPOSTE QUESITI}\label{risposte-quesiti}}
+\subsection{RISPOSTE QUESITI}\label{risposte-quesiti}
 
 \begin{enumerate}
-	\def\labelenumi{\arabic{enumi}.} 
-	\item
-	Un segnale deterministico a tempo continuo \(s(t)\) periodico ha
-	potenza finita (pari alla potenza media calcolata in un singolo periodo) e energia infinita (somma di infinite aree) .
-	\item
-	La potenza istantanea di un segnale deterministico a tempo continuo
-	\(s(t)\) è definita come \(P(t) = |s(t)|^2\).
-	\item
-	La potenza media di un segnale deterministico a tempo continuo s(t) è
-	definita come $ \displaystyle \lim_{T\to\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} s^2(t) dt$, dove T è il periodo del segnale.
-	\item
-	Per $\displaystyle x(t) = Ae^{-t}u(t),$ l'energia è $ \displaystyle E = \int_0^\infty |Ae^{-t}|^2 dt = A^2 \int_0^\infty e^{-
-		2t} dt = \frac{A^2}{2}$.
-	\newline
-		La potenza media è pari a: $\displaystyle P_t = \lim_{T \to \infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} |x(t)|^2 dt = \lim_{T \to \infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} |A e^{-t} u(t)|^2 dt =  \lim_{T \to \infty} \frac{A^2}{T} \int_{0}^{\frac{T}{2}} e^{-2t} dt = \lim_{T \to \infty} \frac{A^2}{T}*0 = 0$
-	\item
-	L'energia del segnale \(x(t) = sinc(t)\) è pari ad uno, in quanto utilizzando il teorema di Parseval,
-	$ \displaystyle\int_{-\infty}^{+\infty}|x(t)|^2dt = \int_{-\infty}^{+\infty}|X(f)|^2df$, e la trasformata 
-	di $sinc(t)$ è pari a $rect(f)$, quindi equivalente ad un rettangolo di altezza e base 1.
-	$ \displaystyle E = \int_{-\infty}^\infty (\frac{sin(\pi t)}{( \pi t)})^2 dt = 1.$
-	\item
-	Per un segnale sinusoidale di ampiezza 2 e periodo 2 secondi,
-	l'energia è infinita perché il segnale è periodico e la potenza media
-	è \(P_m = \frac{1}{2} * (2^2) = 2.\)
-	\item
-	Per un segnale sinusoidale di ampiezza A e periodo T, l'energia è
-	infinita perché il segnale è periodico e la potenza media è
-	\(P_m = \frac{1}{2} * A^2\).
-	\item
-	Per un segnale costante, l'energia è infinita perché il segnale è
-	periodico e la potenza media è \(P_m = C^2,\) dove C è il valore
-	costante.
-	\item
-	Un segnale deterministico a tempo continuo \(s(t)\) ha potenza media
-	finita se: \newline $ \displaystyle \lim_{s\to\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} s^2(t)dt < \infty$.
-	\item
-	Lo spettro di ampiezza di un segnale tempo-continuo aperiodico reale è una funzione pari. La trasformata di Fourier di un segnale reale gode della proprietà di simmetria Hermitiana $(X(f) = X^*(-f))$: quindi ha componenti simmetriche rispetto all'asse delle ordinate $(R(f)=R(-f); A(f)=|X(f)| \to A(f)=A(-f))$.
-	\item
-	Lo spettro di fase di un segnale tempo-continuo aperiodico reale è una	funzione dispari.  La trasformata di Fourier di un segnale reale gode della proprietà di simmetria Hermitiana $(X(f) = X^*(-f))$: quindi la fase della trasformata di Fourier di un segnale reale è uguale all'opposto della fase della sua componente coniugata.
-	$(I(f)=-I(-f); \Theta(f)=\angle X(f) \to \Theta(f)=-\Theta(-f))$.
-	\item
-	$ \displaystyle \int_{-\infty}^\infty sinc(t)dt = 1$, in quanto integrale di una
-	funzione sinc normalizzata.
-	\item
-	L'onda triangolare, non presentando discontinuità (a differenza del segnale onda quadra), nella sua ricostruzione del segnale tramite serie di Fourier le componenti ad alta frequenza hanno importanza minore.
-	\item
-L'onda triangolare, non presentando discontinuità, (a differenza del segnale dente di sega), nella sua ricostruzione del segnale tramite serie di Fourier le componenti ad alta frequenza hanno importanza minore.
-	\item
-	\begin{enumerate}
-		\tightlist
-			\item 
-			Coefficiente della serie di Fourier  è una funzione pari: $X_k = X_{-k}$;
-			\item 
-			se il segnale è anche reale: $X_k$ reale e pari $(X_k = X^*_k) \to $ si sviluppa in soli coseni.\newline
-			$ \displaystyle x(t)= X_0 + 2 \sum_{k=1}^{\infty} X_k cos (2\pi k f_0 t)$
-	\end{enumerate}
-	\item
-	\begin{enumerate}
-		\tightlist
-		\item 
-		Coefficiente della serie di Fourier è una funzione dispari: $X_{-k} = -X_{k}$;
-		\item 
-		se il segnale è anche reale: $X_k$ immaginaria pura e dispari $(-X_k = X^*_k) \to $ si sviluppa in soli seni.\newline
-		$\displaystyle x(t)= 2j \sum_{k=1}^{\infty} X_k sin (2\pi k f_0 t)$
-	\end{enumerate}
-	\item
-	$ \displaystyle x(t)=X_0 + 2\sum_{k=1}^{\infty} X_k cos (2\pi k f_0 t) \to
-	X_k = \frac{2}{T_0} \int_{0}^{\frac{T_0}{2}} x(t) cos (2\pi k f_0 t) dt$
-	\item
-	$\displaystyle x(t)= 2j \sum_{k=1}^{\infty} X_k sin (2\pi k f_0 t) \to
-	X_k = -\frac{2j}{T_0} \int_{0}^{\frac{T_0}{2}} x(t) sin (2\pi k f_0 t)dt$
-	\item
-	Le Condizioni di Dirichlet per la convergenza della serie di Fourier sono:	
-	\begin{enumerate}
-		\def\labelenumii{(\alph{enumii})}
-		\tightlist
-		\item
-		la funzione deve essere assolutamente integrabile sul periodo $T_0$: $\displaystyle \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x(t)| dt < +\infty$
-		\item
-		la funzione deve essere continua o presentare un numero finito di discontinuità di prima specie
-		\item
-		la funzione deve avere un numero finito di massimi e minimi
-		all'interno di un periodo. Oppure  $x(t)$ derivabile rispetto al tempo nel periodo $T_0$, esclusi al più un numero finito di discontinuità di prima specie.
-	\end{enumerate}
-	\item
-	Le Condizioni di Dirichlet per la convergenza della trasformata di
-	Fourier sono simili a quelle per la serie di Fourier:
-	
-	\begin{enumerate}
-		\def\labelenumii{(\alph{enumii})}
-		\tightlist
-		\item
-		la funzione deve essere assolutamente sommabile: $\displaystyle \int_{-\infty}^{\infty} |x(t)| dt < +\infty$
-		\item
-		se in qualunque intervallo finito $(t_1, t_2)$ è continua o presenta un numero finito di discontinuità di prima specie
-		\item
-		 se in qualunque intervallo finito $(t_1, t_2)$ la funzione ha	 un numero finito di massimi e minimi.
-	\end{enumerate}
-	\item
-	La trasformata è pari a sua volta.
-	\item
-	La trasformata è dispari a sua volta.
-	\item
-	Se il segnale aperiodico \(x(t)\) è reale e pari, la sua trasformata
-	di Fourier è reale e pari.
-	\item
-	Se il segnale aperiodico \(x(t)\) è reale e dispari, la sua
-	trasformata di Fourier è immaginaria pura e dispari.
-	\item
-Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(\alpha t)$ con$ |\alpha| > 1$ è $\displaystyle \frac{1}{\alpha} X(\frac{f}{\alpha})$. Quindi per il teorema del cambiamento di scala, con una compressione nel tempo abbiamo una dilatazione in frequenza.
-	\item
-Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(\alpha t)$ con$ |\alpha| < 1$ è $\displaystyle \frac{1}{|\alpha|} X(\frac{f}{\alpha})$. Quindi per il teorema del cambiamento di scala, con una dilatazione nel tempo abbiamo una compressione in frequenza.
-	\item
-	Le trasformate di Fourier di \(rect (\frac{t}{T})\) e di
-	\(rect (\frac{t-5}{T})\) differiscono solo per la fase. Lo spettro di
-	ampiezza è lo stesso, mentre lo spettro di fase di
-	\(rect (\frac{t-5}{T})\) ha una componente lineare aggiuntiva rispetto
-	a \(rect (\frac{t}{T})\).
-	\item
-	$\displaystyle R(f) = \int_{- \infty}^{+\infty} x(t) cos(2\pi ft)dt$
-	\newline
-	Dato che $\displaystyle X(f) = R(f)+ jI(f)$
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Un segnale deterministico a tempo continuo \(s(t)\) periodico ha
+  potenza finita (pari alla potenza media calcolata in un singolo
+  periodo) e energia infinita (somma di infinite aree).
+\item
+  La potenza istantanea di un segnale deterministico a tempo continuo
+  \(s(t)\) è definita come \(P(t) = |s(t)|^2\).
+\item
+  La potenza media di un segnale deterministico a tempo continuo
+  \(s(t)\) è definita come \[
+  p(t) = \lim_{T\to\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} s^2(t) dt
+  \] dove T è il periodo del segnale.
+\item
+  Per \(x(t) = Ae^{-t}u(t),\) l'energia è \[
+  \displaystyle E = \int_0^\infty |Ae^{-t}|^2 dt = A^2 \int_0^\infty e^{-2t} dt = \frac{A^2}{2}
+  \]. La potenza media è pari a: \[
+  \displaystyle P_t = \lim_{T \to \infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} |x(t)|^2 dt = \lim_{T \to \infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} |A e^{-t} u(t)|^2 dt =  \lim_{T \to \infty} \frac{A^2}{T} \int_{0}^{\frac{T}{2}} e^{-2t} dt = \lim_{T \to \infty} \frac{A^2}{T}*0 = 0
+  \]
+\item
+  L'energia del segnale \(x(t) = sinc(t)\) è pari ad uno, in quanto
+  utilizzando il teorema di Parseval,
+  \(\displaystyle\int_{-\infty}^{+\infty}|x(t)|^2dt = \int_{-\infty}^{+\infty}|X(f)|^2df\),
+  e la trasformata di \(sinc(t)\) è pari a \(rect(f)\), quindi
+  equivalente ad un rettangolo di altezza e base 1.
+  \(\displaystyle E = \int_{-\infty}^\infty (\frac{sin(\pi t)}{( \pi t)})^2 dt = 1.\)
+\item
+  Per un segnale sinusoidale di ampiezza 2 e periodo 2 secondi,
+  l'energia è infinita perché il segnale è periodico e la potenza media
+  è \(P_m = \frac{1}{2} * (2^2) = 2.\)
+\item
+  Per un segnale sinusoidale di ampiezza A e periodo T, l'energia è
+  infinita perché il segnale è periodico e la potenza media è
+  \(P_m = \frac{1}{2} * A^2\).
+\item
+  Per un segnale costante, l'energia è infinita perché il segnale è
+  periodico e la potenza media è \(P_m = C^2,\) dove C è il valore
+  costante.
+\item
+  Un segnale deterministico a tempo continuo \(s(t)\) ha potenza media
+  finita se:
+  \(\displaystyle \lim_{s\to\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} s^2(t)dt < \infty\).
+\item
+  Lo spettro di ampiezza di un segnale tempo-continuo aperiodico reale è
+  una funzione pari. La trasformata di Fourier di un segnale reale gode
+  della proprietà di simmetria Hermitiana \((X(f) = X^*(-f))\): quindi
+  ha componenti simmetriche rispetto all'asse delle ordinate
+  \((R(f)=R(-f); A(f)=|X(f)| \to A(f)=A(-f))\).
+\item
+  Lo spettro di fase di un segnale tempo-continuo aperiodico reale è una
+  funzione dispari. La trasformata di Fourier di un segnale reale gode
+  della proprietà di simmetria Hermitiana \((X(f) = X^*(-f))\): quindi
+  la fase della trasformata di Fourier di un segnale reale è uguale
+  all'opposto della fase della sua componente coniugata.
+  \((I(f)=-I(-f); \Theta(f)=\angle X(f) \to \Theta(f)=-\Theta(-f))\).
+\item
+  \(\displaystyle \int_{-\infty}^\infty sinc(t)dt = 1\), in quanto
+  integrale di una funzione \(sinc\) normalizzata.
+\item
+  L'onda triangolare, non presentando discontinuità (a differenza del
+  segnale onda quadra), nella sua ricostruzione del segnale tramite
+  serie di Fourier le componenti ad alta frequenza hanno importanza
+  minore.
+\item
+  L'onda triangolare, non presentando discontinuità, (a differenza del
+  segnale dente di sega), nella sua ricostruzione del segnale tramite
+  serie di Fourier le componenti ad alta frequenza hanno importanza
+  minore.
+\item
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Coefficiente della serie di Fourier è una funzione
+    pari:\(X_k = X_{-k}\);
+  \item
+    se il segnale è anche reale: \(X_k\) reale e pari
+    \((X_k = X^*_k) \to\) si sviluppa in soli coseni.
+    \(\displaystyle x(t)= X_0 + 2 \sum_{k=1}^{\infty} X_k cos (2\pi k f_0 t)\)
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Coefficiente della serie di Fourier è una funzione
+    dispari:\(X_{-k} = -X_{k}\);
+  \item
+    se il segnale è anche reale: \(X_k\) immaginaria pura e dispari
+    \((-X_k = X^*_k) \to\) si sviluppa in soli seni.
+    \(\displaystyle x(t)= 2j \sum_{k=1}^{\infty} X_k sin (2\pi k f_0 t)\)
+  \end{enumerate}
+\item
+  \(\displaystyle x(t)=X_0 + 2\sum_{k=1}^{\infty} X_k cos (2\pi k f_0 t) \to X_k = \frac{2}{T_0} \int_{0}^{\frac{T_0}{2}} x(t) cos (2\pi k f_0 t) dt\)
+\item
+  \(\displaystyle x(t)= 2j \sum_{k=1}^{\infty} X_k sin (2\pi k f_0 t) \to X_k = -\frac{2j}{T_0} \int_{0}^{\frac{T_0}{2}} x(t) sin (2\pi k f_0 t)dt\)
+\item
+  Le Condizioni di Dirichlet per la convergenza della serie di Fourier
+  sono:
 
-	\item
-		$\displaystyle I(f) =- \int_{- \infty}^{+\infty} x(t) sin(2\pi ft)dt$
-	\newline
-	Dato che $\displaystyle X(f) = R(f)+ jI(f)$
-	\item
-	La trasformata di Fourier di \(e^{-j2\pi t}\) è un impulso di Dirac
-	centrato in \(f = 1\).
-	Utilizzando il teorema della traslazione in frequenza: \newline
-	$\to 1*e^{-j2 \pi t} =\Leftrightarrow \delta (f+1)$
-	\item
-	Per il teorema del cambiamento di scala:
-	\newline
-	$\displaystyle x(\alpha t) = \frac{1}{|\alpha|} X(\frac{f}{\alpha})$ con $\alpha = -1$, allora:
-	$\to x(-t) \Leftrightarrow X(-f)$
-	\item
-	Per il teorema del cambiamento di scala, lo spettro di ampiezza di
-	\(rect(\frac{t}{2T})\) viene alterato rispetto a
-	\(rect(\frac{t}{T})\), mentre lo spettro di fase non viene alterato. \newline
-	(Dilatazione nel tempo $\leftrightarrow$ Compressione in frequenza)
-	\item
-	Se il segnale periodico $x(t) \in \mathbb{R}$, dato che il coefficiente della serie di Fourier $X_k$ gode della simmetria Hermitiana,
-	\newline
-	$X_{-k} =X_k^* = \begin{cases}
-		|X_k| =|X_{-k}| \\
-		\angle X_k = - \angle X_{-k}
-	\end{cases} \to$
-	lo spettro di ampiezza è pari e lo spettro di fase è dispari.
-	\item
-	Quando il valore dell'uscita al tempo t dipende soltanto dai valori assunti dall'ingresso agli istanti precedenti. $\to y(t) = T[x(\alpha), \alpha < t, t]$  \newline  Un esempio di sistema
-	causale è un filtro passa-basso RC (o un moltiplicatore?), mentre un esempio di sistema non
-	causale è un derivatore.
-	\item
-	Quando il sistema, se sollecitato da un segnale con ampiezza limitata, produce in uscita un segnale a sua volta con ampiezza limitata.
-	\item
-	Dato un sistema LTI con risposta impulsiva
-	\(h(t) = \delta(t - 1) + \delta(t - 2)\), l'uscita quando il suo
-	ingresso è il segnale \(x(t) = u(t)\) sarà
-	\(y(t) = u(t - 1) + u(t - 2).\)
-	\item
-	La risposta impulsiva di un sistema LTI causale è un segnale causale
-	\(h(t)\) tale che \(h(t) = 0\) per \(t < 0\).
-	\item
-	La risposta impulsiva di un sistema LTI causale soddisfa la condizione
-	\(h(t) = 0\) per \(t < 0\).
-	\item
-	Un sistema che produce in uscita il valore assoluto del segnale (raddrizzatore a doppia onda) al suo ingresso non è un sistema lineare. Ad esempio:
-	\newline
-	se $ \displaystyle x(t)=  x_1(t)+x_2(t) \to T[x(t)]  = |x(t)| = |x_1(t)+x_2(t)| \neq y_1(t)+y_2(t) = |x_1(t)|+|x_2(t)|$\newline
-	\\
-	Altro esempio:
-	
-	Siano 	\(x_1(t) = t\) e \(x_2(t) = -t\):  il sistema produce \(y_1(t) = |t|\)
-	e \(y_2(t) = |-t| = t\). Tuttavia, \(y_1(t) + y_2(t) = 2t\), mentre il
-	sistema applicato alla somma dei segnali in ingresso produce
-	\(|t - t| = 0\), che non è uguale a \(2t\).
-	\item
-	Se un sistema LTI tempo-continuo ha una risposta impulsiva con energia
-	finita, possiamo affermare che il sistema è stabile, perché l'energia 	finita implica che la risposta impulsiva è assolutamente integrabile $\to  \displaystyle \int_{-\infty}^\infty |h(t)| dt < \infty$. 
-	\item
-	Passando nel dominio della frequenza: \newline
-	$\displaystyle Y(f)(1-(j2\pi f)^2)=X(f)$. Sapendo che $Y(f)=X(f)H(f)$, \newline
-	$\displaystyle H(f)X(f)(1+4\pi^2 f^2)=H(f) \to H(f)=\frac{1}{1+4\pi^2 f^2}$
-	\item
-	La densità spettrale di potenza di un segnale \(x(t)\) è definita come: \newline
-	$\displaystyle S_x(f) \triangleq \lim_{T \to \infty} \frac{E_{X_T}(f)}{T} = \lim_{T \to \infty} \frac{|X_T(f)|^2}{T}$ \newline
-	Per il teorema di Wiener-Khintchine afferma però che la densità spettrale di potenza$^*$ è uguale alla trasformata di Fourier della funzione di autocorrelazione così modificata: \newline
-	
-		$\displaystyle R_x(\tau) \triangleq  \lim_{T \to \infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)x(t-\tau)$
-		\newline
-		
-		La densità spettrale di potenza è:
-		\newline
-		
-		 $ \displaystyle S_x(f)= \int_{-\infty}^{\infty} R_x(\tau)e^{-j2 \pi f \tau} d\tau = 2\int_{0}^{\infty}  R_x(\tau) cos(2 \pi f \tau) d\tau$ \newline
-		
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    la funzione deve essere assolutamente integrabile sul periodo
+    \(T_0\):
+    \(\displaystyle \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x(t)| dt < +\infty\)
+  \item
+    la funzione deve essere continua o presentare un numero finito di
+    discontinuità di prima specie
+  \item
+    la funzione deve avere un numero finito di massimi e minimi
+    all'interno di un periodo. Oppure \(x(t)\) derivabile rispetto al
+    tempo nel periodo \(T_0\), esclusi al più un numero finito di
+    discontinuità di prima specie.
+  \end{enumerate}
+\item
+  Le Condizioni di Dirichlet per la convergenza della trasformata di
+  Fourier sono simili a quelle per la serie di Fourier:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    la funzione deve essere assolutamente sommabile:
+    \(\displaystyle \int_{-\infty}^{\infty} |x(t)| dt < +\infty\)
+  \item
+    se in qualunque intervallo finito \((t_1, t_2)\) è continua o
+    presenta un numero finito di discontinuità di prima specie
+  \item
+    se in qualunque intervallo finito \((t_1, t_2)\) la funzione ha un
+    numero finito di massimi e minimi.
+  \end{enumerate}
+\item
+  La trasformata è pari a sua volta.
+\item
+  La trasformata è dispari a sua volta.
+\item
+  Se il segnale aperiodico \(x(t)\) è reale e pari, la sua trasformata
+  di Fourier è reale e pari.
+\item
+  Se il segnale aperiodico \(x(t)\) è reale e dispari, la sua
+  trasformata di Fourier è immaginaria pura e dispari.
+\item
+  Se la trasformata di Fourier di \(x(t)\) è \(X(f)\), allora la
+  trasformata di \(x(\alpha t)\) con\(|\alpha| > 1\) è
+  \(\displaystyle \frac{1}{\alpha} X(\frac{f}{\alpha})\). Quindi per il
+  teorema del cambiamento di scala, con una compressione nel tempo
+  abbiamo una dilatazione in frequenza.
+\item
+  Se la trasformata di Fourier di \(x(t)\) è \(X(f)\), allora la
+  trasformata di \(x(\alpha t)\) con\(|\alpha| < 1\) è
+  \(\displaystyle \frac{1}{|\alpha|} X(\frac{f}{\alpha})\). Quindi per
+  il teorema del cambiamento di scala, con una dilatazione nel tempo
+  abbiamo una compressione in frequenza.
+\item
+  Le trasformate di Fourier di \(rect (\frac{t}{T})\) e di
+  \(rect (\frac{t-5}{T})\) differiscono solo per la fase. Lo spettro di
+  ampiezza è lo stesso, mentre lo spettro di fase di
+  \(rect (\frac{t-5}{T})\) ha una componente lineare aggiuntiva rispetto
+  a \(rect (\frac{t}{T})\).
+\item
+  \(\displaystyle R(f) = \int_{- \infty}^{+\infty} x(t) cos(2\pi ft)dt\)
+  Dato che \(\displaystyle X(f) = R(f)+ jI(f)\)
+\item
+  \(\displaystyle I(f) =- \int_{- \infty}^{+\infty} x(t) sin(2\pi ft)dt\)
+  Dato che \(\displaystyle X(f) = R(f)+ jI(f)\)
+\item
+  La trasformata di Fourier di \(e^{-j2\pi t}\) è un impulso di Dirac
+  centrato in \(f = 1\). Utilizzando il teorema della traslazione in
+  frequenza: \(\to 1*e^{-j2 \pi t} =\Leftrightarrow \delta (f+1)\)
+\item
+  Per il teorema del cambiamento di scala:
+  \(\displaystyle x(\alpha t) = \frac{1}{|\alpha|} X(\frac{f}{\alpha})\)
+  con \(\alpha = -1\), allora: \(\to x(-t) \Leftrightarrow X(-f)\)
+\item
+  Per il teorema del cambiamento di scala, lo spettro di ampiezza di
+  \(rect(\frac{t}{2T})\) viene alterato rispetto a
+  \(rect(\frac{t}{T})\), mentre lo spettro di fase non viene alterato.
+  (Dilatazione nel tempo \(\leftrightarrow\) Compressione in frequenza)
+\item
+  Se il segnale periodico \(x(t) \in \mathbb{R}\), dato che il
+  coefficiente della serie di Fourier \(X_k\) gode della simmetria
+  Hermitiana,
+  \(X_{-k} =X_k^* = \begin{cases} |X_k| =|X_{-k}| \\ \angle X_k = - \angle X_{-k} \end{cases} \to\)
+  lo spettro di ampiezza è pari e lo spettro di fase è dispari.
+\item
+  Quando il valore dell'uscita al tempo \(t\) dipende soltanto dai
+  valori assunti dall'ingresso agli istanti precedenti.
+  \(\to y(t) = T[x(\alpha), \alpha < t, t]\) Un esempio di sistema
+  causale è un filtro passa-basso RC (o un moltiplicatore?), mentre un
+  esempio di sistema non causale è un derivatore.
+\item
+  Quando il sistema, se sollecitato da un segnale con ampiezza limitata,
+  produce in uscita un segnale a sua volta con ampiezza limitata.
+\item
+  Dato un sistema LTI con risposta impulsiva
+  \(h(t) = \delta(t - 1) + \delta(t - 2)\), l'uscita quando il suo
+  ingresso è il segnale \(x(t) = u(t)\) sarà
+  \(y(t) = u(t - 1) + u(t - 2).\)
+\item
+  La risposta impulsiva di un sistema LTI causale è un segnale causale
+  \(h(t)\) tale che \(h(t) = 0\) per \(t < 0\).
+\item
+  La risposta impulsiva di un sistema LTI causale soddisfa la condizione
+  \(h(t) = 0\) per \(t < 0\).
+\item
+  Un sistema che produce in uscita il valore assoluto del segnale
+  (raddrizzatore a doppia onda) al suo ingresso non è un sistema
+  lineare. Ad esempio: se
+  \(\displaystyle x(t)=  x_1(t)+x_2(t) \to T[x(t)]  = |x(t)| = |x_1(t)+x_2(t)| \neq y_1(t)+y_2(t) = |x_1(t)|+|x_2(t)|\).
+  Altro esempio: Siano \(x_1(t) = t\) e \(x_2(t) = -t\): il sistema
+  produce \(y_1(t) = |t|\) e \(y_2(t) = |-t| = t\). Tuttavia,
+  \(y_1(t) + y_2(t) = 2t\), mentre il sistema applicato alla somma dei
+  segnali in ingresso produce \(|t - t| = 0\), che non è uguale a\(2t\).
+\item
+  Se un sistema LTI tempo-continuo ha una risposta impulsiva con energia
+  finita, possiamo affermare che il sistema è stabile, perché l'energia
+  finita implica che la risposta impulsiva è assolutamente integrabile
+  \(\to  \displaystyle \int_{-\infty}^\infty |h(t)| dt < \infty\).
+\item
+  Passando nel dominio della frequenza:
+  \(\displaystyle Y(f)(1-(j2\pi f)^2)=X(f)\). Sapendo che
+  \(Y(f)=X(f)H(f)\),
+  \(\displaystyle H(f)X(f)(1+4\pi^2 f^2)=H(f) \to H(f)=\frac{1}{1+4\pi^2 f^2}\)
+\item
+  La densità spettrale di potenza di un segnale \(x(t)\) è definita
+  come:
+  \(\displaystyle S_x(f) \triangleq \lim_{T \to \infty} \frac{E_{X_T}(f)}{T} = \lim_{T \to \infty} \frac{|X_T(f)|^2}{T}\).
+  Per il teorema di Wiener-Khintchine afferma però che la densità
+  spettrale di potenza\(^*\) è uguale alla trasformata di Fourier della
+  funzione di autocorrelazione così modificata:
+  \(\displaystyle R_x(\tau) \triangleq  \lim_{T \to \infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)x(t-\tau)\).
+  La densità spettrale di potenza è:
+  \(\displaystyle S_x(f)= \int_{-\infty}^{\infty} R_x(\tau)e^{-j2 \pi f \tau} d\tau = 2\int_{0}^{\infty}  R_x(\tau) cos(2 \pi f \tau) d\tau\)
 \end{enumerate}
+
 \end{document}
