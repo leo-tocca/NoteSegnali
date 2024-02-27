@@ -1,6 +1,7 @@
 ---
 header-includes: |
             \usepackage{cancel}
+            \usepackage{steinmetz}
 ---
 # Lista teoremi Teoria dei Segnali
 
@@ -76,5 +77,53 @@ header-includes: |
     x(t) = A_{0} + 2 \sum_{k=1}^{\infty} (A_{k}(\cos(2\pi k f_{0})\cos({\theta_k}) - \sin(2\pi k f_{0})\sin({\theta_k})))
     $$
     $$
-    x(t) = a_{0} + 2 \sum_{k=1}^{\infty} a_{k} \cos(2\pi k f_{0}) - b_{k\sin(2\pi k f_{0})
+    x(t) = a_{0} + 2 \sum_{k=1}^{\infty} [a_{k} \cos(2\pi k f_{0}) - b_{k}\sin(2\pi k f_{0})]
     $$
+    sapendo che $a_{0} = A_{0}, \ a_{k} = A_{k}\cos(\theta_k), \ b_{k} = B_{k}\sin(\theta_k)$.
+
+    Abbiamo quindi ottenuto la forma rettangolare della serie di Fourier, dove si nota che un segnale *periodico* $x(t)$ può essere espresso tramite una **somma di seni e coseni**.
+
+    Il coefficiente $X_n$ può essere espresso anche come:
+    $$
+    X_k = \frac{1}{T_0} \int_{[T_0]} x(t) (\cos(2\pi kf_{0}t) - j\sin(2\pi kf_{0}t))
+    $$
+    $$
+    X_k = a_k +jb_k = A_k \cos(\theta_k) + jA_k\sin(\theta_k) = A_k e^{j\theta_k}
+    $$
+
+5. Criterio di Dirichlet (per $x(t)$ periodico):
+
+    È una serie di condizioni che se incontrate sono sufficienti per poter sviluppare un dato segnale $x(t)$ in serie di Fourier:
+    * $x(t)$ deve essere *assolutamente integrabile sul periodo*: ovvero $(\int_{[T_0]}|x(t)| \,dt < \infty)$
+    * $x(t)$ deve essere *continua* (o avere un numero *finito* di discontinuità di prima specie)
+    * $x(t)$ deve essere *derivabile sul periodo* $T_0$, escluso al più un numero finito di punti, dove comunque esiste **finita** sia la derivata destra che la derivata sinistra
+        - quest'ultima ipotesi è equivalente a: $x(t)$ presenta un numero finito di massimi e minimi nel periodo
+    La serie **converge** al valore assunto da $x(t)$ dove *continua* e alla semisomma dei limiti sinistro e destro se discontinua.
+
+### Spettro di un segnale periodico e reale
+#### Proprietà
+6. Simmetria Hermitiana dello spettro reale:
+
+    I coefficienti $X_k$ sono generalmente quantità complesse del tipo $X_k = |X_{k}|e^{j\phase{X_{k}}}$: $X_{k}$ può essere rappresentata tramite spettro di ampiezza e spettro di fase, discreti (esiste solo in corrispondenza delle armoniche k)
+    $$
+    X_k = \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi kf_{0}t} \,dt
+    $$
+    Analizziamone il coniugato $X^{*}_{k}$:
+    $$
+    X_k^{*} = \Big(\frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi kf_{0}t} \,dt \Big)^{*} = \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t)^{*} e^{+j2\pi kf_{0}t} \,dt = \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi (-k)f_{0}t} \,dt
+    $$
+    È da notare come $x(t)^{*}=x(t)$, dal momento che il segnale $x(t)$ è reale.
+
+    Quindi $X_{k}^{*}=X_{-k}$: i coefficienti $X_k$ di un segnale *reale* sono **simmetrici hermitiani**, ossia hanno *lo stesso modulo e fase opposta*
+    $$
+    X_{-k}=X_{k}^{*} \Longleftrightarrow \left\{ \begin{array}{cl}
+    |X_k|=|X_{-k}| \ \text{ stesso modulo}  \\
+    \phase{X_{k}} = -\phase{X_{-k}} \ \text{ fase opposta}
+    \end{array} \right.
+    $$
+    In definitiva per un segnale reale:
+        - lo spettro d'ampiezza è **simmetrico** rispetto a $k \to$ pari
+        - lo spettro di fase è **antisimmetrico** rispetto a $k \to$ dispari
+
+    TODO: controllare appunti Agata
+
