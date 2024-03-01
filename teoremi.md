@@ -2,6 +2,7 @@
 header-includes: |
             \usepackage{cancel}
             \usepackage{steinmetz}
+            \DeclareMathOperator{\sinc}{sinc}
 ---
 # Lista teoremi Teoria dei Segnali
 
@@ -200,5 +201,98 @@ header-includes: |
 
     * **Note varie**
         
-        Se $x(t)$ è pari i suoi coefficienti $X_k$ sono reali e lo spettro di fase vale $0$ o $\pm \pi$; mentre se $x(t)$ è dispari i suoi coefficienti $X_k$ sono immaginari puri e lo spettro di ampiezza non viene toccato: un segnale dispari è solo "spostato" nel tempo.
+        * Se $x(t)$ è pari i suoi coefficienti $X_k$ sono reali e lo spettro di fase vale $0$ o $\pm \pi$; mentre se $x(t)$ è dispari i suoi coefficienti $X_k$ sono immaginari puri e lo spettro di ampiezza non viene toccato: un segnale dispari è solo "spostato" nel tempo.
+        * È da notare come la diversa velocità di un segnale dipenda dal suo andamento temporale: le variazioni brusche comportano la presenza di **armoniche**[^1] con $k$ più elevato per rappresentare la velocimento alta(?):
+            * più il segnale è regolare meno armoniche sono necessarie per "ricreare" il segnale
+                * $\frac{1}{k} \to$ funzioni discontinue: dente di sega ideale, onda quadra, onda quadra "antisimmetrica", rect
+                * $\frac{1}{k^2} \to$ funzioni continue a derivata discontinua: onda triangolare.
+[^1]: TODO: definire meglio armoniche
 
+## Segnali aperiodici a tempo continuo
+### Trasformata **continua** di Fourier
+> Una funzione non periodica, definita tra $-\infty$ e $\infty$, può essere rappresentata come **somma** di **infinite armoniche semplici** di ampiezza *infinitesima* e di frequenza variabile con continuità tra $-\infty$ e $\infty$
+
+9. Dal segnale periodico al segnale aperiodico...
+
+10. Criteri di esistenza per la trasformata continua di Fourier (TCF)
+    1. $X(f)$ esiste se il segnale $x(t)$
+    2. Criteri di Dirichlet:
+        1.  la funzione deve essere assolutamente sommabile: $\displaystyle \int_{-\infty}^{\infty} |x(t)| dt < +\infty$
+        2.  se in qualunque intervallo finito $(t_1, t_2)$ è continua o presenta un numero finito di discontinuità di prima specie
+        3.  se in qualunque intervallo finito $(t_1, t_2)$ la funzione ha un numero finito di massimi e minimi.
+    
+    Allora $x(t)$ è rappresentabile come TCF e 
+    $$
+    x(t) = \int_{-\infty}^{\infty}X(f)\ e^{j2\pi fT} \,df =  \left\{ \begin{array}{cl}
+    x(t) \ \text{ se continua}  \\
+    \frac{x(t_{0}^{+})-x(t_{0}^{-})}{2}\ \text{ se discontinua}
+    \end{array} \right.
+    $$
+11. Simmetria Hermitiana della trasformata continua di Fourier
+
+    Possiamo rappresentare $X(f)$ in forma rettangolare:
+    $$
+    X(f) = Re(f) + Im(f) = \int_{-\infty}^\infty x(t) \cos(2\pi ft) \,dt - j\int_{-\infty}^\infty x(t) \sin(2\pi ft) \,dt
+    $$
+    $$
+    \underset{pari}{Re(f)=Re(-f)} \text{ e } \underset{dispari}{Im(f)=-Im(-f)} \Longrightarrow X(f)=X^{*}(-f) \text{ simmetria hermitiana}
+    $$
+    infatti $X(f)=Re(f)+jIm(f)=Re(-f)+jIm(f)=X^{*}(-f)$
+    - lo spettro di ampiezza è quindi *pari* a quello di fase dispari.
+
+12. Parità e disparità:
+    - se un segnale è *reale e pari*
+    $$
+    X(f) = \int_{-\infty}^\infty x(t) \cos(2\pi ft) \,df=
+    \left\{ \begin{array}{cl}
+    Re(f) = 2\int_{0}^\infty x(t) \cos(2\pi ft) \,dt \\
+    Im(f) = 0
+    \end{array} \right.
+    $$
+    $\to X(f) = Re(f) \to X(f)=X(-f)$ è reale e pari
+    - se un segnale è *dispari e reale*
+    $$
+    X(f) = - \int_{-\infty}^\infty x(t) \sin(2\pi ft) \,dt=
+    \left\{ \begin{array}{cl}
+    Re(f) = 0 \\
+    Im(f) = -2\int_{0}^\infty x(t) \sin(2\pi ft) 
+    \end{array} \right.
+    $$
+    $\to X(f)=jIm(f) \to X(f)=-X(f)$ è immaginaria pura e dispari    
+
+#### Proprietà della trasformata **continua**
+
+13. **Linearità**
+    
+    Dati due segnali $x_1(t)$ e $x_2(t)$ con le loro trasformate continue di Fourier $X_1(f)$ e $X_2(f)$, allora se:
+    $$
+    x(t) = ax_1(t) + bx_2(t) \Longleftrightarrow X(f)=aX_1(f)+bX_2(f)
+    $$
+    con $a,b$ costanti, $X_1(f)=\text{TCF}[x_1(t)]$ e $X_2(f)=\text{TCF}[x_2(t)]$
+    * Dimostrazione:
+        $$
+        X(f)= \int_{-\infty}^{\infty}x(t)\ e^{-j2\pi ft}\,dt = \int_{-\infty}^{\infty}(ax_1(t) + bx_2(t)) \ e^{-j2\pi ft}\,dt
+        $$
+        ma sappiamo che l'integrale è *lineare*, quindi
+        $$
+        = a\int_{-\infty}^{\infty}x_1(t)\ e^{-j2\pi ft}\,dt + b\int_{-\infty}^{\infty}x_2(t)\ e^{-j2\pi ft}\,dt = aX_1(f)+bX_2(f)
+        $$
+14. **Dualità**
+    
+    se $x(t)\Longleftrightarrow X(f)$, allora $X(t)\Longleftrightarrow x(-f)$:
+    * Esempio:
+        $$
+        \text{rect}(\frac{t}{T})\sinc(fT)
+        $$
+        Ma se nel tempo ho un segnale $sinc(bT)$ qual è la sua trasformata?
+
+        $Tsinc(Tt) \Longleftrightarrow rect({-\frac{f}{T}})$ da cui $sinc(Bt)\Longleftrightarrow \frac{1}{B}rect(\frac{t}{B})$, dove $B$ indica la banda.
+    * Dimostrazione:
+        $$
+        x(t) =\int_{-\infty}^{\infty}X(f)\ e^{j2\pi ft} \,df = \int_{-\infty}^{\infty}X(t)\ e^{j2\pi ft} \,dt 
+        $$
+        con uno scambio di variabili $t$ con $f$. Quindi:
+        $$
+        X(-f)=int_{-\infty}^{\infty}x(t)\ e^{-j2\pi fT} \,dt 
+        $$
+        Da qui deriviamo che $X(-f)$ è la trasformata di $x(t)$ TODO CONTROLLARE
