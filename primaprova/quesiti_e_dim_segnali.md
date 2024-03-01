@@ -34,10 +34,10 @@ titlepage: false
 22. Se il segnale aperiodico $x(t)$ è dispari, allora la sua trasformata di Fourier è
 23. Se il segnale aperiodico $x(t)$ è reale e pari, allora la sua trasformata di Fourier è 
 24. Se il segnale aperiodico $x(t)$ è reale e dispari, allora la sua trasformata di Fourier è…
-25. Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(\alpha t)$ con $|\alpha|>1$ risulta modificata in modo che ...
-26. Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(\alpha t)$ con $|\alpha|>1$ risulta modificata in modo che ...
+25. Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(\alpha t)$ con $|\alpha| >1$ risulta modificata in modo che ...
+26. Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(\alpha t)$ con $|\alpha| >1$ risulta modificata in modo che ...
 27. In cosa differiscono le trasformate di Fourier di $rect (\frac{t}{T})$ e di $rect (\frac{t-5}{T})$? Spiegare le differenze sia per lo spettro di ampiezza che per lo spettro di fase.
-28. In cosa differiscono le trasformate di Fourier di $rect(frac{t}{T})$ e di $rect(\frac{t}{4T})$? Spiegare le differenze sia per lo spettro di ampiezza che per lo spettro di fase
+28. In cosa differiscono le trasformate di Fourier di $rect(\frac{t}{T})$ e di $rect(\frac{t}{4T})$? Spiegare le differenze sia per lo spettro di ampiezza che per lo spettro di fase
 29. Se $x(t)$ è un segnale complesso e $X(f)$ la sua trasformata di Fourier, quale è la trasformata di Fourier della parte reale di  $x(t$)? Giustificare la risposta
 30. Se $x(t)$ è un segnale complesso e $X(f)$ la sua trasformata di Fourier, quale è la trasformata di Fourier della parte immaginaria di $x(t$)? Giustificare la risposta
 31. Quale è la trasformata di Fourier di $e ^{-j2 \pi t}$? Giustificare la risposta
@@ -62,11 +62,12 @@ titlepage: false
 1.  Dimostrare che se un segnale periodico è reale, allora i coefficienti della sua espansione in serie di Fourier (nella sua forma complessa) sono caratterizzati da una simmetria Hermitiana.
 2.  Enunciare e dimostrare il Teorema di dualità della Trasformata continua di Fourier
 3.  Enunciare e dimostrare il Teorema del cambiamento di scala della Trasformata continua di Fourier
-4.  Enunciare e dimostrare il Teorema di integrazione completo della Trasformata continua di Fourier 
-5.  Dato un segnale x(t), enunciare e dimostrare la formula somma di Poisson che lega i coeffcienti della serie di Fourier di  $\displaystyle y(t) = \sum_{n = -\infty}^{\infty} x(t - nT)$ alla trasformata (aperiodica) di Fourier di x(t).
-6.  Dimostrare che la trasformata di Fourier del prodotto di funzioni $x(t) \cdot y(t)$ è la convoluzione di $X(f)$ con $Y (f)$.
-7.  Enunciare e dimostrare il Teorema di Parseval
-8.  Enunciare il Teorema di Wiener-Khintchine
+4.  Enunciare e dimostrare il Teorema di integrazione completo della Trasformata continua di Fourier
+5.  Enunciare e dimostrare il Teorema della moltiplicazione (o prodotto?) della Trasformata continua di Fourier.
+6.  Dato un segnale x(t), enunciare e dimostrare la formula somma di Poisson che lega i coeffcienti della serie di Fourier di  $\displaystyle y(t) = \sum_{n = -\infty}^{\infty} x(t - nT)$ alla trasformata (aperiodica) di Fourier di x(t).
+7.  Dimostrare che la trasformata di Fourier del prodotto di funzioni $x(t) \cdot y(t)$ è la convoluzione di $X(f)$ con $Y (f)$.
+8.  Enunciare e dimostrare il Teorema di Parseval
+9.  Enunciare il Teorema di Wiener-Khintchine
 
 \newpage
 
@@ -76,12 +77,13 @@ titlepage: false
 2.  La potenza istantanea di un segnale deterministico a tempo continuo $s(t)$ è definita come $P(t) = |s(t)|^2$.
 3.  La potenza media di un segnale deterministico a tempo continuo $s(t)$ è definita come
     $$
-    p(t) = \lim_{T\to\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} s^2(t) dt
-    $$ dove T è il periodo del segnale.
+    p(t) = \lim_{T\to\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} s^2(t) \,dt
+    $$ 
+    dove T è il periodo del segnale.
 4.  Per $x(t) = Ae^{-t}u(t),$ l’energia è 
     $$
-    \displaystyle E = \int_0^\infty |Ae^{-t}|^2 dt = A^2 \int_0^\infty e^{-2t} dt = \frac{A^2}{2}
-    $$. 
+    E = \int_{0}^{\infty} |Ae^{-t}|^2 dt = A^2 \int_0^\infty e^{-2t} dt = \frac{A^2}{2}
+    $$ 
     La potenza media è pari a: 
     $$
     \displaystyle P_t = \lim_{T \to \infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} |x(t)|^2 dt = \lim_{T \to \infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} |A e^{-t} u(t)|^2 dt =  \lim_{T \to \infty} \frac{A^2}{T} \int_{0}^{\frac{T}{2}} e^{-2t} dt = \lim_{T \to \infty} \frac{A^2}{T}*0 = 0
