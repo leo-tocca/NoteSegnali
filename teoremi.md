@@ -3,6 +3,7 @@ header-includes: |
             \usepackage{cancel}
             \usepackage{steinmetz}
             \DeclareMathOperator{\sinc}{sinc}
+            \DeclareMathOperator{\rect}{rect}
 ---
 # Lista teoremi Teoria dei Segnali
 
@@ -178,7 +179,7 @@ header-includes: |
 
         Possiamo inoltre scrivere i coefficienti $X_k$ in modo semplificato, data la *parità* del segnale:
         $$
-        X_k = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi kf_{0}t} \,dt = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underset{pari}{x(t)}\cdot\underset{pari}{\cos{(2\pi kf_{0}t)}} \,dt - \frac{j}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underset{pari}{x(t)}\cdot\underset{dispari}{\sin{(2\pi kf_{0}t)}}\,dt=
+        X_k = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi kf_{0}t} \,dt = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underbrace{x(t)}_{\text{pari}}\cdot\underset{pari}{\cos{(2\pi kf_{0}t)}} \,dt - \frac{j}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underset{pari}{x(t)}\cdot\underset{dispari}{\sin{(2\pi kf_{0}t)}}\,dt=
         $$
         $$
         \frac{2}{T_0} \int_{0}^{\frac{T_0}{2}} x(t)\cdot\cos{(2\pi kf_{0}t)} \,dt - 0
@@ -209,7 +210,7 @@ header-includes: |
 [^1]: TODO: definire meglio armoniche
 
 ## Segnali aperiodici a tempo continuo
-### Trasformata **continua** di Fourier
+### Trasformata continua di Fourier
 > Una funzione non periodica, definita tra $-\infty$ e $\infty$, può essere rappresentata come **somma** di **infinite armoniche semplici** di ampiezza *infinitesima* e di frequenza variabile con continuità tra $-\infty$ e $\infty$
 
 9. Dal segnale periodico al segnale aperiodico...
@@ -260,7 +261,7 @@ header-includes: |
     $$
     $\to X(f)=jIm(f) \to X(f)=-X(f)$ è immaginaria pura e dispari    
 
-#### Proprietà della trasformata **continua**
+#### Proprietà della trasformata continua
 
 13. **Linearità**
     
@@ -280,13 +281,15 @@ header-includes: |
 14. **Dualità**
     
     se $x(t)\Longleftrightarrow X(f)$, allora $X(t)\Longleftrightarrow x(-f)$:
+
+    Se la trasformata continua di Fourier passa ad essere un *segnale nel tempo*, allora $x(-f)$ è la sua trasformata di Fourier. Abbiamo quindi una corrispondenza biunivoca tra la funzione e la sua trasformata.
     * Esempio:
         $$
-        \text{rect}(\frac{t}{T})\sinc(fT)
+        \rect(\frac{t}{T})\sinc(fT)
         $$
         Ma se nel tempo ho un segnale $sinc(bT)$ qual è la sua trasformata?
 
-        $Tsinc(Tt) \Longleftrightarrow rect({-\frac{f}{T}})$ da cui $sinc(Bt)\Longleftrightarrow \frac{1}{B}rect(\frac{t}{B})$, dove $B$ indica la banda.
+        $T\sinc(Tt) \Longleftrightarrow rect({-\frac{f}{T}})$ da cui $\sinc(Bt)\Longleftrightarrow \frac{1}{B}\rect(\frac{t}{B})$, dove $B$ indica la banda.
     * Dimostrazione:
         $$
         x(t) =\int_{-\infty}^{\infty}X(f)\ e^{j2\pi ft} \,df = \int_{-\infty}^{\infty}X(t)\ e^{j2\pi ft} \,dt 
@@ -295,4 +298,44 @@ header-includes: |
         $$
         X(-f)=int_{-\infty}^{\infty}x(t)\ e^{-j2\pi fT} \,dt 
         $$
-        Da qui deriviamo che $X(-f)$ è la trasformata di $x(t)$ TODO CONTROLLARE
+        Da qui deriviamo che $x(-f)$ è la trasformata di $X(t)$
+
+15. **Ritardo**
+    
+    Sia $X(f)=\text{TCF}[x(t)]$: la trasformata di Fourier di $x(t)$ ritardato nel tempo di una quantità $t_0$ è pari a:
+    $$
+    x(t-t_0) \Longleftrightarrow X(f) \ e^{-j2\pi ft_0}
+    $$
+
+    - Dimostrazione:
+
+    Applichiamo a $x(t-t_0)$ la definizione di TCF
+    $$
+    x(t-t_0) \Longleftrightarrow \int_{-\infty}^{\infty} x(t-t_0) \ e^{-j2\pi ft} \,dt = \Big|\alpha = t-t_0 \to t=\alpha +t_0
+    $$
+    $$
+    x(t-t_0) \Longleftrightarrow \int_{-\infty}^{\infty} x(\alpha + t_0) e^{-j2\pi (\alpha +t_0)f} \,d\alpha = e^{-j2\pi ft_0} \int_{-\infty}^{\infty} x(\alpha)\ e^{-j2\pi f\alpha} =  e^{-j2\pi ft_0} \ X(f) 
+    $$
+    - Esempio:
+    $$
+    A\rect(\frac{t-\frac{T}{2}}{T}) \Longleftrightarrow AT\sinc(fT)e^{-j\cancel{2}\pi f\frac{T}{\cancel{2}}}
+    $$
+
+    Se $y(t)=x(t-t_0) \Rightarrow Y(f) = X(f) \ e^{-j2 pi ft_0} \Rightarrow$ Un ritardo modifica lo spettro di **fase** ma *non cambia* il suo spettro di ampiezza, in quanto quest'ultimo di indica quali componenti sinusoidali sono necessarie per comporre la forma del segnale, mentre lo spettro di fase mi dice con quale *angolo* iniziale devono "partire" le sinusoidi.
+
+    Quindi se il segnale si sposta nel tempo, allora le sinusoidi hanno angoli iniziali diversi, ma sono le stesse.
+    $$
+    |Y(f)| = |X(f)|\cdot |e^{-j2\pi ft_0}| = |X(f)| \\
+    \phase{Y(f)} = \phase{X(f) \ e^{-j2 pi ft_0}} = \phase{X(f)} + \phase{e^{-j2 pi ft_0}} = \underbrace{\phase{X(f)} - \overbrace{2\pi ft_0}^{=0}}_{\text{\underline{NON} è una traslazione!}}
+    $$
+16. **Cambiamento di scala**
+
+    Si consideri $y(t)=x(\alpha t)$, effettuando un *cambiamento della scala temporale*:
+    $$
+    \begin{array}{cl}
+    |\alpha | > 1 \ \to \text{ compressione della scala dei tempi} \to \text{ l'evoluzione è "accelerata"}\\
+    |\alpha | > 1 \ \to \text{ dilatazione della scala dei tempi} \to \text{ l'evoluzione è "rallentata"}\\
+    |\alpha | < 0 \ \to \text{ inversione della scala dei tempi}
+    \end{array} 
+    $$
+    
