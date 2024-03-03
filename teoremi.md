@@ -336,6 +336,13 @@ header-includes: |
     |\alpha | > 1 \ \to \text{ compressione della scala dei tempi} \to \text{ l'evoluzione è "accelerata"}\\
     |\alpha | > 1 \ \to \text{ dilatazione della scala dei tempi} \to \text{ l'evoluzione è "rallentata"}\\
     |\alpha | < 0 \ \to \text{ inversione della scala dei tempi}
-    \end{array} 
+    \end{array} \\
+    x(\alpha t) \Longleftrightarrow \frac{1}{\alpha} X(\frac{f}{\alpha})
     $$
-    
+    * Dimostrazione:
+    $$
+    \alpha > 0 \Rightarrow x(\alpha t) + \int_{-\infty}^{\infty} x(\alpha t) \ e^{-j2\pi ft} \,dt \text{ ponendo } z+\alpha t \to t= \frac{z}{\alpha}, \,dz=\alpha\,dt \\
+    \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} \frac{x(z) \ e^{-j2\pi f\frac{z}{\alpha}}}{\alpha} \,dt = \frac{1}{\alpha} frac{x(z) \int_{-\infty}^{\infty} \ e^{-j2\pi f(\frac{z}{\alpha})}} - \frac{1}{\alpha}X(\frac{f}{alpha})
+    $$
+
+
