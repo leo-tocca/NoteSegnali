@@ -2,6 +2,7 @@
 header-includes: |
             \usepackage{cancel}
             \usepackage{steinmetz}
+            \usepackage{derivative}
             \DeclareMathOperator{\sinc}{sinc}
             \DeclareMathOperator{\rect}{rect}
 ---
@@ -15,7 +16,7 @@ header-includes: |
     Quindi $\displaystyle \lim_{N \to \infty} \frac{1}{NT_0} \int_{-\frac{NT_0}{2}}^{\frac{NT_0}{2}} |x(t)|^{2} \,dt$ equivale a $N$ integrali cui si aggiunge un $T_0$ ogni volta:
 
     $$
-    \displaystyle \lim_{N \to \infty} \frac{1}{\cancel{N}T_0} \cdot \cancel{N} \{ \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x(t)|^{2} \,dt \} = \bar{P} = \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x(t)|^{2} \,dt
+    \displaystyle \lim_{N \to \infty} \frac{1}{\cancel{N}T_0} \cdot \cancel{N} \Big \{ \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x(t)|^{2} \,dt \} = \bar{P} = \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x(t)|^{2} \,dt
     $$
 
 ## Segnali periodici a tempo continuo
@@ -296,7 +297,7 @@ header-includes: |
         $$
         con uno scambio di variabili $t$ con $f$. Quindi:
         $$
-        X(-f)=int_{-\infty}^{\infty}x(t)\ e^{-j2\pi fT} \,dt 
+        X(-f)=\int_{-\infty}^{\infty}x(t)\ e^{-j2\pi fT} \,dt 
         $$
         Da qui deriviamo che $x(-f)$ è la trasformata di $X(t)$
 
@@ -367,3 +368,24 @@ header-includes: |
     \text{TCF}[x(t)\cos(2\pi f_{0}t)] = \int_{-\infty}^{\infty} x(t)\cos(2\pi f_{0}t)  e^{-j2\pi ft} \,dt \\ \frac{1}{2} \int_{-\infty}^{\infty} x(t) [e^{-j2\pi f_0 t}+ e^{-j2\pi f_0 t}]e^{-j2\pi ft} \,dt = \frac{1}{2}\Big[\int_{-\infty}^{\infty}x(t)  e^{-j2\pi (f-f_0)t}\,dt + \int_{-\infty}^{\infty}x(t)  e^{-j2\pi (f+f_0)t}\,dt  \Big] = \\ \frac{X(f-f_0)+X(f+f_0)}{2}
     $$
     Corollario: $x(t)e^{j2\pi f_{o}t} \Longleftrightarrow X(f-f_0)$
+
+18. **Derivazione**
+
+    Se $x(t) \to X(f)$, allora:
+    $$
+    \dv{}{t} x(t) \Longleftrightarrow j2\pi f \cdot X(f) = Y(f)
+    $$
+    Una derivata nel tempo è una *moltiplicazione* in frequenza.
+
+    - Dimostrazione:
+
+    Deriviamo entrambi i lati di $x(t)$:
+    $$
+    \dv{}{t}x(t) = \dv{}{t} \int_{-\infty}^{\infty} X(f) e^{j2\pi ft} \,df = \int_{-\infty}^{\infty}\dv{}{t} \Big [X(f) e^{j2\pi ft} \Big ] \,df = \int_{-\infty}^{\infty} X(f) \dv{}{t}e^{j2\pi ft} \,df = \\ \int_{-\infty}^{\infty} X(f) (2\pi f) e^{j2\pi ft} \,df \Longrightarrow \text{[TCF]}\dv{x(t)}{t} = j2\pi f X(f)
+    $$
+
+    Il teorema della derivazione *modifica gli spettri*
+    $$
+    |Y(f)| = 2\pi f |X(f)| \\ \phase{Y(f)} = \phase{X(f)} + \text{sgn}(f)\frac{\pi}{2}
+    $$
+    Aumenta proporzionalmente l'ampiezza, esaltando le altre frequenze, e sfasando di $\pm \frac{\pi}{2}$
