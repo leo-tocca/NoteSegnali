@@ -336,13 +336,34 @@ header-includes: |
     |\alpha | > 1 \ \to \text{ compressione della scala dei tempi} \to \text{ l'evoluzione è "accelerata"}\\
     |\alpha | > 1 \ \to \text{ dilatazione della scala dei tempi} \to \text{ l'evoluzione è "rallentata"}\\
     |\alpha | < 0 \ \to \text{ inversione della scala dei tempi}
-    \end{array} \\
-    x(\alpha t) \Longleftrightarrow \frac{1}{\alpha} X(\frac{f}{\alpha})
+    \end{array} 
     $$
-    * Dimostrazione:
+    Inoltre vale:
     $$
-    \alpha > 0 \Rightarrow x(\alpha t) + \int_{-\infty}^{\infty} x(\alpha t) \ e^{-j2\pi ft} \,dt \text{ ponendo } z+\alpha t \to t= \frac{z}{\alpha}, \,dz=\alpha\,dt \\
-    \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} \frac{x(z) \ e^{-j2\pi f\frac{z}{\alpha}}}{\alpha} \,dt = \frac{1}{\alpha} frac{x(z) \int_{-\infty}^{\infty} \ e^{-j2\pi f(\frac{z}{\alpha})}} - \frac{1}{\alpha}X(\frac{f}{alpha})
+    x(\alpha t) \Longleftrightarrow \frac{1}{|\alpha |} x(\frac{f}{\alpha})
     $$
+    - Dimostrazione:
+    $$
+    \cdot \ \ \underline{\alpha > 0} \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} x(\alpha t) e^{-j2\pi ft} \,dt \text{, ponendo } z=\alpha t \to t = \frac{z}{\alpha}, \,dz = \alpha \,dt \\
+    \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} \frac{x(z) e^{-j2\pi f \frac{z}{\alpha}}}{\alpha} \,dz = \frac{1}{\alpha}\int_{-\infty}^{\infty} x(z) e^{-j2\pi f \frac{z}{\alpha}} \,dz = \frac{1}{\alpha} X(\frac{f}{\alpha})
+    $$
+    $$
+    \cdot \ \ \underline{\alpha < 0} \Rightarrow x(\alpha t) \Longleftrightarrow \int_{\infty}^{-\infty} \frac{x(z) e^{-j2\pi f \frac{z}{\alpha}}}{\alpha} \,dz = -\frac{1}{\alpha}\int_{-\infty}^{\infty} x(z) e^{-j2\pi f \frac{z}{\alpha}} \,dz = -\frac{1}{\alpha} X(\frac{f}{\alpha})
+    $$
+    È da notare come l'inversione dell'integrale nel secondo caso l'abbiamo quando $t \to -\infty, \ z \to +\infty$. Inoltre abbiamo sostituito $z=-\alpha t$.
 
+    Quindi una *dilatazione* nel tempo corrisponde ad una *compressione* in frequenza, e **viceversa**
 
+17. **Modulazione**
+
+    Dato un segnale $x(t)$ e la sua trasformata $X(f)$ allora
+    $$
+    x(t)\cos(2\pi f_{0}t) \Longleftrightarrow \frac{X(f-f_0)+X(f+f_0)}{2}
+    $$
+    dove $X(f-f_0)$ e $X(f+f_0)$ sono rispettivamente la replica centrata in $f_0$ e la replica centrata in $-f_0$.
+
+    - Dimostrazione:
+    $$
+    \text{TCF}[x(t)\cos(2\pi f_{0}t)] = \int_{-\infty}^{\infty} x(t)\cos(2\pi f_{0}t)  e^{-j2\pi ft} \,dt \\ \frac{1}{2} \int_{-\infty}^{\infty} x(t) [e^{-j2\pi f_0 t}+ e^{-j2\pi f_0 t}]e^{-j2\pi ft} \,dt = \frac{1}{2}\Big[\int_{-\infty}^{\infty}x(t)  e^{-j2\pi (f-f_0)t}\,dt + \int_{-\infty}^{\infty}x(t)  e^{-j2\pi (f+f_0)t}\,dt  \Big] = \\ \frac{X(f-f_0)+X(f+f_0)}{2}
+    $$
+    Corollario: $x(t)e^{j2\pi f_{o}t} \Longleftrightarrow X(f-f_0)$
