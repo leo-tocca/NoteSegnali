@@ -3,6 +3,7 @@ header-includes: |
             \usepackage{cancel}
             \usepackage{steinmetz}
             \usepackage{derivative}
+            \usepackage{mathtools}
             \DeclareMathOperator{\sinc}{sinc}
             \DeclareMathOperator{\rect}{rect}
 ---
@@ -18,7 +19,6 @@ header-includes: |
     $$
     \displaystyle \lim_{N \to \infty} \frac{1}{\cancel{N}T_0} \cdot \cancel{N} \Big \{ \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x(t)|^{2} \,dt \} = \bar{P} = \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x(t)|^{2} \,dt
     $$
-
 ## Segnali periodici a tempo continuo
 ### Serie di Fourier
 2. Da forma polare a complessa (o rettangolare)
@@ -42,7 +42,6 @@ header-includes: |
     $$
     \Rightarrow x(t) = \sum_{k=-\infty}^{\infty} X_k \ e^{j2\pi kf_{0}t} \text{ forma complessa della serie di Fourier}
     $$
-
 3. Come si calcolano i coefficienti $X_n$?
     
     Partendo dalla forma complessa, moltiplico a destra e a sinistra per $e^{-j2\pi kf_{0}t}$, integrando sul periodo $T_0$.
@@ -70,7 +69,6 @@ header-includes: |
     $$
     \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t)e^{-j2\pi nf_{0}t} \,dt = X_{n}T_{0} \Rightarrow X_{n} = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t)e^{-j2\pi nf_{0}t} \,dt 
     $$
-
 4. Forma rettangolare dalla forma polare
     $$
     x(t) = A_{0} + 2 \sum_{k=1}^{\infty} A_{k} \cos(2\pi k f_{0}t + \theta_{k})
@@ -93,7 +91,6 @@ header-includes: |
     $$
     X_k = a_k +jb_k = A_k \cos(\theta_k) + jA_k\sin(\theta_k) = A_k e^{j\theta_k}
     $$
-
 5. Criterio di Dirichlet (per $x(t)$ periodico):
 
     È una serie di condizioni che se incontrate sono sufficienti per poter sviluppare un dato segnale $x(t)$ in serie di Fourier:
@@ -102,7 +99,6 @@ header-includes: |
     * $x(t)$ deve essere *derivabile sul periodo* $T_0$, escluso al più un numero finito di punti, dove comunque esiste **finita** sia la derivata destra che la derivata sinistra
         - quest'ultima ipotesi è equivalente a: $x(t)$ presenta un numero finito di massimi e minimi nel periodo
     La serie **converge** al valore assunto da $x(t)$ dove *continua* e alla semisomma dei limiti sinistro e destro se discontinua.
-
 ### Spettro di un segnale periodico e reale
 #### Proprietà
 6. Simmetria Hermitiana dello spettro reale:
@@ -129,7 +125,6 @@ header-includes: |
         - lo spettro di fase è **antisimmetrico** rispetto a $k \to$ dispari
 
     TODO: controllare appunti Agata
-
 7. Linearità dello spettro reale:
 
     Se $x(t)$ e $y(t)$ sono due segnali con periodo $T_0$ *reali* allora vale:
@@ -143,7 +138,6 @@ header-includes: |
     $$
     = \frac{a}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi kf_{0}t} \,dt + \frac{b}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} y(t) e^{-j2\pi kf_{0}t} \,dt = aX_{k}+bY_{k}
     $$
-
 8. Parità e disparità del segnale
 
     * Se $x(t)$ è **pari**, allora il coefficiente $X_{k} = X_{-k}$; se il segnale è anche **reale** vale $X_{k}=X_{-k}=X^{*}_{k} \Longleftrightarrow X_k \in \mathbb{R}$. 
@@ -180,7 +174,7 @@ header-includes: |
 
         Possiamo inoltre scrivere i coefficienti $X_k$ in modo semplificato, data la *parità* del segnale:
         $$
-        X_k = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi kf_{0}t} \,dt = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underbrace{x(t)}_{\text{pari}}\cdot\underset{pari}{\cos{(2\pi kf_{0}t)}} \,dt - \frac{j}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underset{pari}{x(t)}\cdot\underset{dispari}{\sin{(2\pi kf_{0}t)}}\,dt=
+        X_k = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi kf_{0}t} \,dt = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underbrace{x(t)}_{pari}\cdot\underbrace{\cos{(2\pi kf_{0}t)}}_{pari} \,dt - \frac{j}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underbrace{x(t)}_{pari}\cdot\underbrace{\sin{(2\pi kf_{0}t)}}_{dispari}\,dt=
         $$
         $$
         \frac{2}{T_0} \int_{0}^{\frac{T_0}{2}} x(t)\cdot\cos{(2\pi kf_{0}t)} \,dt - 0
@@ -209,13 +203,10 @@ header-includes: |
                 * $\frac{1}{k} \to$ funzioni discontinue: dente di sega ideale, onda quadra, onda quadra "antisimmetrica", rect
                 * $\frac{1}{k^2} \to$ funzioni continue a derivata discontinua: onda triangolare.
 [^1]: TODO: definire meglio armoniche
-
 ## Segnali aperiodici a tempo continuo
 ### Trasformata continua di Fourier
 > Una funzione non periodica, definita tra $-\infty$ e $\infty$, può essere rappresentata come **somma** di **infinite armoniche semplici** di ampiezza *infinitesima* e di frequenza variabile con continuità tra $-\infty$ e $\infty$
-
 9. Dal segnale periodico al segnale aperiodico...
-
 10. Criteri di esistenza per la trasformata continua di Fourier (TCF)
     1. $X(f)$ esiste se il segnale $x(t)$
     2. Criteri di Dirichlet:
@@ -241,7 +232,6 @@ header-includes: |
     $$
     infatti $X(f)=Re(f)+jIm(f)=Re(-f)+jIm(f)=X^{*}(-f)$
     - lo spettro di ampiezza è quindi *pari* a quello di fase dispari.
-
 12. Parità e disparità:
     - se un segnale è *reale e pari*
     $$
@@ -261,7 +251,6 @@ header-includes: |
     \end{array} \right.
     $$
     $\to X(f)=jIm(f) \to X(f)=-X(f)$ è immaginaria pura e dispari    
-
 #### Proprietà della trasformata continua
 
 13. **Linearità**
@@ -279,6 +268,7 @@ header-includes: |
         $$
         = a\int_{-\infty}^{\infty}x_1(t)\ e^{-j2\pi ft}\,dt + b\int_{-\infty}^{\infty}x_2(t)\ e^{-j2\pi ft}\,dt = aX_1(f)+bX_2(f)
         $$
+
 14. **Dualità**
     
     se $x(t)\Longleftrightarrow X(f)$, allora $X(t)\Longleftrightarrow x(-f)$:
@@ -389,3 +379,43 @@ header-includes: |
     |Y(f)| = 2\pi f |X(f)| \\ \phase{Y(f)} = \phase{X(f)} + \text{sgn}(f)\frac{\pi}{2}
     $$
     Aumenta proporzionalmente l'ampiezza, esaltando le altre frequenze, e sfasando di $\pm \frac{\pi}{2}$
+    
+19. **Integrazione** (deriva dal teorema di derivazione)
+
+    Dato un segnale $x(t) \Longleftrightarrow X(f)$ e un segnale $y(t) = \int_{-\infty}^{t} x(\alpha) \,d\alpha$, allora vale
+    $$
+    \int_{-\infty}^{t}  x(\alpha) \,d\alpha \Longleftrightarrow \frac{X(f)}{j2\pi f}
+    $$
+    - Dimostrazione:
+
+    Segue dal teorema di derivazione e richiede che $X(0)=0$, al fine di evitare che per $f\to 0$, il rapporto tenda ad infinito.
+    $$
+    X(0)= 0 \longleftrightarrow X(0)=\underbrace{\int_{-\infty}^{\infty}x(t) \ e^{0}\,dt}_{\text{sottende area} \textbf{ nulla}} \longleftrightarrow y(\infty) = \int_{-\infty}^{\infty} x(t)\,dt = X(0) \to 0 \\ y(t) = \int_{-\infty}^{t} x(\alpha) \,d\alpha \Rightarrow x(t) \dv{}{t}y(t) \Rightarrow X(f)=j2\pi f\cdot Y(f) \Rightarrow Y(f) = \frac{X(f)}{j2\pi f}
+    $$
+    Anche l'integrale nel tempo si trasforma in un'operazione algebrica in frequenza: in questo caso però vengono esaltate le componenti a **bassa** frequenza nello spettro del segnale, mentre le alte vengono attenuate; la fase varia sempre di $\pm \frac{\pi}{2}$
+    $$
+    |Y(f)| = \frac{|X(f)|}{2\pi f} \\ \phase{Y(f)} = \phase{X(f)} + \text{sgn}(f)\frac{\pi}{2}
+    $$
+    Da questo teorema deriva la relazione $A \text{tri}(\frac{t}{T})\Longleftrightarrow AT\sinc^{2}(fT)}; \ A\rect (\frac{t}{T})\Longleftrightarrow AT\sinc (fT)$
+
+20. **Prodotto**
+    Consideriamo il segnale $z(t)=x(t)\cdot z(t)$:
+    $$
+    \Rightarrow Z(f) =  \int_{-\infty}^{\infty}x(t)\ y(t)\ e^{-j2\pi ft}\,dt = \int_{t=-\infty}^{\infty} \Big[ \int_{\nu = -\infty}^{\infty} X(\nu) e^{-j2\pi \nu t} \,d\nu \Big ] y(t)\ e^{-j2\pi ft}\,dt= \\ \int_{\nu=-\infty}^{\infty} X(\nu) \Big[ \int_{t = -\infty}^{\infty}  y(t)\ e^{-j2\pi (f-\nu)t}\,dt \Big ] \,d\nu =  \int_{\nu = -\infty}^{\infty} X(\nu) Y(t-\nu) \,d\nu = \\ X(f) \otimes Y(f)
+    $$
+    Quindi:
+    $$
+    \underset{PRODOTTO}{x(t) \ y(t)} \Longleftrightarrow \underset{CONVOLUZIONE}{X(f)\otimes Y(f)} \to \text{ la convoluzione è \textit{commutativa}}
+    $$
+    Vale anche
+    $$
+    x(t)\otimes y(t) \Longleftrightarrow X(f) \ Y(f)
+    $$
+    - Dimostrazione:
+
+    Partiamo sempre dalla definizione di TCF:
+    $$
+    z(t) = x(t) \otimes y(t) = \int_{-\infty}^{\infty} x(\alpha) y(t-\alpha) \,d\alpha \Longleftrightarrow Z(f) = \int_{-\infty}^{\infty} z(t) \ e^{-j2\pi ft} \,dt = \\  \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \Big [ x(\alpha) y(t -\alpha) \,d\alpha  \Big] e^{-j2\pi f(t-\alpha+\alpha)} \,dt = \int_{\alpha=-\infty}^{\infty} x(\alpha) \underbracket{\int_{t=-\infty}^{\infty}y(t-\alpha)e^{-j2\pi f(t-\alpha)}\,dt}_{Y(f)} e^{-j2\pi f\alpha} \,d\alpha = \\ \int_{\alpha=-\infty}^{\infty} x(\alpha) \ Y(f) \ e^{-j2\pi f\alpha}\,d\alpha = X(f) \ Y(f)
+    $$
+
+21. **_Convoluzione_**
