@@ -19,8 +19,10 @@ header-includes: |
     $$
     \displaystyle \lim_{N \to \infty} \frac{1}{\cancel{N}T_0} \cdot \cancel{N} \Big \{ \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x(t)|^{2} \,dt \} = \bar{P} = \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x(t)|^{2} \,dt
     $$
+
 ## Segnali periodici a tempo continuo
 ### Serie di Fourier
+
 2. Da forma polare a complessa (o rettangolare)
 
     la forma polare della serie di Fourier è data da:
@@ -174,7 +176,8 @@ header-includes: |
 
         Possiamo inoltre scrivere i coefficienti $X_k$ in modo semplificato, data la *parità* del segnale:
         $$
-        X_k = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi kf_{0}t} \,dt = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underbrace{x(t)}_{pari}\cdot\underbrace{\cos{(2\pi kf_{0}t)}}_{pari} \,dt - \frac{j}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underbrace{x(t)}_{pari}\cdot\underbrace{\sin{(2\pi kf_{0}t)}}_{dispari}\,dt=
+        X_k = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi kf_{0}t} \,dt = \\
+        \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underbrace{x(t)}_{pari}\cdot\underbrace{\cos{(2\pi kf_{0}t)}}_{pari} \,dt - \frac{j}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underbrace{x(t)}_{pari}\cdot\underbrace{\sin{(2\pi kf_{0}t)}}_{dispari}\,dt=
         $$
         $$
         \frac{2}{T_0} \int_{0}^{\frac{T_0}{2}} x(t)\cdot\cos{(2\pi kf_{0}t)} \,dt - 0
@@ -189,7 +192,8 @@ header-includes: |
         * Dato che $x(t)\in\mathbb{R}$, $X_k$, allora vale $X_{-k} = -X_{k} = X_{k}^{*} \Rightarrow X_{k}^{*}=-X_k$, quindi è un immaginario puro!
         * Per $X_k$:
         $$
-        X_k = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi kf_{0}t} \,dt = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underset{dispari}{x(t)}\cdot\underset{pari}{\cos{(2\pi kf_{0}t)}} \,dt - \frac{j}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underset{dispari}{x(t)}\cdot\underset{dispari}{\sin{(2\pi kf_{0}t)}}\,dt=
+        X_k = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi kf_{0}t} \,dt = \\
+        \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underset{dispari}{x(t)}\cdot\underset{pari}{\cos{(2\pi kf_{0}t)}} \,dt - \frac{j}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underset{dispari}{x(t)}\cdot\underset{dispari}{\sin{(2\pi kf_{0}t)}}\,dt=
         $$
         $$
         -\frac{j}{T_0} \int_{0}^{\frac{T_0}{2}} x(t)\cdot\sin{(2\pi kf_{0}t)} \,dt 
@@ -203,8 +207,10 @@ header-includes: |
                 * $\frac{1}{k} \to$ funzioni discontinue: dente di sega ideale, onda quadra, onda quadra "antisimmetrica", rect
                 * $\frac{1}{k^2} \to$ funzioni continue a derivata discontinua: onda triangolare.
 [^1]: TODO: definire meglio armoniche
+
 ## Segnali aperiodici a tempo continuo
 ### Trasformata continua di Fourier
+
 > Una funzione non periodica, definita tra $-\infty$ e $\infty$, può essere rappresentata come **somma** di **infinite armoniche semplici** di ampiezza *infinitesima* e di frequenza variabile con continuità tra $-\infty$ e $\infty$
 9. Dal segnale periodico al segnale aperiodico...
 10. Criteri di esistenza per la trasformata continua di Fourier (TCF)
@@ -278,9 +284,9 @@ header-includes: |
         $$
         \rect(\frac{t}{T})\sinc(fT)
         $$
-        Ma se nel tempo ho un segnale $sinc(bT)$ qual è la sua trasformata?
+        Ma se nel tempo ho un segnale $\sinc(bT)$ qual è la sua trasformata?
 
-        $T\sinc(Tt) \Longleftrightarrow rect({-\frac{f}{T}})$ da cui $\sinc(Bt)\Longleftrightarrow \frac{1}{B}\rect(\frac{t}{B})$, dove $B$ indica la banda.
+        $T\sinc(Tt) \Longleftrightarrow \rect({-\frac{f}{T}})$ da cui $\sinc(Bt)\Longleftrightarrow \frac{1}{B}\rect(\frac{t}{B})$, dove $B$ indica la banda.
     * Dimostrazione:
         $$
         x(t) =\int_{-\infty}^{\infty}X(f)\ e^{j2\pi ft} \,df = \int_{-\infty}^{\infty}X(t)\ e^{j2\pi ft} \,dt 
@@ -396,10 +402,15 @@ header-includes: |
     $$
     |Y(f)| = \frac{|X(f)|}{2\pi f} \\ \phase{Y(f)} = \phase{X(f)} + \text{sgn}(f)\frac{\pi}{2}
     $$
-    Da questo teorema deriva la relazione $A \text{tri}(\frac{t}{T})\Longleftrightarrow AT\sinc^{2}(fT)}; \ A\rect (\frac{t}{T})\Longleftrightarrow AT\sinc (fT)$
+    Da questo teorema deriva la relazione $A \text{tri}(\frac{t}{T})\Longleftrightarrow AT\sinc^{2}(fT); \ A\rect (\frac{t}{T})\Longleftrightarrow AT\sinc (fT)$
 
 20. **Prodotto**
-    Consideriamo il segnale $z(t)=x(t)\cdot z(t)$:
+
+    Partendo da due segnali $x(t)$ e $y(t)$
+    $$
+    z(t)=x(t)\cdot y(t) \Longleftrightarrow X(f) \otimes Y(f)
+    $$
+    - Dimostrazione:
     $$
     \Rightarrow Z(f) =  \int_{-\infty}^{\infty}x(t)\ y(t)\ e^{-j2\pi ft}\,dt = \int_{t=-\infty}^{\infty} \Big[ \int_{\nu = -\infty}^{\infty} X(\nu) e^{-j2\pi \nu t} \,d\nu \Big ] y(t)\ e^{-j2\pi ft}\,dt= \\ \int_{\nu=-\infty}^{\infty} X(\nu) \Big[ \int_{t = -\infty}^{\infty}  y(t)\ e^{-j2\pi (f-\nu)t}\,dt \Big ] \,d\nu =  \int_{\nu = -\infty}^{\infty} X(\nu) Y(t-\nu) \,d\nu = \\ X(f) \otimes Y(f)
     $$
@@ -407,15 +418,43 @@ header-includes: |
     $$
     \underset{PRODOTTO}{x(t) \ y(t)} \Longleftrightarrow \underset{CONVOLUZIONE}{X(f)\otimes Y(f)} \to \text{ la convoluzione è \textit{commutativa}}
     $$
-    Vale anche
+    
+21. **_Convoluzione_**
+
+    Dati due segnali $x(t)$ e $y(t)$ sappiamo che:
     $$
-    x(t)\otimes y(t) \Longleftrightarrow X(f) \ Y(f)
+    z(t) = x(t) \otimes y(t) \Longleftrightarrow X(f) \ Y(f)
     $$
     - Dimostrazione:
 
-    Partiamo sempre dalla definizione di TCF:
+        Partiamo sempre dalla definizione di TCF:
     $$
-    z(t) = x(t) \otimes y(t) = \int_{-\infty}^{\infty} x(\alpha) y(t-\alpha) \,d\alpha \Longleftrightarrow Z(f) = \int_{-\infty}^{\infty} z(t) \ e^{-j2\pi ft} \,dt = \\  \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \Big [ x(\alpha) y(t -\alpha) \,d\alpha  \Big] e^{-j2\pi f(t-\alpha+\alpha)} \,dt = \int_{\alpha=-\infty}^{\infty} x(\alpha) \underbracket{\int_{t=-\infty}^{\infty}y(t-\alpha)e^{-j2\pi f(t-\alpha)}\,dt}_{Y(f)} e^{-j2\pi f\alpha} \,d\alpha = \\ \int_{\alpha=-\infty}^{\infty} x(\alpha) \ Y(f) \ e^{-j2\pi f\alpha}\,d\alpha = X(f) \ Y(f)
+    z(t) = x(t) \otimes y(t) = \int_{-\infty}^{\infty} x(\alpha) y(t-\alpha) \,d\alpha \Longleftrightarrow Z(f) = \int_{-\infty}^{\infty} z(t) \ e^{-j2\pi ft} \,dt = \\  \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \Big [ x(\alpha) y(t -\alpha) \,d\alpha  \Big] e^{-j2\pi f(t-\alpha+\alpha)} \,dt =\\
+    \int_{\alpha=-\infty}^{\infty} x(\alpha) \underbrace{\Big [\int_{t=-\infty}^{\infty}y(t-\alpha)e^{-j2\pi f(t-\alpha)}\,dt \Big ]}_{Y(f)}  e^{-j2\pi f\alpha} \,d\alpha = \\ \int_{\alpha=-\infty}^{\infty} x(\alpha) \ Y(f) \ e^{-j2\pi f\alpha}\,d\alpha = X(f) \ Y(f)
     $$
+    - Nota bene:
+        - la convoluzione ha proprietà commutativa, associativa e distributiva.
 
-21. **_Convoluzione_**
+## Trasformata di Fourier generalizzata
+
+22. Teorema d'integrazione **completo**:
+
+    Vogliamo rimuovere il vincolo (o ipotesi) $X(0)$ che è alla base dell'applicabilità del teorema d'integrazione "incompleto": ciò viene realizzato utilizzando la delta di Dirac.
+
+    Il teorema completo afferma che:
+    $$
+    y(t) = \int_{-\infty}^{t} x(\alpha)\,d\alpha \Longleftrightarrow \frac{X(f)}{j2\pi f} + \frac{\delta(f)}{2}\cdot X(0)  
+    $$
+    Il nuovo termine rende conto dell’eventuale valor medio diverso da zero del segnale!.
+    
+    - Dimostrazione:
+
+        Essendo:
+        $$
+        x(t)\otimes u(t) = \int_{-\infty}^{\infty} x(\alpha) \ u(t-\alpha)\,d\alpha = \int_{-\infty}^{t} x(\alpha)\,d\alpha
+        $$
+        abbiamo che per la convoluzione $x(t)\otimes u(t)\Longleftrightarrow X(f)U(f)$:
+        $$
+        X(f)\ U(f)=X(f)\Big[\frac{1}{j2\pi f}+\frac{\delta(f)}{2}\Big] = \frac{X(f)}{j2\pi f}+ \frac{X(0)}{2}\delta(f)
+        $$
+        Questo perché $\text{TCF}(u(t))=U(f)=\frac{1}{j2\pi f}$; l’ultimo termine scompare per segnali ad area nulla.
