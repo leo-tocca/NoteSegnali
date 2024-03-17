@@ -474,4 +474,15 @@ header-includes: |
         $$
         X(f)\ U(f)=X(f)\Big[\frac{1}{j2\pi f}+\frac{\delta(f)}{2}\Big] = \frac{X(f)}{j2\pi f}+ \frac{X(0)}{2}\delta(f)
         $$
-        Questo perché $\text{TCF}(u(t))=U(f)=\frac{1}{j2\pi f}$; l’ultimo termine scompare per segnali ad area nulla: rende conto dell'eventuiale valor medio diverso da zero del segnale, ed è un termine correttivo che rappresenta la funzione impulsiva.
+        Questo perché $\text{TCF}(u(t))=U(f)=\frac{1}{j2\pi f}$; l’ultimo termine scompare per segnali ad area nulla: rende conto dell'eventuale valor medio diverso da zero del segnale, ed è un termine correttivo che rappresenta la funzione impulsiva.
+
+23. Teorema della modulazione, alternativa:
+    
+    - Dimostrazione:
+
+        per il teorema del prodotto, 
+        \begin{gather*}
+        x(t)\cos(2\pi f_{0}t) \Longleftrightarrow X(f) \otimes \Big[ \frac{\delta(f-f_0)+\delta(f+f_0)}{2} \Big] = X(f) \otimes \frac{\delta(f-f_0)}{2} + X(f) \otimes  \frac{\delta(f+f_0)}{2} \\
+        \to X(f)\otimes \delta(f-f_0) = \int_{\mathbb{R}}X(\alpha) \delta(f-f_0 -\alpha)\,d\alpha = \int_{\mathbb{R}}X(\alpha) \delta()lpha -(f-f_0)\,d\alpha = X(f-f_0) \\
+        x(t)\cos(2\pi f_0 t) \Longleftrightarrow \frac{X(f-f_0)+X(f+f_0)}{2}
+        \end{gather*}
