@@ -101,8 +101,11 @@ header-includes: |
     * $x(t)$ deve essere *derivabile sul periodo* $T_0$, escluso al più un numero finito di punti, dove comunque esiste **finita** sia la derivata destra che la derivata sinistra
         - quest'ultima ipotesi è equivalente a: $x(t)$ presenta un numero finito di massimi e minimi nel periodo
     La serie **converge** al valore assunto da $x(t)$ dove *continua* e alla semisomma dei limiti sinistro e destro se discontinua.
+
 ### Spettro di un segnale periodico e reale
+
 #### Proprietà
+
 6. Simmetria Hermitiana dello spettro reale:
 
     I coefficienti $X_k$ sono generalmente quantità complesse del tipo $X_k = |X_{k}|e^{j\phase{X_{k}}}$: $X_{k}$ può essere rappresentata tramite spettro di ampiezza e spettro di fase, discreti (esiste solo in corrispondenza delle armoniche k)
@@ -192,7 +195,9 @@ header-includes: |
         * Dato che $x(t)\in\mathbb{R}$, $X_k$, allora vale $X_{-k} = -X_{k} = X_{k}^{*} \Rightarrow X_{k}^{*}=-X_k$, quindi è un immaginario puro!
         * Per $X_k$:
         $$
-        X_k = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi kf_{0}t} \,dt = \\
+        X_k = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi kf_{0}t} \,dt =
+        $$
+        $$
         \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underset{dispari}{x(t)}\cdot\underset{pari}{\cos{(2\pi kf_{0}t)}} \,dt - \frac{j}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underset{dispari}{x(t)}\cdot\underset{dispari}{\sin{(2\pi kf_{0}t)}}\,dt=
         $$
         $$
@@ -212,6 +217,7 @@ header-includes: |
 ### Trasformata continua di Fourier
 
 > Una funzione non periodica, definita tra $-\infty$ e $\infty$, può essere rappresentata come **somma** di **infinite armoniche semplici** di ampiezza *infinitesima* e di frequenza variabile con continuità tra $-\infty$ e $\infty$
+
 9. Dal segnale periodico al segnale aperiodico...
 10. Criteri di esistenza per la trasformata continua di Fourier (TCF)
     1. $X(f)$ esiste se il segnale $x(t)$
@@ -256,7 +262,8 @@ header-includes: |
     Im(f) = -2\int_{0}^\infty x(t) \sin(2\pi ft) 
     \end{array} \right.
     $$
-    $\to X(f)=jIm(f) \to X(f)=-X(f)$ è immaginaria pura e dispari    
+    $\to X(f)=jIm(f) \to X(f)=-X(f)$ è immaginaria pura e dispari
+
 #### Proprietà della trasformata continua
 
 13. **Linearità**
@@ -341,7 +348,9 @@ header-includes: |
     $$
     - Dimostrazione:
     $$
-    \cdot \ \ \underline{\alpha > 0} \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} x(\alpha t) e^{-j2\pi ft} \,dt \text{, ponendo } z=\alpha t \to t = \frac{z}{\alpha}, \,dz = \alpha \,dt \\
+    \cdot \ \ \underline{\alpha > 0} \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} x(\alpha t) e^{-j2\pi ft} \,dt \text{, ponendo } z=\alpha t \to t = \frac{z}{\alpha}, \,dz = \alpha \,dt 
+    $$
+    $$
     \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} \frac{x(z) e^{-j2\pi f \frac{z}{\alpha}}}{\alpha} \,dz = \frac{1}{\alpha}\int_{-\infty}^{\infty} x(z) e^{-j2\pi f \frac{z}{\alpha}} \,dz = \frac{1}{\alpha} X(\frac{f}{\alpha})
     $$
     $$
@@ -361,7 +370,13 @@ header-includes: |
 
     - Dimostrazione:
     $$
-    \text{TCF}[x(t)\cos(2\pi f_{0}t)] = \int_{-\infty}^{\infty} x(t)\cos(2\pi f_{0}t)  e^{-j2\pi ft} \,dt \\ \frac{1}{2} \int_{-\infty}^{\infty} x(t) [e^{-j2\pi f_0 t}+ e^{-j2\pi f_0 t}]e^{-j2\pi ft} \,dt = \frac{1}{2}\Big[\int_{-\infty}^{\infty}x(t)  e^{-j2\pi (f-f_0)t}\,dt + \int_{-\infty}^{\infty}x(t)  e^{-j2\pi (f+f_0)t}\,dt  \Big] = \\ \frac{X(f-f_0)+X(f+f_0)}{2}
+    \text{TCF}[x(t)\cos(2\pi f_{0}t)] = \int_{-\infty}^{\infty} x(t)\cos(2\pi f_{0}t)  e^{-j2\pi ft} \,dt = 
+    $$
+    $$
+    = \frac{1}{2} \int_{-\infty}^{\infty} x(t) [e^{-j2\pi f_0 t}+ e^{-j2\pi f_0 t}]e^{-j2\pi ft} \,dt = \frac{1}{2}\Big[\int_{-\infty}^{\infty}x(t)  e^{-j2\pi (f-f_0)t}\,dt + \int_{-\infty}^{\infty}x(t)  e^{-j2\pi (f+f_0)t}\,dt  \Big] =
+    $$
+    $$
+    \frac{X(f-f_0)+X(f+f_0)}{2}
     $$
     Corollario: $x(t)e^{j2\pi f_{o}t} \Longleftrightarrow X(f-f_0)$
 
@@ -376,9 +391,11 @@ header-includes: |
     - Dimostrazione:
 
     Deriviamo entrambi i lati di $x(t)$:
-    $$
-    \dv{}{t}x(t) = \dv{}{t} \int_{-\infty}^{\infty} X(f) e^{j2\pi ft} \,df = \int_{-\infty}^{\infty}\dv{}{t} \Big [X(f) e^{j2\pi ft} \Big ] \,df = \int_{-\infty}^{\infty} X(f) \dv{}{t}e^{j2\pi ft} \,df = \\ \int_{-\infty}^{\infty} X(f) (2\pi f) e^{j2\pi ft} \,df \Longrightarrow \text{[TCF]}\dv{x(t)}{t} = j2\pi f X(f)
-    $$
+    \begin{gather*}
+    \dv{}{t}x(t) = \dv{}{t} \int_{-\infty}^{\infty} X(f) e^{j2\pi ft} \,df = \int_{-\infty}^{\infty}\dv{}{t} \Big [X(f) e^{j2\pi ft} \Big ] \,df = \int_{-\infty}^{\infty} X(f) \dv{}{t}e^{j2\pi ft} \,df = 
+    \\
+    \int_{-\infty}^{\infty} X(f) (2\pi f) e^{j2\pi ft} \,df \Longrightarrow \text{[TCF]}\dv{x(t)}{t} = j2\pi f X(f)
+    \end{gather*}
 
     Il teorema della derivazione *modifica gli spettri*
     $$
@@ -404,7 +421,7 @@ header-includes: |
     $$
     Da questo teorema deriva la relazione $A \text{tri}(\frac{t}{T})\Longleftrightarrow AT\sinc^{2}(fT); \ A\rect (\frac{t}{T})\Longleftrightarrow AT\sinc (fT)$
 
-20. **Prodotto**
+20. **Prodotto**: è il duale della convoluzione
 
     Partendo da due segnali $x(t)$ e $y(t)$
     $$
@@ -457,4 +474,4 @@ header-includes: |
         $$
         X(f)\ U(f)=X(f)\Big[\frac{1}{j2\pi f}+\frac{\delta(f)}{2}\Big] = \frac{X(f)}{j2\pi f}+ \frac{X(0)}{2}\delta(f)
         $$
-        Questo perché $\text{TCF}(u(t))=U(f)=\frac{1}{j2\pi f}$; l’ultimo termine scompare per segnali ad area nulla.
+        Questo perché $\text{TCF}(u(t))=U(f)=\frac{1}{j2\pi f}$; l’ultimo termine scompare per segnali ad area nulla: rende conto dell'eventuiale valor medio diverso da zero del segnale, ed è un termine correttivo che rappresenta la funzione impulsiva.
