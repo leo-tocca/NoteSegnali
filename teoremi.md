@@ -481,8 +481,50 @@ header-includes: |
     - Dimostrazione:
 
         per il teorema del prodotto, 
+        $$
         \begin{gather*}
         x(t)\cos(2\pi f_{0}t) \Longleftrightarrow X(f) \otimes \Big[ \frac{\delta(f-f_0)+\delta(f+f_0)}{2} \Big] = X(f) \otimes \frac{\delta(f-f_0)}{2} + X(f) \otimes  \frac{\delta(f+f_0)}{2} \\
         \to X(f)\otimes \delta(f-f_0) = \int_{\mathbb{R}}X(\alpha) \delta(f-f_0 -\alpha)\,d\alpha = \int_{\mathbb{R}}X(\alpha) \delta()lpha -(f-f_0)\,d\alpha = X(f-f_0) \\
         x(t)\cos(2\pi f_0 t) \Longleftrightarrow \frac{X(f-f_0)+X(f+f_0)}{2}
         \end{gather*}
+        $$
+
+TODO: aggiornare numeri
+
+## Sistemi
+1. Teorema di Parseval:
+
+Dato un segnale $x(t)$ e la sua energia $E_{x}=\int_{-\infty}^{\infty} |x(t)|^2 \,dt < +\infty$ (energia finita), possiamo esprimere l'energia $E_x$ *anche in frequenza*:
+$$
+\begin{gather*}
+E_{x}=\int_{-\infty}^{\infty} |x(t)|^2 \,dt = \int_{-\infty}^{\infty} x(t) \ x^{\ast} \,dt = \int_{-\infty}^{\infty} x(t) \Big[ \int_{-\infty}^{\infty} X^{*}(f) e^{-j2\pi ft} \,df \Big] \,dt \\
+\int_{f=-\infty}^{\infty} X^{\star}(f) \Big [\int_{t=-\infty}^{\infty} x(t) e^{-j2\pi ft} \,dt\Big ] \,df = \int_{-\infty}^{\infty} X^{*}(f) = \int_{-\infty}^{\infty} |X(f)|^{2} \,df
+\end{gather*}
+$$
+
+$E_x$ è l'energia totale, deriva da $p_x = |x(t)|^2$ potenza istantanea integrata o da $|X(f)|^2$ detta **densità spettrale** $E_x(f)$ integrata.
+
+2. Teorema di Wiener-Khinchin
+
+Siamo la densità spettrale di potenza:
+$$
+P_x = \lim_{T\to \infty} \frac{1}{T}\int_{-\infty}^{\infty} x(t) \,dt 
+$$
+e la funzione *densità spettrale di potenza*
+$$
+S_x(f) \triangleq \lim_{T\to \infty} \frac{\text{Ext(f)}}{T} =\lim_{T\to\infty} \frac{|x(t)|^2}{T} 
+$$
+con $\text{Ext}(f)$ densità di energia del segnale *troncato* nell'intervallo $[-\frac{T}{2}; \frac{T}{2}]$ 
+
+Definiamo **funzione di autocorrelazione** $R_x(\tau)= \int_{-\infty}^{\infty}x(\tau)x(t-\tau)\,dt$ ossia il segnale moltiplicato per una sua replica *ritardata*. Indica "quanto il segnale somiglia alla sua replica ritardata": 
+più $x(t)$ è compatta meno somiglierà e meno varrà $R_x(\tau)$
+
+
+Il teorema afferma che la densità spettrale di energia di un segnale coincide con la trasformata di Fourier della funzione di autocorrelazione del segnale stesso:
+$$
+\begin{gather*}
+E_x(f)= \int_{-\infty}^{\infty}R_{x}(\tau) e^{-j2\pi ft}\,d\tau = 2\int_{0}^{\infty} \cos(2\pi f\tau)R_x(\tau) \,d\tau
+\end{gather*}
+$$
+
+TODO DEF
