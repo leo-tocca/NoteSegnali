@@ -445,10 +445,10 @@ header-includes: |
     - Dimostrazione:
 
         Partiamo sempre dalla definizione di TCF:
-    $$
+    \begin{gather*}
     z(t) = x(t) \otimes y(t) = \int_{-\infty}^{\infty} x(\alpha) y(t-\alpha) \,d\alpha \Longleftrightarrow Z(f) = \int_{-\infty}^{\infty} z(t) \ e^{-j2\pi ft} \,dt = \\  \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \Big [ x(\alpha) y(t -\alpha) \,d\alpha  \Big] e^{-j2\pi f(t-\alpha+\alpha)} \,dt =\\
     \int_{\alpha=-\infty}^{\infty} x(\alpha) \underbrace{\Big [\int_{t=-\infty}^{\infty}y(t-\alpha)e^{-j2\pi f(t-\alpha)}\,dt \Big ]}_{Y(f)}  e^{-j2\pi f\alpha} \,d\alpha = \\ \int_{\alpha=-\infty}^{\infty} x(\alpha) \ Y(f) \ e^{-j2\pi f\alpha}\,d\alpha = X(f) \ Y(f)
-    $$
+    \end{gather*}
     - Nota bene:
         - la convoluzione ha proprietà commutativa, associativa e distributiva.
 
@@ -481,13 +481,50 @@ header-includes: |
     - Dimostrazione:
 
         per il teorema del prodotto, 
-        $$
+        
         \begin{gather*}
         x(t)\cos(2\pi f_{0}t) \Longleftrightarrow X(f) \otimes \Big[ \frac{\delta(f-f_0)+\delta(f+f_0)}{2} \Big] = X(f) \otimes \frac{\delta(f-f_0)}{2} + X(f) \otimes  \frac{\delta(f+f_0)}{2} \\
-        \to X(f)\otimes \delta(f-f_0) = \int_{\mathbb{R}}X(\alpha) \delta(f-f_0 -\alpha)\,d\alpha = \int_{\mathbb{R}}X(\alpha) \delta()lpha -(f-f_0)\,d\alpha = X(f-f_0) \\
+        \to X(f)\otimes \delta(f-f_0) = \int_{\mathbb{R}}X(\alpha) \delta(f-f_0 -\alpha)\,d\alpha = \int_{\mathbb{R}}X(\alpha) \delta(\alpha) -(f-f_0)\,d\alpha = X(f-f_0) \\
         x(t)\cos(2\pi f_0 t) \Longleftrightarrow \frac{X(f-f_0)+X(f+f_0)}{2}
         \end{gather*}
-        $$
+        
+
+## Periodicizzazione
+
+24. Prima formula della somma di Poisson:
+
+    Come rendere un segnale *aperiodico* $x(t)$ **periodico** di periodo $T_0$. Partiamo da $y(t)=\sum_{n=-\infty}^{\infty} = x(t-nT_0)$
+    relazione nel tempo tra periodico e aperiodico
+    \begin{gather*}
+    \to Y_k = \frac{1}{T_0} = \int_{-\frac{T}{2}}^{\frac{T}{2}} y(t) \ e^{-j2 \pi kf_{0}t} \,dt = \frac{1}{T_0} = \int_{-\frac{T}{2}}^{\frac{T}{2}} \sum_{n=-\infty}^{\infty} x(t-nT_0) e^{-j2\pi kf_{0}t} \,dt \\
+    \sum_{n=-\infty}^{\infty}\frac{1}{T_0} \int_{-\frac{T}{2}}^{\frac{T}{2}} x(t-nT_0)e^{-j2\pi kf_{0}t} \,dt \left\{ \begin{array}{cl} \alpha = t-t_0 \\ t = \alpha -t_0 \\ \,d\alpha = \,dt \end{array}\right\} = \\
+    \frac{1}{T_0} \sum_{n=-\infty}^{\infty}\frac{1}{T_0} \int_{-\frac{T}{2}-nT_0}^{\frac{T}{2}-nT_0} x(\alpha) \ e^{-j2\pi kf_{0}(\alpha +nT_0)} \,d\alpha = \\
+    \frac{1}{T_0} \sum_{n=-\infty}^{\infty}\frac{1}{T_0} \int_{-\frac{T}{2}-nT_0}^{\frac{T}{2}-nT_0} x(\alpha) e^{-j2\pi kf_{0}\alpha} \cdot \underbrace{e^{-j2\pi k\cancel{f_0}n\cancel{T_0}}}_{\text{multiplo di }2\pi \to e^{0}} \,d\alpha= \\
+    \frac{1}{T_0} \sum_{n=-\infty}^{\infty}\frac{1}{T_0} \int_{-\frac{T}{2}-nT_0}^{\frac{T}{2}-nT_0} x(\alpha) \ e^{-j2\pi kf_{0}\alpha} \,d\alpha =
+    \frac{1}{T_0} \int_{-\infty}^{\infty}x(\alpha) \ e^{-j2\pi kf_{0}\alpha}\,d\alpha = \underbrace{\frac{1}{T_0}X(kf_0)}_{\text{campionamento in frequenza}}
+    \end{gather*}
+    Si ottiene una relazione detta **campionamento in frequenza**. I coefficienti della serie di Fourier del segnale periodico $y(t)$ sono, a meno del fattore $\frac{1}{T_0}$, i campioni della TCF del *segnale base* $x(t)$ presi in corrispondenza delle frequenze armoniche $kf_0$
+    \begin{gather*}
+    \to \sum_{n=-\infty}^{\infty}x(t-nT_0) = \sum_{k=-\infty}^{\infty} \frac{1}{T_0} X(\frac{k}{T_0})\ e^{+j2\pi kt f_0}
+    \end{gather*}
+
+25. Seconda formula della somma di Poisson
+
+    Applichiamo alla prima formula di Poisson il teorema della dualità:
+    $$
+    X(t) \longleftrightarrow x(-f) \\
+    x(t) \longleftrightarrow X(f)
+    $$
+    \begin{gather*}
+    \sum_{n=-\infty}^{\infty}x(t-nT_0) = \sum_{k=-\infty}^{\infty} \frac{1}{T_0} X(\frac{k}{T_0})\ e^{+\frac{j2\pi kt}{T_0}} \\
+    \sum_{n=-\infty}^{\infty}x(t-nT_0) = \sum_{k=-\infty}^{\infty} \frac{1}{T_0}(X(-\frac{k}{T_0}))\ e^{+\frac{j2\pi kt}{T_0}} \\
+    \Rightarrow \sum_{n=-\infty}^{\infty}x(t-nT_0) = \sum_{k=-\infty}^{\infty} \frac{1}{T_0} X(\frac{k}{T_0})\ e^{-\frac{j2\pi kt}{T_0}} \text{ cambio di segno all'indice k} \\
+    \to T = \frac{1}{T_0} \Rightarrow \sum_{n=-\infty}^{\infty}X(t-\frac{n}{T}) = T\sum_{k=-\infty}^{\infty} \frac{1}{T_0} x(kT)\ e^{-j2\pi ktfT}
+    \end{gather*}
+    Adesso, dal punto di vista puramente formale, cambiano nome da $t$ in $f$, otteniamo un'espressione, otteniamo un'espressione *duale* rispetto alla prima formula di Poisson
+    $$
+    \sum_{n=-\infty}^{\infty}x(nT)e^{-j2\pi fT} = \frac{1}{T}\sum_{k=-\infty}^{\infty}X(f-\frac{k}{T})
+    $$
 
 TODO: aggiornare numeri
 
@@ -495,12 +532,12 @@ TODO: aggiornare numeri
 1. Teorema di Parseval:
 
 Dato un segnale $x(t)$ e la sua energia $E_{x}=\int_{-\infty}^{\infty} |x(t)|^2 \,dt < +\infty$ (energia finita), possiamo esprimere l'energia $E_x$ *anche in frequenza*:
-$$
+
 \begin{gather*}
 E_{x}=\int_{-\infty}^{\infty} |x(t)|^2 \,dt = \int_{-\infty}^{\infty} x(t) \ x^{\ast} \,dt = \int_{-\infty}^{\infty} x(t) \Big[ \int_{-\infty}^{\infty} X^{*}(f) e^{-j2\pi ft} \,df \Big] \,dt \\
 \int_{f=-\infty}^{\infty} X^{\star}(f) \Big [\int_{t=-\infty}^{\infty} x(t) e^{-j2\pi ft} \,dt\Big ] \,df = \int_{-\infty}^{\infty} X^{*}(f) = \int_{-\infty}^{\infty} |X(f)|^{2} \,df
 \end{gather*}
-$$
+
 
 $E_x$ è l'energia totale, deriva da $p_x = |x(t)|^2$ potenza istantanea integrata o da $|X(f)|^2$ detta **densità spettrale** $E_x(f)$ integrata.
 
@@ -521,10 +558,16 @@ più $x(t)$ è compatta meno somiglierà e meno varrà $R_x(\tau)$
 
 
 Il teorema afferma che la densità spettrale di energia di un segnale coincide con la trasformata di Fourier della funzione di autocorrelazione del segnale stesso:
-$$
-\begin{gather*}
-E_x(f)= \int_{-\infty}^{\infty}R_{x}(\tau) e^{-j2\pi ft}\,d\tau = 2\int_{0}^{\infty} \cos(2\pi f\tau)R_x(\tau) \,d\tau
-\end{gather*}
-$$
 
-TODO DEF
+\begin{gather*}
+E_x(f)= \int_{-\infty}^{\infty}R_{x}(\tau) e^{-j2\pi ft}\,d\tau \underbrace{=}_{R_x(\tau) \text{ è pari})} 2\int_{0}^{\infty} \cos(2\pi f\tau)R_x(\tau) \,d\tau
+\end{gather*}
+
+- Dimostrazione:
+
+Partiamo dalla definizione di autocorrelazione:
+
+\begin{gather*}
+R_{x} (\tau) = \int_{-\infty}^{\infty} x(\alpha) x(\alpha -t) \,d\alpha = \int_{-\infty}^{\infty} x(\alpha)x(-(t-\alpha)) \,d\alpha = x(\tau) \otimes x(-\tau) = \\
+R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f) \ X^{*}(-f) = |X(f)|^{2} = E_x(f)
+\end{gather*}
