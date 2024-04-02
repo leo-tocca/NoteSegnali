@@ -129,7 +129,7 @@ header-includes: |
         - lo spettro d'ampiezza è **simmetrico** rispetto a $k \to$ pari
         - lo spettro di fase è **antisimmetrico** rispetto a $k \to$ dispari
 
-    TODO: controllare appunti Agata
+    <!--- (TODO: controllare appunti Agata) --->
 7. Linearità dello spettro reale:
 
     Se $x(t)$ e $y(t)$ sono due segnali con periodo $T_0$ *reali* allora vale:
@@ -178,13 +178,12 @@ header-includes: |
         Da ciò deduco che un segnale reale e pari è esprimibile in serie di soli *coseni* (i quali sono a loro volta pari).
 
         Possiamo inoltre scrivere i coefficienti $X_k$ in modo semplificato, data la *parità* del segnale:
-        $$
+        \begin{gather*}
         X_k = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi kf_{0}t} \,dt = \\
         \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underbrace{x(t)}_{pari}\cdot\underbrace{\cos{(2\pi kf_{0}t)}}_{pari} \,dt - \frac{j}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underbrace{x(t)}_{pari}\cdot\underbrace{\sin{(2\pi kf_{0}t)}}_{dispari}\,dt=
-        $$
-        $$
+        \\
         \frac{2}{T_0} \int_{0}^{\frac{T_0}{2}} x(t)\cdot\cos{(2\pi kf_{0}t)} \,dt - 0
-        $$
+        \end{gather*}
 
     * se $x(t)$ è **dispari**, allora anche i coefficienti $X_k$ saranno dispari. Inoltre, dato che $x(t)\in\mathbb{R}$, $X_k$ sarà un **immaginario puro**, ed 
         $$
@@ -328,10 +327,10 @@ header-includes: |
     Se $y(t)=x(t-t_0) \Rightarrow Y(f) = X(f) \ e^{-j2 pi ft_0} \Rightarrow$ Un ritardo modifica lo spettro di **fase** ma *non cambia* il suo spettro di ampiezza, in quanto quest'ultimo di indica quali componenti sinusoidali sono necessarie per comporre la forma del segnale, mentre lo spettro di fase mi dice con quale *angolo* iniziale devono "partire" le sinusoidi.
 
     Quindi se il segnale si sposta nel tempo, allora le sinusoidi hanno angoli iniziali diversi, ma sono le stesse.
-    $$
+    \begin{gather*}
     |Y(f)| = |X(f)|\cdot |e^{-j2\pi ft_0}| = |X(f)| \\
     \phase{Y(f)} = \phase{X(f) \ e^{-j2 pi ft_0}} = \phase{X(f)} + \phase{e^{-j2 pi ft_0}} = \underbrace{\phase{X(f)} - \overbrace{2\pi ft_0}^{=0}}_{\text{\underline{NON} è una traslazione!}}
-    $$
+    \end{gather*}
 16. **Cambiamento di scala**
 
     Si consideri $y(t)=x(\alpha t)$, effettuando un *cambiamento della scala temporale*:
@@ -412,9 +411,9 @@ header-includes: |
     - Dimostrazione:
 
     Segue dal teorema di derivazione e richiede che $X(0)=0$, al fine di evitare che per $f\to 0$, il rapporto tenda ad infinito.
-    $$
+    \begin{gather*}
     X(0)= 0 \longleftrightarrow X(0)=\underbrace{\int_{-\infty}^{\infty}x(t) \ e^{0}\,dt}_{\text{sottende area} \textbf{ nulla}} \longleftrightarrow y(\infty) = \int_{-\infty}^{\infty} x(t)\,dt = X(0) \to 0 \\ y(t) = \int_{-\infty}^{t} x(\alpha) \,d\alpha \Rightarrow x(t) \dv{}{t}y(t) \Rightarrow X(f)=j2\pi f\cdot Y(f) \Rightarrow Y(f) = \frac{X(f)}{j2\pi f}
-    $$
+    \end{gather*}
     Anche l'integrale nel tempo si trasforma in un'operazione algebrica in frequenza: in questo caso però vengono esaltate le componenti a **bassa** frequenza nello spettro del segnale, mentre le alte vengono attenuate; la fase varia sempre di $\pm \frac{\pi}{2}$
     $$
     |Y(f)| = \frac{|X(f)|}{2\pi f} \\ \phase{Y(f)} = \phase{X(f)} + \text{sgn}(f)\frac{\pi}{2}
@@ -428,9 +427,9 @@ header-includes: |
     z(t)=x(t)\cdot y(t) \Longleftrightarrow X(f) \otimes Y(f)
     $$
     - Dimostrazione:
-    $$
+    \begin{gather*}
     \Rightarrow Z(f) =  \int_{-\infty}^{\infty}x(t)\ y(t)\ e^{-j2\pi ft}\,dt = \int_{t=-\infty}^{\infty} \Big[ \int_{\nu = -\infty}^{\infty} X(\nu) e^{-j2\pi \nu t} \,d\nu \Big ] y(t)\ e^{-j2\pi ft}\,dt= \\ \int_{\nu=-\infty}^{\infty} X(\nu) \Big[ \int_{t = -\infty}^{\infty}  y(t)\ e^{-j2\pi (f-\nu)t}\,dt \Big ] \,d\nu =  \int_{\nu = -\infty}^{\infty} X(\nu) Y(t-\nu) \,d\nu = \\ X(f) \otimes Y(f)
-    $$
+    \end{gather*}
     Quindi:
     $$
     \underset{PRODOTTO}{x(t) \ y(t)} \Longleftrightarrow \underset{CONVOLUZIONE}{X(f)\otimes Y(f)} \to \text{ la convoluzione è \textit{commutativa}}
@@ -481,9 +480,8 @@ header-includes: |
     - Dimostrazione:
 
         per il teorema del prodotto, 
-        
         \begin{gather*}
-        x(t)\cos(2\pi f_{0}t) \Longleftrightarrow X(f) \otimes \Big[ \frac{\delta(f-f_0)+\delta(f+f_0)}{2} \Big] = X(f) \otimes \frac{\delta(f-f_0)}{2} + X(f) \otimes  \frac{\delta(f+f_0)}{2} \\
+        x(t)\cos(2\pi f_{0}t) \Longleftrightarrow X(f) \otimes \Big[ \frac{\delta(f-f_0)+\delta(f+f_0)}{2} \Big] = \\ X(f) \otimes \frac{\delta(f-f_0)}{2} + X(f) \otimes  \frac{\delta(f+f_0)}{2} \\
         \to X(f)\otimes \delta(f-f_0) = \int_{\mathbb{R}}X(\alpha) \delta(f-f_0 -\alpha)\,d\alpha = \int_{\mathbb{R}}X(\alpha) \delta(\alpha) -(f-f_0)\,d\alpha = X(f-f_0) \\
         x(t)\cos(2\pi f_0 t) \Longleftrightarrow \frac{X(f-f_0)+X(f+f_0)}{2}
         \end{gather*}
