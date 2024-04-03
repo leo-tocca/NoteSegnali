@@ -93,48 +93,49 @@ titlepage: false
 7.  Per un segnale sinusoidale di ampiezza A e periodo T, l’energia è infinita perché il segnale è periodico e la potenza media è $P_m = \frac{1}{2} * A^2$.
 8.  Per un segnale costante, l’energia è infinita perché il segnale è periodico e la potenza media è $P_m = C^2,$ dove C è il valore costante.
 9.  Un segnale deterministico a tempo continuo $s(t)$ ha potenza media finita se: $\displaystyle \lim_{s\to\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} s^2(t)dt < \infty$.
-10. Lo spettro di ampiezza di un segnale tempo-continuo aperiodico reale è una funzione pari. La trasformata di Fourier di un segnale reale gode della proprietà di simmetria Hermitiana $(X(f) = X^*(-f))$: quindi ha componenti simmetriche rispetto all’asse delle ordinate $(R(f)=R(-f); A(f)=|X(f)| \to A(f)=A(-f))$.
-11. Lo spettro di fase di un segnale tempo-continuo aperiodico reale è una funzione dispari. La trasformata di Fourier di un segnale reale gode della proprietà di simmetria Hermitiana $(X(f) = X^*(-f))$: quindi la fase della trasformata di Fourier di un segnale reale è uguale all’opposto della fase della sua componente coniugata. $(I(f)=-I(-f); \Theta(f)=\angle X(f) \to \Theta(f)=-\Theta(-f))$.
-12. $\displaystyle \int_{-\infty}^\infty sinc(t)dt = 1$, in quanto integrale di una funzione $sinc$ normalizzata.
-13. L’onda triangolare, non presentando discontinuità (a differenza del  segnale onda quadra), nella sua ricostruzione del segnale tramite serie di Fourier le componenti ad alta frequenza hanno importanza minore.
-14. L’onda triangolare, non presentando discontinuità, (a differenza del segnale dente di sega), nella sua ricostruzione del segnale tramite serie di Fourier le componenti ad alta frequenza hanno importanza minore.
-15. 
+10.  Lo spettro di ampiezza di un segnale tempo-continuo aperiodico reale è una funzione pari. La trasformata di Fourier di un segnale reale gode della proprietà di simmetria Hermitiana $(X(f) = X^*(-f))$: quindi ha componenti simmetriche rispetto all’asse delle ordinate $(R(f)=R(-f); A(f)=|X(f)| \to A(f)=A(-f))$.
+11.  Lo spettro di fase di un segnale tempo-continuo aperiodico reale è una funzione dispari. La trasformata di Fourier di un segnale reale gode della proprietà di simmetria Hermitiana $(X(f) = X^*(-f))$: quindi la fase della trasformata di Fourier di un segnale reale è uguale all’opposto della fase della sua componente coniugata. $(I(f)=-I(-f); \Theta(f)=\angle X(f) \to \Theta(f)=-\Theta(-f))$.
+12.  $\displaystyle \int_{-\infty}^\infty sinc(t)dt = 1$, in quanto integrale di una funzione $sinc$ normalizzata.
+13.  L’onda triangolare, non presentando discontinuità (a differenza del  segnale onda quadra), nella sua ricostruzione del segnale tramite serie di Fourier le componenti ad alta frequenza hanno importanza minore.
+14.  L’onda triangolare, non presentando discontinuità, (a differenza del segnale dente di sega), nella sua ricostruzione del segnale tramite serie di Fourier le componenti ad alta frequenza hanno importanza minore.
+15.  
     1.  Coefficiente della serie di Fourier è una funzione pari:$X_k = X_{-k}$;
     2.  se il segnale è anche reale: $X_k$ reale e pari $(X_k = X^*_k) \to$ si sviluppa in soli coseni. $\displaystyle x(t)= X_0 + 2 \sum_{k=1}^{\infty} X_k cos (2\pi k f_0 t)$
-16. 1.  Coefficiente della serie di Fourier è una funzione dispari:$X_{-k} = -X_{k}$;
-    2.  se il segnale è anche reale: $X_k$ immaginaria pura e dispari $(-X_k = X^*_k) \to$ si sviluppa in soli seni. $\displaystyle x(t)= 2j \sum_{k=1}^{\infty} X_k sin (2\pi k f_0 t)$
-17. $\displaystyle x(t)=X_0 + 2\sum_{k=1}^{\infty} X_k cos (2\pi k f_0 t) \to X_k = \frac{2}{T_0} \int_{0}^{\frac{T_0}{2}} x(t) cos (2\pi k f_0 t) dt$
-18. $\displaystyle x(t)= 2j \sum_{k=1}^{\infty} X_k sin (2\pi k f_0 t) \to X_k = -\frac{2j}{T_0} \int_{0}^{\frac{T_0}{2}} x(t) sin (2\pi k f_0 t)dt$
-19. Le Condizioni di Dirichlet per la convergenza della serie di Fourier sono:
+16.  1.  Coefficiente della serie di Fourier è una funzione dispari:$X_{-k} = -X_{k}$;
+    1.  se il segnale è anche reale: $X_k$ immaginaria pura e dispari $(-X_k = X^*_k) \to$ si sviluppa in soli seni. $\displaystyle x(t)= 2j \sum_{k=1}^{\infty} X_k sin (2\pi k f_0 t)$
+17.  $\displaystyle x(t)=X_0 + 2\sum_{k=1}^{\infty} X_k cos (2\pi k f_0 t) \to X_k = \frac{2}{T_0} \int_{0}^{\frac{T_0}{2}} x(t) cos (2\pi k f_0 t) dt$
+18.  $\displaystyle x(t)= 2j \sum_{k=1}^{\infty} X_k sin (2\pi k f_0 t) \to X_k = -\frac{2j}{T_0} \int_{0}^{\frac{T_0}{2}} x(t) sin (2\pi k f_0 t)dt$
+19.  Le Condizioni di Dirichlet per la convergenza della serie di Fourier sono:
     1.  la funzione deve essere assolutamente integrabile sul periodo $T_0$: $\displaystyle \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x(t)| dt < +\infty$
     2.  la funzione deve essere continua o presentare un numero finito di discontinuità di prima specie
     3.  la funzione deve avere un numero finito di massimi e minimi all’interno di un periodo. Oppure $x(t)$ derivabile rispetto al tempo nel periodo $T_0$, esclusi al più un numero finito di discontinuità di prima specie.
-20. Le Condizioni di Dirichlet per la convergenza della trasformata di Fourier sono simili a quelle per la serie di Fourier:
+20.  Le Condizioni di Dirichlet per la convergenza della trasformata di Fourier sono simili a quelle per la serie di Fourier:
     1.  la funzione deve essere assolutamente sommabile: $\displaystyle \int_{-\infty}^{\infty} |x(t)| dt < +\infty$
     2.  se in qualunque intervallo finito $(t_1, t_2)$ è continua o presenta un numero finito di discontinuità di prima specie
     3.  se in qualunque intervallo finito $(t_1, t_2)$ la funzione ha un numero finito di massimi e minimi.
-21. La trasformata è pari a sua volta.
-22. La trasformata è dispari a sua volta.
-23. Se il segnale aperiodico $x(t)$ è reale e pari, la sua trasformata di Fourier è reale e pari.
-24. Se il segnale aperiodico $x(t)$ è reale e dispari, la sua trasformata di Fourier è immaginaria pura e dispari.
-25. Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(\alpha t)$ con$|\alpha| > 1$ è $\displaystyle \frac{1}{\alpha} X(\frac{f}{\alpha})$. Quindi per il teorema del cambiamento di scala, con una compressione nel tempo abbiamo una dilatazione in frequenza.
-26. Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(\alpha t)$ con$|\alpha| < 1$ è $\displaystyle \frac{1}{|\alpha|} X(\frac{f}{\alpha})$. Quindi per il teorema del cambiamento di scala, con una dilatazione nel tempo abbiamo una compressione in frequenza.
-27. Le trasformate di Fourier di $rect (\frac{t}{T})$ e di $rect (\frac{t-5}{T})$ differiscono solo per la fase. Lo spettro di ampiezza è lo stesso, mentre lo spettro di fase di $rect (\frac{t-5}{T})$ ha una componente lineare aggiuntiva rispetto a $rect (\frac{t}{T})$.
-28. $\displaystyle R(f) = \int_{- \infty}^{+\infty} x(t) cos(2\pi ft)dt$ Dato che $\displaystyle X(f) = R(f)+ jI(f)$
-29. $\displaystyle I(f) =- \int_{- \infty}^{+\infty} x(t) sin(2\pi ft)dt$ Dato che $\displaystyle X(f) = R(f)+ jI(f)$
-30. La trasformata di Fourier di $e^{-j2\pi t}$ è un impulso di Dirac centrato in $f = 1$. Utilizzando il teorema della traslazione in frequenza: $\to 1*e^{-j2 \pi t} =\Leftrightarrow \delta (f+1)$
-31. Per il teorema del cambiamento di scala: $\displaystyle x(\alpha t) = \frac{1}{|\alpha|} X(\frac{f}{\alpha})$ con $\alpha = -1$, allora: $\to x(-t) \Leftrightarrow X(-f)$
-32. Per il teorema del cambiamento di scala, lo spettro di ampiezza di $rect(\frac{t}{2T})$ viene alterato rispetto a $rect(\frac{t}{T})$, mentre lo spettro di fase non viene alterato. (Dilatazione nel tempo $\leftrightarrow$ Compressione in frequenza)
-33. Se il segnale periodico $x(t) \in \mathbb{R}$, dato che il coefficiente della serie di Fourier $X_k$ gode della simmetria Hermitiana, $X_{-k} =X_k^* = \begin{cases} |X_k| =|X_{-k}| \\ \angle X_k = - \angle X_{-k} \end{cases} \to$ lo spettro di ampiezza è pari e lo spettro di fase è dispari.
-34. Quando il valore dell’uscita al tempo $t$ dipende soltanto dai valori assunti dall’ingresso agli istanti precedenti.  $\to y(t) = T[x(\alpha), \alpha < t, t]$ Un esempio di sistema causale è un filtro passa-basso RC (o un moltiplicatore?), mentre un esempio di sistema non causale è un derivatore.
-35. Quando il sistema, se sollecitato da un segnale con ampiezza limitata, produce in uscita un segnale a sua volta con ampiezza limitata.
-36. Dato un sistema LTI con risposta impulsiva $h(t) = \delta(t - 1) + \delta(t - 2)$, l’uscita quando il suo ingresso è il segnale $x(t) = u(t)$ sarà $y(t) = u(t - 1) + u(t - 2).$
-37. La risposta impulsiva di un sistema LTI causale è un segnale causale $h(t)$ tale che $h(t) = 0$ per $t < 0$.
-38. La risposta impulsiva di un sistema LTI causale soddisfa la condizione $h(t) = 0$ per $t < 0$.
-39. Un sistema che produce in uscita il valore assoluto del segnale (raddrizzatore a doppia onda) al suo ingresso non è un sistema lineare. Ad esempio: se $\displaystyle x(t)=  x_1(t)+x_2(t) \to T[x(t)]  = |x(t)| = |x_1(t)+x_2(t)| \neq y_1(t)+y_2(t) = |x_1(t)|+|x_2(t)|$. Altro esempio: Siano $x_1(t) = t$ e $x_2(t) = -t$: il sistema produce $y_1(t) = |t|$ e $y_2(t) = |-t| = t$. Tuttavia, $y_1(t) + y_2(t) = 2t$, mentre il sistema applicato alla somma dei segnali in ingresso produce $|t - t| = 0$, che non è uguale a$2t$.
-40. Se un sistema LTI tempo-continuo ha una risposta impulsiva con energia finita, possiamo affermare che il sistema è stabile, perché l’energia finita implica che la risposta impulsiva è assolutamente integrabile $\to  \displaystyle \int_{-\infty}^\infty |h(t)| dt < \infty$.
-41. Passando nel dominio della frequenza: $\displaystyle Y(f)(1-(j2\pi f)^2)=X(f)$. Sapendo che $Y(f)=X(f)H(f)$, $\displaystyle H(f)X(f)(1+4\pi^2 f^2)=H(f) \to H(f)=\frac{1}{1+4\pi^2 f^2}$
-42. La densità spettrale di potenza di un segnale $x(t)$ è definita come: $\displaystyle S_x(f) \triangleq \lim_{T \to \infty} \frac{E_{X_T}(f)}{T} = \lim_{T \to \infty} \frac{|X_T(f)|^2}{T}$. Per il teorema di Wiener-Khintchine afferma però che la densità spettrale di potenza$^*$ è uguale alla trasformata di Fourier della funzione di autocorrelazione così modificata:
+21.  La trasformata è pari a sua volta.
+22.  La trasformata è dispari a sua volta.
+23.  Se il segnale aperiodico $x(t)$ è reale e pari, la sua trasformata di Fourier è reale e pari.
+24.  Se il segnale aperiodico $x(t)$ è reale e dispari, la sua trasformata di Fourier è immaginaria pura e dispari.
+25.  Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(\alpha t)$ con$|\alpha| > 1$ è $\displaystyle \frac{1}{\alpha} X(\frac{f}{\alpha})$. Quindi per il teorema del cambiamento di scala, con una compressione nel tempo abbiamo una dilatazione in frequenza.
+26.  Se la trasformata di Fourier di $x(t)$ è $X(f)$, allora la trasformata di $x(\alpha t)$ con$|\alpha| < 1$ è $\displaystyle \frac{1}{|\alpha|} X(\frac{f}{\alpha})$. Quindi per il teorema del cambiamento di scala, con una dilatazione nel tempo abbiamo una compressione in frequenza.
+27.  Le trasformate di Fourier di $rect (\frac{t}{T})$ e di $rect (\frac{t-5}{T})$ differiscono solo per la fase. Lo spettro di ampiezza è lo stesso, mentre lo spettro di fase di $rect (\frac{t-5}{T})$ ha una componente lineare aggiuntiva rispetto a $rect (\frac{t}{T})$.
+28.  Per il teorema del cambiamento di scala, lo spettro di ampiezza di $rect(\frac{t}{4T})$ viene alterato rispetto a $rect(\frac{t}{T})$, mentre lo spettro di fase non viene alterato. (Dilatazione nel tempo $\leftrightarrow$ Compressione in frequenza)
+29.  $\displaystyle R(f) = \int_{- \infty}^{+\infty} x(t) cos(2\pi ft)dt$ Dato che $\displaystyle X(f) = R(f)+ jI(f)$
+30.  $\displaystyle I(f) =- \int_{- \infty}^{+\infty} x(t) sin(2\pi ft)dt$ Dato che $\displaystyle X(f) = R(f)+ jI(f)$
+31.  La trasformata di Fourier di $e^{-j2\pi t}$ è un impulso di Dirac centrato in $f = 1$. Utilizzando il teorema della traslazione in frequenza: $\to 1*e^{-j2 \pi t} =\Leftrightarrow \delta (f+1)$
+32.  Per il teorema del cambiamento di scala: $\displaystyle x(\alpha t) = \frac{1}{|\alpha|} X(\frac{f}{\alpha})$ con $\alpha = -1$, allora: $\to x(-t) \Leftrightarrow X(-f)$
+33.  Per il teorema del cambiamento di scala, lo spettro di ampiezza di $rect(\frac{t}{2T})$ viene alterato rispetto a $rect(\frac{t}{T})$, mentre lo spettro di fase non viene alterato. (Dilatazione nel tempo $\leftrightarrow$ Compressione in frequenza)
+34.  Se il segnale periodico $x(t) \in \mathbb{R}$, dato che il coefficiente della serie di Fourier $X_k$ gode della simmetria Hermitiana, $X_{-k} =X_k^* = \begin{cases} |X_k| =|X_{-k}| \\ \angle X_k = - \angle X_{-k} \end{cases} \to$ lo spettro di ampiezza è pari e lo spettro di fase è dispari.
+35.  Quando il valore dell’uscita al tempo $t$ dipende soltanto dai valori assunti dall’ingresso agli istanti precedenti.  $\to y(t) = T[x(\alpha), \alpha < t, t]$ Un esempio di sistema causale è un filtro passa-basso RC (o un moltiplicatore?), mentre un esempio di sistema non causale è un derivatore.
+36.  Quando il sistema, se sollecitato da un segnale con ampiezza limitata, produce in uscita un segnale a sua volta con ampiezza limitata.
+37.  Dato un sistema LTI con risposta impulsiva $h(t) = \delta(t - 1) + \delta(t - 2)$, l’uscita quando il suo ingresso è il segnale $x(t) = u(t)$ sarà $y(t) = u(t - 1) + u(t - 2).$
+38.  La risposta impulsiva di un sistema LTI causale è un segnale causale $h(t)$ tale che $h(t) = 0$ per $t < 0$.
+39.  La risposta impulsiva di un sistema LTI causale soddisfa la condizione $h(t) = 0$ per $t < 0$.
+40.  Un sistema che produce in uscita il valore assoluto del segnale (raddrizzatore a doppia onda) al suo ingresso non è un sistema lineare. Ad esempio: se $\displaystyle x(t)=  x_1(t)+x_2(t) \to T[x(t)]  = |x(t)| = |x_1(t)+x_2(t)| \neq y_1(t)+y_2(t) = |x_1(t)|+|x_2(t)|$. Altro esempio: Siano $x_1(t) = t$ e $x_2(t) = -t$: il sistema produce $y_1(t) = |t|$ e $y_2(t) = |-t| = t$. Tuttavia, $y_1(t) + y_2(t) = 2t$, mentre il sistema applicato alla somma dei segnali in ingresso produce $|t - t| = 0$, che non è uguale a$2t$.
+41.  Se un sistema LTI tempo-continuo ha una risposta impulsiva con energia finita, possiamo affermare che il sistema è stabile, perché l’energia finita implica che la risposta impulsiva è assolutamente integrabile $\to  \displaystyle \int_{-\infty}^\infty |h(t)| dt < \infty$.
+42.  Passando nel dominio della frequenza: $\displaystyle Y(f)(1-(j2\pi f)^2)=X(f)$. Sapendo che $Y(f)=X(f)H(f)$, $\displaystyle H(f)X(f)(1+4\pi^2 f^2)=H(f) \to H(f)=\frac{1}{1+4\pi^2 f^2}$
+43.  La densità spettrale di potenza di un segnale $x(t)$ è definita come: $\displaystyle S_x(f) \triangleq \lim_{T \to \infty} \frac{E_{X_T}(f)}{T} = \lim_{T \to \infty} \frac{|X_T(f)|^2}{T}$. Per il teorema di Wiener-Khintchine afferma però che la densità spettrale di potenza$^*$ è uguale alla trasformata di Fourier della funzione di autocorrelazione così modificata:
 $$
 R_x(\tau) \triangleq  \lim_{T \to \infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)x(t-\tau)
 $$ La densità spettrale di potenza è: 
