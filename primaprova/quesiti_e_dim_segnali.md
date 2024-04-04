@@ -98,7 +98,7 @@ titlepage: false
 12.  $\displaystyle \int_{-\infty}^\infty sinc(t)dt = 1$, in quanto integrale di una funzione $sinc$ normalizzata.
 13.  L’onda triangolare, non presentando discontinuità (a differenza del  segnale onda quadra), nella sua ricostruzione del segnale tramite serie di Fourier le componenti ad alta frequenza hanno importanza minore.
 14.  L’onda triangolare, non presentando discontinuità, (a differenza del segnale dente di sega), nella sua ricostruzione del segnale tramite serie di Fourier le componenti ad alta frequenza hanno importanza minore.
-15.  
+15. 
     1.  Coefficiente della serie di Fourier è una funzione pari:$X_k = X_{-k}$;
     2.  se il segnale è anche reale: $X_k$ reale e pari $(X_k = X^*_k) \to$ si sviluppa in soli coseni. $\displaystyle x(t)= X_0 + 2 \sum_{k=1}^{\infty} X_k cos (2\pi k f_0 t)$
 16. 
