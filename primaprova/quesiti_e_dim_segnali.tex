@@ -355,20 +355,20 @@ Teoria dei Segnali}
   trasformata di Fourier è\ldots{}
 \item
   Se la trasformata di Fourier di \(x(t)\) è \(X(f)\), allora la
-  trasformata di \(x(\alpha t)\) con \(|\alpha|>1\) risulta modificata
+  trasformata di \(x(\alpha t)\) con \(|\alpha| >1\) risulta modificata
   in modo che \ldots{}
 \item
   Se la trasformata di Fourier di \(x(t)\) è \(X(f)\), allora la
-  trasformata di \(x(\alpha t)\) con \(|\alpha|>1\) risulta modificata
+  trasformata di \(x(\alpha t)\) con \(|\alpha| >1\) risulta modificata
   in modo che \ldots{}
 \item
   In cosa differiscono le trasformate di Fourier di
   \(rect (\frac{t}{T})\) e di \(rect (\frac{t-5}{T})\)? Spiegare le
   differenze sia per lo spettro di ampiezza che per lo spettro di fase.
 \item
-  In cosa differiscono le trasformate di Fourier di \(rect(frac{t}{T})\)
-  e di \(rect(\frac{t}{4T})\)? Spiegare le differenze sia per lo spettro
-  di ampiezza che per lo spettro di fase
+  In cosa differiscono le trasformate di Fourier di
+  \(rect(\frac{t}{T})\) e di \(rect(\frac{t}{4T})\)? Spiegare le
+  differenze sia per lo spettro di ampiezza che per lo spettro di fase
 \item
   Se \(x(t)\) è un segnale complesso e \(X(f)\) la sua trasformata di
   Fourier, quale è la trasformata di Fourier della parte reale di
@@ -448,6 +448,9 @@ Teoria dei Segnali}
   Enunciare e dimostrare il Teorema di integrazione completo della
   Trasformata continua di Fourier
 \item
+  Enunciare e dimostrare il Teorema della moltiplicazione (o prodotto?)
+  della Trasformata continua di Fourier.
+\item
   Dato un segnale x(t), enunciare e dimostrare la formula somma di
   Poisson che lega i coeffcienti della serie di Fourier di
   \(\displaystyle y(t) = \sum_{n = -\infty}^{\infty} x(t - nT)\) alla
@@ -467,7 +470,6 @@ Teoria dei Segnali}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\tightlist
 \item
   Un segnale deterministico a tempo continuo \(s(t)\) periodico ha
   potenza finita (pari alla potenza media calcolata in un singolo
@@ -478,12 +480,12 @@ Teoria dei Segnali}
 \item
   La potenza media di un segnale deterministico a tempo continuo
   \(s(t)\) è definita come \[
-  p(t) = \lim_{T\to\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} s^2(t) dt
+  p(t) = \lim_{T\to\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} s^2(t) \,dt
   \] dove T è il periodo del segnale.
 \item
   Per \(x(t) = Ae^{-t}u(t),\) l'energia è \[
-  \displaystyle E = \int_0^\infty |Ae^{-t}|^2 dt = A^2 \int_0^\infty e^{-2t} dt = \frac{A^2}{2}
-  \]. La potenza media è pari a: \[
+  E = \int_{0}^{\infty} |Ae^{-t}|^2 dt = A^2 \int_0^\infty e^{-2t} dt = \frac{A^2}{2}
+  \] La potenza media è pari a: \[
   \displaystyle P_t = \lim_{T \to \infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} |x(t)|^2 dt = \lim_{T \to \infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} |A e^{-t} u(t)|^2 dt =  \lim_{T \to \infty} \frac{A^2}{T} \int_{0}^{\frac{T}{2}} e^{-2t} dt = \lim_{T \to \infty} \frac{A^2}{T}*0 = 0
   \]
 \item
@@ -536,17 +538,10 @@ Teoria dei Segnali}
   serie di Fourier le componenti ad alta frequenza hanno importanza
   minore.
 \item
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    Coefficiente della serie di Fourier è una funzione
-    pari:\(X_k = X_{-k}\);
-  \item
-    se il segnale è anche reale: \(X_k\) reale e pari
-    \((X_k = X^*_k) \to\) si sviluppa in soli coseni.
-    \(\displaystyle x(t)= X_0 + 2 \sum_{k=1}^{\infty} X_k cos (2\pi k f_0 t)\)
-  \end{enumerate}
+\begin{verbatim}
+1.  Coefficiente della serie di Fourier è una funzione pari:$X_k = X_{-k}$;
+2.  se il segnale è anche reale: $X_k$ reale e pari $(X_k = X^*_k) \to$ si sviluppa in soli coseni. $\displaystyle x(t)= X_0 + 2 \sum_{k=1}^{\infty} X_k cos (2\pi k f_0 t)$
+\end{verbatim}
 \item
   \begin{enumerate}
   \def\labelenumii{\arabic{enumii}.}
@@ -554,10 +549,15 @@ Teoria dei Segnali}
   \item
     Coefficiente della serie di Fourier è una funzione
     dispari:\(X_{-k} = -X_{k}\);
-  \item
-    se il segnale è anche reale: \(X_k\) immaginaria pura e dispari
-    \((-X_k = X^*_k) \to\) si sviluppa in soli seni.
-    \(\displaystyle x(t)= 2j \sum_{k=1}^{\infty} X_k sin (2\pi k f_0 t)\)
+
+    \begin{enumerate}
+    \def\labelenumiii{\arabic{enumiii}.}
+    \tightlist
+    \item
+      se il segnale è anche reale: \(X_k\) immaginaria pura e dispari
+      \((-X_k = X^*_k) \to\) si sviluppa in soli seni.
+      \(\displaystyle x(t)= 2j \sum_{k=1}^{\infty} X_k sin (2\pi k f_0 t)\)
+    \end{enumerate}
   \end{enumerate}
 \item
   \(\displaystyle x(t)=X_0 + 2\sum_{k=1}^{\infty} X_k cos (2\pi k f_0 t) \to X_k = \frac{2}{T_0} \int_{0}^{\frac{T_0}{2}} x(t) cos (2\pi k f_0 t) dt\)
@@ -565,41 +565,23 @@ Teoria dei Segnali}
   \(\displaystyle x(t)= 2j \sum_{k=1}^{\infty} X_k sin (2\pi k f_0 t) \to X_k = -\frac{2j}{T_0} \int_{0}^{\frac{T_0}{2}} x(t) sin (2\pi k f_0 t)dt\)
 \item
   Le Condizioni di Dirichlet per la convergenza della serie di Fourier
-  sono:
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    la funzione deve essere assolutamente integrabile sul periodo
-    \(T_0\):
-    \(\displaystyle \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x(t)| dt < +\infty\)
-  \item
-    la funzione deve essere continua o presentare un numero finito di
-    discontinuità di prima specie
-  \item
-    la funzione deve avere un numero finito di massimi e minimi
-    all'interno di un periodo. Oppure \(x(t)\) derivabile rispetto al
-    tempo nel periodo \(T_0\), esclusi al più un numero finito di
-    discontinuità di prima specie.
-  \end{enumerate}
+  sono: 1. la funzione deve essere assolutamente integrabile sul periodo
+  \(T_0\):
+  \(\displaystyle \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x(t)| dt < +\infty\)
+  2. la funzione deve essere continua o presentare un numero finito di
+  discontinuità di prima specie 3. la funzione deve avere un numero
+  finito di massimi e minimi all'interno di un periodo. Oppure \(x(t)\)
+  derivabile rispetto al tempo nel periodo \(T_0\), esclusi al più un
+  numero finito di discontinuità di prima specie.
 \item
   Le Condizioni di Dirichlet per la convergenza della trasformata di
-  Fourier sono simili a quelle per la serie di Fourier:
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    la funzione deve essere assolutamente sommabile:
-    \(\displaystyle \int_{-\infty}^{\infty} |x(t)| dt < +\infty\)
-  \item
-    se in qualunque intervallo finito \((t_1, t_2)\) è continua o
-    presenta un numero finito di discontinuità di prima specie
-  \item
-    se in qualunque intervallo finito \((t_1, t_2)\) la funzione ha un
-    numero finito di massimi e minimi.
-  \end{enumerate}
+  Fourier sono simili a quelle per la serie di Fourier: 1. la funzione
+  deve essere assolutamente sommabile:
+  \(\displaystyle \int_{-\infty}^{\infty} |x(t)| dt < +\infty\) 2. se in
+  qualunque intervallo finito \((t_1, t_2)\) è continua o presenta un
+  numero finito di discontinuità di prima specie 3. se in qualunque
+  intervallo finito \((t_1, t_2)\) la funzione ha un numero finito di
+  massimi e minimi.
 \item
   La trasformata è pari a sua volta.
 \item
@@ -628,6 +610,11 @@ Teoria dei Segnali}
   ampiezza è lo stesso, mentre lo spettro di fase di
   \(rect (\frac{t-5}{T})\) ha una componente lineare aggiuntiva rispetto
   a \(rect (\frac{t}{T})\).
+\item
+  Per il teorema del cambiamento di scala, lo spettro di ampiezza di
+  \(rect(\frac{t}{4T})\) viene alterato rispetto a
+  \(rect(\frac{t}{T})\), mentre lo spettro di fase non viene alterato.
+  (Dilatazione nel tempo \(\leftrightarrow\) Compressione in frequenza)
 \item
   \(\displaystyle R(f) = \int_{- \infty}^{+\infty} x(t) cos(2\pi ft)dt\)
   Dato che \(\displaystyle X(f) = R(f)+ jI(f)\)
@@ -698,10 +685,11 @@ Teoria dei Segnali}
   \(\displaystyle S_x(f) \triangleq \lim_{T \to \infty} \frac{E_{X_T}(f)}{T} = \lim_{T \to \infty} \frac{|X_T(f)|^2}{T}\).
   Per il teorema di Wiener-Khintchine afferma però che la densità
   spettrale di potenza\(^*\) è uguale alla trasformata di Fourier della
-  funzione di autocorrelazione così modificata:
-  \(\displaystyle R_x(\tau) \triangleq  \lim_{T \to \infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)x(t-\tau)\).
-  La densità spettrale di potenza è:
-  \(\displaystyle S_x(f)= \int_{-\infty}^{\infty} R_x(\tau)e^{-j2 \pi f \tau} d\tau = 2\int_{0}^{\infty}  R_x(\tau) cos(2 \pi f \tau) d\tau\)
+  funzione di autocorrelazione così modificata: \[
+  R_x(\tau) \triangleq  \lim_{T \to \infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)x(t-\tau)
+  \] La densità spettrale di potenza è:
+  \begin{gather*}\displaystyle S_x(f)= \int_{-\infty}^{\infty} R_x(\tau)e^{-j2 \pi f \tau} d\tau = 2\int_{0}^{\infty}  R_x(\tau) cos(2 \pi f \tau) d\tau
+  \end{gather*}
 \end{enumerate}
 
 \end{document}
