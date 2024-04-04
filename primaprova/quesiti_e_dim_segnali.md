@@ -101,15 +101,16 @@ titlepage: false
 15.  
     1.  Coefficiente della serie di Fourier è una funzione pari:$X_k = X_{-k}$;
     2.  se il segnale è anche reale: $X_k$ reale e pari $(X_k = X^*_k) \to$ si sviluppa in soli coseni. $\displaystyle x(t)= X_0 + 2 \sum_{k=1}^{\infty} X_k cos (2\pi k f_0 t)$
-16.  1.  Coefficiente della serie di Fourier è una funzione dispari:$X_{-k} = -X_{k}$;
+16. 
+    1.  Coefficiente della serie di Fourier è una funzione dispari:$X_{-k} = -X_{k}$;
     1.  se il segnale è anche reale: $X_k$ immaginaria pura e dispari $(-X_k = X^*_k) \to$ si sviluppa in soli seni. $\displaystyle x(t)= 2j \sum_{k=1}^{\infty} X_k sin (2\pi k f_0 t)$
 17.  $\displaystyle x(t)=X_0 + 2\sum_{k=1}^{\infty} X_k cos (2\pi k f_0 t) \to X_k = \frac{2}{T_0} \int_{0}^{\frac{T_0}{2}} x(t) cos (2\pi k f_0 t) dt$
 18.  $\displaystyle x(t)= 2j \sum_{k=1}^{\infty} X_k sin (2\pi k f_0 t) \to X_k = -\frac{2j}{T_0} \int_{0}^{\frac{T_0}{2}} x(t) sin (2\pi k f_0 t)dt$
-19.  Le Condizioni di Dirichlet per la convergenza della serie di Fourier sono:
-    1.  la funzione deve essere assolutamente integrabile sul periodo $T_0$: $\displaystyle \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x(t)| dt < +\infty$
+19. Le Condizioni di Dirichlet per la convergenza della serie di Fourier sono:
+    1. la funzione deve essere assolutamente integrabile sul periodo $T_0$: $\displaystyle \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x(t)| dt < +\infty$
     2.  la funzione deve essere continua o presentare un numero finito di discontinuità di prima specie
     3.  la funzione deve avere un numero finito di massimi e minimi all’interno di un periodo. Oppure $x(t)$ derivabile rispetto al tempo nel periodo $T_0$, esclusi al più un numero finito di discontinuità di prima specie.
-20.  Le Condizioni di Dirichlet per la convergenza della trasformata di Fourier sono simili a quelle per la serie di Fourier:
+20. Le Condizioni di Dirichlet per la convergenza della trasformata di Fourier sono simili a quelle per la serie di Fourier:
     1.  la funzione deve essere assolutamente sommabile: $\displaystyle \int_{-\infty}^{\infty} |x(t)| dt < +\infty$
     2.  se in qualunque intervallo finito $(t_1, t_2)$ è continua o presenta un numero finito di discontinuità di prima specie
     3.  se in qualunque intervallo finito $(t_1, t_2)$ la funzione ha un numero finito di massimi e minimi.
