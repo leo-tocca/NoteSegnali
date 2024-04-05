@@ -44,6 +44,7 @@ header-includes: |
     $$
     \Rightarrow x(t) = \sum_{k=-\infty}^{\infty} X_k \ e^{j2\pi kf_{0}t} \text{ forma complessa della serie di Fourier}
     $$
+    \newpage
 3. Come si calcolano i coefficienti $X_n$?
     
     Partendo dalla forma complessa, moltiplico a destra e a sinistra per $e^{-j2\pi kf_{0}t}$, integrando sul periodo $T_0$.
@@ -218,6 +219,36 @@ header-includes: |
 > Una funzione non periodica, definita tra $-\infty$ e $\infty$, può essere rappresentata come **somma** di **infinite armoniche semplici** di ampiezza *infinitesima* e di frequenza variabile con continuità tra $-\infty$ e $\infty$
 
 9. Dal segnale periodico al segnale aperiodico...
+     
+    Partiamo dall'impulso rettangolare *aperiodico* $\rect{\frac{t}{T}}$:
+    \begin{gather*}
+    x(t) = \rect{\frac{t}{T}} \to x_{p}(t) = \sum \rect(\frac{t-nT_0}{T}) \text{ treno di impulsi rettangolari}
+    \end{gather*}
+    possiamo vedere $x(t)$ come caso limite di $x_p(t)$ con periodo $T_0 \to \infty$
+    $$
+    x(t) = \lim_{T_0 \to \infty} x_{p}(t)
+    $$
+    1. la frequenza diventa infinitesima $(f_0 = \frac{1}{T_0})$
+    2. si riduce la *distanza tra le armoniche*, ossia si **infittisce** lo spettro;
+    3. $X_k=\frac{1}{T_0}\int_{-\frac{T_0}{2}}^<{\frac{T_0}{2}} x_p(t) \ e^{-j2\pi kf_0 t}\,dt$, l'ampiezza assume valori *sempre più piccoli*
+
+    Usiamo il coefficiente *modificato* $X(f_0 k) = T_0 X_k$ per ovviare il problema. Riscriviamo $x_p(t)$ e $X_k$\
+    \begin{gather*}
+    x_{p}(t) = \sum_{k=-\infty}^{\infty}X(kf_0)\ e^{j2\pi kf_0 t} \cdot f_0 \to x(t) = \underbrace{\int_{-\infty}^{\infty}X(f)\ e^{j2\pi ft}\,df}_{\text{integrale di Fourier}}
+    \end{gather*}
+    Le armoniche si *infittiscono talmente tanto* da non essere più distinte ma **continue**.
+
+    \begin{gather*}
+    X(kf_0) = T_0 \ X_k = \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}}  x_{p}(t) \ e^{-j2\pi kf_0 t}\,dt \to \underbrace{X(f) = \int_{-\infty}^{\infty}X(f)\ e^{j2\pi ft}\,dt}_{\text{trasformata continua di Fourier}}
+    \end{gather*}
+
+    $X(f)$ è una **funzione complessa della variabile continua $f$**, quindi è di spettro continuo.
+
+    - Nota: **differenze tra segnali continui periodici e aperiodici**:
+        * un segnale *periodico* è rappresentato da componenti sinusoidali a frequenze in relazione **armonica** (multipli di $f_0$, frequenza *fondamentale* e ad ampiezza finita).
+        * un segnale *aperiodico* è rappresentato con componenti sinusoidali di ampiezza *infinitesima* $|X(f)|\,df$ e frequenza $f$ variabile con continuità su $\mathbb{R}$; è un segnale
+        periodico di periodo illimitato con $f_0$ infinitesimo. Le armoniche discrete *degenerano* nell'insieme continuo.
+
 10. Criteri di esistenza per la trasformata continua di Fourier (TCF)
     1. $X(f)$ esiste se il segnale $x(t)$
     2. Criteri di Dirichlet:
@@ -232,6 +263,8 @@ header-includes: |
     \frac{x(t_{0}^{+})-x(t_{0}^{-})}{2}\ \text{ se discontinua}
     \end{array} \right.
     $$
+\newpage
+    
 11. Simmetria Hermitiana della trasformata continua di Fourier
 
     Possiamo rappresentare $X(f)$ in forma rettangolare:
@@ -358,7 +391,7 @@ header-includes: |
     È da notare come l'inversione dell'integrale nel secondo caso l'abbiamo quando $t \to -\infty, \ z \to +\infty$. Inoltre abbiamo sostituito $z=-\alpha t$.
 
     Quindi una *dilatazione* nel tempo corrisponde ad una *compressione* in frequenza, e **viceversa**
-
+\newpage
 17. **Modulazione**
 
     Dato un segnale $x(t)$ e la sua trasformata $X(f)$ allora
@@ -401,7 +434,7 @@ header-includes: |
     |Y(f)| = 2\pi f |X(f)| \\ \phase{Y(f)} = \phase{X(f)} + \text{sgn}(f)\frac{\pi}{2}
     $$
     Aumenta proporzionalmente l'ampiezza, esaltando le altre frequenze, e sfasando di $\pm \frac{\pi}{2}$
-    
+\newpage
 19. **Integrazione** (deriva dal teorema di derivazione)
 
     Dato un segnale $x(t) \Longleftrightarrow X(f)$ e un segnale $y(t) = \int_{-\infty}^{t} x(\alpha) \,d\alpha$, allora vale
@@ -451,6 +484,7 @@ header-includes: |
     - Nota bene:
         - la convoluzione ha proprietà commutativa, associativa e distributiva.
 
+
 ## Trasformata di Fourier generalizzata
 
 22. Teorema d'integrazione **completo**:
@@ -486,7 +520,6 @@ header-includes: |
         x(t)\cos(2\pi f_0 t) \Longleftrightarrow \frac{X(f-f_0)+X(f+f_0)}{2}
         \end{gather*}
         
-
 ## Periodicizzazione
 
 24. Prima formula della somma di Poisson:
@@ -524,10 +557,9 @@ header-includes: |
     \sum_{n=-\infty}^{\infty}x(nT)e^{-j2\pi fT} = \frac{1}{T}\sum_{k=-\infty}^{\infty}X(f-\frac{k}{T})
     $$
 
-TODO: aggiornare numeri
 
 ## Sistemi
-1. Teorema di Parseval:
+26. Teorema di Parseval:
 
 Dato un segnale $x(t)$ e la sua energia $E_{x}=\int_{-\infty}^{\infty} |x(t)|^2 \,dt < +\infty$ (energia finita), possiamo esprimere l'energia $E_x$ *anche in frequenza*:
 
@@ -539,7 +571,7 @@ E_{x}=\int_{-\infty}^{\infty} |x(t)|^2 \,dt = \int_{-\infty}^{\infty} x(t) \ x^{
 
 $E_x$ è l'energia totale, deriva da $p_x = |x(t)|^2$ potenza istantanea integrata o da $|X(f)|^2$ detta **densità spettrale** $E_x(f)$ integrata.
 
-2. Teorema di Wiener-Khinchin
+27. Teorema di Wiener-Khinchin
 
 Siamo la densità spettrale di potenza:
 $$
