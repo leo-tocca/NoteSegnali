@@ -89,7 +89,7 @@
 \definecolor{default-filecolor}{HTML}{A50000}
 \definecolor{default-citecolor}{HTML}{4077C0}
 \definecolor{default-urlcolor}{HTML}{4077C0}
-\usepackage[margin=2.5cm,includehead=true,includefoot=true,centering,]{geometry}
+\usepackage[margin=1.5cm,includehead=true,includefoot=true,centering,]{geometry}
 % add backlinks to footnote references, cf. https://tex.stackexchange.com/questions/302266/make-footnote-clickable-both-ways
 \usepackage{footnotebackref}
 \setlength{\emergencystretch}{3em} % prevent overfull lines
@@ -325,6 +325,7 @@ continuo}\label{segnali-periodici-a-tempo-continuo}
    \] \[
    \Rightarrow x(t) = \sum_{k=-\infty}^{\infty} X_k \ e^{j2\pi kf_{0}t} \text{ forma complessa della serie di Fourier}
    \]
+
 \item
   Come si calcolano i coefficienti \(X_n\)?
 
@@ -556,6 +557,62 @@ continuità tra \(-\infty\) e \(\infty\)
 \setcounter{enumi}{8}
 \item
   Dal segnale periodico al segnale aperiodico\ldots{}
+
+  Partiamo dall'impulso rettangolare \emph{aperiodico}
+  \(\mathop{\mathrm{rect}}{\frac{t}{T}}\): \begin{gather*}
+   x(t) = \mathop{\mathrm{rect}}{\frac{t}{T}} \to x_{p}(t) = \sum \mathop{\mathrm{rect}}(\frac{t-nT_0}{T}) \text{ treno di impulsi rettangolari}
+   \end{gather*} possiamo vedere \(x(t)\) come caso limite di \(x_p(t)\)
+  con periodo \(T_0 \to \infty\) \[
+   x(t) = \lim_{T_0 \to \infty} x_{p}(t)
+   \]
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    la frequenza diventa infinitesima \((f_0 = \frac{1}{T_0})\)
+  \item
+    si riduce la \emph{distanza tra le armoniche}, ossia si
+    \textbf{infittisce} lo spettro;
+  \item
+    \(X_k=\frac{1}{T_0}\int_{-\frac{T_0}{2}}^<{\frac{T_0}{2}} x_p(t) \ e^{-j2\pi kf_0 t}\,dt\),
+    l'ampiezza assume valori \emph{sempre più piccoli}
+  \end{enumerate}
+
+  Usiamo il coefficiente \emph{modificato} \(X(f_0 k) = T_0 X_k\) per
+  ovviare il problema. Riscriviamo \(x_p(t)\) e \(X_k\)\\
+  \begin{gather*}
+   x_{p}(t) = \sum_{k=-\infty}^{\infty}X(kf_0)\ e^{j2\pi kf_0 t} \cdot f_0 \to x(t) = \underbrace{\int_{-\infty}^{\infty}X(f)\ e^{j2\pi ft}\,df}_{\text{integrale di Fourier}}
+   \end{gather*} Le armoniche si \emph{infittiscono talmente tanto} da
+  non essere più distinte ma \textbf{continue}.
+
+  \begin{gather*}
+   X(kf_0) = T_0 \ X_k = \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}}  x_{p}(t) \ e^{-j2\pi kf_0 t}\,dt \to \underbrace{X(f) = \int_{-\infty}^{\infty}X(f)\ e^{j2\pi ft}\,dt}_{\text{trasformata continua di Fourier}}
+   \end{gather*}
+
+  \(X(f)\) è una \textbf{funzione complessa della variabile continua
+  \(f\)}, quindi è di spettro continuo.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Nota: \textbf{differenze tra segnali continui periodici e
+    aperiodici}:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      un segnale \emph{periodico} è rappresentato da componenti
+      sinusoidali a frequenze in relazione \textbf{armonica} (multipli
+      di \(f_0\), frequenza \emph{fondamentale} e ad ampiezza finita).
+    \item
+      un segnale \emph{aperiodico} è rappresentato con componenti
+      sinusoidali di ampiezza \emph{infinitesima} \(|X(f)|\,df\) e
+      frequenza \(f\) variabile con continuità su \(\mathbb{R}\); è un
+      segnale periodico di periodo illimitato con \(f_0\) infinitesimo.
+      Le armoniche discrete \emph{degenerano} nell'insieme continuo.
+    \end{itemize}
+  \end{itemize}
 \item
   Criteri di esistenza per la trasformata continua di Fourier (TCF)
 
@@ -587,7 +644,7 @@ continuità tra \(-\infty\) e \(\infty\)
   x(t) \ \text{ se continua}  \\
   \frac{x(t_{0}^{+})-x(t_{0}^{-})}{2}\ \text{ se discontinua}
   \end{array} \right.
-  \]
+  \] 
 \item
   Simmetria Hermitiana della trasformata continua di Fourier
 
@@ -750,7 +807,7 @@ continua}\label{proprietuxe0-della-trasformata-continua}
   \end{itemize}
 
   Quindi una \emph{dilatazione} nel tempo corrisponde ad una
-  \emph{compressione} in frequenza, e \textbf{viceversa}
+  \emph{compressione} in frequenza, e \textbf{viceversa} 
 \item
   \textbf{Modulazione}
 
@@ -792,7 +849,7 @@ continua}\label{proprietuxe0-della-trasformata-continua}
   Il teorema della derivazione \emph{modifica gli spettri} \[
   |Y(f)| = 2\pi f |X(f)| \\ \phase{Y(f)} = \phase{X(f)} + \text{sgn}(f)\frac{\pi}{2}
   \] Aumenta proporzionalmente l'ampiezza, esaltando le altre frequenze,
-  e sfasando di \(\pm \frac{\pi}{2}\)
+  e sfasando di \(\pm \frac{\pi}{2}\) 
 \item
   \textbf{Integrazione} (deriva dal teorema di derivazione)
 
@@ -952,12 +1009,11 @@ generalizzata}\label{trasformata-di-fourier-generalizzata}
   \]
 \end{enumerate}
 
-TODO: aggiornare numeri
-
 \subsection{Sistemi}\label{sistemi}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{25}
 \tightlist
 \item
   Teorema di Parseval:
@@ -978,7 +1034,7 @@ istantanea integrata o da \(|X(f)|^2\) detta \textbf{densità spettrale}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
+\setcounter{enumi}{26}
 \tightlist
 \item
   Teorema di Wiener-Khinchin
