@@ -6,6 +6,13 @@ header-includes: |
             \usepackage{mathtools}
             \DeclareMathOperator{\sinc}{sinc}
             \DeclareMathOperator{\rect}{rect}
+            \usepackage{geometry}
+				\geometry{
+					a4paper,
+					total={170mm,257mm},
+					left=20mm,
+					top=20mm,
+				}
 ---
 # Lista teoremi Teoria dei Segnali
 
@@ -33,10 +40,10 @@ header-includes: |
     = A_0 + \cancel{2} \sum_{k=1}^{\infty} A_{k} \frac{e^{j(2\pi kf_{0}t + \theta_{K})}+e^{-j(2\pi kf_{0}t + \theta_{K})}}{\cancel{2}} \to \text{ uso formula di Eulero per il coseno}
     $$
     $$
-    = A_0 + \sum_{k=1}^{\infty} A_{k} e^{j2\pi kf_{0}t + \theta_{K}}  + \sum_{k=1}^{\infty} A_{k} e^{-j2\pi kf_{0}t + \theta_{K}} \to \text{ separo le due esponenziali}
+    = A_0 + \sum_{k=1}^{\infty} A_{k} e^{j(2\pi kf_{0}t + \theta_{k})}  + \sum_{k=1}^{\infty} A_{k} e^{-j(2\pi kf_{0}t + \theta_{K})} \to \text{ separo le due esponenziali}
     $$
     $$
-    = x_0 + \sum_{k=1}^{\infty} A_{k} e^{j\theta_{k}} e^{j2\pi kf_{0}t}  + \sum_{k=1}^{\infty} A_{k} e^{-j\theta_{k}} e^{-j2\pi kf_{0}t}  \to \text{ raggruppo le sommatorie}
+    = x_0 + \sum_{k=1}^{\infty} A_{k} e^{j\theta_{k}} e^{j2\pi kf_{0}t}  + \sum_{k=1}^{\infty} A_{k} e^{-j\theta_{k}} e^{-j2\pi kf_{0}t}  \to \text{ raggruppo le sommatorie e} k \text{ diventa }-k
     $$
     $$
     = x_0 + \sum_{k=1}^{\infty} X_k e^{j2\pi kf_{0}t}  + \sum_{k=1}^{\infty} X_k e^{-j2\pi kf_{0}t}
@@ -44,7 +51,7 @@ header-includes: |
     $$
     \Rightarrow x(t) = \sum_{k=-\infty}^{\infty} X_k \ e^{j2\pi kf_{0}t} \text{ forma complessa della serie di Fourier}
     $$
-    \newpage
+
 3. Come si calcolano i coefficienti $X_n$?
     
     Partendo dalla forma complessa, moltiplico a destra e a sinistra per $e^{-j2\pi kf_{0}t}$, integrando sul periodo $T_0$.
@@ -53,7 +60,7 @@ header-includes: |
     $$
     Porto fuori la sommatoria e raccolgo $e$: per ipotesi la serie converge.
     $$
-    \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t)e^{-j2\pi kf_{0}t} \,dt = \sum_{k=-\infty}^{\infty} X_k  \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} e^{j2\pi (k-n)f_{0}t} 
+    \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t)e^{-j2\pi kf_{0}t} \,dt = \sum_{k=-\infty}^{\infty} X_k  \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} e^{j2\pi (k-n)f_{0}t} \,dt
     $$
     L'integrale al secondo membro viene calcolato per $k\neq n$
     $$
@@ -72,6 +79,8 @@ header-includes: |
     $$
     \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t)e^{-j2\pi nf_{0}t} \,dt = X_{n}T_{0} \Rightarrow X_{n} = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t)e^{-j2\pi nf_{0}t} \,dt 
     $$
+    
+    N-esimo termine della serie di Fourier
 4. Forma rettangolare dalla forma polare
     $$
     x(t) = A_{0} + 2 \sum_{k=1}^{\infty} A_{k} \cos(2\pi k f_{0}t + \theta_{k})
@@ -123,7 +132,7 @@ header-includes: |
     $$
     È da notare come $x(t)^{*}=x(t)$, dal momento che il segnale $x(t)$ è reale.
 
-    Quindi $X_{k}^{*}=X_{-k}$: i coefficienti $X_k$ di un segnale *reale* sono **simmetrici hermitiani**, ossia hanno *lo stesso modulo e fase opposta*
+    Quindi $X_{k}^{*}=X_{-k}$: i coefficienti $X_k$ di un segnale *reale* **godono di simmetria hermitiana**, ossia hanno *lo stesso modulo e fase opposta*
     $$
     X_{-k}=X_{k}^{*} \Longleftrightarrow \left\{ \begin{array}{cl}
     |X_k|=|X_{-k}| \ \text{ stesso modulo}  \\
@@ -131,8 +140,8 @@ header-includes: |
     \end{array} \right.
     $$
     In definitiva per un segnale reale:
-        - lo spettro d'ampiezza è **simmetrico** rispetto a $k \to$ pari
-        - lo spettro di fase è **antisimmetrico** rispetto a $k \to$ dispari
+    - lo spettro d'ampiezza è **simmetrico** rispetto a $k \to$ pari
+    - lo spettro di fase è **antisimmetrico** rispetto a $k \to$ dispari
 
     <!--- (TODO: controllare appunti Agata) --->
 7. Linearità dello spettro reale:
@@ -157,12 +166,11 @@ header-includes: |
         X_{k} = \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi kf_{0}t} \,dt \Longleftrightarrow X_{-k} = \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi (-k)f_{0}t} \,dt 
         $$
         Utilizziamo il cambio di variabile
-        $$
-        X_{-k} = \frac{1}{T_0} \int_{\frac{T_0}{2}}^{-\frac{T_0}{2}} x(-\alpha) e^{-j2\pi (\cancel{-}(\cancel{-}\alpha)) kf_{0}} -\,d\alpha = \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(\alpha) e^{-j2\pi\alpha kf_{0}} \,d\alpha =
-        $$
-        $$
-        -\frac{1}{T_0} \int_{\frac{T_0}{2}}^{-\frac{T_0}{2}} x(\alpha) e^{-j2\pi\alpha kf_{0}} \,d\alpha = X_k
-        $$
+        \begin{gather*}
+        X_{-k} = \frac{1}{T_0} \int_{\frac{T_0}{2}}^{-\frac{T_0}{2}} x(-\alpha) e^{-j2\pi (\cancel{-}(\cancel{-}\alpha)) kf_{0}} -\,d\alpha = -\frac{1}{T_0} \int_{\frac{T_0}{2}}^{-\frac{T_0}{2}} x(\alpha) e^{-j2\pi\alpha kf_{0}} \,d\alpha =
+        \\ 
+        \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(\alpha) e^{-j2\pi\alpha kf_{0}} \,d\alpha = X_k
+        \end{gather*}
         dato che il segnale $\in \mathbb{R}$ lo possiamo rappresentare come (perché essendo reale ha fase nulla?):
         $$
         x(t) = X_{0} + 2\sum_{k=1}^{\infty}X_{k}\cos(2\pi kf_{0}t)
@@ -189,6 +197,7 @@ header-includes: |
         \\
         \frac{2}{T_0} \int_{0}^{\frac{T_0}{2}} x(t)\cdot\cos{(2\pi kf_{0}t)} \,dt - 0
         \end{gather*}
+        Integrale di una funzione pari su un intervallo simmetrico.
 
     * se $x(t)$ è **dispari**, allora anche i coefficienti $X_k$ saranno dispari. Inoltre, dato che $x(t)\in\mathbb{R}$, $X_k$ sarà un **immaginario puro**, ed 
         $$
@@ -204,7 +213,7 @@ header-includes: |
         \begin{gather*}
         \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underbrace{x(t)}_{\text{dispari}}\cdot\underbrace{\cos(2\pi kf_{0}t)}_{\text{pari}} \,dt - \frac{j}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underbrace{x(t)}_{\text{dispari}}\cdot\underbrace{\sin(2\pi kf_{0}t)}_{\text{dispari}}\,dt=
         \\
-        -\frac{j}{T_0} \int_{0}^{\frac{T_0}{2}} x(t)\cdot\sin{(2\pi kf_{0}t)} \,dt 
+        -\frac{2j}{T_0} \int_{0}^{\frac{T_0}{2}} x(t)\cdot\sin{(2\pi kf_{0}t)} \,dt 
         \end{gather*}
 
     * **Note varie**
@@ -242,7 +251,7 @@ header-includes: |
     Le armoniche si *infittiscono talmente tanto* da non essere più distinte ma **continue**.
 
     \begin{gather*}
-    X(kf_0) = T_0 \ X_k = \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}}  x_{p}(t) \ e^{-j2\pi kf_0 t}\,dt \to \underbrace{X(f) = \int_{-\infty}^{\infty}X(f)\ e^{j2\pi ft}\,dt}_{\text{trasformata continua di Fourier}}
+    X(kf_0) = T_0 \ X_k = \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}}  x_{p}(t) \ e^{-j2\pi kf_0 t}\,dt \to \underbrace{X(f) = \int_{-\infty}^{\infty}x(t)\ e^{j2\pi ft}\,dt}_{\text{trasformata continua di Fourier}}
     \end{gather*}
 
     $X(f)$ è una **funzione complessa della variabile continua $f$**, quindi è di spettro continuo.
@@ -253,12 +262,12 @@ header-includes: |
         periodico di periodo illimitato con $f_0$ infinitesimo. Le armoniche discrete *degenerano* nell'insieme continuo.
 
 10. Criteri di esistenza per la trasformata continua di Fourier (TCF)
-    1. $X(f)$ esiste se il segnale $x(t)$
+    1. $X(f)$ esiste se il segnale $x(t)$ ha energia finita (condizione "sufficiente")!
     2. Criteri di Dirichlet:
         1.  la funzione deve essere assolutamente sommabile: $\displaystyle \int_{-\infty}^{\infty} |x(t)| dt < +\infty$
-        2.  se in qualunque intervallo finito $(t_1, t_2)$ è continua o presenta un numero finito di discontinuità di prima specie
-        3.  se in qualunque intervallo finito $(t_1, t_2)$ la funzione ha un numero finito di massimi e minimi.
-    
+        2.  se in qualunque intervallo finito $t_1 < t < t_2$ è continua o presenta un numero finito di discontinuità di prima specie
+        3.  se in qualunque intervallo finito $t_1 < t < t_2$ la funzione ha un numero finito di massimi e minimi.
+
     Allora $x(t)$ è rappresentabile come TCF e 
     $$
     x(t) = \int_{-\infty}^{\infty}X(f)\ e^{j2\pi fT} \,df =  \left\{ \begin{array}{cl}
@@ -331,11 +340,11 @@ header-includes: |
         $T\sinc(Tt) \Longleftrightarrow \rect({-\frac{f}{T}})$ da cui $\sinc(Bt)\Longleftrightarrow \frac{1}{B}\rect(\frac{t}{B})$, dove $B$ indica la banda.
     * Dimostrazione:
         $$
-        x(t) =\int_{-\infty}^{\infty}X(f)\ e^{j2\pi ft} \,df = \int_{-\infty}^{\infty}X(t)\ e^{j2\pi ft} \,dt 
+        x(t) =\int_{-\infty}^{\infty}X(f)\ e^{j2\pi ft} \,df \to x(f) \int_{-\infty}^{\infty}X(t)\ e^{j2\pi ft} \,dt 
         $$
         con uno scambio di variabili $t$ con $f$. Quindi:
         $$
-        X(-f)=\int_{-\infty}^{\infty}x(t)\ e^{-j2\pi fT} \,dt 
+        x(-f)=\int_{-\infty}^{\infty}<S-Del>Xx(t)\ e^{-j2\pi fT} \,dt 
         $$
         Da qui deriviamo che $x(-f)$ è la trasformata di $X(t)$
 
@@ -353,7 +362,7 @@ header-includes: |
     x(t-t_0) \Longleftrightarrow \int_{-\infty}^{\infty} x(t-t_0) \ e^{-j2\pi ft} \,dt = \Big|\alpha = t-t_0 \to t=\alpha +t_0
     $$
     $$
-    x(t-t_0) \Longleftrightarrow \int_{-\infty}^{\infty} x(\alpha + t_0) e^{-j2\pi (\alpha +t_0)f} \,d\alpha = e^{-j2\pi ft_0} \int_{-\infty}^{\infty} x(\alpha)\ e^{-j2\pi f\alpha} =  e^{-j2\pi ft_0} \ X(f) 
+    x(t-t_0) \Longleftrightarrow \int_{-\infty}^{\infty} x(\alpha) e^{-j2\pi (\alpha +t_0)f} \,d\alpha = e^{-j2\pi ft_0} \int_{-\infty}^{\infty} x(\alpha)\ e^{-j2\pi f\alpha} =  e^{-j2\pi ft_0} \ X(f) 
     $$
     - Esempio:
     $$
@@ -543,16 +552,18 @@ header-includes: |
 25. Seconda formula della somma di Poisson
 
     Applichiamo alla prima formula di Poisson il teorema della dualità:
-    $$
+    \begin{gather*}
     X(t) \longleftrightarrow x(-f) \\
     x(t) \longleftrightarrow X(f)
-    $$
+    \end{gather*}
+
     \begin{gather*}
     \sum_{n=-\infty}^{\infty}x(t-nT_0) = \sum_{k=-\infty}^{\infty} \frac{1}{T_0} X(\frac{k}{T_0})\ e^{+\frac{j2\pi kt}{T_0}} \\
-    \sum_{n=-\infty}^{\infty}x(t-nT_0) = \sum_{k=-\infty}^{\infty} \frac{1}{T_0}(X(-\frac{k}{T_0}))\ e^{+\frac{j2\pi kt}{T_0}} \\
-    \Rightarrow \sum_{n=-\infty}^{\infty}x(t-nT_0) = \sum_{k=-\infty}^{\infty} \frac{1}{T_0} X(\frac{k}{T_0})\ e^{-\frac{j2\pi kt}{T_0}} \text{ cambio di segno all'indice k} \\
-    \to T = \frac{1}{T_0} \Rightarrow \sum_{n=-\infty}^{\infty}X(t-\frac{n}{T}) = T\sum_{k=-\infty}^{\infty} \frac{1}{T_0} x(kT)\ e^{-j2\pi ktfT}
+    \sum_{n=-\infty}^{\infty}X(t-nT_0) = \sum_{k=-\infty}^{\infty} \frac{1}{T_0}(x(-\frac{k}{T_0}))\ e^{+\frac{j2\pi kt}{T_0}} \\
+    \Rightarrow \sum_{n=-\infty}^{\infty}X(t-nT_0) = \sum_{k=-\infty}^{\infty} \frac{1}{T_0} x(\frac{k}{T_0})\ e^{-\frac{j2\pi kt}{T_0}} \text{ cambio di segno all'indice k} \\
+    \to T = \frac{1}{T_0} \Rightarrow \sum_{n=-\infty}^{\infty}X(t-\frac{n}{T}) = T\sum_{k=-\infty}^{\infty} \frac{1}{T_0} x(kT)\ e^{-j2\pi ktT}
     \end{gather*}
+
     Adesso, dal punto di vista puramente formale, cambiano nome da $t$ in $f$, otteniamo un'espressione, otteniamo un'espressione *duale* rispetto alla prima formula di Poisson
     $$
     \sum_{n=-\infty}^{\infty}x(nT)e^{-j2\pi fT} = \frac{1}{T}\sum_{k=-\infty}^{\infty}X(f-\frac{k}{T})
