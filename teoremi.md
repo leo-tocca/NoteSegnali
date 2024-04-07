@@ -109,7 +109,11 @@ header-includes: |
 
 6. Simmetria Hermitiana dello spettro reale:
 
-    I coefficienti $X_k$ sono generalmente quantità complesse del tipo $X_k = |X_{k}|e^{j\phase{X_{k}}}$: $X_{k}$ può essere rappresentata tramite spettro di ampiezza e spettro di fase, discreti (esiste solo in corrispondenza delle armoniche k)
+    I coefficienti $X_k$ sono generalmente quantità complesse del tipo 
+    \begin{gather*}
+    X_k = |X_{k}|e^{j\phase{X_{k}}}
+    \end{gather*}
+    $X_{k}$può essere rappresentata tramite spettro di ampiezza e spettro di fase, discreti (esiste solo in corrispondenza delle armoniche $k$)
     $$
     X_k = \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi kf_{0}t} \,dt
     $$
@@ -165,7 +169,7 @@ header-includes: |
         $$
         Dimostrazione:
         $$
-        x(t) = \sum_{k=-\infty}^{\infty} X_{k} e^{j2\pi kf_{0}t} = X_{0} + \sum_{k=1}^{\infty} X_{k} e^{j2\pi kf_{0}t} + \sum_{k=-1}^{\infty} X_{k} e^{j2\pi kf_{0}t} =
+        x(t) = \sum_{k=-\infty}^{\infty} X_{k} e^{j2\pi kf_{0}t} = X_{0} + \sum_{k=1}^{\infty} X_{k} e^{j2\pi kf_{0}t} + \sum_{k=-\infty}^{-1} X_{k} e^{j2\pi kf_{0}t} =
         $$
         $$
         = X_{0} + \sum_{k=1}^{\infty} X_{k} e^{j2\pi kf_{0}t} + \sum_{k=1}^{\infty} X_{-k} e^{-j2\pi kf_{0}t} =
@@ -197,12 +201,11 @@ header-includes: |
         $$
         X_k = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi kf_{0}t} \,dt =
         $$
-        $$
-        \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underset{dispari}{x(t)}\cdot\underset{pari}{\cos{(2\pi kf_{0}t)}} \,dt - \frac{j}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underset{dispari}{x(t)}\cdot\underset{dispari}{\sin{(2\pi kf_{0}t)}}\,dt=
-        $$
-        $$
+        \begin{gather*}
+        \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underbrace{x(t)}_{\text{dispari}}\cdot\underbrace{\cos(2\pi kf_{0}t)}_{\text{pari}} \,dt - \frac{j}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underbrace{x(t)}_{\text{dispari}}\cdot\underbrace{\sin(2\pi kf_{0}t)}_{\text{dispari}}\,dt=
+        \\
         -\frac{j}{T_0} \int_{0}^{\frac{T_0}{2}} x(t)\cdot\sin{(2\pi kf_{0}t)} \,dt 
-        $$
+        \end{gather*}
 
     * **Note varie**
         
@@ -230,7 +233,7 @@ header-includes: |
     $$
     1. la frequenza diventa infinitesima $(f_0 = \frac{1}{T_0})$
     2. si riduce la *distanza tra le armoniche*, ossia si **infittisce** lo spettro;
-    3. $X_k=\frac{1}{T_0}\int_{-\frac{T_0}{2}}^<{\frac{T_0}{2}} x_p(t) \ e^{-j2\pi kf_0 t}\,dt$, l'ampiezza assume valori *sempre più piccoli*
+    3. $X_k=\frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x_p(t) \ e^{-j2\pi kf_0 t}\,dt$, l'ampiezza assume valori *sempre più piccoli*
 
     Usiamo il coefficiente *modificato* $X(f_0 k) = T_0 X_k$ per ovviare il problema. Riscriviamo $x_p(t)$ e $X_k$\
     \begin{gather*}
@@ -272,7 +275,7 @@ header-includes: |
     X(f) = Re(f) + Im(f) = \int_{-\infty}^\infty x(t) \cos(2\pi ft) \,dt - j\int_{-\infty}^\infty x(t) \sin(2\pi ft) \,dt
     $$
     $$
-    \underset{pari}{Re(f)=Re(-f)} \text{ e } \underset{dispari}{Im(f)=-Im(-f)} \Longrightarrow X(f)=X^{*}(-f) \text{ simmetria hermitiana}
+    \underbrace{Re(f)=Re(-f)}_{\text{pari}} \text{ e } \underbrace{Im(f)=-Im(-f)}_{\text{dispari}} \Longrightarrow X(f)=X^{*}(-f) \text{ simmetria hermitiana}
     $$
     infatti $X(f)=Re(f)+jIm(f)=Re(-f)+jIm(f)=X^{*}(-f)$
     - lo spettro di ampiezza è quindi *pari* a quello di fase dispari.
@@ -321,7 +324,7 @@ header-includes: |
     Se la trasformata continua di Fourier passa ad essere un *segnale nel tempo*, allora $x(-f)$ è la sua trasformata di Fourier. Abbiamo quindi una corrispondenza biunivoca tra la funzione e la sua trasformata.
     * Esempio:
         $$
-        \rect(\frac{t}{T})\sinc(fT)
+        \rect(\frac{t}{T})\Longleftrightarrow\sinc(fT)
         $$
         Ma se nel tempo ho un segnale $\sinc(bT)$ qual è la sua trasformata?
 
@@ -370,8 +373,8 @@ header-includes: |
     $$
     \begin{array}{cl}
     |\alpha | > 1 \ \to \text{ compressione della scala dei tempi} \to \text{ l'evoluzione è "accelerata"}\\
-    |\alpha | > 1 \ \to \text{ dilatazione della scala dei tempi} \to \text{ l'evoluzione è "rallentata"}\\
-    |\alpha | < 0 \ \to \text{ inversione della scala dei tempi}
+    |\alpha | < 1 \ \to \text{ dilatazione della scala dei tempi} \to \text{ l'evoluzione è "rallentata"}\\
+    \alpha  < 0 \ \to \text{ inversione della scala dei tempi}
     \end{array} 
     $$
     Inoltre vale:
@@ -401,22 +404,20 @@ header-includes: |
     dove $X(f-f_0)$ e $X(f+f_0)$ sono rispettivamente la replica centrata in $f_0$ e la replica centrata in $-f_0$.
 
     - Dimostrazione:
-    $$
+    \begin{gather*}
     \text{TCF}[x(t)\cos(2\pi f_{0}t)] = \int_{-\infty}^{\infty} x(t)\cos(2\pi f_{0}t)  e^{-j2\pi ft} \,dt = 
-    $$
-    $$
-    = \frac{1}{2} \int_{-\infty}^{\infty} x(t) [e^{-j2\pi f_0 t}+ e^{-j2\pi f_0 t}]e^{-j2\pi ft} \,dt = \frac{1}{2}\Big[\int_{-\infty}^{\infty}x(t)  e^{-j2\pi (f-f_0)t}\,dt + \int_{-\infty}^{\infty}x(t)  e^{-j2\pi (f+f_0)t}\,dt  \Big] =
-    $$
-    $$
+    \\
+    = \frac{1}{2} \int_{-\infty}^{\infty} x(t) [e^{-j2\pi f_0 t}+ e^{-j2\pi f_0 t}]e^{-j2\pi ft} \,dt =\\ \frac{1}{2}\Big[\int_{-\infty}^{\infty}x(t)  e^{-j2\pi (f-f_0)t}\,dt + \int_{-\infty}^{\infty}x(t)  e^{-j2\pi (f+f_0)t}\,dt  \Big] =
+    \\
     \frac{X(f-f_0)+X(f+f_0)}{2}
-    $$
-    Corollario: $x(t)e^{j2\pi f_{o}t} \Longleftrightarrow X(f-f_0)$
+    \end{gather*}
+    Corollario: $x(t)e^{j2\pi f_{0}t} \Longleftrightarrow X(f-f_0)$
 
 18. **Derivazione**
 
     Se $x(t) \to X(f)$, allora:
     $$
-    \dv{}{t} x(t) \Longleftrightarrow j2\pi f \cdot X(f) = Y(f)
+    \odv{}{t} x(t) \Longleftrightarrow j2\pi f \cdot X(f) = Y(f)
     $$
     Una derivata nel tempo è una *moltiplicazione* in frequenza.
 
@@ -424,9 +425,9 @@ header-includes: |
 
     Deriviamo entrambi i lati di $x(t)$:
     \begin{gather*}
-    \dv{}{t}x(t) = \dv{}{t} \int_{-\infty}^{\infty} X(f) e^{j2\pi ft} \,df = \int_{-\infty}^{\infty}\dv{}{t} \Big [X(f) e^{j2\pi ft} \Big ] \,df = \int_{-\infty}^{\infty} X(f) \dv{}{t}e^{j2\pi ft} \,df = 
+    \odv{}{t}x(t) = \odv{}{t} \int_{-\infty}^{\infty} X(f) e^{j2\pi ft} \,df = \int_{-\infty}^{\infty}\odv{}{t} \Big [X(f) e^{j2\pi ft} \Big ] \,df = \int_{-\infty}^{\infty} X(f) \odv{}{t}e^{j2\pi ft} \,df = 
     \\
-    \int_{-\infty}^{\infty} X(f) (2\pi f) e^{j2\pi ft} \,df \Longrightarrow \text{[TCF]}\dv{x(t)}{t} = j2\pi f X(f)
+    \int_{-\infty}^{\infty} X(f) (2\pi f) e^{j2\pi ft} \,df \Longrightarrow \text{[TCF]}\odv{x(t)}{t} = j2\pi f X(f)
     \end{gather*}
 
     Il teorema della derivazione *modifica gli spettri*
@@ -445,7 +446,7 @@ header-includes: |
 
     Segue dal teorema di derivazione e richiede che $X(0)=0$, al fine di evitare che per $f\to 0$, il rapporto tenda ad infinito.
     \begin{gather*}
-    X(0)= 0 \longleftrightarrow X(0)=\underbrace{\int_{-\infty}^{\infty}x(t) \ e^{0}\,dt}_{\text{sottende area} \textbf{ nulla}} \longleftrightarrow y(\infty) = \int_{-\infty}^{\infty} x(t)\,dt = X(0) \to 0 \\ y(t) = \int_{-\infty}^{t} x(\alpha) \,d\alpha \Rightarrow x(t) \dv{}{t}y(t) \Rightarrow X(f)=j2\pi f\cdot Y(f) \Rightarrow Y(f) = \frac{X(f)}{j2\pi f}
+    X(0)= 0 \longleftrightarrow X(0)=\underbrace{\int_{-\infty}^{\infty}x(t) \ e^{0}\,dt}_{\text{sottende area} \textbf{ nulla}} \longleftrightarrow y(\infty) = \int_{-\infty}^{\infty} x(t)\,dt = X(0) \to 0 \\ y(t) = \int_{-\infty}^{t} x(\alpha) \,d\alpha \Rightarrow x(t) \odv{}{t}y(t) \Rightarrow X(f)=j2\pi f\cdot Y(f) \Rightarrow Y(f) = \frac{X(f)}{j2\pi f}
     \end{gather*}
     Anche l'integrale nel tempo si trasforma in un'operazione algebrica in frequenza: in questo caso però vengono esaltate le componenti a **bassa** frequenza nello spettro del segnale, mentre le alte vengono attenuate; la fase varia sempre di $\pm \frac{\pi}{2}$
     $$
@@ -528,7 +529,7 @@ header-includes: |
     relazione nel tempo tra periodico e aperiodico
     \begin{gather*}
     \to Y_k = \frac{1}{T_0} = \int_{-\frac{T}{2}}^{\frac{T}{2}} y(t) \ e^{-j2 \pi kf_{0}t} \,dt = \frac{1}{T_0} = \int_{-\frac{T}{2}}^{\frac{T}{2}} \sum_{n=-\infty}^{\infty} x(t-nT_0) e^{-j2\pi kf_{0}t} \,dt \\
-    \sum_{n=-\infty}^{\infty}\frac{1}{T_0} \int_{-\frac{T}{2}}^{\frac{T}{2}} x(t-nT_0)e^{-j2\pi kf_{0}t} \,dt \left\{ \begin{array}{cl} \alpha = t-t_0 \\ t = \alpha -t_0 \\ \,d\alpha = \,dt \end{array}\right\} = \\
+    \sum_{n=-\infty}^{\infty}\frac{1}{T_0} \int_{-\frac{T}{2}}^{\frac{T}{2}} x(t-nT_0)e^{-j2\pi kf_{0}t} \,dt = \ \ \ \text{ sostituiamo } \left\{ \begin{array}{cl} \alpha = t-t_0 \\ t = \alpha -t_0 \\ \,d\alpha = \,dt \end{array}\right.  \\
     \frac{1}{T_0} \sum_{n=-\infty}^{\infty}\frac{1}{T_0} \int_{-\frac{T}{2}-nT_0}^{\frac{T}{2}-nT_0} x(\alpha) \ e^{-j2\pi kf_{0}(\alpha +nT_0)} \,d\alpha = \\
     \frac{1}{T_0} \sum_{n=-\infty}^{\infty}\frac{1}{T_0} \int_{-\frac{T}{2}-nT_0}^{\frac{T}{2}-nT_0} x(\alpha) e^{-j2\pi kf_{0}\alpha} \cdot \underbrace{e^{-j2\pi k\cancel{f_0}n\cancel{T_0}}}_{\text{multiplo di }2\pi \to e^{0}} \,d\alpha= \\
     \frac{1}{T_0} \sum_{n=-\infty}^{\infty}\frac{1}{T_0} \int_{-\frac{T}{2}-nT_0}^{\frac{T}{2}-nT_0} x(\alpha) \ e^{-j2\pi kf_{0}\alpha} \,d\alpha =
@@ -579,9 +580,9 @@ P_x = \lim_{T\to \infty} \frac{1}{T}\int_{-\infty}^{\infty} x(t) \,dt
 $$
 e la funzione *densità spettrale di potenza*
 $$
-S_x(f) \triangleq \lim_{T\to \infty} \frac{\text{Ext(f)}}{T} =\lim_{T\to\infty} \frac{|x(t)|^2}{T} 
+S_x(f) \triangleq \lim_{T\to \infty} \frac{E_{x_T}(f)}{T} =\lim_{T\to\infty} \frac{|x(t)|^2}{T} 
 $$
-con $\text{Ext}(f)$ densità di energia del segnale *troncato* nell'intervallo $[-\frac{T}{2}; \frac{T}{2}]$ 
+con $E_{x_T}(f)$ densità di energia del segnale *troncato* nell'intervallo $[-\frac{T}{2}; \frac{T}{2}]$ 
 
 Definiamo **funzione di autocorrelazione** $R_x(\tau)= \int_{-\infty}^{\infty}x(\tau)x(t-\tau)\,dt$ ossia il segnale moltiplicato per una sua replica *ritardata*. Indica "quanto il segnale somiglia alla sua replica ritardata": 
 più $x(t)$ è compatta meno somiglierà e meno varrà $R_x(\tau)$
