@@ -638,7 +638,7 @@ continua}\label{proprietuxe0-della-trasformata-continua}
   \textbf{Derivazione}
 
   Se \(x(t) \to X(f)\), allora: \[
-  \dv{}{t} x(t) \Longleftrightarrow j2\pi f \cdot X(f) = Y(f)
+  \odv{}{t} x(t) \Longleftrightarrow j2\pi f \cdot X(f) = Y(f)
   \] Una derivata nel tempo è una \emph{moltiplicazione} in frequenza.
 
   \begin{itemize}
@@ -648,15 +648,15 @@ continua}\label{proprietuxe0-della-trasformata-continua}
   \end{itemize}
 
   Deriviamo entrambi i lati di \(x(t)\): \begin{gather*}
-  \dv{}{t}x(t) = \dv{}{t} \int_{-\infty}^{\infty} X(f) e^{j2\pi ft} \,df = \int_{-\infty}^{\infty}\dv{}{t} \Big [X(f) e^{j2\pi ft} \Big ] \,df = \int_{-\infty}^{\infty} X(f) \dv{}{t}e^{j2\pi ft} \,df = 
+  \odv{}{t}x(t) = \odv{}{t} \int_{-\infty}^{\infty} X(f) e^{j2\pi ft} \,df = \int_{-\infty}^{\infty}\odv{}{t} \Big [X(f) e^{j2\pi ft} \Big ] \,df = \int_{-\infty}^{\infty} X(f) \odv{}{t}e^{j2\pi ft} \,df = 
   \\
-  \int_{-\infty}^{\infty} X(f) (2\pi f) e^{j2\pi ft} \,df \Longrightarrow \text{[TCF]}\dv{x(t)}{t} = j2\pi f X(f)
+  \int_{-\infty}^{\infty} X(f) (2\pi f) e^{j2\pi ft} \,df \Longrightarrow \text{[TCF]}\odv{x(t)}{t} = j2\pi f X(f)
   \end{gather*}
 
   Il teorema della derivazione \emph{modifica gli spettri} \[
   |Y(f)| = 2\pi f |X(f)| \\ \phase{Y(f)} = \phase{X(f)} + \text{sgn}(f)\frac{\pi}{2}
   \] Aumenta proporzionalmente l'ampiezza, esaltando le altre frequenze,
-  e sfasando di \(\pm \frac{\pi}{2}\) \newpage
+  e sfasando di \(\pm \frac{\pi}{2}\)
 \item
   \textbf{Integrazione} (deriva dal teorema di derivazione)
 
@@ -674,7 +674,7 @@ continua}\label{proprietuxe0-della-trasformata-continua}
   Segue dal teorema di derivazione e richiede che \(X(0)=0\), al fine di
   evitare che per \(f\to 0\), il rapporto tenda ad infinito.
   \begin{gather*}
-  X(0)= 0 \longleftrightarrow X(0)=\underbrace{\int_{-\infty}^{\infty}x(t) \ e^{0}\,dt}_{\text{sottende area} \textbf{ nulla}} \longleftrightarrow y(\infty) = \int_{-\infty}^{\infty} x(t)\,dt = X(0) \to 0 \\ y(t) = \int_{-\infty}^{t} x(\alpha) \,d\alpha \Rightarrow x(t) \dv{}{t}y(t) \Rightarrow X(f)=j2\pi f\cdot Y(f) \Rightarrow Y(f) = \frac{X(f)}{j2\pi f}
+  X(0)= 0 \longleftrightarrow X(0)=\underbrace{\int_{-\infty}^{\infty}x(t) \ e^{0}\,dt}_{\text{sottende area} \textbf{ nulla}} \longleftrightarrow y(\infty) = \int_{-\infty}^{\infty} x(t)\,dt = X(0) \to 0 \\ y(t) = \int_{-\infty}^{t} x(\alpha) \,d\alpha \Rightarrow x(t) \odv{}{t}y(t) \Rightarrow X(f)=j2\pi f\cdot Y(f) \Rightarrow Y(f) = \frac{X(f)}{j2\pi f}
   \end{gather*} Anche l'integrale nel tempo si trasforma in
   un'operazione algebrica in frequenza: in questo caso però vengono
   esaltate le componenti a \textbf{bassa} frequenza nello spettro del
