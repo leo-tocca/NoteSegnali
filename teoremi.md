@@ -270,12 +270,12 @@ header-includes: |
 
     Allora $x(t)$ è rappresentabile come TCF e 
     $$
-    x(t) = \int_{-\infty}^{\infty}X(f)\ e^{j2\pi fT} \,df =  \left\{ \begin{array}{cl}
+    x(t) = \int_{-\infty}^{\infty}X(f)\ e^{j2\pi ft} \,df =  \left\{ \begin{array}{cl}
     x(t) \ \text{ se continua}  \\
     \frac{x(t_{0}^{+})-x(t_{0}^{-})}{2}\ \text{ se discontinua}
     \end{array} \right.
     $$
-\newpage
+
     
 11. Simmetria Hermitiana della trasformata continua di Fourier
 
@@ -340,11 +340,11 @@ header-includes: |
         $T\sinc(Tt) \Longleftrightarrow \rect({-\frac{f}{T}})$ da cui $\sinc(Bt)\Longleftrightarrow \frac{1}{B}\rect(\frac{t}{B})$, dove $B$ indica la banda.
     * Dimostrazione:
         $$
-        x(t) =\int_{-\infty}^{\infty}X(f)\ e^{j2\pi ft} \,df \to x(f) \int_{-\infty}^{\infty}X(t)\ e^{j2\pi ft} \,dt 
+        x(t) =\int_{-\infty}^{\infty}X(f)\ e^{j2\pi ft} \,df \to x(f) = \int_{-\infty}^{\infty}X(t)\ e^{j2\pi ft} \,dt 
         $$
         con uno scambio di variabili $t$ con $f$. Quindi:
         $$
-        x(-f)=\int_{-\infty}^{\infty}<S-Del>Xx(t)\ e^{-j2\pi fT} \,dt 
+        x(-f)=\int_{-\infty}^{\infty}<S-Del>Xx(t)\ e^{-j2\pi ft} \,dt 
         $$
         Da qui deriviamo che $x(-f)$ è la trasformata di $X(t)$
 
@@ -359,7 +359,7 @@ header-includes: |
 
     Applichiamo a $x(t-t_0)$ la definizione di TCF
     $$
-    x(t-t_0) \Longleftrightarrow \int_{-\infty}^{\infty} x(t-t_0) \ e^{-j2\pi ft} \,dt = \Big|\alpha = t-t_0 \to t=\alpha +t_0
+    x(t-t_0) \Longleftrightarrow \int_{-\infty}^{\infty} x(t-t_0) \ e^{-j2\pi ft} \,dt = \text{ sostituiamo } \Big\{\alpha = t-t_0 \to t=\alpha +t_0, \,dt = \,d\alpha
     $$
     $$
     x(t-t_0) \Longleftrightarrow \int_{-\infty}^{\infty} x(\alpha) e^{-j2\pi (\alpha +t_0)f} \,d\alpha = e^{-j2\pi ft_0} \int_{-\infty}^{\infty} x(\alpha)\ e^{-j2\pi f\alpha} =  e^{-j2\pi ft_0} \ X(f) 
@@ -388,11 +388,11 @@ header-includes: |
     $$
     Inoltre vale:
     $$
-    x(\alpha t) \Longleftrightarrow \frac{1}{|\alpha |} x(\frac{f}{\alpha})
+    x(\alpha t) \Longleftrightarrow \frac{1}{|\alpha |} X(\frac{f}{\alpha})
     $$
     - Dimostrazione:
     $$
-    \cdot \ \ \underline{\alpha > 0} \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} x(\alpha t) e^{-j2\pi ft} \,dt \text{, ponendo } z=\alpha t \to t = \frac{z}{\alpha}, \,dz = \alpha \,dt 
+    \cdot \ \ \underline{\alpha > 0} \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} x(\alpha t) e^{-j2\pi ft} \,dt \text{, ponendo } z=\alpha t \to t = \frac{z}{\alpha}, \,dz = \alpha \,dt \to \,dt = \frac{\d,z}{\alpha} 
     $$
     $$
     \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} \frac{x(z) e^{-j2\pi f \frac{z}{\alpha}}}{\alpha} \,dz = \frac{1}{\alpha}\int_{-\infty}^{\infty} x(z) e^{-j2\pi f \frac{z}{\alpha}} \,dz = \frac{1}{\alpha} X(\frac{f}{\alpha})
@@ -403,7 +403,7 @@ header-includes: |
     È da notare come l'inversione dell'integrale nel secondo caso l'abbiamo quando $t \to -\infty, \ z \to +\infty$. Inoltre abbiamo sostituito $z=-\alpha t$.
 
     Quindi una *dilatazione* nel tempo corrisponde ad una *compressione* in frequenza, e **viceversa**
-\newpage
+
 17. **Modulazione**
 
     Dato un segnale $x(t)$ e la sua trasformata $X(f)$ allora
@@ -420,7 +420,7 @@ header-includes: |
     \\
     \frac{X(f-f_0)+X(f+f_0)}{2}
     \end{gather*}
-    Corollario: $x(t)e^{j2\pi f_{0}t} \Longleftrightarrow X(f-f_0)$
+    Corollario: $x(t)e^{j2\pi f_{0}t} \Longleftrightarrow X(f-f_0) \to$ *traslazione in frequenza*
 
 18. **Derivazione**
 
@@ -436,15 +436,15 @@ header-includes: |
     \begin{gather*}
     \odv{}{t}x(t) = \odv{}{t} \int_{-\infty}^{\infty} X(f) e^{j2\pi ft} \,df = \int_{-\infty}^{\infty}\odv{}{t} \Big [X(f) e^{j2\pi ft} \Big ] \,df = \int_{-\infty}^{\infty} X(f) \odv{}{t}e^{j2\pi ft} \,df = 
     \\
-    \int_{-\infty}^{\infty} X(f) (2\pi f) e^{j2\pi ft} \,df \Longrightarrow \text{[TCF]}\odv{x(t)}{t} = j2\pi f X(f)
+    \int_{-\infty}^{\infty} X(f) (2\pi f) e^{j2\pi ft} \,df \Longrightarrow \text{TCF}\Big[\odv{x(t)}{t}\Big] = j2\pi f X(f)
     \end{gather*}
 
     Il teorema della derivazione *modifica gli spettri*
-    $$
+    \begin{gather*}
     |Y(f)| = 2\pi f |X(f)| \\ \phase{Y(f)} = \phase{X(f)} + \text{sgn}(f)\frac{\pi}{2}
-    $$
+    \end{gather*}
     Aumenta proporzionalmente l'ampiezza, esaltando le altre frequenze, e sfasando di $\pm \frac{\pi}{2}$
-\newpage
+    
 19. **Integrazione** (deriva dal teorema di derivazione)
 
     Dato un segnale $x(t) \Longleftrightarrow X(f)$ e un segnale $y(t) = \int_{-\infty}^{t} x(\alpha) \,d\alpha$, allora vale
@@ -458,9 +458,9 @@ header-includes: |
     X(0)= 0 \longleftrightarrow X(0)=\underbrace{\int_{-\infty}^{\infty}x(t) \ e^{0}\,dt}_{\text{sottende area} \textbf{ nulla}} \longleftrightarrow y(\infty) = \int_{-\infty}^{\infty} x(t)\,dt = X(0) \to 0 \\ y(t) = \int_{-\infty}^{t} x(\alpha) \,d\alpha \Rightarrow x(t) \odv{}{t}y(t) \Rightarrow X(f)=j2\pi f\cdot Y(f) \Rightarrow Y(f) = \frac{X(f)}{j2\pi f}
     \end{gather*}
     Anche l'integrale nel tempo si trasforma in un'operazione algebrica in frequenza: in questo caso però vengono esaltate le componenti a **bassa** frequenza nello spettro del segnale, mentre le alte vengono attenuate; la fase varia sempre di $\pm \frac{\pi}{2}$
-    $$
+    \begin{gather*}
     |Y(f)| = \frac{|X(f)|}{2\pi f} \\ \phase{Y(f)} = \phase{X(f)} + \text{sgn}(f)\frac{\pi}{2}
-    $$
+    \end{gather*}
     Da questo teorema deriva la relazione $A \text{tri}(\frac{t}{T})\Longleftrightarrow AT\sinc^{2}(fT); \ A\rect (\frac{t}{T})\Longleftrightarrow AT\sinc (fT)$
 
 20. **Prodotto**: è il duale della convoluzione
@@ -471,13 +471,16 @@ header-includes: |
     $$
     - Dimostrazione:
     \begin{gather*}
-    \Rightarrow Z(f) =  \int_{-\infty}^{\infty}x(t)\ y(t)\ e^{-j2\pi ft}\,dt = \int_{t=-\infty}^{\infty} \Big[ \int_{\nu = -\infty}^{\infty} X(\nu) e^{-j2\pi \nu t} \,d\nu \Big ] y(t)\ e^{-j2\pi ft}\,dt= \\ \int_{\nu=-\infty}^{\infty} X(\nu) \Big[ \int_{t = -\infty}^{\infty}  y(t)\ e^{-j2\pi (f-\nu)t}\,dt \Big ] \,d\nu =  \int_{\nu = -\infty}^{\infty} X(\nu) Y(t-\nu) \,d\nu = \\ X(f) \otimes Y(f)
+    \Rightarrow Z(f) =  \int_{-\infty}^{\infty}x(t)\ y(t)\ e^{-j2\pi ft}\,dt = \int_{t=-\infty}^{\infty} \Big[ \int_{\nu = -\infty}^{\infty} X(\nu) e^{-j2\pi \nu t} \,d\nu \Big ] y(t)\ e^{-j2\pi ft}\,dt= \\ 
+    \int_{\nu=-\infty}^{\infty} X(\nu) \Big[ \int_{t = -\infty}^{\infty}  y(t)\ e^{-j2\pi (f-\nu)t}\,dt \Big ] \,d\nu =  \int_{\nu = -\infty}^{\infty} X(\nu) Y(f-\nu) \,d\nu =
+    \\ X(f) \otimes Y(f)
     \end{gather*}
     Quindi:
     $$
     \underset{PRODOTTO}{x(t) \ y(t)} \Longleftrightarrow \underset{CONVOLUZIONE}{X(f)\otimes Y(f)} \to \text{ la convoluzione è \textit{commutativa}}
     $$
-    
+    Nota Bene: $\nu$ è __nu__!
+
 21. **_Convoluzione_**
 
     Dati due segnali $x(t)$ e $y(t)$ sappiamo che:
@@ -503,21 +506,23 @@ header-includes: |
 
     Il teorema completo afferma che:
     $$
-    y(t) = \int_{-\infty}^{t} x(\alpha)\,d\alpha \Longleftrightarrow \frac{X(f)}{j2\pi f} + \frac{\delta(f)}{2}\cdot X(0)  
+    y(t) = \int_{-\infty}^{t} x(\alpha)\,d\alpha \Longleftrightarrow Y(f) = \frac{X(f)}{j2\pi f} + \frac{\delta(f)}{2}\cdot X(0)  
     $$
     Il nuovo termine rende conto dell’eventuale valor medio diverso da zero del segnale!.
     
     - Dimostrazione:
 
         Essendo:
-        $$
+        \begin{gather*}
         x(t)\otimes u(t) = \int_{-\infty}^{\infty} x(\alpha) \ u(t-\alpha)\,d\alpha = \int_{-\infty}^{t} x(\alpha)\,d\alpha
-        $$
+        \\
+        u(t) = \frac{1}{2}\text{sgn}(t)+\frac{1}{2}
+        \end{gather*}
         abbiamo che per la convoluzione $x(t)\otimes u(t)\Longleftrightarrow X(f)U(f)$:
         $$
         X(f)\ U(f)=X(f)\Big[\frac{1}{j2\pi f}+\frac{\delta(f)}{2}\Big] = \frac{X(f)}{j2\pi f}+ \frac{X(0)}{2}\delta(f)
         $$
-        Questo perché $\text{TCF}(u(t))=U(f)=\frac{1}{j2\pi f}$; l’ultimo termine scompare per segnali ad area nulla: rende conto dell'eventuale valor medio diverso da zero del segnale, ed è un termine correttivo che rappresenta la funzione impulsiva.
+        Questo perché $\text{TCF}(u(t))=U(f)=\frac{1}{j2\pi f}+\frac{1}{2}\delta (f)$; l’ultimo termine scompare per segnali ad area nulla: rende conto dell'eventuale valor medio diverso da zero del segnale, ed è un termine correttivo che rappresenta la funzione impulsiva.
 
 23. Teorema della modulazione, alternativa:
     
@@ -556,14 +561,12 @@ header-includes: |
     X(t) \longleftrightarrow x(-f) \\
     x(t) \longleftrightarrow X(f)
     \end{gather*}
-
     \begin{gather*}
     \sum_{n=-\infty}^{\infty}x(t-nT_0) = \sum_{k=-\infty}^{\infty} \frac{1}{T_0} X(\frac{k}{T_0})\ e^{+\frac{j2\pi kt}{T_0}} \\
     \sum_{n=-\infty}^{\infty}X(t-nT_0) = \sum_{k=-\infty}^{\infty} \frac{1}{T_0}(x(-\frac{k}{T_0}))\ e^{+\frac{j2\pi kt}{T_0}} \\
     \Rightarrow \sum_{n=-\infty}^{\infty}X(t-nT_0) = \sum_{k=-\infty}^{\infty} \frac{1}{T_0} x(\frac{k}{T_0})\ e^{-\frac{j2\pi kt}{T_0}} \text{ cambio di segno all'indice k} \\
     \to T = \frac{1}{T_0} \Rightarrow \sum_{n=-\infty}^{\infty}X(t-\frac{n}{T}) = T\sum_{k=-\infty}^{\infty} \frac{1}{T_0} x(kT)\ e^{-j2\pi ktT}
     \end{gather*}
-
     Adesso, dal punto di vista puramente formale, cambiano nome da $t$ in $f$, otteniamo un'espressione, otteniamo un'espressione *duale* rispetto alla prima formula di Poisson
     $$
     \sum_{n=-\infty}^{\infty}x(nT)e^{-j2\pi fT} = \frac{1}{T}\sum_{k=-\infty}^{\infty}X(f-\frac{k}{T})
@@ -574,13 +577,10 @@ header-includes: |
 26. Teorema di Parseval:
 
 Dato un segnale $x(t)$ e la sua energia $E_{x}=\int_{-\infty}^{\infty} |x(t)|^2 \,dt < +\infty$ (energia finita), possiamo esprimere l'energia $E_x$ *anche in frequenza*:
-
 \begin{gather*}
 E_{x}=\int_{-\infty}^{\infty} |x(t)|^2 \,dt = \int_{-\infty}^{\infty} x(t) \ x^{\ast} \,dt = \int_{-\infty}^{\infty} x(t) \Big[ \int_{-\infty}^{\infty} X^{*}(f) e^{-j2\pi ft} \,df \Big] \,dt \\
 \int_{f=-\infty}^{\infty} X^{\star}(f) \Big [\int_{t=-\infty}^{\infty} x(t) e^{-j2\pi ft} \,dt\Big ] \,df = \int_{-\infty}^{\infty} X^{*}(f) = \int_{-\infty}^{\infty} |X(f)|^{2} \,df
 \end{gather*}
-
-
 $E_x$ è l'energia totale, deriva da $p_x = |x(t)|^2$ potenza istantanea integrata o da $|X(f)|^2$ detta **densità spettrale** $E_x(f)$ integrata.
 
 27. Teorema di Wiener-Khinchin
@@ -597,7 +597,6 @@ con $E_{x_T}(f)$ densità di energia del segnale *troncato* nell'intervallo $[-\
 
 Definiamo **funzione di autocorrelazione** $R_x(\tau)= \int_{-\infty}^{\infty}x(\tau)x(t-\tau)\,dt$ ossia il segnale moltiplicato per una sua replica *ritardata*. Indica "quanto il segnale somiglia alla sua replica ritardata": 
 più $x(t)$ è compatta meno somiglierà e meno varrà $R_x(\tau)$
-
 
 Il teorema afferma che la densità spettrale di energia di un segnale coincide con la trasformata di Fourier della funzione di autocorrelazione del segnale stesso:
 

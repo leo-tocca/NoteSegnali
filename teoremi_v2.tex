@@ -40,38 +40,26 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
-\ifLuaTeX
-\usepackage[bidi=basic]{babel}
-\else
-\usepackage[bidi=default]{babel}
-\fi
-\babelprovide[main,import]{italian}
-% get rid of language-specific shorthands (see #6817):
-\let\LanguageShortHands\languageshorthands
-\def\languageshorthands#1{}
 \usepackage{cancel}
 \usepackage{steinmetz}
 \usepackage{derivative}
 \usepackage{mathtools}
 \DeclareMathOperator{\sinc}{sinc}
 \DeclareMathOperator{\rect}{rect}
+\usepackage{geometry}
+    \geometry{
+        a4paper,
+        total={170mm,257mm},
+        left=20mm,
+        top=20mm,
+    }
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-
-\usepackage{geometry}
-\geometry{
-	a4paper,
-	total={170mm,257mm},
-	left=20mm,
-	top=20mm,
-}
-\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdflang={it},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
@@ -122,9 +110,9 @@ continuo}\label{segnali-periodici-a-tempo-continuo}
    \] \[
    = A_0 + \cancel{2} \sum_{k=1}^{\infty} A_{k} \frac{e^{j(2\pi kf_{0}t + \theta_{K})}+e^{-j(2\pi kf_{0}t + \theta_{K})}}{\cancel{2}} \to \text{ uso formula di Eulero per il coseno}
    \] \[
-   = A_0 + \sum_{k=1}^{\infty} A_{k} e^{j2\pi kf_{0}t + \theta_{K}}  + \sum_{k=1}^{\infty} A_{k} e^{-j2\pi kf_{0}t + \theta_{K}} \to \text{ separo le due esponenziali}
+   = A_0 + \sum_{k=1}^{\infty} A_{k} e^{j(2\pi kf_{0}t + \theta_{k})}  + \sum_{k=1}^{\infty} A_{k} e^{-j(2\pi kf_{0}t + \theta_{K})} \to \text{ separo le due esponenziali}
    \] \[
-   = x_0 + \sum_{k=1}^{\infty} A_{k} e^{j\theta_{k}} e^{j2\pi kf_{0}t}  + \sum_{k=1}^{\infty} A_{k} e^{-j\theta_{k}} e^{-j2\pi kf_{0}t}  \to \text{ raggruppo le sommatorie}
+   = x_0 + \sum_{k=1}^{\infty} A_{k} e^{j\theta_{k}} e^{j2\pi kf_{0}t}  + \sum_{k=1}^{\infty} A_{k} e^{-j\theta_{k}} e^{-j2\pi kf_{0}t}  \to \text{ raggruppo le sommatorie e} k \text{ diventa }-k
    \] \[
    = x_0 + \sum_{k=1}^{\infty} X_k e^{j2\pi kf_{0}t}  + \sum_{k=1}^{\infty} X_k e^{-j2\pi kf_{0}t}
    \] \[
@@ -138,7 +126,7 @@ continuo}\label{segnali-periodici-a-tempo-continuo}
    \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t)e^{-j2\pi kf_{0}t} \,dt = \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \sum_{k=-\infty}^{\infty} X_k \ e^{j2\pi kf_{0}t}  e^{-j2\pi nf_{0}t} \,dt
    \] Porto fuori la sommatoria e raccolgo \(e\): per ipotesi la serie
   converge. \[
-   \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t)e^{-j2\pi kf_{0}t} \,dt = \sum_{k=-\infty}^{\infty} X_k  \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} e^{j2\pi (k-n)f_{0}t} 
+   \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t)e^{-j2\pi kf_{0}t} \,dt = \sum_{k=-\infty}^{\infty} X_k  \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} e^{j2\pi (k-n)f_{0}t} \,dt
    \] L'integrale al secondo membro viene calcolato per \(k\neq n\) \[
    \to \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} e^{j2\pi (k-n)f_{0}t} = \frac{e^{j2\pi (k-n)f_{0}t}}{j2\pi (k-n)f_{0}} \Big|_{-\frac{T_0}{2}}^{\frac{T_0}{2}}=
    \] \[
@@ -152,6 +140,8 @@ continuo}\label{segnali-periodici-a-tempo-continuo}
    \] \[
    \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t)e^{-j2\pi nf_{0}t} \,dt = X_{n}T_{0} \Rightarrow X_{n} = \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t)e^{-j2\pi nf_{0}t} \,dt 
    \]
+
+  N-esimo termine della serie di Fourier
 \item
   Forma rettangolare dalla forma polare \[
    x(t) = A_{0} + 2 \sum_{k=1}^{\infty} A_{k} \cos(2\pi k f_{0}t + \theta_{k})
@@ -227,15 +217,23 @@ reale}\label{spettro-di-un-segnale-periodico-e-reale}
   \(x(t)\) è reale.
 
   Quindi \(X_{k}^{*}=X_{-k}\): i coefficienti \(X_k\) di un segnale
-  \emph{reale} sono \textbf{simmetrici hermitiani}, ossia hanno \emph{lo
-  stesso modulo e fase opposta} \[
+  \emph{reale} \textbf{godono di simmetria hermitiana}, ossia hanno
+  \emph{lo stesso modulo e fase opposta} \[
    X_{-k}=X_{k}^{*} \Longleftrightarrow \left\{ \begin{array}{cl}
    |X_k|=|X_{-k}| \ \text{ stesso modulo}  \\
    \phase{X_{k}} = -\phase{X_{-k}} \ \text{ fase opposta}
    \end{array} \right.
-   \] In definitiva per un segnale reale: - lo spettro d'ampiezza è
-  \textbf{simmetrico} rispetto a \(k \to\) pari - lo spettro di fase è
-  \textbf{antisimmetrico} rispetto a \(k \to\) dispari
+   \] In definitiva per un segnale reale:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    lo spettro d'ampiezza è \textbf{simmetrico} rispetto a \(k \to\)
+    pari
+  \item
+    lo spettro di fase è \textbf{antisimmetrico} rispetto a \(k \to\)
+    dispari
+  \end{itemize}
 \item
   Linearità dello spettro reale:
 
@@ -260,11 +258,11 @@ reale}\label{spettro-di-un-segnale-periodico-e-reale}
     \(X_k = X_{-k}\) (con un cambio di variabile
     \(\alpha=-t \to \,dt=-\,d\alpha\)). \[
       X_{k} = \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi kf_{0}t} \,dt \Longleftrightarrow X_{-k} = \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(t) e^{-j2\pi (-k)f_{0}t} \,dt 
-      \] Utilizziamo il cambio di variabile \[
-      X_{-k} = \frac{1}{T_0} \int_{\frac{T_0}{2}}^{-\frac{T_0}{2}} x(-\alpha) e^{-j2\pi (\cancel{-}(\cancel{-}\alpha)) kf_{0}} -\,d\alpha = \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(\alpha) e^{-j2\pi\alpha kf_{0}} \,d\alpha =
-      \] \[
-      -\frac{1}{T_0} \int_{\frac{T_0}{2}}^{-\frac{T_0}{2}} x(\alpha) e^{-j2\pi\alpha kf_{0}} \,d\alpha = X_k
-      \] dato che il segnale \(\in \mathbb{R}\) lo possiamo
+      \] Utilizziamo il cambio di variabile \begin{gather*}
+      X_{-k} = \frac{1}{T_0} \int_{\frac{T_0}{2}}^{-\frac{T_0}{2}} x(-\alpha) e^{-j2\pi (\cancel{-}(\cancel{-}\alpha)) kf_{0}} -\,d\alpha = -\frac{1}{T_0} \int_{\frac{T_0}{2}}^{-\frac{T_0}{2}} x(\alpha) e^{-j2\pi\alpha kf_{0}} \,d\alpha =
+      \\ 
+      \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x(\alpha) e^{-j2\pi\alpha kf_{0}} \,d\alpha = X_k
+      \end{gather*} dato che il segnale \(\in \mathbb{R}\) lo possiamo
     rappresentare come (perché essendo reale ha fase nulla?): \[
       x(t) = X_{0} + 2\sum_{k=1}^{\infty}X_{k}\cos(2\pi kf_{0}t)
       \] Dimostrazione: \[
@@ -284,7 +282,8 @@ reale}\label{spettro-di-un-segnale-periodico-e-reale}
       \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underbrace{x(t)}_{pari}\cdot\underbrace{\cos{(2\pi kf_{0}t)}}_{pari} \,dt - \frac{j}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underbrace{x(t)}_{pari}\cdot\underbrace{\sin{(2\pi kf_{0}t)}}_{dispari}\,dt=
       \\
       \frac{2}{T_0} \int_{0}^{\frac{T_0}{2}} x(t)\cdot\cos{(2\pi kf_{0}t)} \,dt - 0
-      \end{gather*}
+      \end{gather*} Integrale di una funzione pari su un intervallo
+    simmetrico.
   \item
     se \(x(t)\) è \textbf{dispari}, allora anche i coefficienti \(X_k\)
     saranno dispari. Inoltre, dato che \(x(t)\in\mathbb{R}\), \(X_k\)
@@ -304,7 +303,7 @@ reale}\label{spettro-di-un-segnale-periodico-e-reale}
         \] \begin{gather*}
         \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underbrace{x(t)}_{\text{dispari}}\cdot\underbrace{\cos(2\pi kf_{0}t)}_{\text{pari}} \,dt - \frac{j}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \underbrace{x(t)}_{\text{dispari}}\cdot\underbrace{\sin(2\pi kf_{0}t)}_{\text{dispari}}\,dt=
         \\
-        -\frac{j}{T_0} \int_{0}^{\frac{T_0}{2}} x(t)\cdot\sin{(2\pi kf_{0}t)} \,dt 
+        -\frac{2j}{T_0} \int_{0}^{\frac{T_0}{2}} x(t)\cdot\sin{(2\pi kf_{0}t)} \,dt 
         \end{gather*}
     \end{itemize}
   \item
@@ -393,7 +392,7 @@ continuità tra \(-\infty\) e \(\infty\)
   non essere più distinte ma \textbf{continue}.
 
   \begin{gather*}
-   X(kf_0) = T_0 \ X_k = \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}}  x_{p}(t) \ e^{-j2\pi kf_0 t}\,dt \to \underbrace{X(f) = \int_{-\infty}^{\infty}X(f)\ e^{j2\pi ft}\,dt}_{\text{trasformata continua di Fourier}}
+   X(kf_0) = T_0 \ X_k = \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}}  x_{p}(t) \ e^{-j2\pi kf_0 t}\,dt \to \underbrace{X(f) = \int_{-\infty}^{\infty}x(t)\ e^{j2\pi ft}\,dt}_{\text{trasformata continua di Fourier}}
    \end{gather*}
 
   \(X(f)\) è una \textbf{funzione complessa della variabile continua
@@ -426,7 +425,8 @@ continuità tra \(-\infty\) e \(\infty\)
   \def\labelenumii{\arabic{enumii}.}
   \tightlist
   \item
-    \(X(f)\) esiste se il segnale \(x(t)\)
+    \(X(f)\) esiste se il segnale \(x(t)\) ha energia finita (condizione
+    ``sufficiente'')!
   \item
     Criteri di Dirichlet:
 
@@ -437,20 +437,20 @@ continuità tra \(-\infty\) e \(\infty\)
       la funzione deve essere assolutamente sommabile:
       \(\displaystyle \int_{-\infty}^{\infty} |x(t)| dt < +\infty\)
     \item
-      se in qualunque intervallo finito \((t_1, t_2)\) è continua o
+      se in qualunque intervallo finito \(t_1 < t < t_2\) è continua o
       presenta un numero finito di discontinuità di prima specie
     \item
-      se in qualunque intervallo finito \((t_1, t_2)\) la funzione ha un
-      numero finito di massimi e minimi.
+      se in qualunque intervallo finito \(t_1 < t < t_2\) la funzione ha
+      un numero finito di massimi e minimi.
     \end{enumerate}
   \end{enumerate}
 
   Allora \(x(t)\) è rappresentabile come TCF e \[
-  x(t) = \int_{-\infty}^{\infty}X(f)\ e^{j2\pi fT} \,df =  \left\{ \begin{array}{cl}
+  x(t) = \int_{-\infty}^{\infty}X(f)\ e^{j2\pi ft} \,df =  \left\{ \begin{array}{cl}
   x(t) \ \text{ se continua}  \\
   \frac{x(t_{0}^{+})-x(t_{0}^{-})}{2}\ \text{ se discontinua}
   \end{array} \right.
-  \] 
+  \]
 \item
   Simmetria Hermitiana della trasformata continua di Fourier
 
@@ -538,9 +538,9 @@ continua}\label{proprietuxe0-della-trasformata-continua}
     dove \(B\) indica la banda.
   \item
     Dimostrazione: \[
-      x(t) =\int_{-\infty}^{\infty}X(f)\ e^{j2\pi ft} \,df = \int_{-\infty}^{\infty}X(t)\ e^{j2\pi ft} \,dt 
+      x(t) =\int_{-\infty}^{\infty}X(f)\ e^{j2\pi ft} \,df \to x(f) = \int_{-\infty}^{\infty}X(t)\ e^{j2\pi ft} \,dt 
       \] con uno scambio di variabili \(t\) con \(f\). Quindi: \[
-      X(-f)=\int_{-\infty}^{\infty}x(t)\ e^{-j2\pi fT} \,dt 
+      x(-f)=\int_{-\infty}^{\infty}<S-Del>Xx(t)\ e^{-j2\pi ft} \,dt 
       \] Da qui deriviamo che \(x(-f)\) è la trasformata di \(X(t)\)
   \end{itemize}
 \item
@@ -558,9 +558,9 @@ continua}\label{proprietuxe0-della-trasformata-continua}
   \end{itemize}
 
   Applichiamo a \(x(t-t_0)\) la definizione di TCF \[
-  x(t-t_0) \Longleftrightarrow \int_{-\infty}^{\infty} x(t-t_0) \ e^{-j2\pi ft} \,dt = \Big|\alpha = t-t_0 \to t=\alpha +t_0
+  x(t-t_0) \Longleftrightarrow \int_{-\infty}^{\infty} x(t-t_0) \ e^{-j2\pi ft} \,dt = \text{ sostituiamo } \Big\{\alpha = t-t_0 \to t=\alpha +t_0, \,dt = \,d\alpha
   \] \[
-  x(t-t_0) \Longleftrightarrow \int_{-\infty}^{\infty} x(\alpha + t_0) e^{-j2\pi (\alpha +t_0)f} \,d\alpha = e^{-j2\pi ft_0} \int_{-\infty}^{\infty} x(\alpha)\ e^{-j2\pi f\alpha} =  e^{-j2\pi ft_0} \ X(f) 
+  x(t-t_0) \Longleftrightarrow \int_{-\infty}^{\infty} x(\alpha) e^{-j2\pi (\alpha +t_0)f} \,d\alpha = e^{-j2\pi ft_0} \int_{-\infty}^{\infty} x(\alpha)\ e^{-j2\pi f\alpha} =  e^{-j2\pi ft_0} \ X(f) 
   \]
 
   \begin{itemize}
@@ -595,14 +595,14 @@ continua}\label{proprietuxe0-della-trasformata-continua}
   \alpha  < 0 \ \to \text{ inversione della scala dei tempi}
   \end{array} 
   \] Inoltre vale: \[
-  x(\alpha t) \Longleftrightarrow \frac{1}{|\alpha |} x(\frac{f}{\alpha})
+  x(\alpha t) \Longleftrightarrow \frac{1}{|\alpha |} X(\frac{f}{\alpha})
   \]
 
   \begin{itemize}
   \tightlist
   \item
     Dimostrazione: \[
-    \cdot \ \ \underline{\alpha > 0} \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} x(\alpha t) e^{-j2\pi ft} \,dt \text{, ponendo } z=\alpha t \to t = \frac{z}{\alpha}, \,dz = \alpha \,dt 
+    \cdot \ \ \underline{\alpha > 0} \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} x(\alpha t) e^{-j2\pi ft} \,dt \text{, ponendo } z=\alpha t \to t = \frac{z}{\alpha}, \,dz = \alpha \,dt \to \,dt = \frac{\d,z}{\alpha} 
     \] \[
     \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} \frac{x(z) e^{-j2\pi f \frac{z}{\alpha}}}{\alpha} \,dz = \frac{1}{\alpha}\int_{-\infty}^{\infty} x(z) e^{-j2\pi f \frac{z}{\alpha}} \,dz = \frac{1}{\alpha} X(\frac{f}{\alpha})
     \] \[
@@ -632,7 +632,8 @@ continua}\label{proprietuxe0-della-trasformata-continua}
     \\
     \frac{X(f-f_0)+X(f+f_0)}{2}
     \end{gather*} Corollario:
-    \(x(t)e^{j2\pi f_{0}t} \Longleftrightarrow X(f-f_0)\)
+    \(x(t)e^{j2\pi f_{0}t} \Longleftrightarrow X(f-f_0) \to\)
+    \emph{traslazione in frequenza}
   \end{itemize}
 \item
   \textbf{Derivazione}
@@ -650,13 +651,14 @@ continua}\label{proprietuxe0-della-trasformata-continua}
   Deriviamo entrambi i lati di \(x(t)\): \begin{gather*}
   \odv{}{t}x(t) = \odv{}{t} \int_{-\infty}^{\infty} X(f) e^{j2\pi ft} \,df = \int_{-\infty}^{\infty}\odv{}{t} \Big [X(f) e^{j2\pi ft} \Big ] \,df = \int_{-\infty}^{\infty} X(f) \odv{}{t}e^{j2\pi ft} \,df = 
   \\
-  \int_{-\infty}^{\infty} X(f) (2\pi f) e^{j2\pi ft} \,df \Longrightarrow \text{[TCF]}\odv{x(t)}{t} = j2\pi f X(f)
+  \int_{-\infty}^{\infty} X(f) (2\pi f) e^{j2\pi ft} \,df \Longrightarrow \text{TCF}\Big[\odv{x(t)}{t}\Big] = j2\pi f X(f)
   \end{gather*}
 
-  Il teorema della derivazione \emph{modifica gli spettri} \[
+  Il teorema della derivazione \emph{modifica gli spettri}
+  \begin{gather*}
   |Y(f)| = 2\pi f |X(f)| \\ \phase{Y(f)} = \phase{X(f)} + \text{sgn}(f)\frac{\pi}{2}
-  \] Aumenta proporzionalmente l'ampiezza, esaltando le altre frequenze,
-  e sfasando di \(\pm \frac{\pi}{2}\)
+  \end{gather*} Aumenta proporzionalmente l'ampiezza, esaltando le altre
+  frequenze, e sfasando di \(\pm \frac{\pi}{2}\)
 \item
   \textbf{Integrazione} (deriva dal teorema di derivazione)
 
@@ -679,9 +681,9 @@ continua}\label{proprietuxe0-della-trasformata-continua}
   un'operazione algebrica in frequenza: in questo caso però vengono
   esaltate le componenti a \textbf{bassa} frequenza nello spettro del
   segnale, mentre le alte vengono attenuate; la fase varia sempre di
-  \(\pm \frac{\pi}{2}\) \[
+  \(\pm \frac{\pi}{2}\) \begin{gather*}
   |Y(f)| = \frac{|X(f)|}{2\pi f} \\ \phase{Y(f)} = \phase{X(f)} + \text{sgn}(f)\frac{\pi}{2}
-  \] Da questo teorema deriva la relazione
+  \end{gather*} Da questo teorema deriva la relazione
   \(A \text{tri}(\frac{t}{T})\Longleftrightarrow AT\mathop{\mathrm{sinc}}^{2}(fT); \ A\mathop{\mathrm{rect}}(\frac{t}{T})\Longleftrightarrow AT\mathop{\mathrm{sinc}}(fT)\)
 \item
   \textbf{Prodotto}: è il duale della convoluzione
@@ -694,10 +696,12 @@ continua}\label{proprietuxe0-della-trasformata-continua}
   \tightlist
   \item
     Dimostrazione: \begin{gather*}
-    \Rightarrow Z(f) =  \int_{-\infty}^{\infty}x(t)\ y(t)\ e^{-j2\pi ft}\,dt = \int_{t=-\infty}^{\infty} \Big[ \int_{\nu = -\infty}^{\infty} X(\nu) e^{-j2\pi \nu t} \,d\nu \Big ] y(t)\ e^{-j2\pi ft}\,dt= \\ \int_{\nu=-\infty}^{\infty} X(\nu) \Big[ \int_{t = -\infty}^{\infty}  y(t)\ e^{-j2\pi (f-\nu)t}\,dt \Big ] \,d\nu =  \int_{\nu = -\infty}^{\infty} X(\nu) Y(t-\nu) \,d\nu = \\ X(f) \otimes Y(f)
+    \Rightarrow Z(f) =  \int_{-\infty}^{\infty}x(t)\ y(t)\ e^{-j2\pi ft}\,dt = \int_{t=-\infty}^{\infty} \Big[ \int_{\nu = -\infty}^{\infty} X(\nu) e^{-j2\pi \nu t} \,d\nu \Big ] y(t)\ e^{-j2\pi ft}\,dt= \\ 
+    \int_{\nu=-\infty}^{\infty} X(\nu) \Big[ \int_{t = -\infty}^{\infty}  y(t)\ e^{-j2\pi (f-\nu)t}\,dt \Big ] \,d\nu =  \int_{\nu = -\infty}^{\infty} X(\nu) Y(f-\nu) \,d\nu =
+    \\ X(f) \otimes Y(f)
     \end{gather*} Quindi: \[
     \underset{PRODOTTO}{x(t) \ y(t)} \Longleftrightarrow \underset{CONVOLUZIONE}{X(f)\otimes Y(f)} \to \text{ la convoluzione è \textit{commutativa}}
-    \]
+    \] Nota Bene: \(\nu\) è \textbf{nu}!
   \end{itemize}
 \item
   \textbf{\emph{Convoluzione}}
@@ -740,7 +744,7 @@ generalizzata}\label{trasformata-di-fourier-generalizzata}
   viene realizzato utilizzando la delta di Dirac.
 
   Il teorema completo afferma che: \[
-  y(t) = \int_{-\infty}^{t} x(\alpha)\,d\alpha \Longleftrightarrow \frac{X(f)}{j2\pi f} + \frac{\delta(f)}{2}\cdot X(0)  
+  y(t) = \int_{-\infty}^{t} x(\alpha)\,d\alpha \Longleftrightarrow Y(f) = \frac{X(f)}{j2\pi f} + \frac{\delta(f)}{2}\cdot X(0)  
   \] Il nuovo termine rende conto dell'eventuale valor medio diverso da
   zero del segnale!.
 
@@ -748,12 +752,15 @@ generalizzata}\label{trasformata-di-fourier-generalizzata}
   \item
     Dimostrazione:
 
-    Essendo: \[
+    Essendo: \begin{gather*}
       x(t)\otimes u(t) = \int_{-\infty}^{\infty} x(\alpha) \ u(t-\alpha)\,d\alpha = \int_{-\infty}^{t} x(\alpha)\,d\alpha
-      \] abbiamo che per la convoluzione
+      \\
+      u(t) = \frac{1}{2}\text{sgn}(t)+\frac{1}{2}
+      \end{gather*} abbiamo che per la convoluzione
     \(x(t)\otimes u(t)\Longleftrightarrow X(f)U(f)\): \[
       X(f)\ U(f)=X(f)\Big[\frac{1}{j2\pi f}+\frac{\delta(f)}{2}\Big] = \frac{X(f)}{j2\pi f}+ \frac{X(0)}{2}\delta(f)
-      \] Questo perché \(\text{TCF}(u(t))=U(f)=\frac{1}{j2\pi f}\);
+      \] Questo perché
+    \(\text{TCF}(u(t))=U(f)=\frac{1}{j2\pi f}+\frac{1}{2}\delta (f)\);
     l'ultimo termine scompare per segnali ad area nulla: rende conto
     dell'eventuale valor medio diverso da zero del segnale, ed è un
     termine correttivo che rappresenta la funzione impulsiva.
@@ -801,14 +808,15 @@ generalizzata}\label{trasformata-di-fourier-generalizzata}
 \item
   Seconda formula della somma di Poisson
 
-  Applichiamo alla prima formula di Poisson il teorema della dualità: \[
+  Applichiamo alla prima formula di Poisson il teorema della dualità:
+  \begin{gather*}
   X(t) \longleftrightarrow x(-f) \\
   x(t) \longleftrightarrow X(f)
-  \] \begin{gather*}
+  \end{gather*} \begin{gather*}
   \sum_{n=-\infty}^{\infty}x(t-nT_0) = \sum_{k=-\infty}^{\infty} \frac{1}{T_0} X(\frac{k}{T_0})\ e^{+\frac{j2\pi kt}{T_0}} \\
-  \sum_{n=-\infty}^{\infty}x(t-nT_0) = \sum_{k=-\infty}^{\infty} \frac{1}{T_0}(X(-\frac{k}{T_0}))\ e^{+\frac{j2\pi kt}{T_0}} \\
-  \Rightarrow \sum_{n=-\infty}^{\infty}x(t-nT_0) = \sum_{k=-\infty}^{\infty} \frac{1}{T_0} X(\frac{k}{T_0})\ e^{-\frac{j2\pi kt}{T_0}} \text{ cambio di segno all'indice k} \\
-  \to T = \frac{1}{T_0} \Rightarrow \sum_{n=-\infty}^{\infty}X(t-\frac{n}{T}) = T\sum_{k=-\infty}^{\infty} \frac{1}{T_0} x(kT)\ e^{-j2\pi ktfT}
+  \sum_{n=-\infty}^{\infty}X(t-nT_0) = \sum_{k=-\infty}^{\infty} \frac{1}{T_0}(x(-\frac{k}{T_0}))\ e^{+\frac{j2\pi kt}{T_0}} \\
+  \Rightarrow \sum_{n=-\infty}^{\infty}X(t-nT_0) = \sum_{k=-\infty}^{\infty} \frac{1}{T_0} x(\frac{k}{T_0})\ e^{-\frac{j2\pi kt}{T_0}} \text{ cambio di segno all'indice k} \\
+  \to T = \frac{1}{T_0} \Rightarrow \sum_{n=-\infty}^{\infty}X(t-\frac{n}{T}) = T\sum_{k=-\infty}^{\infty} \frac{1}{T_0} x(kT)\ e^{-j2\pi ktT}
   \end{gather*} Adesso, dal punto di vista puramente formale, cambiano
   nome da \(t\) in \(f\), otteniamo un'espressione, otteniamo
   un'espressione \emph{duale} rispetto alla prima formula di Poisson \[
@@ -829,15 +837,12 @@ generalizzata}\label{trasformata-di-fourier-generalizzata}
 Dato un segnale \(x(t)\) e la sua energia
 \(E_{x}=\int_{-\infty}^{\infty} |x(t)|^2 \,dt < +\infty\) (energia
 finita), possiamo esprimere l'energia \(E_x\) \emph{anche in frequenza}:
-
 \begin{gather*}
 E_{x}=\int_{-\infty}^{\infty} |x(t)|^2 \,dt = \int_{-\infty}^{\infty} x(t) \ x^{\ast} \,dt = \int_{-\infty}^{\infty} x(t) \Big[ \int_{-\infty}^{\infty} X^{*}(f) e^{-j2\pi ft} \,df \Big] \,dt \\
 \int_{f=-\infty}^{\infty} X^{\star}(f) \Big [\int_{t=-\infty}^{\infty} x(t) e^{-j2\pi ft} \,dt\Big ] \,df = \int_{-\infty}^{\infty} X^{*}(f) = \int_{-\infty}^{\infty} |X(f)|^{2} \,df
-\end{gather*}
-
-\(E_x\) è l'energia totale, deriva da \(p_x = |x(t)|^2\) potenza
-istantanea integrata o da \(|X(f)|^2\) detta \textbf{densità spettrale}
-\(E_x(f)\) integrata.
+\end{gather*} \(E_x\) è l'energia totale, deriva da \(p_x = |x(t)|^2\)
+potenza istantanea integrata o da \(|X(f)|^2\) detta \textbf{densità
+spettrale} \(E_x(f)\) integrata.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
