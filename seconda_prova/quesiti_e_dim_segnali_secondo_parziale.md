@@ -1,10 +1,8 @@
-author:
-
-- Leonardo Toccafondi   
-  date: Maggio, 2023
-  title: Dimostrazioni e quesiti per secondo parziale di Teoria dei Segnali
-
 ---
+#title: "Dimostrazioni e quesiti per secondo parziale di Teoria dei Segnali"
+#author:[Leonardo Toccafondi]
+#date: 2024-04-18
+...
 
 ## QUESITI
 ##### Processo WSS
@@ -84,6 +82,7 @@ X[K] = \sum_{n=0}^{N-1} x[n] = e^{-j \frac{2\pi}{N} kn}, \ \ \ k = 0, 1 , \dots,
    
 NOTA BENE: con [$^{**}$] si intendono domande aggiunte da me!
 con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
+
 ## RISPOSTE QUESITI
 
 1.  Un processo aleatorio $x$ è detto stazionario se la sua *funzione di
@@ -273,16 +272,32 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
     discreta assume che il segnale sia periodico, mentre la trasformata
     per sequenze non fa questa assunzione (?).
 
-24. $$x[n] = \cos^2(\frac{2\pi n}{10}), \ n= 0, \cdots, 19$$
-
-    $$x[n] = \frac{1}{2}[1+\cos(2\frac{2\pi n}{10})] = \frac{1}{2} + \frac{1}{4}e^{\frac{j2\pi n}{20}} + \frac{1}{4}e^{\frac{-j2\pi n}{20}}$$
-
-    $$x[k] = \frac{1}{2}\sum_{k=0}^{19} e^{\frac{-j2\pi kn}{20}} + \frac{1}{4}\sum_{k=0}^{19} e^{\frac{-j2\pi (k-4)n}{20}} +\frac{1}{4}\sum_{k=0}^{19} e^{\frac{-j2\pi (k+4)n}{20}} = x_1[k]+x_2[k]+x_3[k]$$
-
-    $x_1[k]=\left\{ \begin{array}{cl}\frac{1}{2}\cdot20 = 10 \text{, per m=0}\\0 \text{ altrimenti}\end{array}, \ x_2[k]=\left\{ \begin{array}{cl}\frac{1}{4}\cdot20 = 5 \text{, per m=4}\\0 \text{ altrimenti}\end{array}, \ x_3[k]=\left\{ \begin{array}{cl}\frac{1}{2}\cdot20 = 5 \text{, per m=16}\\0 \text{ altrimenti}\end{array} \right$
-
-    $x[k]=\left\{ \begin{array}{cl} 10 \text{, per m=0}\\ 5 \text{, per m=4, 16}\\0 \text{ altrimenti}\end{array} \right$
-
+24.
+\begin{gather*} 
+x[n] = \cos^2(\frac{2\pi n}{10}), \ n= 0, \cdots, 19 \\
+x[n] = \frac{1}{2}[1+\cos(2\frac{2\pi n}{10})] = \frac{1}{2} + \frac{1}{4}e^{\frac{j2\pi n}{20}} + \frac{1}{4}e^{\frac{-j2\pi n}{20}} \\
+x[k] = \frac{1}{2}\sum_{k=0}^{19} e^{\frac{-j2\pi kn}{20}} + \frac{1}{4}\sum_{k=0}^{19} e^{\frac{-j2\pi (k-4)n}{20}} +\frac{1}{4}\sum_{k=0}^{19} e^{\frac{-j2\pi (k+4)n}{20}} = x_1[k]+x_2[k]+x_3[k]
+\end{gather*}
+$$
+x_{1}[k] = \left\{ \begin{array}{cl}
+\frac{1}{2} \cdot 20 = 10 & \text{per } m=0 \\
+0 & \text{altrimenti}
+\end{array} \right., \
+x_{2}[k] = \left\{ \begin{array}{cl}
+\frac{1}{4} \cdot 20 = 5& \text{per } m=4 \\
+0 & \text{altrimenti}
+\end{array} \right.,\
+x_{3}[k] = \left\{ \begin{array}{cl}
+\frac{1}{4} \cdot 20 = 5& \text{per } m=16 \\
+0 & \text{altrimenti}
+\end{array} \right.,\\
+x[k] = \left\{ \begin{array}{cl}
+10& \text{per } m=0 \\
+5 & \text{per }m=4, 16\\
+0 & \text{altrimenti}
+\end{array} \right.
+$$
+   
 25. Il Teorema del prodotto per la DFT afferma che la DFT del prodotto
     di due sequenze è uguale alla convoluzione circolare delle DFT delle
     due sequenze. Il Teorema della convoluzione per la DFT afferma che
