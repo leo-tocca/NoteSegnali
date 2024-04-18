@@ -612,3 +612,64 @@ Partiamo dalla definizione di autocorrelazione:
 R_{x} (\tau) = \int_{-\infty}^{\infty} x(\alpha) x(\alpha -t) \,d\alpha = \int_{-\infty}^{\infty} x(\alpha)x(-(t-\alpha)) \,d\alpha = x(\tau) \otimes x(-\tau) = \\
 R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f) \ X^{*}(-f) = |X(f)|^{2} = E_x(f)
 \end{gather*}
+
+\newpage
+
+# Secondo Parziale
+
+## Processi aleatori analogici
+
+1. Un processo aleatorio $X(t)$ filtrato da un SLS è all'uscita un nuovo processo $Y(t)$ WSS.
+
+## Segnali a tempo discreto aperiodici
+
+2. Trasformata di Fourier per sequenze (definizione, periodo 1, denormalizzazione);
+3. Relazione tra definizione di antitrasformata e trasformata; Criterio di convergenza per TFS (solo definizione).
+
+### Teoremi
+4. Teorema di Linearità;
+5. Teorema del Ritardo;
+6. Teorema della Modulazione;
+7. Teorema della Somma di Convoluzione;
+8. Teorema del Prodotto;
+9. Teorema dell'Incremento;
+10. Teorema della Sequenza Somma.
+
+### Campionamento:
+11. Teorema del campionamento (Solo definizione);
+12. Relazione tra TCF e TFS.
+
+## Segnali a tempo discreto aperiodici
+13. Trasformata discreta di Fourier (definizione);
+14. La trasformata di una sequenza periodica è essa stessa periodica (stesso periodo);
+15. La relazione di sintesi di una TDF discende da quella di analisi;
+
+### Proprietà:
+16. Proprietà di Linearità;
+17. Proprietà di Traslazione Circolare;
+18. Proprietà di Traslazione In Frequenza;
+19. Proprietà di Inversione Temporale;
+20. Simmetria per sequenze reali (pari e dispari);
+21. Teorema di Parseval per sequenze;
+22. Teorema del Prodotto;
+23. Teorema della Convoluzione (+ relazioni tra convoluzione lineare e circolare).
+
+### Generale:
+24. Fast Fourier Transform (FFT).
+
+## Sistemi monodimensionali a tempo discreto 
+
+### Proprietà dei sistemi;
+26. SLS a tempo discreto: risposta impulsiva.
+
+### Proprietà:
+27. Sistemi a cascata e in parallelo;
+28. Risposta in frequenza;
+29. Filtri a tempo discreto.
+
+## Quantizzazione
+30. Formule e definizioni (passo, dinamica D, bit B, fattore di scala A...);
+31. Tipologie di quantizzatori (midrise, midtread, arrotondamento e troncamento);
+32. Errore di quantizzazione;
+33. Modello dell’errore di quantizzazione;
+34. Definizione Signal To Noise Ratio (SNR) e formule.
