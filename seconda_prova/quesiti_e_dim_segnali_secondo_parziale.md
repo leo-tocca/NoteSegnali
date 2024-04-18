@@ -20,14 +20,14 @@ author:
 8. Enunciare e spiegare la Proprietà di Simmetria della TDF per sequenze reali
 9. Enunciare e spiegare il teorema dell'Incremento della TDF per sequenze reali
 10. Enunciare e spiegare la condizione di convergenza della Trasformata di Fourier per sequenze (vedi n°6)
-11. Sia $x[n] = cos(2\pi 0.1 n), \ n ∈ \mathbb{Z}$. Quale è la sua trasformata di Fourier per sequenze? Giustificare la risposta.
-12. Se $x[n]$ ha trasformata di Fourier per sequenze $\overline{X}(F)$, quale sequenza $y[n]$ ha trasformata di Fourier $\overline{Y}(F) = \overline{X}(F − F_0)$? Giustificare la risposta.
+11. Sia $x[n] = cos(2\pi 0.1 n), \ n \in \mathbb{Z}$. Quale è la sua trasformata di Fourier per sequenze? Giustificare la risposta.
+12. Se $x[n]$ ha trasformata di Fourier per sequenze $\overline{X}(F)$, quale sequenza $y[n]$ ha trasformata di Fourier $\overline{Y}(F) = \overline{X}(F - F_0)$? Giustificare la risposta.
 13. Calcolare la trasfornata di Fourier della sequenza $x[n]$ formata dall'impulso rettangolare discreto, cioe $x[n]= u[n]-u[n-N]$
 
 ###### Campionamento e interpolazione
 14. Definizione teorema del campionamento e condizione di Nyquist [$^{**}$]
 15. Cosa si intende per *aliasing*? Come si evita e perché va evitato. [$^{**}$]
-16. Il segnale $x(t) = e^{−t} u(t)$ può essere campionato con assoluta assenza di aliasing? Giustificare la risposta.
+16. Il segnale $x(t) = e^{-t} u(t)$ può essere campionato con assoluta assenza di aliasing? Giustificare la risposta.
 17. Data una serie di campioni $x(nT)$ ottenuti campionando il segnale analogico di partenza $x(t)$, scrivere la relazione che lega il segnale ricostruito $\hat{x}(t)$ ai campioni $x(nT)$, nel caso di interpolazione lineare. 
 18. Dato il segnale campionato $x_c(t)$ ottenuto campionando il segnale analogico di partenza $x(t)$, scrivere la relazione che lega lo spettro di $x_c(t)$ allo spettro di $x(t)$.
 19. Differenza tra interpolazione a mantenimento, cardinale (e/o lineare) $^{**}$
