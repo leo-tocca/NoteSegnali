@@ -20,7 +20,7 @@
 10. Enunciare e spiegare la condizione di convergenza della Trasformata di Fourier per sequenze (vedi n°6)
 11. Sia $x[n] = cos(2\pi 0.1 n), \ n \in \mathbb{Z}$. Quale è la sua trasformata di Fourier per sequenze? Giustificare la risposta.
 12. Se $x[n]$ ha trasformata di Fourier per sequenze $\overline{X}(F)$, quale sequenza $y[n]$ ha trasformata di Fourier $\overline{Y}(F) = \overline{X}(F - F_0)$? Giustificare la risposta.
-13. Calcolare la trasfornata di Fourier della sequenza $x[n]$ formata dall'impulso rettangolare discreto, cioe $x[n]= u[n]-u[n-N]$
+13. Calcolare la trasformata di Fourier della sequenza $x[n]$ formata dall'impulso rettangolare discreto, cioè $x[n]= u[n]-u[n-N]$
 
 ###### Campionamento e interpolazione
 14. Definizione teorema del campionamento e condizione di Nyquist [$^{**}$]
@@ -42,20 +42,24 @@
 
 ##### Sistemi LTI discreti
 28. Scrivere la risposta impulsiva di un sistema discreto che implementa una finestra mobile
-29. Giustificare la seguente affermazione: "Un sistema LTI è stabile se la sua funzione di trasferimento ha una regione di convergenza che include la circonferenza unitaria del piano z". $^*$.
-30. Si supponga di voler usare un algoritmo di convoluzione veloce per eseguire il filtraggio di un segnale con un sistema LTI di tipo FIR, avente una risposta impulsiva lunga $N = 200$ campioni. Misurando la complessità in termini di moltiplicazioni reali per campione di uscita, è più conveniente usare (per il calcolo della convoluzione circolare) una FFT con periodicità $L = 2048$ oppure una con periodicità $L = 512$? Giustificare la risposta.
-31. In uno schema di convoluzione veloce, quante moltiplicazioni reali per campione di uscita devono essere effettuate? Giustificare la risposta
-32. 
+29. Descrivere un filtro discreto a media mobile
+30. Descrivere il fitro detto accumulatore o integratore numerico
+31. Giustificare la seguente affermazione: "Un sistema LTI è stabile se la sua funzione di trasferimento ha una regione di convergenza che include la circonferenza unitaria del piano z". $^*$.
+32. Si supponga di voler usare un algoritmo di convoluzione veloce per eseguire il filtraggio di un segnale con un sistema LTI di tipo FIR, avente una risposta impulsiva lunga $N = 200$ campioni. Misurando la complessità in termini di moltiplicazioni reali per campione di uscita, è più conveniente usare (per il calcolo della convoluzione circolare) una FFT con periodicità $L = 2048$ oppure una con periodicità $L = 512$? Giustificare la risposta.
+33. In uno schema di convoluzione veloce, quante moltiplicazioni reali per campione di uscita devono essere effettuate? Giustificare la risposta
+
 ##### Quantizzazione
-32. Spiegare la differenza tra un quantizzatore uniforme (a passo $\Delta$ e a $B$ bit) di tipo midtread e uno di tipo midrise
-33. Dato un quantizzatore uniforme, scrivere le relazioni che permettono di trovare il valore quantizzato $\hat{x}(nT)$ a partire dal campione $x(nT)$ nel caso dell'operazione di arrotondamento e di troncamento
-34. Enunciare le ipotesi che usualmente vengono assunte per il rumore di quantizzazione. Giustificare la seguente affermazione: "Quantizzando un segnale sinusoidale di ampiezza unitaria con un convertitore analogico-digitale avente $B$ bit di quantizzazione e dinamica $[-1, 1]$ si ottiene un rapporto segnale-rumore 0(espresso in $dB$) dato da $SN R \approx 6.02B + 1.76$".
+34. Spiegare la differenza tra un quantizzatore uniforme (a passo $\Delta$ e a $B$ bit) di tipo midtread e uno di tipo midrise
+35. Dato un quantizzatore uniforme, scrivere le relazioni che permettono di trovare il valore quantizzato $\hat{x}(nT)$ a partire dal campione $x(nT)$ nel caso dell'operazione di arrotondamento e di troncamento
+36. Enunciare le ipotesi che usualmente vengono assunte per il rumore di quantizzazione.
+37. Giustificare la seguente affermazione: "Quantizzando un segnale sinusoidale di ampiezza unitaria con un convertitore analogico-digitale avente $B$ bit di quantizzazione e dinamica $[-1, 1]$ si ottiene un rapporto segnale-rumore 0(espresso in $dB$) dato da $SNR \approx 6.02B + 1.76$".
 
 ##### Sistemi di comunicazione digitale
-34. Spiegare il ruolo svolto dal codificatore di canale in un sistema di comunicazione digitale
-35. Spiegare il ruolo svolto da un codificatore di sorgente nella catena di trasmissione digitale.
-36. Spiegare il ruolo svolto da un modulatore digitale nella catena di trasmissione digitale.
-37. Spiegare il ruolo svolto dal codificatore di sorgente nella catena di trasmissione digitale.
+38. Spiegare il ruolo svolto dal codificatore di canale in un sistema di comunicazione digitale
+39. Spiegare il ruolo svolto da un codificatore di sorgente nella catena di trasmissione digitale.
+40. Spiegare il ruolo svolto da un modulatore digitale nella catena di trasmissione digitale.
+41. Spiegare il ruolo svolto dal codificatore di sorgente nella catena di trasmissione digitale.
+42. Descrivere gli schemi di base di modulazione digitale utilizzati in un sistema di comunicazione
 
 ## DIMOSTRAZIONI
 
@@ -82,6 +86,8 @@ X[K] = \sum_{n=0}^{N-1} x[n] = e^{-j \frac{2\pi}{N} kn}, \ \ \ k = 0, 1 , \dots,
    
 NOTA BENE: con [$^{**}$] si intendono domande aggiunte da me!
 con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
+
+\newpage
 
 ## RISPOSTE QUESITI
 
@@ -136,13 +142,14 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
         colore bianco nello spettro dei colori
 
 5.  Sapendo che $y(t) = x(t) \otimes h(t)$
-    $$\displaystyle E[y(t)] = E[x(t)\otimes h(t)] = E[\int_{-\infty}^{\infty} h(\alpha)x(t - \alpha) d\alpha]$$
-    $$= \int_{-\infty}^{\infty} h(\alpha)E[x(t - \alpha)] d\alpha =
-       m_x \int_{-\infty}^{\infty} h(\alpha) d\alpha = m_x \cdot H(0)$$
-    $$R_y(t_1, t_2) = E[y(t_1), y(t_2)] \to R_y(t, t-\tau) = \\
-      E[y(t)y(t-\tau)] \to R_y(\tau) = R_x(\tau) \otimes (\tau) h(\tau) h(-\tau)$$
-    $$S_y(\tau) = S_x(f) \cdot H(f) \cdot H(-f) = S_x(f) \cdot H(f) \cdot H^*(-f) = S_x(f) \cdot |H(f)|^2$$
-
+    \begin{gather*}
+    E[y(t)] = E[x(t)\otimes h(t)] = E[\int_{-\infty}^{\infty} h(\alpha)x(t - \alpha) d\alpha]
+    //= \int_{-\infty}^{\infty} h(\alpha)E[x(t - \alpha)] d\alpha =
+       m_x \int_{-\infty}^{\infty} h(\alpha) d\alpha = m_x \cdot H(0)
+    // R_y(t_1, t_2) = E[y(t_1), y(t_2)] \to R_y(t, t-\tau) = \\
+      E[y(t)y(t-\tau)] \to R_y(\tau) = R_x(\tau) \otimes (\tau) h(\tau) h(-\tau)
+    // S_y(\tau) = S_x(f) \cdot H(f) \cdot H(-f) = S_x(f) \cdot H(f) \cdot H^*(-f) = S_x(f) \cdot |H(f)|^2
+    \end{gather*}
     Quindi è nuovamente un processo WSS
 
 6.  Il segnale $x[n]$ viene espressi mediante la somma di molti termini
@@ -442,4 +449,4 @@ $$
         possibili.
 
 41. Gli effetti del rumore possono essere ridotti aumentando la potenza
-    del segnale trasmesso (limite nell'attrezzatura),
+    del segnale trasmesso (limite nell'attrezzatura)
