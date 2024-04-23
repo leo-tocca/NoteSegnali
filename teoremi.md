@@ -4,6 +4,7 @@ header-includes: |
             \usepackage{steinmetz}
             \usepackage{derivative}
             \usepackage{mathtools}
+            \usepackage{siunitx}
             \DeclareMathOperator{\sinc}{sinc}
             \DeclareMathOperator{\rect}{rect}
             \usepackage{geometry}
@@ -392,7 +393,7 @@ header-includes: |
     $$
     - Dimostrazione:
     $$
-    \cdot \ \ \underline{\alpha > 0} \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} x(\alpha t) e^{-j2\pi ft} \,dt \text{, ponendo } z=\alpha t \to t = \frac{z}{\alpha}, \,dz = \alpha \,dt \to \,dt = \frac{\d,z}{\alpha} 
+    \cdot \ \ \underline{\alpha > 0} \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} x(\alpha t) e^{-j2\pi ft} \,dt \text{, ponendo } z=\alpha t \to t = \frac{z}{\alpha}, \,dz = \alpha \,dt \to \,dt = \frac{\,dz}{\alpha} 
     $$
     $$
     \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} \frac{x(z) e^{-j2\pi f \frac{z}{\alpha}}}{\alpha} \,dz = \frac{1}{\alpha}\int_{-\infty}^{\infty} x(z) e^{-j2\pi f \frac{z}{\alpha}} \,dz = \frac{1}{\alpha} X(\frac{f}{\alpha})
@@ -620,17 +621,79 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
 ## Processi aleatori analogici
 
 1. Un processo aleatorio $X(t)$ filtrato da un SLS è all'uscita un nuovo processo $Y(t)$ WSS.
+    
+    Per far sì che accada il processo $y(t)$ deve avere:
+    1. Media costante;
+    2. L'autocorrelazione funzione solo di $\tau$
+
+    - Dimostrazione:
+        1. \begin{gather*}
+            E[y(t)] = E[x(t)\otimes h(t)]= E[\int_{-\infty}^{\infty} h(\alpha)\cdot x(t-\alpha) \,d\alpha] = \\
+            \int_{-\infty}^{\infty} h(\alpha) \ E[x(t-\alpha)] \,d\alpha = m_{X} \int_{-\infty}^{\infty} h(\alpha) \,d\alpha = m_{X} \ H(0) = \text{ costante}
+            \end{gather*}
+        2. \begin{gather*}
+            R_{yy}(t_{1},t_{2}) \left\{ \begin{array}{lcl}
+            t_{1} &=t \\
+            t_{2} &=t + \tau \to \tau = t_{2}-t_{1}
+            \end{array} \right. \to \text{ cambio di variabile} \\
+            R_{yy}(t, t + \tau)= E[y(t)\cdot y(t+\tau)] = E\Big[\int_{-\infty}^{\infty} h)\alpha \ x(t-\alpha)\,d\,\alpha \ \int_{-\infty}^{\infty}h(\beta) \ x(t+\tau -\beta) d\,\beta\Big]\\
+            E\Big[\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} h(\alpha) \ h(\beta) \ x(t-\alpha) x(t+\tau -\beta) \,d\alpha \,d\beta \Big]= \\
+            \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} h(\alpha) \ h(\beta) \ E \Big[x(t-\alpha) x(t+\tau -\beta) \Big] \,d\alpha \,d\beta \\
+            \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} h(\alpha) \ h(\beta) \ R_{xx}(\tau -\beta +\alpha) \,d\alpha \,d\beta \to R_{yy}(t, t+\tau) = R_{yy(\tau)}
+            \end{gather*}
+        
+        Quindi il processo $y(t)$ è WSS.
 
 ## Segnali a tempo discreto aperiodici
 
 2. Trasformata di Fourier per sequenze (definizione, periodo 1, denormalizzazione);
+
+    Data la sequenza *aperiodica* $x[n]$ **discreta**:
+    \begin{gather*}
+    \overline{X}(f) = \sum_{n=-\infty}^{\infty}x[n]\ e^{-j2\pi nfT} \longrightarrow f=F\cdot F_{c} = \frac{F}{T} = \si{\hertz}
+    \\
+    = \sum_{n=-\infty}^{\infty}x[n] \ e^{j2\pi nF}
+    \end{gather*}
+    $\overline{X}(f)$ è **completamente nota** se conosco il suo andamento in un intervallo delle frequenze *normalizzate* di ampiezza unitaria:  $\underbrace{F\in [-\frac{1}{2}; \frac{1}{2}]}_{\text{Intervallo base}}$
+
+    - Periodica di periodo $1$:
+    \begin{gather*}
+    \overline{X}(F+1) = \sum_{n=-\infty}^{\infty} x[n] \ e^{-j2\pi n(F+1)} = \\
+    \sum_{n=-\infty}^{\infty} x[n] e^{-j2\pi nF}\underbrace{\cancel{e^{-j2\pi n}}}_{=1 \text{ (n intero)}} = \\
+    \sum_{n=-\infty}^{\infty} x[n] e^{-j2\pi nF} = \overline{X}(F)
+    \end{gather*}
+
+    - *Denormalizzazione*:
+    
+    Necessaria in quanto se la sequenza $x[n]$ deriva da un'operazione di campionamento. la frequenza normalizzata **non permette** di stabilire un legame con la frequenza (espressa in \si{\Hz})
+    delle componenti nella trasformata del segnale analogico di partenza.
+
+    Se $T$ è il periodo di campionamento, $\Rightarrow f \triangleq \frac{F}{T} = F \cdot f_{c}$ in \si{\hertz}. Sostituendo ottengo $F=fT$ in \si{\Hz}
+    \begin{gather*}
+    \text{TFS}\Big[X[n]\Big] = \overline{X}(f) \triangleq \sum_{n=-\infty}^{\infty} x[n] e^{-j2\pi nfT}
+    \end{gather*}
+    $f$ continua in $\Big[ -\frac{1}{2T}; \frac{1}{2T} \Big] \to \overline{X}(f)$ continua. Posso introdurre il *modulo* $\overline{A}(f)=|\overline{X}(f)|$ e lo *spettro di fase* $\overline{\theta}(f)= \phase{\overline{X}(f)}$.
+
+    $X(f)$ è periodica di periodo pari a $f_c =\frac{1}{T} \Rightarrow \overline{X}(f+\frac{1}{T})= \sum x[n]e^{-j2\pi nFT} \cdot \underbrace{\cancel{e^{2\pi n \frac{1}{T}T}}}_{=1}=\overline{X}(f)$
 3. Relazione tra definizione di antitrasformata e trasformata; Criterio di convergenza per TFS (solo definizione).
+    
+    $$
+    x[n] = \text{ITFS}\Big [ \overline{X}(f) \Big] = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{j2\pi n ft} \,df
+    $$
+    - Dimostrazione:
+    \begin{gather*}
+    \overline{X}(f) \triangleq \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi m fT} \to \text{ moltiplico e divido per osc.ni complesse alla frequenza } f \text{ e integro}\\
+    \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{j2\pi n fT} \,df = \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi m fT} \ e^{j2\pi n fT} \,df = \\
+    \sum_{m=-\infty}^{\infty} x[m] \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi (m-n)fT}\,df
+    \end{gather*}
 
 ### Teoremi
 4. Teorema di Linearità;
 5. Teorema del Ritardo;
 6. Teorema della Modulazione;
 7. Teorema della Somma di Convoluzione;
+    
+    Sia $s[n]$ la sequenza discreta
 8. Teorema del Prodotto;
 9. Teorema dell'Incremento;
 10. Teorema della Sequenza Somma.
