@@ -7,6 +7,7 @@ header-includes: |
             \usepackage{siunitx}
             \DeclareMathOperator{\sinc}{sinc}
             \DeclareMathOperator{\rect}{rect}
+            \DeclareMathOperator{\tfs}{TFS}
             \usepackage{geometry}
 				\geometry{
 					a4paper,
@@ -684,17 +685,74 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     \begin{gather*}
     \overline{X}(f) \triangleq \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi m fT} \to \text{ moltiplico e divido per osc.ni complesse alla frequenza } f \text{ e integro}\\
     \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{j2\pi n fT} \,df = \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi m fT} \ e^{j2\pi n fT} \,df = \\
-    \sum_{m=-\infty}^{\infty} x[m] \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi (m-n)fT}\,df
+    \sum_{m=-\infty}^{\infty} x[m] \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi (m-n)fT}\,df \\
+    \text{Studiamo } \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi (m-n)fT}\,df \longrightarrow
+    \left\{ \begin{array}{cl}
+    \frac{1}{T} & : \ m=n \to \int_{-\frac{1}{2T}}^{\frac{1}{2T}} 1\cdot \,df = \frac{1}{T} \\
+    0 & : \ m \neq n \to m-n=k \to \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi kfT} = 0
+    \end{array} \right. \\
+    \Rightarrow \text{ Riprendo la sommatoria } \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{-j2\pi nfT} \,df = \sum_{m=-\infty}^{\infty}
+     x[m] \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi(m-n)fT}\,df = \frac{1}{T}x[n] \\
+     \Rightarrow x[n] = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}}\overline{X}(f)\ e^{j2\pi nfT}
     \end{gather*}
+    Nota bene: nell'ultima sommatoria ho tutti elementi pari a $0$, tranne il caso $m=n \to \frac{1}{T}$
+    - Criterio di convergenza:
+    \begin{gather*}
+    \sum_{n=-\infty}^{\infty} \Big|x[n]\Big| < +\infty \Rightarrow \exists \text{ TFS}
+    \end{gather*}
+    Un criterio di convergenza per l'esistenza della trasformata è la **assoluta sommabilità** della frequenza.
 
 ### Teoremi
 4. Teorema di Linearità;
+    $$
+    x[n]=ax_1[n]+bx_2[n] \Rightarrow \overline{X}(f) = a\overline{X_1}(f)+b\overline{X_2}(f)
+    $$    
 5. Teorema del Ritardo;
+
+    Sia $x[n]$ una sequenza.
+    $$
+    x[n-k] \Longleftrightarrow \overline{X}(f) \cdot e^{-j2\pi kfT}
+    $$
+    - Dimostrazione:
+    \begin{gather*}
+    \tfs[x[n-k]] = \sum_{m=-\infty}^{\infty}x[n-k] \ e^{-j2\pi nfT} = \\ = \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi(m+k)fT} = e^{-j2\pi kfT}\sum_{m=-\infty}^{\infty}x[m] \ e^{-j2\pi mfT} =\\ =\overline{X}(f)e^{-j2\pi kfT}
+    \end{gather*}
 6. Teorema della Modulazione;
+    $$
+    x[n]\cdot e^{-j2\pi nf_{0}t} \Longleftrightarrow \overline{X}(f-f_{0})
+    $$
+    - Dimostrazione:
+    \begin{gather*}
+    \tfs\Big[x[n]e^{j2\pi nf_{0}t}\Big] = \sum_{n=-\infty}^{\infty} x[n] \ e^{-j2\pi nfT} \cdot e^{j2\pi nf_{0}T}= \sum_{n=-\infty}^{\infty} x[n] \ e^{-j2\pi n(f-f_0)T} = \overline{X}(f-f_0)
+    \end{gather*}
 7. Teorema della Somma di Convoluzione;
     
-    Sia $s[n]$ la sequenza discreta
+    Sia $s[n]$ la sequenza discreta *somma di convoluzione* tra le sequenze aperiodiche $x[n]$ e $y[n]$.
+    $$
+    s[n]= x[n]\otimes y[n] = \sum_{k=-\infty}^{\infty} x[k]\ y[n-k] = \sum_{k=-\infty}^{\infty} y[k] \ x[n-k]
+    $$
+    Gode delle stesse proprietà del caso continuo.
+    $$
+    \Rightarrow \overline{S}(f) = \overline{X}(f) \cdot \overline{Y}(f)
+    $$
+    - Dimostrazione:
+    \begin{gather*}
+    \overline{S}(f) = \sum_{n=-\infty}^{\infty} \sum_{k=-\infty}^{\infty} x[k]\ y[n-k] e^{-j2\pi nfT} = \sum_{k=-\infty}^{\infty} x[k] \underbrace{\sum_{n=-\infty}^{\infty}y[n-k]\ e^{-j2\pi nfT}}_{\text{ritardo}}= \\
+    = \sum_{n=-\infty}^{\infty} x[k] \overline{Y}(f) \ e^{-j2\pi kfT} = \overline{Y}(f)  \sum_{n=-\infty}^{\infty} \ x[k]  e^{-j2\pi kfT} =\overline{Y}(f) \ \overline{X}(f)
+    \end{gather*}
 8. Teorema del Prodotto;
+    $$
+    p[n]=x[n]\cdot y[n] \Longleftrightarrow \overline{P}(f) = \overline{X}(f) \otimes \overline{Y}(f)
+    $$
+    - Dimostrazione:
+    \begin{gather*}
+     \overline{P}(f)=\sum_{n=-\infty}^{\infty} p[n] \ e^{-j2\pi nfT} =  \sum_{n=-\infty}^{\infty} x[n] \ y[n] \ e^{-j2\pi nfT} = \\ = \sum_{n=-\infty}^{\infty}
+     \underbrace{T\int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu)\ e^{-j2\pi n\nu T} \,d\nu}_{\text{antitrasformata di }\overline{X}(f)} y[n] \ e^{-j2\pi nfT} = \\
+     = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu)  \underbrace{\sum_{n=-\infty}^{\infty} y[n] \ e^{-j2\pi n(f-\nu)T}}_{\text{dalla modulazione }\to \overline{Y}(f-\nu)} \,d\nu=
+     T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu) \overline{Y}(f-\nu)\,d\nu  \\
+    \Rightarrow \overline{P}(f) = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu) \overline{Y}(f-\nu)\,d\nu
+    \end{gather*}
+    Questa è la **convoluzione ciclica o periodica**. Calcolato su un singolo periodo e il risultato è diviso per l'ampiezza del periodo $\frac{1}{T}$
 9. Teorema dell'Incremento;
 10. Teorema della Sequenza Somma.
 
