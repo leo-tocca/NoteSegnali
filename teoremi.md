@@ -778,10 +778,30 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     \end{gather*}
 
 ### Campionamento:
-11. Teorema del campionamento (Solo definizione);
+11. Teorema del campionamento (Solo definizione?);
     \begin{gather*}
-    \underset{\text{discreto}}{x[n]}=\underset{\text{continuo}}{x(nT)} \Longleftrightarrow \underset{\text{discreto}}{\overline{X}(f)} = \underset{\text{continuo}}{X(f)}
+    \underset{\text{discreto}}{x[n]}=\underset{\text{continuo}}{x(nT)} \Longleftrightarrow \underset{\text{discreto}}{\overline{X}(f)} = \underset{\text{continuo}}{X(f)} \\
+    \overline{X}(f) \sum_{n=-\infty}^{\infty} x[n] \ e^{-j2\pi nfT} = \sum_{n=-\infty}^{\infty} x(nT) \ e^{-j2\pi nfT}= \\
+    \text{Sapendo che: } x(nT)=\int_{-\infty}^{\infty}X(\alpha) e^{j2\pi\alpha nT}\,d\alpha \\
+    = \sum_{n=-\infty}^{\infty} \int_{-\infty}^{\infty} X(\alpha) \ e^{-j2\pi \alpha nT} \,d\alpha \cdot e^{-j2\pi nfT}
+    = \int_{-\infty}^{\infty} X(\alpha) \sum_{n=-\infty}^{\infty} e^{-j2\pi n(f-\alpha)T} \,d\alpha \\
     \end{gather*}
+    ma il segnale *pettine di Dirac* è esprimibile in serie di Fourier con coefficienti pari a $\frac{1}{T}$:
+  $$
+  \displaystyle
+  \boxed{
+  \begin{array}{c}
+  \sum_{n=-\infty}^{\infty} \delta(t-nT) = \frac{1}{T} \sum_{k=-\infty}^{\infty} e^{\frac{j2\pi kt}{T}} \\
+  \text{Trasformata di Fourier} \to \\
+  \sum_{n=-\infty}^{\infty} e^{-j2\pi nfT} = \frac{1}{T}\sum_{n=-\infty}^{\infty} \delta(f-\frac{k}{T})
+  \end{array}
+  }
+  $$
+  \begin{gather*}
+  \int_{-\infty}^{\infty}X(\alpha) \frac{1}{T} \sum_{k=-\infty}^{\infty} \delta(f-\alpha -\frac{k}{T})\,d\alpha = \frac{1}{T}\sum_{k=-\infty}^{\infty} \int_{-\infty}^{\infty}X(\alpha) \delta(f-\alpha -\frac{k}{T})\,d\alpha = \\
+  \delta \text{ è pari } = \frac{1}{T}\sum_{k=-\infty}^{\infty} \int_{-\infty}^{\infty}X(\alpha) \delta\Big(\alpha -(f- \frac{k}{T})\Big)\,d\alpha = \text{ prodotto tra } X(\alpha) \text{ e Dirac centrato in } f -\frac{k}{T} \\
+  \text{per la proprietà campionatrice della delta di Dirac } \overline{X}(f) = \frac{1}{T}\sum_{n=-\infty}^{\infty}X(f-\frac{k}{T})
+  \end{gather*}
 12. Relazione tra TCF e TFS.
 
 ## Segnali a tempo discreto aperiodici
