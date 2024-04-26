@@ -754,10 +754,34 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     \end{gather*}
     Questa è la **convoluzione ciclica o periodica**. Calcolato su un singolo periodo e il risultato è diviso per l'ampiezza del periodo $\frac{1}{T}$
 9. Teorema dell'Incremento;
+    $$
+    \odv{X(t)}{t}\Big|_{t=nT} \cong \frac{x(nT)-x(nT-T)}{T} = \frac{x[n]-x[n-1]}{T}, \text{ con } x[n] \triangleq x(nT)  
+    $$
+    Si introduce l'operatore **incremento** $\Delta x[n] \triangleq x[n] - x[n-1]$ \newline
+    Usando il *teorema del ritardo*:
+    $$
+    \Delta x[n] \Longleftrightarrow \overline{X}(f) - \overline{X}(f)\ e^{-j2\pi fT} = \overline{X}(f) \ (1-e^{-j2\pi fT})
+    $$
+    È l'analogo del teorema di derivazione.
 10. Teorema della Sequenza Somma.
+
+    Consideriamo la sequenza somma $y[n]=\sum_{k=-\infty}^{\infty}x[k]$. Dal teorema dell'incremento otteniamo la sua trasformata in sequenza:
+    $$
+    \overline{Y}(f) = \frac{\overline{X}(f)}{1-e^{-j2\pi fT}}
+    $$
+    purché $\overline{X}(0) = 0$.
+    - Dimostrazione:
+    \begin{gather*}
+    z[n] = \Delta y[n] \Longleftrightarrow \overline{Z}(f)=\overline{Y}(f)[1-e^{-j2\pi fT}] \text{ dal teorema dell'incremento} \\
+    \text{però } \Delta y[n] = y[n] - y[n-1] = \sum_{k=-\infty}^{n} x[k] - \sum_{k=-\infty}^{n-1} = x[n] \\
+    \text{quindi } \overline{X}(f) = \overline{Y}(f)[1-e^{-j2\pi fT}] \to \overline{Y}(f) = \frac{\overline{X}(f)}{1-e^{-j2\pi fT}}
+    \end{gather*}
 
 ### Campionamento:
 11. Teorema del campionamento (Solo definizione);
+    \begin{gather*}
+    \underset{\text{discreto}}{x[n]}=\underset{\text{continuo}}{x(nT)} \Longleftrightarrow \underset{\text{discreto}}{\overline{X}(f)} = \underset{\text{continuo}}{X(f)}
+    \end{gather*}
 12. Relazione tra TCF e TFS.
 
 ## Segnali a tempo discreto aperiodici
