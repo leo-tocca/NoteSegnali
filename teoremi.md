@@ -780,6 +780,11 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
 ### Campionamento:
 11. Teorema del campionamento (Solo definizione?);
     \begin{gather*}
+    \hat{x}(t)= \sum_{n=-\infty}^{\infty} x[n] \ p(t-nT), \ \text{con } p(t)= \sinc(\frac{f}{T}) \Rightarrow P(f)=T\rect (fT) \\
+    \hat{X}(f) = P(f) \ \overline{X}(f) = \cancel{T}\rect (\frac{f}{\frac{1}{T}})
+    \end{gather*}
+12. Relazione tra TCF e TFS.
+    \begin{gather*}
     \underset{\text{discreto}}{x[n]}=\underset{\text{continuo}}{x(nT)} \Longleftrightarrow \underset{\text{discreto}}{\overline{X}(f)} = \underset{\text{continuo}}{X(f)} \\
     \overline{X}(f) \sum_{n=-\infty}^{\infty} x[n] \ e^{-j2\pi nfT} = \sum_{n=-\infty}^{\infty} x(nT) \ e^{-j2\pi nfT}= \\
     \text{Sapendo che: } x(nT)=\int_{-\infty}^{\infty}X(\alpha) e^{j2\pi\alpha nT}\,d\alpha \\
@@ -802,11 +807,18 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
   \delta \text{ è pari } = \frac{1}{T}\sum_{k=-\infty}^{\infty} \int_{-\infty}^{\infty}X(\alpha) \delta\Big(\alpha -(f- \frac{k}{T})\Big)\,d\alpha = \text{ prodotto tra } X(\alpha) \text{ e Dirac centrato in } f -\frac{k}{T} \\
   \text{per la proprietà campionatrice della delta di Dirac } \overline{X}(f) = \frac{1}{T}\sum_{n=-\infty}^{\infty}X(f-\frac{k}{T})
   \end{gather*}
-12. Relazione tra TCF e TFS.
 
-## Segnali a tempo discreto aperiodici
+## Segnali a tempo discreto periodici
 13. Trasformata discreta di Fourier (definizione);
+
+    Supponiamo $x[n]$ periodica di periodo $N_0$ 
+    $$
+    \underset{\text{antitrasformata discreta di Fourier}}{x[n]=\frac{1}{N_0}\sum_{k=0}^{N_0 -1}\overline{X}_{k} \ e^{j\frac{2\pi kn}{N_0}}}; \
+    \underset{\text{Trasformata discreta di Fourier}} {\overline{X}_k = \sum_{n=0}^{N_0 -1} x[n] \ e^{-j \frac{2\pi kn}{N_0}}}
+    $$
 14. La trasformata di una sequenza periodica è essa stessa periodica (stesso periodo);
+
+    
 15. La relazione di sintesi di una TDF discende da quella di analisi;
 
 ### Proprietà:
