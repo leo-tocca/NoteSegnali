@@ -789,10 +789,10 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     ma il segnale *pettine di Dirac* è esprimibile in serie di Fourier con coefficienti pari a $\frac{1}{T}$:
   $$
   \displaystyle
-  \boxed{
-  \begin{array}{c}
+  \boxed{\displaystyle
+  \begin{array}{c} \displaystyle
   \sum_{n=-\infty}^{\infty} \delta(t-nT) = \frac{1}{T} \sum_{k=-\infty}^{\infty} e^{\frac{j2\pi kt}{T}} \\
-  \text{Trasformata di Fourier} \to \\
+  \text{Trasformata di Fourier} \updownarrow \\ \displaystyle
   \sum_{n=-\infty}^{\infty} e^{-j2\pi nfT} = \frac{1}{T}\sum_{n=-\infty}^{\infty} \delta(f-\frac{k}{T})
   \end{array}
   }
