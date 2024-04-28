@@ -778,10 +778,20 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     \end{gather*}
 
 ### Campionamento:
-11. Teorema del campionamento (Solo definizione?);
+11. Teorema del campionamento (da interpolazione cardinale);
     \begin{gather*}
-    \hat{x}(t)= \sum_{n=-\infty}^{\infty} x[n] \ p(t-nT), \ \text{con } p(t)= \sinc(\frac{f}{T}) \Rightarrow P(f)=T\rect (fT) \\
-    \hat{X}(f) = P(f) \ \overline{X}(f) = \cancel{T}\rect (\frac{f}{\frac{1}{T}})
+    p(t) \text{ è un impulso "diverso" per generalizzare l'operazione d'interpolazione} \\
+    \hat{x}(t)= \sum_{n=-\infty}^{\infty} x[n] \ p(t-nT), \ \text{scegliendo } p(t)= \sinc(\frac{f}{T}) \Rightarrow P(f)=T\rect (fT) \\
+    \hat{X}(f) = P(f) \ \overline{X}(f) = \cancel{T}\rect (\frac{f}{\frac{1}{T}})\frac{1}{\cancel{T}}\cdot  \sum_{k=-\infty}^{+\infty} X(f-\frac{k}{T})= X(f) \\
+    \text{ricampionando il segnale interpolato al generico istante } t=kT \\
+    \hat{x}(kT) =\sum_{n=-\infty}^{+\infty} x(nT) \ \sinc(\frac{kT-nT}{T}), \text{ ma } \sinc(k-n)=
+    \left\{ \begin{array}{cl}
+    0 & n\neq k \\
+    1 & k=n
+    \end{array} 
+    \right. \\
+\text{Quindi: } \hat{x}(kT)=\sum_{n=-\infty}^{+\infty}x[n] \ \underbrace{\delta[k-n]}_{1\text{ sse }n=k}= x[k] = x(kT) \\
+    \text{Il segnale di partenza coincide con il segnale interpolato.}
     \end{gather*}
 12. Relazione tra TCF e TFS.
     \begin{gather*}
@@ -792,21 +802,21 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     = \int_{-\infty}^{\infty} X(\alpha) \sum_{n=-\infty}^{\infty} e^{-j2\pi n(f-\alpha)T} \,d\alpha \\
     \end{gather*}
     ma il segnale *pettine di Dirac* è esprimibile in serie di Fourier con coefficienti pari a $\frac{1}{T}$:
-  $$
-  \displaystyle
-  \boxed{\displaystyle
-  \begin{array}{c} \displaystyle
-  \sum_{n=-\infty}^{\infty} \delta(t-nT) = \frac{1}{T} \sum_{k=-\infty}^{\infty} e^{\frac{j2\pi kt}{T}} \\
-  \text{Trasformata di Fourier} \updownarrow \\ \displaystyle
-  \sum_{n=-\infty}^{\infty} e^{-j2\pi nfT} = \frac{1}{T}\sum_{n=-\infty}^{\infty} \delta(f-\frac{k}{T})
-  \end{array}
-  }
-  $$
-  \begin{gather*}
-  \int_{-\infty}^{\infty}X(\alpha) \frac{1}{T} \sum_{k=-\infty}^{\infty} \delta(f-\alpha -\frac{k}{T})\,d\alpha = \frac{1}{T}\sum_{k=-\infty}^{\infty} \int_{-\infty}^{\infty}X(\alpha) \delta(f-\alpha -\frac{k}{T})\,d\alpha = \\
-  \delta \text{ è pari } = \frac{1}{T}\sum_{k=-\infty}^{\infty} \int_{-\infty}^{\infty}X(\alpha) \delta\Big(\alpha -(f- \frac{k}{T})\Big)\,d\alpha = \text{ prodotto tra } X(\alpha) \text{ e Dirac centrato in } f -\frac{k}{T} \\
-  \text{per la proprietà campionatrice della delta di Dirac } \overline{X}(f) = \frac{1}{T}\sum_{n=-\infty}^{\infty}X(f-\frac{k}{T})
-  \end{gather*}
+    $$
+    \displaystyle
+    \boxed{\displaystyle
+    \begin{array}{c} \displaystyle
+    \sum_{n=-\infty}^{\infty} \delta(t-nT) = \frac{1}{T} \sum_{k=-\infty}^{\infty} e^{\frac{j2\pi kt}{T}} \\
+    \text{Trasformata di Fourier} \updownarrow \\ \displaystyle
+    \sum_{n=-\infty}^{\infty} e^{-j2\pi nfT} = \frac{1}{T}\sum_{n=-\infty}^{\infty} \delta(f-\frac{k}{T})
+    \end{array}
+    }
+    $$
+    \begin{gather*}
+    \int_{-\infty}^{\infty}X(\alpha) \frac{1}{T} \sum_{k=-\infty}^{\infty} \delta(f-\alpha -\frac{k}{T})\,d\alpha = \frac{1}{T}\sum_{k=-\infty}^{\infty} \int_{-\infty}^{\infty}X(\alpha) \delta(f-\alpha -\frac{k}{T})\,d\alpha = \\
+    \delta \text{ è pari } = \frac{1}{T}\sum_{k=-\infty}^{\infty} \int_{-\infty}^{\infty}X(\alpha) \delta\Big(\alpha -(f- \frac{k}{T})\Big)\,d\alpha = \text{ prodotto tra } X(\alpha) \text{ e Dirac centrato in } f -\frac{k}{T} \\
+    \text{per la proprietà campionatrice della delta di Dirac } \overline{X}(f) = \frac{1}{T}\sum_{n=-\infty}^{\infty}X(f-\frac{k}{T})
+    \end{gather*}
 
 ## Segnali a tempo discreto periodici
 13. Trasformata discreta di Fourier (definizione);
@@ -816,8 +826,10 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     \underset{\text{antitrasformata discreta di Fourier}}{x[n]=\frac{1}{N_0}\sum_{k=0}^{N_0 -1}\overline{X}_{k} \ e^{j\frac{2\pi kn}{N_0}}}; \
     \underset{\text{Trasformata discreta di Fourier}} {\overline{X}_k = \sum_{n=0}^{N_0 -1} x[n] \ e^{-j \frac{2\pi kn}{N_0}}}
     $$
-14. La trasformata di una sequenza periodica è essa stessa periodica (stesso periodo);
-
+14. La trasformata di una sequenza periodica è essa stessa periodica (stesso periodo $N_0$);
+    \begin{gather*}
+    \overline{X}_{k+N_0} = \sum_{n=0}^{N_0 -1} x[n] e^{-j2\pi(k+N_0)\frac{n}{N_0}} = \sum_{n=0}^{N_0 -1} x[n] e^{-j2\pi k\frac{n}{N_0}} \ e^{-j2\pi n} = \overline{X}_k
+    \end{gather*}
     
 15. La relazione di sintesi di una TDF discende da quella di analisi;
 
