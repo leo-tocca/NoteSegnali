@@ -832,6 +832,11 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     \end{gather*}
     
 15. La relazione di sintesi di una TDF discende da quella di analisi;
+    \begin{gather*}
+    x[n] = \sum_{k=0}^{N_0 -1} \overline{X}_k \ e^{j2\pi k \frac{n}{N_0}} \Rightarrow \overline{X}_k = \sum_{n=0}^{N_0 -1} x[n] e^{-j\frac{2\pi nk}{N_0}} \\
+    \text{Moltiplichiamo per } e^{-j \frac{2\pi nm}{N_0}} \text{ con } 0\leq m \leq N_0 - 1 \text{ ed effettuiamo una somma sul periodo} \\
+    \sum_{n=0}^{N_0 -1} x[n] e^{-j2\pi m\frac{n}{N_0}} = \sum_{n=0}^{N_0 -1} \sum_{k=0}^{N_0 -1}\overline{X}_k e^{-j2\pi n\frac{(k-m)}{N_0}} = \sum_{k=0}^{N_0 -1}\overline{X}_k \sum_{n=0}^{N_0 -1} e^{-j2\pi n\frac{(k-m)}{N_0}} = N_0 \overline{X}_k
+    \end{gather*}
 
 ### Proprietà:
 16. Proprietà di Linearità;
