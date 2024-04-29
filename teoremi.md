@@ -8,6 +8,7 @@ header-includes: |
             \DeclareMathOperator{\sinc}{sinc}
             \DeclareMathOperator{\rect}{rect}
             \DeclareMathOperator{\tfs}{TFS}
+            \DeclareMathOperator{\dft}{DFT}
             \usepackage{geometry}
 				\geometry{
 					a4paper,
@@ -781,10 +782,10 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
 11. Teorema del campionamento (da interpolazione cardinale);
     \begin{gather*}
     p(t) \text{ è un impulso "diverso" per generalizzare l'operazione d'interpolazione} \\
-    \hat{x}(t)= \sum_{n=-\infty}^{\infty} x[n] \ p(t-nT), \ \text{scegliendo } p(t)= \sinc(\frac{f}{T}) \Rightarrow P(f)=T\rect (fT) \\
-    \hat{X}(f) = P(f) \ \overline{X}(f) = \cancel{T}\rect (\frac{f}{\frac{1}{T}})\frac{1}{\cancel{T}}\cdot  \sum_{k=-\infty}^{+\infty} X(f-\frac{k}{T})= X(f) \\
+    \hat{x}(t)= \sum_{n=-\infty}^{\infty} x[n] \ p(t-nT), \ \text{scegliendo } p(t)= \sinc\Big(\frac{f}{T}\Big) \Rightarrow P(f)=T\rect (fT) \\ 
+    \hat{X}(f) = P(f) \ \overline{X}(f) = \cancel{T}\rect \Big(\frac{f}{\frac{1}{T}}\Big)\frac{1}{\cancel{T}}\cdot  \sum_{k=-\infty}^{+\infty} X\Big(f-\frac{k}{T}\Big)= X(f) \\
     \text{ricampionando il segnale interpolato al generico istante } t=kT \\
-    \hat{x}(kT) =\sum_{n=-\infty}^{+\infty} x(nT) \ \sinc(\frac{kT-nT}{T}), \text{ ma } \sinc(k-n)=
+    \hat{x}(kT) =\sum_{n=-\infty}^{+\infty} x(nT) \ \sinc\Big(\frac{kT-nT}{T}\Big), \text{ ma } \sinc(k-n)=
     \left\{ \begin{array}{cl}
     0 & n\neq k \\
     1 & k=n
@@ -835,11 +836,18 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     \begin{gather*}
     x[n] = \sum_{k=0}^{N_0 -1} \overline{X}_k \ e^{j2\pi k \frac{n}{N_0}} \Rightarrow \overline{X}_k = \sum_{n=0}^{N_0 -1} x[n] e^{-j\frac{2\pi nk}{N_0}} \\
     \text{Moltiplichiamo per } e^{-j \frac{2\pi nm}{N_0}} \text{ con } 0\leq m \leq N_0 - 1 \text{ ed effettuiamo una somma sul periodo} \\
-    \sum_{n=0}^{N_0 -1} x[n] e^{-j2\pi m\frac{n}{N_0}} = \sum_{n=0}^{N_0 -1} \sum_{k=0}^{N_0 -1}\overline{X}_k e^{-j2\pi n\frac{(k-m)}{N_0}} = \sum_{k=0}^{N_0 -1}\overline{X}_k \sum_{n=0}^{N_0 -1} e^{-j2\pi n\frac{(k-m)}{N_0}} = N_0 \overline{X}_k
+    \sum_{n=0}^{N_0 -1} x[n] e^{-j2\pi m\frac{n}{N_0}} = \sum_{n=0}^{N_0 -1} \sum_{k=0}^{N_0 -1}\overline{X}_k e^{-j2\pi n\frac{(k-m)}{N_0}} = \sum_{k=0}^{N_0 -1}\overline{X}_k \sum_{n=0}^{N_0 -1} e^{-j2\pi n\frac{(k-m)}{N_0}} = N_0 \overline{X}_k \\
+    \Rightarrow \overline{X}_k = \frac{1}{N_0}\sum_{n=0}^{N_0 -1} x[n] \ e^{-j2\pi\frac{k}{N_0}}
     \end{gather*}
 
 ### Proprietà:
+
+Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = X[k], \text{ con } 0\leq n, k \leq N_0 -1$
+
 16. Proprietà di Linearità;
+    \begin{gather*}
+    x[n] = ax_1[n] +bx_2[n] \Longleftrightarrow X[k] = aX_1[k] + bX_2[k]
+    \end{gather*}
 17. Proprietà di Traslazione Circolare;
 18. Proprietà di Traslazione In Frequenza;
 19. Proprietà di Inversione Temporale;
