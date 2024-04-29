@@ -8,7 +8,7 @@ header-includes: |
             \DeclareMathOperator{\sinc}{sinc}
             \DeclareMathOperator{\rect}{rect}
             \DeclareMathOperator{\tfs}{TFS}
-            \DeclareMathOperator{\dft}{DFT}
+            \newcommand{\dft}{\operatorname{DFT}}
             \usepackage{geometry}
 				\geometry{
 					a4paper,
@@ -842,22 +842,78 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
 
 ### Proprietà:
 
-Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = X[k], \text{ con } 0\leq n, k \leq N_0 -1$
+Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k \leq N_0 -1$
 
 16. Proprietà di Linearità;
-    \begin{gather*}
-    x[n] = ax_1[n] +bx_2[n] \Longleftrightarrow X[k] = aX_1[k] + bX_2[k]
-    \end{gather*}
+    $$
+    \dft_{N_0}\Big\{ax[n]+by[n]\Big\} = a\overline{X}_k + b\overline{Y}_k
+    $$
 17. Proprietà di Traslazione Circolare;
+    $$
+    \dft_{N_0}\Big\{ x[n-n_0] \Big\} = \overline{X}_k \ e^{-\frac{j2\pi kn_0}{N_0}}
+    $$
+    - Dimostrazione:
+    \begin{gather*}
+    \dft_{N_0}\Big\{ x[n-n_0] \Big\} = \sum_{n=0}^{N_0 -1} x[n-n_0] \ e^{-j2\pi\frac{n}{N_0}k} =
+    \boxed{
+    \begin{array}{cl}
+    \text{cambio di variabile} \\
+    p  = n - n_0 \\
+    n  = p + n_0
+    \end{array}} \\
+    = \sum_{p=-n_0}^{N_0 - 1 - n_0} x[p] \ e^{-j\frac{2\pi}{N_0}(p+n_0)} = \sum_{p=-n_0}^{N_0 - 1 - n_0} x[p] \ e^{-j\frac{2\pi}{N_0}kp} \ e^{-j\frac{2\pi}{N_0}n_0}=\\
+    = e^{-j\frac{2\pi}{N_0}kn_0} \sum_{p=-n_0}^{N_0 - 1 - n_0} x[p] \ e^{-j\frac{2\pi}{N_0}kp} = e^{-j\frac{2\pi}{N_0}kn_0} \sum_{p=0}^{N_0 - 1} x[p] \ e^{-j\frac{2\pi}{N_0}kp} \\
+    \dft_{N_0}\Big\{ x[n-n_0] \Big\} = e^{-j\frac{2\pi kn_0}{N_0}} \cdot \overline{X}_k 
+    \end{gather*}
+    Si dice traslazione **circolare** in quanto, osservando la periodicità della sequenza originale e di quella traslata,
+    è possibile notare come i campioni che "escono" a destra dell'intervallo rientrano alla sinistra dell'intervallo stesso.
 18. Proprietà di Traslazione In Frequenza;
+    $$
+    \dft_{N_0}\Big\{ x[n] \ e^{-j\frac{2\pi k_0 n}{N_0}} \Big\} = \overline{X}_{k-k_0}
+    $$
 19. Proprietà di Inversione Temporale;
+    \begin{gather*}
+    \dft_{N_0}\Big\{ x[-n] \Big\} = \overline{X}_{-k} = \overline{X}_{N_0 - k} 
+    \end{gather*}
+    - Dimostrazione:
+    \begin{gather*}
+    \dft_{N_0}\Big\{ x[-n] \Big\} = \sum_{n=0}^{N_0 -1} x[-n] \ e^{-j\frac{2\pi}{N_0}kn} = \sum_{n=0}^{N_0 -1} x[n-n_0] \ e^{-j2\pi\frac{n}{N_0}k} = \\
+    \boxed{
+    \begin{array}{cl}
+    \text{cambio di variabile} \\
+    p  = N_0 - n \\
+    n  = N_0 - p
+    \end{array}}
+    = \sum_{p=1}^{N_0} x[p] \ e^{-j\frac{2\pi}{N_0}k(N_0 -p)} = \underbrace{e^{-j2\pi k}}_{=1} \ \sum_{p=0}^{N_0 -1} x[p] \ e^{-j2\pi\frac{(-p)}{N_0}k} = \overline{X}_{-k} = \overline{X}_{N_0 - k}
+    \end{gather*}
+    dove nel primo passaggio, abbiamo usato la periodicità della sequenza x[n] e
+    nel penultimo passaggio, per cambiare gli indici della sommatoria, abbiamo
+    usato le proprietà di periodicità della sequenza e della funzione esponenziale,
+    come già visto.
+20. Proprietà di coniugazione;
+    $$
+    \dft_{N_0}\Big\{ x^{*}[n] \Big\} = \overline{X}^{*}_{-k} = \overline{X}^{*}_{N_0 - k}
+    $$
 20. Simmetria per sequenze reali (pari e dispari);
+    
+    Per una sequenza reale $x[n]$ abbiamo:
+    $$
+    \dft_{N_0}\Big\{ x[n] \Big\} = \dft_{N_0}\Big\{x^{*}[n] \Big\} \to \overline{X}_k = \overline{X}^{*}_{-k} = \overline{X}^{*}_{N_0 -k}
+    $$
+    da cui derivano le proprietà di simmetria per il modulo e per la fase:
+    \begin{gather*}
+    \Big|\overline{X}_k \Big| = \Big| \overline{X}_{N_0 - k} \Big| \\
+    \phase{\overline{X}_k} = -\phase{\overline{X}_{-k}}
+    \end{gather*}
+    Tali relazioni implicano che il modulo della sequenza $X[k]$ è simmetrico rispetto al valore $k = \frac{N}{2}$, mentre la fase è antisimmetrica rispetto a tale valore.
+    - per sequenze di lunghezza **pari**, il centro di simmetria coincide con un campione della sequenza;
+    - per sequenze di lunghezza **dispari**, invece, il centro di simmetria coincide con un punto equidistante tra due campioni.
 21. Teorema di Parseval per sequenze;
 22. Teorema del Prodotto;
 23. Teorema della Convoluzione (+ relazioni tra convoluzione lineare e circolare).
 
 ### Generale:
-24. Fast Fourier Transform (FFT).
+25. Fast Fourier Transform (FFT).
 
 ## Sistemi monodimensionali a tempo discreto 
 
