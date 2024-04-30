@@ -909,8 +909,57 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     - per sequenze di lunghezza **pari**, il centro di simmetria coincide con un campione della sequenza;
     - per sequenze di lunghezza **dispari**, invece, il centro di simmetria coincide con un punto equidistante tra due campioni.
 21. Teorema di Parseval per sequenze;
+    \begin{gather*}
+    \left\{ \begin{array}{cl} \displaystyle
+    \sum_{n=0}^{N_0 -1} x[n] \ y^{*}[n] = \frac{1}{N_0} \sum_{k=0}^{N_0 -1}\overline{X}_k \ \overline{Y}^{*}_{k} \\
+    \displaystyle\sum_{n=0}^{N_0 -1} \Big|x[n]\Big|^{2} = \frac{1}{N_0} \sum_{k=0}^{N_0 -1}\overline{X}_k \ \Big|\overline{X}_{k}\Big|^{2}
+    \end{array} \right.
+    \end{gather*}
+    - Dimostrazione:
+    \begin{gather*}
+    \sum_{n=0}^{N_0 -1} x[n] \ y^{*}[n] =\sum_{n=0}^{N_0 -1}\overline{X}_k \ \Big(\frac{1}{N_0}\sum_{k=0}^{N_0 - 1}\overline{Y}_k \ e^{j\frac{2\pi kn}{N_0}}\Big)^{*} = \\
+    = \frac{1}{N_0} \sum_{k=0}^{N_0 -1} \overline{Y}_k \sum_{n=0}^{N_0 -1 }x[n] \ e^{-j\frac{2\pi kn}{N_0}} = \frac{1}{N_0} \sum_{k=0}^{N_0 -1} \overline{X}_k \ \overline{Y}^{*}_k
+    \end{gather*}
+        - Ponendo $x[n]=y[n]$ si ottiene la seconda relazione.
 22. Teorema del Prodotto;
+
+    Consideriamo adesso la sequenza (periodica) $p[n]$ data dal *prodotto* fra la sequenza $x[n]$ e la sequenza $y[n]$ entrambe periodiche di periodo $N_0$
+    $$
+    p[n] =x[n] \ y[n]
+    $$
+    e calcoliamone la trasformata discreta di Fourier:
+    \begin{align*}
+    \overline{P}_k &= \sum_{n=0}^{N_0 - 1} p[n] \ e^{-j2\pi\frac{nk}{N_0}} = \sum_{n=0}^{N_0 - 1}x[n] \ y[n] e^{-j2\pi\frac{nk}{N_0}} = \\
+    &= \sum_{n=0}^{N_0 -1}\frac{1}{N_0}\sum_{m=0}^{N_0 -1}\overline{X}_m \ e^{j2\pi\frac{nm}{N_0}}\cdot y[n] \ e^{-j2\pi\frac{nk}{N_0}}
+    \end{align*}
+    Dove $x[n]$ è stata scomposta in serie discreta di Fourier. Inoltre è stata utilizzata una variabile "muta" $m$ nell'antitrasformata per non creare ambiguità con la 
+    variabile $k$, da cui dipende la trasformata.
+    \begin{align*}
+    &= \frac{1}{N_0} \sum_{n=0}^{N_0 -1}\sum_{m=0}^{N_0 -1} \overline{X}_m \ e^{j2\pi \frac{nm}{N_0}} \cdot y[n] e^{-j2\pi\frac{nk}{N_0}}
+    \end{align*}
+    Invertendo l'ordine delle sommatorie otteniamo:
+    \begin{align*}
+    \overline{P}_k &= \sum_{m=0}^{N_0 -1} \overline{X}_m \frac{1}{N_0}\sum_{n=0}^{N_0 -1} y[n] \ e^{-j2\pi{frac{n(k-m)}{N_0}}} = \frac{1}{N_0}\sum_{m=0}^{N_0 -1}\overline{X}_m \ \overline{Y}_{k-m}= \\ 
+    &= \frac{1}{N_0}\cdot \overline{X}_k \otimes \overline{Y}_k
+    \end{align*}
+    La convoluzione tra le due trasformate discrete è una somma di convoluzione **ciclica** tra le due sequenze periodiche $\overline{X}_k$ e $\overline{Y}_k$ in ambito *frequenziale*. In conclusione:
+    \begin{align*}
+    p[n] = x[n] \ y[n] \Longleftrightarrow \overline{P}_k = \frac{1}{N_0}\cdot \overline{X}_k \otimes \overline{Y}_k
+    \end{align*}
 23. Teorema della Convoluzione (+ relazioni tra convoluzione lineare e circolare).
+    
+    Consideriamo ora la sequenza $z[n]$ come somma di convoluzione ciclica o circolare tra le due sequenze $x[n]$ e $y[n]$, periodiche di periodo $N_0$
+    $$
+    z[n] = x[n] \otimes y[n] = \sum_{m=0}^{N_0 -1}x[m] \ y[n-m] = \sum_{m=0}^{N_0 -1}y[m] \ x[n-m]
+    $$
+    La somma di convoluzione gode di tutte le proprietà citate per la somma di convoluzione tra sequenze periodiche. \newline
+    Calcoliamo la trasformata discreta di $z[n]$:
+    \begin{align*}
+    \overline{Z}_k &= \sum_{n=0}^{N_0 -1} z[n] \ e^{-j2\pi{\frac{nk}{N_0}}} = \sum_{n=0}^{N_0 -1} \sum_{m=0}^{N_0 -1} x[m] \ y[n-m] e^{-j2\pi{\frac{nk}{N_0}}} = 
+    \sum_{m=0}^{N_0 -1} x[m] \sum_{n=0}^{N_0 -1} y[n-m] e^{-j2\pi\frac{nk}{N_0}} = \\
+    &= \sum_{m=0}^{N_0 -1} x[m] \ \overline{Y}_k \ e^{-j2\pi\frac{mk}{N_0}} = \overline{Y}_k \sum_{m=0}^{N_0 -1} x[m] \ e^{-j2\pi\frac{mk}{N_0}}= \\
+    &= \overline{X}_k \cdot \overline{Y}_k
+    \end{align*}
 
 ### Generale:
 25. Fast Fourier Transform (FFT).
