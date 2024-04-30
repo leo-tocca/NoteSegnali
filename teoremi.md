@@ -960,6 +960,25 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     &= \sum_{m=0}^{N_0 -1} x[m] \ \overline{Y}_k \ e^{-j2\pi\frac{mk}{N_0}} = \overline{Y}_k \sum_{m=0}^{N_0 -1} x[m] \ e^{-j2\pi\frac{mk}{N_0}}= \\
     &= \overline{X}_k \cdot \overline{Y}_k
     \end{align*}
+    Quindi:
+    $$
+    x[n]\otimes y[n] \Longleftrightarrow \overline{X}_k \cdot \overline{Y}_k
+    $$
+    - Relazioni tra convoluzione lineare e circolare (per due sequenze di lunghezza finita):
+
+        Siano $x[n]$ e $h[n]$ due sequenze di lunghezza $L$ e $M$: il "supporto" sul quale le sequenze hanno campioni *non nulli* è $[0, L-1]$ e $[0, M-1]$.
+        - La convoluzione *lineare* è ottenuta dalla relazione:
+        $$
+        y_{l}[n] = x[n] * h[n] = \sum_{k=-\infty}^{\infty} x[k] \ h[n-k]
+        $$
+        dove le sequenze sono considerate **aperiodiche** e $y_l[n]$ ha una lunghezza *finita* e pari a $L+M-1$ campioni, considerando il "supporto" dove le sequenze
+        hanno campioni non nulli. Vi è quindi una *sovrapposizione* tra campioni non nulli delle due sequenze in $[0, L+M-2]$
+        - La convoluzione *circolare* invece, a causa della diversa lunghezza delle due sequenze, richiede di fissare un **periodo comune** $N$, per eseguire l'**estensione 
+        periodica** delle sequenze: l'unico vincolo da porre diventa quindi $N \geq \text{max}(L,M)$, appendendo quindi in fondo alle sequenze un numero di zeri (pari a $N-L$
+        o $N-M$) prima di estendere periodicamente le due sequenze. La convoluzione circolare è data da:
+        $$
+        y_{c}[n] = x[n] \otimes h[n] =\sum_{k=0}^{N-1}x[k] \ h[n-k]
+        $$
 
 ### Generale:
 25. Fast Fourier Transform (FFT).
