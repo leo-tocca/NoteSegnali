@@ -629,20 +629,22 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     2. L'autocorrelazione funzione solo di $\tau$
 
     - Dimostrazione:
-        1. \begin{gather*}
-            E[y(t)] = E[x(t)\otimes h(t)]= E[\int_{-\infty}^{\infty} h(\alpha)\cdot x(t-\alpha) \,d\alpha] = \\
-            \int_{-\infty}^{\infty} h(\alpha) \ E[x(t-\alpha)] \,d\alpha = m_{X} \int_{-\infty}^{\infty} h(\alpha) \,d\alpha = m_{X} \ H(0) = \text{ costante}
-            \end{gather*}
-        2. \begin{gather*}
-            R_{yy}(t_{1},t_{2}) \left\{ \begin{array}{lcl}
+        1. \begin{align*}
+            E[y(t)]&= E[x(t)\otimes h(t)]= E\Big[\int_{-\infty}^{\infty} h(\alpha)\cdot x(t-\alpha) \,d\alpha\Big] = \\
+            &=\int_{-\infty}^{\infty} h(\alpha) \ E[x(t-\alpha)] \,d\alpha = m_{X} \int_{-\infty}^{\infty} h(\alpha) \,d\alpha = \\ &= m_{X} \ H(0) =  \text{ costante}
+            \end{align*}
+        2. \begin{align*}
+            R_{yy}(t_{1},t_{2}) = \left\{ \begin{array}{lcl}
             t_{1} &=t \\
-            t_{2} &=t + \tau \to \tau = t_{2}-t_{1}
-            \end{array} \right. \to \text{ cambio di variabile} \\
-            R_{yy}(t, t + \tau)= E[y(t)\cdot y(t+\tau)] = E\Big[\int_{-\infty}^{\infty} h)\alpha \ x(t-\alpha)\,d\,\alpha \ \int_{-\infty}^{\infty}h(\beta) \ x(t+\tau -\beta) d\,\beta\Big]\\
-            E\Big[\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} h(\alpha) \ h(\beta) \ x(t-\alpha) x(t+\tau -\beta) \,d\alpha \,d\beta \Big]= \\
-            \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} h(\alpha) \ h(\beta) \ E \Big[x(t-\alpha) x(t+\tau -\beta) \Big] \,d\alpha \,d\beta \\
-            \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} h(\alpha) \ h(\beta) \ R_{xx}(\tau -\beta +\alpha) \,d\alpha \,d\beta \to R_{yy}(t, t+\tau) = R_{yy(\tau)}
-            \end{gather*}
+            t_{2} &=t + \tau \to \tau &= t_{2}-t_{1}
+            \end{array} \right. \to \text{ cambio di variabile}
+            \end{align*}
+            \begin{align*}
+            R_{yy}(t, t + \tau) &= E[y(t)\cdot y(t+\tau)] = E\Big[\int_{-\infty}^{\infty} h)\alpha \ x(t-\alpha)\,d\,\alpha \ \int_{-\infty}^{\infty}h(\beta) \ x(t+\tau -\beta) d\,\beta\Big]\\
+            &=E\Big[\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} h(\alpha) \ h(\beta) \ x(t-\alpha) x(t+\tau -\beta) \,d\alpha \,d\beta \Big]= \\
+            &=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} h(\alpha) \ h(\beta) \ E \Big[x(t-\alpha) x(t+\tau -\beta) \Big] \,d\alpha \,d\beta \\
+            &=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} h(\alpha) \ h(\beta) \ R_{xx}(\tau -\beta +\alpha) \,d\alpha \,d\beta \to R_{yy}(t, t+\tau) = R_{yy(\tau)}
+            =\end{align*}
         
         Quindi il processo $y(t)$ è WSS.
 
@@ -651,11 +653,11 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
 2. Trasformata di Fourier per sequenze (definizione, periodo 1, denormalizzazione);
 
     Data la sequenza *aperiodica* $x[n]$ **discreta**:
-    \begin{gather*}
-    \overline{X}(f) = \sum_{n=-\infty}^{\infty}x[n]\ e^{-j2\pi nfT} \longrightarrow f=F\cdot F_{c} = \frac{F}{T} = \si{\hertz}
+    \begin{align*}
+    \overline{X}(f) &= \sum_{n=-\infty}^{\infty}x[n]\ e^{-j2\pi nfT} \longrightarrow f=F\cdot F_{c} = \frac{F}{T} = \si{\hertz}
     \\
-    = \sum_{n=-\infty}^{\infty}x[n] \ e^{j2\pi nF}
-    \end{gather*}
+    &= \sum_{n=-\infty}^{\infty}x[n] \ e^{j2\pi nF}
+    \end{align*}
     $\overline{X}(f)$ è **completamente nota** se conosco il suo andamento in un intervallo delle frequenze *normalizzate* di ampiezza unitaria:  $\underbrace{F\in [-\frac{1}{2}; \frac{1}{2}]}_{\text{Intervallo base}}$
 
     - Periodica di periodo $1$:
@@ -983,6 +985,47 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
 ### Generale:
 25. Fast Fourier Transform (FFT).
 
+    Supponiamo di avere in memoria un numero $N_0$ di valori della sequenza periodica $x[n]$ e calcoliamone numericamente la trasformata discreta:
+    $$
+    \overline{X}_k = \sum_{n=0}^{N_0 -1} \  e^{-j\frac{1\pi kn}{N_0}} =\Big\{ x[0]\cdot e^{-j0}+x[1]\cdot e^{j\frac{2\pi k}{N_0}}+x[2]\cdot e^{-j\frac{2\pi 2k}{N_0}} + \cdots + x[N_0 -1]\cdot e^{-j\frac{2\pi(N_0 -1)k}{N_0}}\Big\}
+    $$
+    Vogliamo quindi determinare il numero di *operazioni necessarie* sia per la trasformata che per l'antitrasformata (ignorando il fattore di scala $\frac{1}{N_0}$):
+    $$
+    x[n] = \overline{X}_0 \cdot e^{j0}+\overline{X}_1\cdot e^{j\frac{2\pi k}{N_0}}+\overline{X}_2\cdot e^{j\frac{2\pi 2k}{N_0}} + \cdots + \overline{X}_{N_0 -1}\cdot e^{j\frac{2\pi(N_0 -1)k}{N_0}}
+    $$
+    Supponiamo quindi di avere valori *complessi* $z=a+jb$, ma **precalcolati**, ovvero già in memoria. Per il calcolo di un *singolo campione* $X[k]$ è necessario eseguire $N_0$ moltiplicazioni complesse
+    e $N_0 -1$ addizioni complesse, le quali sono tradotte dai calcolatori in operazioni nel campo reale, eseguendole tra le parti reali e immaginari dei numeri complessi coinvolti:
+    - per eseguire un’addizione complessa è necessario eseguire 2 addizioni reali: $(a + jb) + (c + jd) = (a + c) + j(b + d)$
+    - per eseguire una moltiplicazione complessa è necessario eseguire 4 moltiplicazioni reali e 2 addizioni reali, $(a + jb) · (c + jd) = (ac − bd) + j(ad + bc)$.
+
+    Quindi per un singolo campione $X[k]$ sono necessarie $N_0$ moltiplicazioni complesse e $N_0 -1$ somme complesse. Inoltre, per ogni valore di $k$ sono necessarie
+    $8N_0 -2$ operazioni reali, e dato che la sequenza è composta da $N_0$ valori la complessità diventa **quadratica**
+    $$
+    (8N_0 -2)N_0 = 8N_{0}^{2} -2N_0 \approx 8N_{0}^2
+    $$
+    Per velocizzare i calcoli è stato quindi introdotto l'algoritmo **Fast Fourier Transform** o FFT, il quale viene applicato se *$N_0$ è una potenza del $2 \to N_0 = 2^{M}$*
+    \begin{align*}
+    \overline{X}_k &= \sum_{m=0}^{\frac{N_0}{2}-1} x[2m]\ e^{-j\frac{2\pi(2m)k}{N_0}} + \sum_{m=0}^{\frac{N_0}{2}-1} x[2m+1] \ e^{-j\frac{2\pi(2m-1)k}{N_0}}= \\
+    & = \overbrace{\sum_{m=0}^{\frac{N_0}{2}-1} x[2m]\ e^{-j\frac{2\pi mk}{\frac{N_0}{2}}}}^{\overline{P}_k}+e^{-j\frac{2\pi k}{\frac{N_0}{2}}} + \overbrace{\sum_{m=0}^{\frac{N_0}{2}-1} x[2m+1] \ e^{-j\frac{2\pi mk}{\frac{N_0}{2}}}}^{\overline{D}_k}
+    \end{align*}
+    con $k= 0, \dots , N_0 -1$. $\overline{P}_k$ è la trasformata ottenuta dai $\frac{N_0}{2}$ campioni di *indice pari* di $x[n]$, mentre $\overline{D}_k$ indica la trasformata
+    della sequenza ottenuta dai $\frac{N_0}{2}$ campioni di *indice dispari* Questa scomposizione è ricorsiva dell'ordine, in quanto la trasformata di ordine $N_0$ è espressa come combinazione lineare
+    di due trasformate di ordine $\frac{N_0}{2}$: questo concetto può essere esteso al numero di operazioni $N_{FFT}$:
+    $$
+    N_{FFT}(N_0)=N_{FFT}(\frac{N_0}{2})+N_{FFT}(\frac{N_0}{2})+6N_0 + 2N_0
+    $$
+    tenendo conto che per ogni $k$ (dei coefficienti dispari) è necessario moltiplicare $D_k$ per un esponenziale complesso (precalcolato, 6 operazioni reali) e poi sommare con $P_k$ (2 operazioni reali).
+
+    Il procedimento viene poi ripetuto ricorsivamente. Infine, iterando la formula:
+    $$
+    N_{FFT}(N_0) = 6N_0 + 8N_0\log_2 N_0 \approx 8N_0 \log_2 N_0
+    $$
+    la complessità risulta **logaritmica**! Ad esempio, con $N_0=1024$
+    $$
+    \frac{N_{TDF}(N_0)}{N_{FFT}(N_0)} = \frac{8N_{0}^{\cancel{2}}}{\cancel{8N_0}\log_2 N_0} = \frac{N_0}{\log_2 N_0} \approx 100
+    $$
+    Il vantaggio conseguito dall'utilizzo di FFT al posto della trasformata classica aumenta al crescere di $N_0$
+ 
 ## Sistemi monodimensionali a tempo discreto 
 
 ### Proprietà dei sistemi;
