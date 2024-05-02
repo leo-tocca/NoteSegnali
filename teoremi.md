@@ -661,11 +661,11 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     $\overline{X}(f)$ è **completamente nota** se conosco il suo andamento in un intervallo delle frequenze *normalizzate* di ampiezza unitaria:  $\underbrace{F\in [-\frac{1}{2}; \frac{1}{2}]}_{\text{Intervallo base}}$
 
     - Periodica di periodo $1$:
-    \begin{gather*}
-    \overline{X}(F+1) = \sum_{n=-\infty}^{\infty} x[n] \ e^{-j2\pi n(F+1)} = \\
-    \sum_{n=-\infty}^{\infty} x[n] e^{-j2\pi nF}\underbrace{\cancel{e^{-j2\pi n}}}_{=1 \text{ (n intero)}} = \\
-    \sum_{n=-\infty}^{\infty} x[n] e^{-j2\pi nF} = \overline{X}(F)
-    \end{gather*}
+    \begin{align*}
+    \overline{X}(F+1) &= \sum_{n=-\infty}^{\infty} x[n] \ e^{-j2\pi n(F+1)} =
+    \sum_{n=-\infty}^{\infty} x[n] e^{-j2\pi nF}\underbrace{\cancel{e^{-j2\pi n}}}_{=1 \text{ (n intero)}} =
+    =\sum_{n=-\infty}^{\infty} x[n] e^{-j2\pi nF} = \\ &= \overline{X}(F)
+    \end{align*}
 
     - *Denormalizzazione*:
     
@@ -685,19 +685,23 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     x[n] = \text{ITFS}\Big [ \overline{X}(f) \Big] = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{j2\pi n ft} \,df
     $$
     - Dimostrazione:
-    \begin{gather*}
-    \overline{X}(f) \triangleq \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi m fT} \to \text{ moltiplico e divido per osc.ni complesse alla frequenza } f \text{ e integro}\\
-    \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{j2\pi n fT} \,df = \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi m fT} \ e^{j2\pi n fT} \,df = \\
-    \sum_{m=-\infty}^{\infty} x[m] \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi (m-n)fT}\,df \\
+    \begin{align*}
+    \overline{X}(f) &\triangleq \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi m fT} \to \text{ moltiplico e divido per osc.ni complesse alla frequenza } f \text{ e integro}\\
+    & =\int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{j2\pi n fT} \,df = \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi m fT} \ e^{j2\pi n fT} \,df = \\
+    & =\sum_{m=-\infty}^{\infty} x[m] \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi (m-n)fT}\,df 
+    \end{align*}
+    $$
     \text{Studiamo } \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi (m-n)fT}\,df \longrightarrow
     \left\{ \begin{array}{cl}
     \frac{1}{T} & : \ m=n \to \int_{-\frac{1}{2T}}^{\frac{1}{2T}} 1\cdot \,df = \frac{1}{T} \\
     0 & : \ m \neq n \to m-n=k \to \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi kfT} = 0
-    \end{array} \right. \\
-    \Rightarrow \text{ Riprendo la sommatoria } \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{-j2\pi nfT} \,df = \sum_{m=-\infty}^{\infty}
-     x[m] \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi(m-n)fT}\,df = \frac{1}{T}x[n] \\
-     \Rightarrow x[n] = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}}\overline{X}(f)\ e^{j2\pi nfT}
-    \end{gather*}
+    \end{array} \right.
+    $$
+    \begin{align*}
+    &\Rightarrow \text{ Riprendo la sommatoria } \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{-j2\pi nfT} \,df = \sum_{m=-\infty}^{\infty}
+    x[m] \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi(m-n)fT}\,df = \frac{1}{T}x[n] \\
+    & \Rightarrow x[n] = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}}\overline{X}(f)\ e^{j2\pi nfT}
+    \end{align*}
     Nota bene: nell'ultima sommatoria ho tutti elementi pari a $0$, tranne il caso $m=n \to \frac{1}{T}$
     - Criterio di convergenza:
     \begin{gather*}
@@ -718,7 +722,7 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     $$
     - Dimostrazione:
     \begin{gather*}
-    \tfs[x[n-k]] = \sum_{m=-\infty}^{\infty}x[n-k] \ e^{-j2\pi nfT} = \\ = \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi(m+k)fT} = e^{-j2\pi kfT}\sum_{m=-\infty}^{\infty}x[m] \ e^{-j2\pi mfT} =\\ =\overline{X}(f)e^{-j2\pi kfT}
+    \tfs[x[n-k]] = \sum_{m=-\infty}^{\infty}x[n-k] \ e^{-j2\pi nfT} = \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi(m+k)fT} = e^{-j2\pi kfT}\sum_{m=-\infty}^{\infty}x[m] \ e^{-j2\pi mfT} =\overline{X}(f)e^{-j2\pi kfT}
     \end{gather*}
 6. Teorema della Modulazione;
     $$
@@ -739,10 +743,10 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     \Rightarrow \overline{S}(f) = \overline{X}(f) \cdot \overline{Y}(f)
     $$
     - Dimostrazione:
-    \begin{gather*}
-    \overline{S}(f) = \sum_{n=-\infty}^{\infty} \sum_{k=-\infty}^{\infty} x[k]\ y[n-k] e^{-j2\pi nfT} = \sum_{k=-\infty}^{\infty} x[k] \underbrace{\sum_{n=-\infty}^{\infty}y[n-k]\ e^{-j2\pi nfT}}_{\text{ritardo}}= \\
-    = \sum_{n=-\infty}^{\infty} x[k] \overline{Y}(f) \ e^{-j2\pi kfT} = \overline{Y}(f)  \sum_{n=-\infty}^{\infty} \ x[k]  e^{-j2\pi kfT} =\overline{Y}(f) \ \overline{X}(f)
-    \end{gather*}
+    \begin{align*}
+    \overline{S}(f) &= \sum_{n=-\infty}^{\infty} \sum_{k=-\infty}^{\infty} x[k]\ y[n-k] e^{-j2\pi nfT} = \sum_{k=-\infty}^{\infty} x[k] \underbrace{\sum_{n=-\infty}^{\infty}y[n-k]\ e^{-j2\pi nfT}}_{\text{ritardo}}= \\
+    &= \sum_{n=-\infty}^{\infty} x[k] \overline{Y}(f) \ e^{-j2\pi kfT} = \overline{Y}(f)  \sum_{n=-\infty}^{\infty} \ x[k]  e^{-j2\pi kfT} =\overline{Y}(f) \ \overline{X}(f)
+    \end{align*}
 8. Teorema del Prodotto;
     $$
     p[n]=x[n]\cdot y[n] \Longleftrightarrow \overline{P}(f) = \overline{X}(f) \otimes \overline{Y}(f)
