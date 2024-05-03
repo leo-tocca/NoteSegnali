@@ -9,6 +9,7 @@ header-includes: |
             \DeclareMathOperator{\rect}{rect}
             \DeclareMathOperator{\tfs}{TFS}
             \newcommand{\dft}{\operatorname{DFT}}
+            \newcommand{\tf}[1]{\text{T}\Big[ #1 \Big]}
             \usepackage{geometry}
 				\geometry{
 					a4paper,
@@ -1032,8 +1033,32 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
  
 ## Sistemi monodimensionali a tempo discreto 
 
+$$
+y[n] = \text{T}\Big[x[m], n\Big] = \text{T}\Big[x[n] \Big]
+$$
+
 ### Proprietà dei sistemi;
 26. SLS a tempo discreto: risposta impulsiva.
+    $$
+    h[n] = \tf{\delta[n]}
+    $$
+    Nota $h[n]$:
+    \begin{align*}
+    y[n] &= \tf{x[n]} = \tf{\sum_{k=-\infty}^{\infty}x[k] \ \delta[n-k]} = \text{per la linearità} \\
+    &= \sum_{k=-\infty}^{\infty}x[k] \tf{\delta[n-k]} = \text{per la stazionarietà: } \to
+    \left \{\begin{array}{cl}
+    \tf{\delta[n-k]}=h[n-k]
+    \end{array}\right. \\
+    &= \sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = x[n] \otimes h[n]
+    \end{align*}
+    Quindi l'uscita è una *somma di convoluzione* tra la sequenza in ingresso e la risposta impulsiva del sistema stesso!
+    
+    Un sistema lineare e stazionario (SLS) può essere:
+    - FIR (Finite Impulse Response) se la sua risposta impulsiva è costituita da un **numero finito di campioni**;
+    - IIR (Infinite Impulse Response) se la sua risposta impulsiva è costituita da un numero **infinito** di campioni.
+
+    È possibile dimostrare come la *condizione necessaria e sufficiente* per la stabilità in senso BIBO di un SLS è l'**'assoluta sommabilità**
+    della sua risposta impulsvia
 
 ### Proprietà:
 27. Sistemi a cascata e in parallelo;
