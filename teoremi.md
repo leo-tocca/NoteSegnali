@@ -10,6 +10,8 @@ header-includes: |
             \DeclareMathOperator{\tfs}{TFS}
             \newcommand{\dft}{\operatorname{DFT}}
             \newcommand{\tf}[1]{\text{T}\Big[ #1 \Big]}
+            \newcommand{\Abs}[1]{\Big| #1 \Big|}
+            \newcommand{\ov}[1]{\overline{#1}}
             \usepackage{geometry}
 				\geometry{
 					a4paper,
@@ -1058,12 +1060,76 @@ $$
     - IIR (Infinite Impulse Response) se la sua risposta impulsiva è costituita da un numero **infinito** di campioni.
 
     È possibile dimostrare come la *condizione necessaria e sufficiente* per la stabilità in senso BIBO di un SLS è l'**'assoluta sommabilità**
-    della sua risposta impulsvia
+    della sua risposta impulsiva:
+    $$
+    \sum_{k=-\infty}^{\infty} \Abs{h[k]} < \infty
+    $$
+    Da ciò deriviamo che
+    - i sistemi FIR sono stabili: la sommatoria diventa una somma *finita* di quantità *limitate*;
+    - mentre i sistemi IIR non lo sono sempre. Diventa necessario controllare la validità della seguente condizione:
+        - **sequenza causale**:
+
+            un SLS è causale se e solo se la sua risposta impulsiva è una sequenza causale, cioè:
+            $$
+            h[n] = 0 \text{ se } n<0, \text{ ovvero } h[n] = h[n] \ u[n] 
+            $$
 
 ### Proprietà:
 27. Sistemi a cascata e in parallelo;
+    
+    - In un sistema a **cascata** l'ordine degli stessi può essere variato senza alterare l'uscita:
+        \begin{align*}
+        h[n] = h_{1}[n] \otimes h_{2}[n] \to y[n] = x[n] \otimes \Big(h_{1}[n] \otimes h_{2}[n] \Big)
+        \end{align*}
+        Questo per la proprietà commutativa del prodotto di concoluzione discreta.
+    - Due sistemi **in parallelo**:
+        \begin{align*}
+        h[n] = h_{1}[n] + h_{2}[n] \to y[n] = x[n] \otimes \Big[ h_{1}[n] + h_{2}[n] \Big]
+        \end{align*}
+
 28. Risposta in frequenza;
+
+    1. La risposta in frequenza di un SLS a tempo discreto è la **trasformata di Fourier** della risposta impulsiva $h[n]$ del sistema stesso
+        $$
+        \overline{H}(f) = \sum_{n=-\infty}^{\infty} h[n] \ e^{-j2\pi nfT}
+        $$
+    2. Inoltre $\overline{H}(f)$ è pari al rapporto tra le trasformate $\overline{Y}(f)$ e $\ov{X}(f)$ rispettivamente
+        della sequenza in uscita $y[n]$ e in ingresso $x[n]$:
+        $$
+        \ov{H}(f)=\frac{\ov{Y}(f)}{\ov{X}(f)}
+        $$
+    3. La risposta in frequenza è data dal rapporto fra la sequenza di uscita y[n] e quella di ingresso x[n] quando x[n] è una oscillazione complessa alla frequenza f:
+        $$
+        \ov{H}(f) = \frac{y[n]}{x[n]}\Bigg|_{x[n]=e^{j2\pi nfT}}
+        $$
+    È possibile inoltre definire, data la risposta in frequenza $\ov{H}(f)$, la *risposta in ampiezza* $\ov{A}(f)=|\ov{H}(f)|$, la quale determina
+    la **selettività** di un SLS e la sua *risposta in fase* $\ov{\theta}(f)=\phase{\ov{H}(f)}$
+
 29. Filtri a tempo discreto.
+
+    La **condizione di non distorsione** viene riformulata come segue:
+    $$
+    y[n]=Kx[n-n_0]
+    $$
+    $K$ ed $n_0$ rappresentano rispettivamente il guadagno ed il ritardo del sistema. Nel dominio della frequenza, questa condizione si traduce nei due seguenti requisiti per la risposta in ampiezza e la risposta in fase:
+    $$
+    \ov{A}(f) = K, \ \ \ov{\theta}(f)=-2\pi fn_{0}T
+    $$
+    È sufficiente che queste condizioni siano verificate nell'ambito della banda del segnale per garantire assenza di distorsioni
+
+    Le caratteristiche di selettività di un filtro a tempo discreto con risposta in frequenza (che è una funzione periodica di periodo 1/T) sono determinate dall'andamento della sua
+    risposta in ampiezza in un solo periodo della funzione (as esempio $\Big[-\frac{1}{2T}, \frac{1}{2T}\Big]$).
+
+    Le basse frequenze sono sempre prossime alla frequenza nulla, mentre le alte sono comunque prossime al limite superiore dell'intervallo, ovvero $\frac{1}{2T}$:
+    - **passa basso**
+        \begin{align*}
+        h_{\text{LP}}[n] &= 2BT \sinc(2nBT) \Longleftrightarrow \ov{H}_{\text{LP}} = \frac{1}{T}\sum_{k=-\infty}^{\infty} T \cdot \operatorname{rect}\left(\frac{f-\frac{k}{T}}{2 B}\right)
+        \end{align*}
+    - **passa alto**
+        \begin{align*}
+        h_{\text{HP}}[n] = \delta[n] -2BT\sinc(2nBT) \Longleftrightarrow \ov{H}_{\text{HP}}(f) = 1- \ov{H}_{\text{LP}}(f) 
+        \end{align*}
+    I filtri ideali **non sono causali!**    
 
 ## Quantizzazione
 30. Formule e definizioni (passo, dinamica D, bit B, fattore di scala A...);
