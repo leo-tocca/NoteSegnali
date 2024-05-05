@@ -1131,9 +1131,43 @@ $$
         \end{align*}
     I filtri ideali **non sono causali!**    
 
-## Quantizzazione
+## Quantizzazione (per alcune di queste domande guardare quesiti)
 30. Formule e definizioni (passo, dinamica D, bit B, fattore di scala A...);
+
+    L’operazione di quantizzazione rende **discreta** l’ampiezza dei campioni associando loro
+    un valore di ampiezza scelto da un insieme finito di possibili livelli (livelli di quantizzazione)
+    $$
+    \hat{x} = \text{Q}\Big[x(nT)\Big]
+    $$
+    La quantizzazione è un'operazione *lossy*, in quanto essendo un'operazione irreversibile, una volta quantizzato il segnale l'informazione originale
+    non potrà essere più recuperata, commettendo un errore
+    $$
+    e(nt)=\hat{x}(nT)-x(nT)
+    $$
+    Per effettuare l'operazione di quantizzazione dividiamo l’intervallo di variazione di ampiezza dei suoi campioni in intervalli di quantizzazione contigui $(x_i, x_{i+1})$,
+    dove gli estremi rappresentano le *soglie* di quantizzazione. 
+
+    L'operazione quindi consiste nel **selezionare l'intervallo più corretto per ogni campione** $x(nt)$ e associare al suo interno un valore $\hat{x}_i$ detto *livello* dell'intervallo selezionato.
+
+    - **Passo**: indicato con $\Delta$, rappresenta la distanza tra livelli di quantizzazione.
+    - **bit**: indicato con $B$, serve a determinare il numero di possibili livelli di quantizzazione, rappresentati con notazione binaria, pari a $2^{B}$
+    - **dinamica**: indicata con $D$ rappresenta l'ampiezza dell'intervallo di valori che i livelli di quantizzazione riescono a coprire.
+
+    Per avere una *buona rappresentazione del segnale*, la dinamica $D \approx$ **intervallo variazione ampiezza dei campioni**!
+    $$
+    D > X_{\text{max}}-X_{\text{min}}
+    $$
+
 31. Tipologie di quantizzatori (midrise, midtread, arrotondamento e troncamento);
+
+    Vedi risposte 33, 34 quesiti
+
 32. Errore di quantizzazione;
 33. Modello dell’errore di quantizzazione;
 34. Definizione Signal To Noise Ratio (SNR) e formule.
+
+    È il rapporto tra la *potenza del segnale* e la *potenza dell'errore di quantizzazione*:
+    $$
+    \text{SNR}_q = \frac{S}{\delta^2_e}
+    $$
+    Ciò vale con l'ipotesi di un quantizzatore che utilizzi l'arrotondamento. $S$ rappresenta la potenza del segnale (è necessario conoscerla)..
