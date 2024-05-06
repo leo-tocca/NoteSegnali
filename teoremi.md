@@ -1148,26 +1148,88 @@ $$
     dove gli estremi rappresentano le *soglie* di quantizzazione. 
 
     L'operazione quindi consiste nel **selezionare l'intervallo più corretto per ogni campione** $x(nt)$ e associare al suo interno un valore $\hat{x}_i$ detto *livello* dell'intervallo selezionato.
+    
+    - "Definizioni":
+        - **Passo**: indicato con $\Delta$, rappresenta la distanza tra livelli di quantizzazione.
+        - **bit**: indicato con $B$, serve a determinare il numero di possibili livelli di quantizzazione, rappresentati con notazione binaria, pari a $2^{B}$
+        - **dinamica**: indicata con $D$ rappresenta l'ampiezza dell'intervallo di valori che i livelli di quantizzazione riescono a coprire.
+    
+    - Quantizzatori uniformi
+        
+        Ottenuti imponendo una distanza costante tra le soglie e i livelli ($\Delta$ costante).
 
-    - **Passo**: indicato con $\Delta$, rappresenta la distanza tra livelli di quantizzazione.
-    - **bit**: indicato con $B$, serve a determinare il numero di possibili livelli di quantizzazione, rappresentati con notazione binaria, pari a $2^{B}$
-    - **dinamica**: indicata con $D$ rappresenta l'ampiezza dell'intervallo di valori che i livelli di quantizzazione riescono a coprire.
+        Per avere una *buona rappresentazione del segnale*, la dinamica $D \approx$ **intervallo variazione ampiezza dei campioni**!
+        $$
+        D > X_{\text{max}}-X_{\text{min}}
+        $$
+        In un processo *aleatorio gaussiano*, i cui campioni seguono la distribuzione di probabilità Gaussiana (quindi con un intervallo di variazione *illimitato*),
+        si rende necessario ipotizzare un intervallo di variazione dei campi **finito** e di dimensione tale da rendere *minima* la probabilità che esca da tale intervallo
+        (**overflow**). Considerando il caso di valor medio *nullo*:
+        \begin{align*}
+        E\Big[f(x)\Big]=0 &\to \text{gli intervalli sono: }
+        \left\{\begin{array}{cl}
+        [-3\Delta, 3\Delta] & \approx 95,45 \% \\ \relax 
+        [-4\Delta, 4\Delta] & \approx 99,73 \%
+        \end{array} \right. \to \Delta > 8\sigma
+        \end{align*}
 
-    Per avere una *buona rappresentazione del segnale*, la dinamica $D \approx$ **intervallo variazione ampiezza dei campioni**!
-    $$
-    D > X_{\text{max}}-X_{\text{min}}
-    $$
+        Per far sì che il passo non sia né eccessivamente grande (livelli di quantizzazione usati molto minori rispetto a quelli a disposizione), né troppo piccolo (commessi
+        errori rilevanti (di overflow), quando si quantizzano campioni al di fuori della dinamica del quantizzatore) $\Delta, D, B$ sono legati secondo:
+        $$
+        \Delta=\frac{D}{2^B}
+        $$
 
 31. Tipologie di quantizzatori (midrise, midtread, arrotondamento e troncamento);
 
     Vedi risposte 33, 34 quesiti
 
-32. Errore di quantizzazione;
-33. Modello dell’errore di quantizzazione;
-34. Definizione Signal To Noise Ratio (SNR) e formule.
+32. Errore di quantizzazione e modello;
+
+    L'errore di quantizzazione può essere visto come una sequenza che *si somma* (modello additivo) al segnale campionato:
+    $$
+    e(nT)=\hat{x}(nt)-x(nT) \Rightarrow \hat{x}(nT) = e(nT)+x(nT)
+    $$
+    Modelliamo quindi $e(nT)$ come un processo aleatorio, indicandolo come **rumore di quantizzazione** e con le seguenti ipotesi:
+    1. $e(nT)$ sia un processo stazionario in senso lato: quindi media,
+        potenza e varianza *costanti* e non dipendono da n;
+    2.   che la densità di probabilità di $e(nT)$ sia di tipo
+        **uniforme**, permettendo di valutare tali costanti distinguendo i casi di quantizzazione per troncamento e per arrotondamento: \\
+        densità probabilità errore quantizzazione:
+        \begin{align*}
+        P_e(e)= \left\{
+        \begin{array}{ll}
+        \frac{1}{\Delta}& -\frac{\Delta}{2}<e\leq\frac{\Delta}{2}\\
+        0 & \text{altrove}
+        \end{array}\right. \to E\Big[e(nT)\Big]= 0 = E\Big[e^{2}(nT)\Big] = \frac{\Delta^{2}}{12}
+        \end{align*}
+    3.   $\{e(nT)\}$ incorrelato con processo $\{x(nT)\}$;
+    4.   I campioni del processo $\{e(nT)\}$ sono **incorrelati** tra loro;
+
+    Per la quantizzazione con troncamento si ha:
+    \begin{align*}
+    E\Big[e(nT)\ e\Big((n+m)T\Big)\Big]=\left\{\begin{array}{ll}E[e^2(nT)]=\frac{\Delta^2}{3}&m=0\\
+    \\E[e(nT)]E\Big[e\Big((n+m)T\Big)\Big]=\frac{\Delta}{2}\cdot\frac{\Delta}{2} =\frac{\Delta^2}{4}&m\neq0,\end{array}\right.
+    \end{align*}
+    mentre per la quantizzazione con arrotondamento abbiamo
+    \begin{align*}
+    E\Big[e(nT)e\Big((n+m)T\Big)\Big]=\left\{\begin{array}{ll}E[e^2(nT)]=\sigma_e^2=\frac{\Delta^2}{12}&m=0\\\\0&m\ne0.\end{array}\right.
+    \end{align*}
+    In questo caso, l'errore di quantizzazione è un **processo bianco**.
+
+33. Definizione Signal To Noise Ratio (SNR) e formule.
 
     È il rapporto tra la *potenza del segnale* e la *potenza dell'errore di quantizzazione*:
     $$
     \text{SNR}_q = \frac{S}{\delta^2_e}
     $$
-    Ciò vale con l'ipotesi di un quantizzatore che utilizzi l'arrotondamento. $S$ rappresenta la potenza del segnale (è necessario conoscerla)..
+    Ciò vale con l'ipotesi di un quantizzatore che utilizzi l'arrotondamento. $S$ rappresenta la potenza del segnale (è necessario conoscerla oltre ai 
+    parametri del quantizzatore)...  e $\Delta=\frac{D}{2^{B}}$:
+    $$
+    \text{SNR}_{q}=\frac{S}{\sigma_e^2}=\frac{S}{\frac{1}{12}\Delta^2}=\frac{S}{\frac{1}{12}(\frac{D}{2^B})^2}=\frac{12\cdot S\cdot2^{2B}}{D^2}
+    $$
+    Esprimendo $\text{SNR}_{q}$ in scala logaritmica
+    \begin{align*}
+    SNR_{\mathrm{qdB}} &=10\log_{10}SNR_{\mathrm{q}}=10\log_{10}\left(\frac{12\cdot S\cdot2^{2B}}{D^{2}}\right) \\
+    &=(20 \log_{10}2)B+10\log_{\mathbf{1}0}\left(\frac{12S}{D^2}\right) \\
+    &\approx6.02B+10\log_{10}\left(\frac{12S}{D^2}\right)\ \mathrm{dB}. 
+    \end{align*}
