@@ -630,24 +630,21 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     Per far sì che accada il processo $y(t)$ deve avere:
     1. Media costante;
     2. L'autocorrelazione funzione solo di $\tau$
-
     - Dimostrazione:
         1. \begin{align*}
-            E[y(t)]&= E[x(t)\otimes h(t)]= E\Big[\int_{-\infty}^{\infty} h(\alpha)\cdot x(t-\alpha) \,d\alpha\Big] = \\
-            &=\int_{-\infty}^{\infty} h(\alpha) \ E[x(t-\alpha)] \,d\alpha = m_{X} \int_{-\infty}^{\infty} h(\alpha) \,d\alpha = \\ &= m_{X} \ H(0) =  \text{ costante}
+            E[y(t)]&= E[x(t)\otimes h(t)]= E\Big[\int_{-\infty}^{\infty} h(\alpha)\cdot x(t-\alpha) \,d\alpha\Big] =
+            =\int_{-\infty}^{\infty} h(\alpha) \ E[x(t-\alpha)] \,d\alpha \\ &= m_{X} \int_{-\infty}^{\infty} h(\alpha) \,d\alpha = m_{X} \ H(0) =  \text{ costante}
             \end{align*}
         2. \begin{align*}
-            R_{yy}(t_{1},t_{2}) = \left\{ \begin{array}{lcl}
-            t_{1} &=t \\
-            t_{2} &=t + \tau \to \tau &= t_{2}-t_{1}
-            \end{array} \right. \to \text{ cambio di variabile}
-            \end{align*}
-            \begin{align*}
-            R_{yy}(t, t + \tau) &= E[y(t)\cdot y(t+\tau)] = E\Big[\int_{-\infty}^{\infty} h)\alpha \ x(t-\alpha)\,d\,\alpha \ \int_{-\infty}^{\infty}h(\beta) \ x(t+\tau -\beta) d\,\beta\Big]\\
+            R_{yy}(t_{1},t_{2}) &= \left\{ \begin{array}{lcl}
+            t_{1} =t \\
+            t_{2} = t + \tau \to \tau &= t_{2}-t_{1}
+            \end{array} \right. \to \text{ cambio di variabile} \\
+            R_{yy}(t, t + \tau) &= E[y(t)\cdot y(t+\tau)] = E\Big[\int_{-\infty}^{\infty} h(\alpha) \ x(t-\alpha)\,d\,\alpha \ \int_{-\infty}^{\infty}h(\beta) \ x(t+\tau -\beta) d\,\beta\Big]\\
             &=E\Big[\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} h(\alpha) \ h(\beta) \ x(t-\alpha) x(t+\tau -\beta) \,d\alpha \,d\beta \Big]= \\
             &=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} h(\alpha) \ h(\beta) \ E \Big[x(t-\alpha) x(t+\tau -\beta) \Big] \,d\alpha \,d\beta \\
-            &=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} h(\alpha) \ h(\beta) \ R_{xx}(\tau -\beta +\alpha) \,d\alpha \,d\beta \to R_{yy}(t, t+\tau) = R_{yy(\tau)}
-            =\end{align*}
+            &=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} h(\alpha) \ h(\beta) \ R_{xx}(\tau -\beta +\alpha) \,d\alpha \,d\beta \\&\to R_{yy}(t, t+\tau) = R_{yy(\tau)}
+            \end{align*}
         
         Quindi il processo $y(t)$ è WSS.
 
@@ -657,9 +654,8 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
 
     Data la sequenza *aperiodica* $x[n]$ **discreta**:
     \begin{align*}
-    \overline{X}(f) &= \sum_{n=-\infty}^{\infty}x[n]\ e^{-j2\pi nfT} \longrightarrow f=F\cdot F_{c} = \frac{F}{T} = \si{\hertz}
-    \\
-    &= \sum_{n=-\infty}^{\infty}x[n] \ e^{j2\pi nF}
+    \overline{X}(f) &= \sum_{n=-\infty}^{\infty}x[n]\ e^{-j2\pi nfT} = \longrightarrow f=F\cdot F_{c} = \frac{F}{T} = \si{\hertz} \longrightarrow
+    = \sum_{n=-\infty}^{\infty}x[n] \ e^{j2\pi nF}
     \end{align*}
     $\overline{X}(f)$ è **completamente nota** se conosco il suo andamento in un intervallo delle frequenze *normalizzate* di ampiezza unitaria:  $\underbrace{F\in [-\frac{1}{2}; \frac{1}{2}]}_{\text{Intervallo base}}$
 
@@ -672,7 +668,7 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
 
     - *Denormalizzazione*:
     
-    Necessaria in quanto se la sequenza $x[n]$ deriva da un'operazione di campionamento. la frequenza normalizzata **non permette** di stabilire un legame con la frequenza (espressa in \si{\Hz})
+    Necessaria in quanto se la sequenza $x[n]$ deriva da un'operazione di campionamento, la frequenza normalizzata **non permette** di stabilire un legame con la frequenza (espressa in \si{\Hz})
     delle componenti nella trasformata del segnale analogico di partenza.
 
     Se $T$ è il periodo di campionamento, $\Rightarrow f \triangleq \frac{F}{T} = F \cdot f_{c}$ in \si{\hertz}. Sostituendo ottengo $F=fT$ in \si{\Hz}
@@ -691,16 +687,12 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     \begin{align*}
     \overline{X}(f) &\triangleq \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi m fT} \to \text{ moltiplico e divido per osc.ni complesse alla frequenza } f \text{ e integro}\\
     & =\int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{j2\pi n fT} \,df = \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi m fT} \ e^{j2\pi n fT} \,df = \\
-    & =\sum_{m=-\infty}^{\infty} x[m] \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi (m-n)fT}\,df 
-    \end{align*}
-    $$
-    \text{Studiamo } \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi (m-n)fT}\,df \longrightarrow
+    & =\sum_{m=-\infty}^{\infty} x[m] \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi (m-n)fT}\,df \\
+    &\text{Studiamo } \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi (m-n)fT}\,df \longrightarrow
     \left\{ \begin{array}{cl}
     \frac{1}{T} & : \ m=n \to \int_{-\frac{1}{2T}}^{\frac{1}{2T}} 1\cdot \,df = \frac{1}{T} \\
     0 & : \ m \neq n \to m-n=k \to \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi kfT} = 0
-    \end{array} \right.
-    $$
-    \begin{align*}
+    \end{array} \right. \\    
     &\Rightarrow \text{ Riprendo la sommatoria } \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{-j2\pi nfT} \,df = \sum_{m=-\infty}^{\infty}
     x[m] \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi(m-n)fT}\,df = \frac{1}{T}x[n] \\
     & \Rightarrow x[n] = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}}\overline{X}(f)\ e^{j2\pi nfT}
@@ -755,13 +747,13 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     p[n]=x[n]\cdot y[n] \Longleftrightarrow \overline{P}(f) = \overline{X}(f) \otimes \overline{Y}(f)
     $$
     - Dimostrazione:
-    \begin{gather*}
-     \overline{P}(f)=\sum_{n=-\infty}^{\infty} p[n] \ e^{-j2\pi nfT} =  \sum_{n=-\infty}^{\infty} x[n] \ y[n] \ e^{-j2\pi nfT} = \\ = \sum_{n=-\infty}^{\infty}
+    \begin{align*}
+     \overline{P}(f)&=\sum_{n=-\infty}^{\infty} p[n] \ e^{-j2\pi nfT} =  \sum_{n=-\infty}^{\infty} x[n] \ y[n] \ e^{-j2\pi nfT} = \sum_{n=-\infty}^{\infty}
      \underbrace{T\int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu)\ e^{-j2\pi n\nu T} \,d\nu}_{\text{antitrasformata di }\overline{X}(f)} y[n] \ e^{-j2\pi nfT} = \\
-     = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu)  \underbrace{\sum_{n=-\infty}^{\infty} y[n] \ e^{-j2\pi n(f-\nu)T}}_{\text{dalla modulazione }\to \overline{Y}(f-\nu)} \,d\nu=
+     &= T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu)  \underbrace{\sum_{n=-\infty}^{\infty} y[n] \ e^{-j2\pi n(f-\nu)T}}_{\text{dalla modulazione }\to \overline{Y}(f-\nu)} \,d\nu=
      T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu) \overline{Y}(f-\nu)\,d\nu  \\
-    \Rightarrow \overline{P}(f) = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu) \overline{Y}(f-\nu)\,d\nu
-    \end{gather*}
+    &\Rightarrow \overline{P}(f) = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu) \overline{Y}(f-\nu)\,d\nu
+    \end{align*}
     Questa è la **convoluzione ciclica o periodica**. Calcolato su un singolo periodo e il risultato è diviso per l'ampiezza del periodo $\frac{1}{T}$
 9. Teorema dell'Incremento;
     $$
@@ -788,29 +780,39 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     \end{gather*}
 
 ### Campionamento:
-11. Teorema del campionamento (da interpolazione cardinale);
-    \begin{gather*}
-    p(t) \text{ è un impulso "diverso" per generalizzare l'operazione d'interpolazione} \\
-    \hat{x}(t)= \sum_{n=-\infty}^{\infty} x[n] \ p(t-nT), \ \text{scegliendo } p(t)= \sinc\Big(\frac{f}{T}\Big) \Rightarrow P(f)=T\rect (fT) \\ 
-    \hat{X}(f) = P(f) \ \overline{X}(f) = \cancel{T}\rect \Big(\frac{f}{\frac{1}{T}}\Big)\frac{1}{\cancel{T}}\cdot  \sum_{k=-\infty}^{+\infty} X\Big(f-\frac{k}{T}\Big)= X(f) \\
-    \text{ricampionando il segnale interpolato al generico istante } t=kT \\
-    \hat{x}(kT) =\sum_{n=-\infty}^{+\infty} x(nT) \ \sinc\Big(\frac{kT-nT}{T}\Big), \text{ ma } \sinc(k-n)=
+11. Teorema del campionamento ("risultato" dell'interpolazione cardinale);
+
+    Un segnale il cui spettro è *limitato* nella banda $B$ può essere ricostruito a partire dai propri campioni, **purché** $f_c \leq 2B$
+    
+    $p(t)$ è un impulso "diverso" per generalizzare l'operazione d'interpolazione, anche al fine di evitare le discontinuità che lo stesso impulso $p(t)$ introduce nell'interpolazione a mantenimento.
+    \begin{align*}
+    \hat{x}(t)&= \sum_{n=-\infty}^{\infty} x[n] \ p(t-nT), \ \text{scegliendo } p(t)= \sinc\Big(\frac{f}{T}\Big) \Rightarrow P(f)=T\rect (fT) \\ 
+    \hat{X}(f)&= P(f) \ \overline{X}(f) = \cancel{T}\rect \Big(\frac{f}{\frac{1}{T}}\Big)\frac{1}{\cancel{T}}\cdot  \sum_{k=-\infty}^{+\infty} X\Big(f-\frac{k}{T}\Big)= X(f) \\
+   &\boxed{\begin{array}{cl}
+  \text{ricampionando il segnale}
+  \\
+   \text{interpolato al generico istante } t=kT
+  \end{array}}&
+  \\
+    \hat{x}(kT) &=\sum_{n=-\infty}^{+\infty} x(nT) \ \sinc\Big(\frac{kT-nT}{T}\Big), \text{ ma } \sinc(k-n)=
     \left\{ \begin{array}{cl}
     0 & n\neq k \\
     1 & k=n
     \end{array} 
     \right. \\
-\text{Quindi: } \hat{x}(kT)=\sum_{n=-\infty}^{+\infty}x[n] \ \underbrace{\delta[k-n]}_{1\text{ sse }n=k}= x[k] = x(kT) \\
-    \text{Il segnale di partenza coincide con il segnale interpolato.}
-    \end{gather*}
+    &\text{Quindi: } \hat{x}(kT)=\sum_{n=-\infty}^{+\infty}x[n] \ \underbrace{\delta[k-n]}_{1\text{ sse }n=k}= x[k] = x(kT)
+    \end{align*}
+    Il segnale di partenza coincide con il segnale interpolato.
 12. Relazione tra TCF e TFS.
-    \begin{gather*}
-    \underset{\text{discreto}}{x[n]}=\underset{\text{continuo}}{x(nT)} \Longleftrightarrow \underset{\text{discreto}}{\overline{X}(f)} = \underset{\text{continuo}}{X(f)} \\
-    \overline{X}(f) \sum_{n=-\infty}^{\infty} x[n] \ e^{-j2\pi nfT} = \sum_{n=-\infty}^{\infty} x(nT) \ e^{-j2\pi nfT}= \\
-    \text{Sapendo che: } x(nT)=\int_{-\infty}^{\infty}X(\alpha) e^{j2\pi\alpha nT}\,d\alpha \\
-    = \sum_{n=-\infty}^{\infty} \int_{-\infty}^{\infty} X(\alpha) \ e^{-j2\pi \alpha nT} \,d\alpha \cdot e^{-j2\pi nfT}
-    = \int_{-\infty}^{\infty} X(\alpha) \sum_{n=-\infty}^{\infty} e^{-j2\pi n(f-\alpha)T} \,d\alpha \\
-    \end{gather*}
+    \begin{align*}
+    \underset{\text{discreto}}{x[n]}=\underset{\text{continuo}}{x(nT)} \Longleftrightarrow \underset{\text{discreto}}{\overline{X}(f)} = \underset{\text{continuo}}{X(f)}
+    \end{align*}
+    \begin{align*}
+    \overline{X}(f) &\triangleq \sum_{n=-\infty}^{\infty} x[n] \ e^{-j2\pi nfT} = \sum_{n=-\infty}^{\infty} x(nT) \ e^{-j2\pi nfT}=
+    \boxed{\text{Sapendo che: } x(nT)=\int_{-\infty}^{\infty}X(\alpha) e^{j2\pi\alpha nT}\,d\alpha} \\
+    &= \sum_{n=-\infty}^{\infty} \int_{-\infty}^{\infty} X(\alpha) \ e^{-j2\pi \alpha nT} \,d\alpha \cdot e^{-j2\pi nfT}
+    = \int_{-\infty}^{\infty} X(\alpha) \sum_{n=-\infty}^{\infty} e^{-j2\pi n(f-\alpha)T} \,d\alpha
+    \end{align*}
     ma il segnale *pettine di Dirac* è esprimibile in serie di Fourier con coefficienti pari a $\frac{1}{T}$:
     $$
     \displaystyle
@@ -822,11 +824,11 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     \end{array}
     }
     $$
-    \begin{gather*}
-    \int_{-\infty}^{\infty}X(\alpha) \frac{1}{T} \sum_{k=-\infty}^{\infty} \delta(f-\alpha -\frac{k}{T})\,d\alpha = \frac{1}{T}\sum_{k=-\infty}^{\infty} \int_{-\infty}^{\infty}X(\alpha) \delta(f-\alpha -\frac{k}{T})\,d\alpha = \\
-    \delta \text{ è pari } = \frac{1}{T}\sum_{k=-\infty}^{\infty} \int_{-\infty}^{\infty}X(\alpha) \delta\Big(\alpha -(f- \frac{k}{T})\Big)\,d\alpha = \text{ prodotto tra } X(\alpha) \text{ e Dirac centrato in } f -\frac{k}{T} \\
-    \text{per la proprietà campionatrice della delta di Dirac } \overline{X}(f) = \frac{1}{T}\sum_{n=-\infty}^{\infty}X(f-\frac{k}{T})
-    \end{gather*}
+    \begin{align*}
+    &\int_{-\infty}^{\infty}X(\alpha) \frac{1}{T} \sum_{k=-\infty}^{\infty} \delta(f-\alpha -\frac{k}{T})\,d\alpha = \frac{1}{T}\sum_{k=-\infty}^{\infty} \int_{-\infty}^{\infty}X(\alpha) \delta(f-\alpha -\frac{k}{T})\,d\alpha = \\
+    &=\delta \text{ è pari } = \frac{1}{T}\sum_{k=-\infty}^{\infty} \int_{-\infty}^{\infty}X(\alpha) \delta\Big(\alpha -(f- \frac{k}{T})\Big)\,d\alpha = \text{ prodotto tra } X(\alpha) \text{ e Dirac centrato in } f -\frac{k}{T} \\
+    &=\text{per la proprietà campionatrice della delta di Dirac } \longrightarrow \overline{X}(f) = \frac{1}{T}\sum_{n=-\infty}^{\infty}X(f-\frac{k}{T})
+    \end{align*}
 
 ## Segnali a tempo discreto periodici
 13. Trasformata discreta di Fourier (definizione);
@@ -842,12 +844,12 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     \end{gather*}
     
 15. La relazione di sintesi di una TDF discende da quella di analisi;
-    \begin{gather*}
-    x[n] = \sum_{k=0}^{N_0 -1} \overline{X}_k \ e^{j2\pi k \frac{n}{N_0}} \Rightarrow \overline{X}_k = \sum_{n=0}^{N_0 -1} x[n] e^{-j\frac{2\pi nk}{N_0}} \\
-    \text{Moltiplichiamo per } e^{-j \frac{2\pi nm}{N_0}} \text{ con } 0\leq m \leq N_0 - 1 \text{ ed effettuiamo una somma sul periodo} \\
-    \sum_{n=0}^{N_0 -1} x[n] e^{-j2\pi m\frac{n}{N_0}} = \sum_{n=0}^{N_0 -1} \sum_{k=0}^{N_0 -1}\overline{X}_k e^{-j2\pi n\frac{(k-m)}{N_0}} = \sum_{k=0}^{N_0 -1}\overline{X}_k \sum_{n=0}^{N_0 -1} e^{-j2\pi n\frac{(k-m)}{N_0}} = N_0 \overline{X}_k \\
-    \Rightarrow \overline{X}_k = \frac{1}{N_0}\sum_{n=0}^{N_0 -1} x[n] \ e^{-j2\pi\frac{k}{N_0}}
-    \end{gather*}
+    \begin{align*}
+    x[n] &= \sum_{k=0}^{N_0 -1} \overline{X}_k \ e^{j2\pi k \frac{n}{N_0}} \Rightarrow \overline{X}_k = \sum_{n=0}^{N_0 -1} x[n] e^{-j\frac{2\pi nk}{N_0}} \\
+    &\text{Moltiplichiamo per } e^{-j \frac{2\pi nm}{N_0}} \text{ con } 0\leq m \leq N_0 - 1 \text{ ed effettuiamo una somma sul periodo} \\
+    &=\sum_{n=0}^{N_0 -1} x[n] e^{-j2\pi m\frac{n}{N_0}} = \sum_{n=0}^{N_0 -1} \sum_{k=0}^{N_0 -1}\overline{X}_k e^{-j2\pi n\frac{(k-m)}{N_0}} = \sum_{k=0}^{N_0 -1}\overline{X}_k \sum_{n=0}^{N_0 -1} e^{-j2\pi n\frac{(k-m)}{N_0}} = N_0 \overline{X}_k \\
+    &\Rightarrow \overline{X}_k = \frac{1}{N_0}\sum_{n=0}^{N_0 -1} x[n] \ e^{-j2\pi\frac{k}{N_0}}
+    \end{align*}
 
 ### Proprietà:
 
@@ -862,18 +864,18 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     \dft_{N_0}\Big\{ x[n-n_0] \Big\} = \overline{X}_k \ e^{-\frac{j2\pi kn_0}{N_0}}
     $$
     - Dimostrazione:
-    \begin{gather*}
-    \dft_{N_0}\Big\{ x[n-n_0] \Big\} = \sum_{n=0}^{N_0 -1} x[n-n_0] \ e^{-j2\pi\frac{n}{N_0}k} =
+    \begin{align*}
+    \dft_{N_0}\Big\{ x[n-n_0] \Big\} &= \sum_{n=0}^{N_0 -1} x[n-n_0] \ e^{-j2\pi\frac{n}{N_0}k} =
     \boxed{
     \begin{array}{cl}
     \text{cambio di variabile} \\
     p  = n - n_0 \\
     n  = p + n_0
     \end{array}} \\
-    = \sum_{p=-n_0}^{N_0 - 1 - n_0} x[p] \ e^{-j\frac{2\pi}{N_0}(p+n_0)} = \sum_{p=-n_0}^{N_0 - 1 - n_0} x[p] \ e^{-j\frac{2\pi}{N_0}kp} \ e^{-j\frac{2\pi}{N_0}n_0}=\\
-    = e^{-j\frac{2\pi}{N_0}kn_0} \sum_{p=-n_0}^{N_0 - 1 - n_0} x[p] \ e^{-j\frac{2\pi}{N_0}kp} = e^{-j\frac{2\pi}{N_0}kn_0} \sum_{p=0}^{N_0 - 1} x[p] \ e^{-j\frac{2\pi}{N_0}kp} \\
-    \dft_{N_0}\Big\{ x[n-n_0] \Big\} = e^{-j\frac{2\pi kn_0}{N_0}} \cdot \overline{X}_k 
-    \end{gather*}
+    &= \sum_{p=-n_0}^{N_0 - 1 - n_0} x[p] \ e^{-j\frac{2\pi}{N_0}(p+n_0)} = \sum_{p=-n_0}^{N_0 - 1 - n_0} x[p] \ e^{-j\frac{2\pi}{N_0}kp} \ e^{-j\frac{2\pi}{N_0}n_0}=\\
+    &= e^{-j\frac{2\pi}{N_0}kn_0} \sum_{p=-n_0}^{N_0 - 1 - n_0} x[p] \ e^{-j\frac{2\pi}{N_0}kp} = e^{-j\frac{2\pi}{N_0}kn_0} \sum_{p=0}^{N_0 - 1} x[p] \ e^{-j\frac{2\pi}{N_0}kp} \\
+    &\dft_{N_0}\Big\{ x[n-n_0] \Big\} = e^{-j\frac{2\pi kn_0}{N_0}} \cdot \overline{X}_k &
+    \end{align*}
     Si dice traslazione **circolare** in quanto, osservando la periodicità della sequenza originale e di quella traslata,
     è possibile notare come i campioni che "escono" a destra dell'intervallo rientrano alla sinistra dell'intervallo stesso.
 18. Proprietà di Traslazione In Frequenza;
@@ -885,16 +887,16 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     \dft_{N_0}\Big\{ x[-n] \Big\} = \overline{X}_{-k} = \overline{X}_{N_0 - k} 
     \end{gather*}
     - Dimostrazione:
-    \begin{gather*}
-    \dft_{N_0}\Big\{ x[-n] \Big\} = \sum_{n=0}^{N_0 -1} x[-n] \ e^{-j\frac{2\pi}{N_0}kn} = \sum_{n=0}^{N_0 -1} x[n-n_0] \ e^{-j2\pi\frac{n}{N_0}k} = \\
+    \begin{align*}
+    \dft_{N_0}\Big\{ x[-n] \Big\} &= \sum_{n=0}^{N_0 -1} x[-n] \ e^{-j\frac{2\pi}{N_0}kn} = \sum_{n=0}^{N_0 -1} x[n-n_0] \ e^{-j2\pi\frac{n}{N_0}k} =
     \boxed{
     \begin{array}{cl}
     \text{cambio di variabile} \\
     p  = N_0 - n \\
     n  = N_0 - p
-    \end{array}}
-    = \sum_{p=1}^{N_0} x[p] \ e^{-j\frac{2\pi}{N_0}k(N_0 -p)} = \underbrace{e^{-j2\pi k}}_{=1} \ \sum_{p=0}^{N_0 -1} x[p] \ e^{-j2\pi\frac{(-p)}{N_0}k} = \overline{X}_{-k} = \overline{X}_{N_0 - k}
-    \end{gather*}
+    \end{array}}\\
+    &= \sum_{p=1}^{N_0} x[p] \ e^{-j\frac{2\pi}{N_0}k(N_0 -p)} = \underbrace{e^{-j2\pi k}}_{=1} \ \sum_{p=0}^{N_0 -1} x[p] \ e^{-j2\pi\frac{(-p)}{N_0}k} = \overline{X}_{-k} = \overline{X}_{N_0 - k}
+    \end{align*}
     dove nel primo passaggio, abbiamo usato la periodicità della sequenza x[n] e
     nel penultimo passaggio, per cambiare gli indici della sommatoria, abbiamo
     usato le proprietà di periodicità della sequenza e della funzione esponenziale,
@@ -926,7 +928,7 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     \end{gather*}
     - Dimostrazione:
     \begin{gather*}
-    \sum_{n=0}^{N_0 -1} x[n] \ y^{*}[n] =\sum_{n=0}^{N_0 -1}\overline{X}_k \ \Big(\frac{1}{N_0}\sum_{k=0}^{N_0 - 1}\overline{Y}_k \ e^{j\frac{2\pi kn}{N_0}}\Big)^{*} = \\
+    \sum_{n=0}^{N_0 -1} x[n] \ y^{*}[n] =\sum_{n=0}^{N_0 -1}\overline{X}_k \ \Big(\frac{1}{N_0}\sum_{k=0}^{N_0 - 1}\overline{Y}_k \ e^{j\frac{2\pi kn}{N_0}}\Big)^{*} 
     = \frac{1}{N_0} \sum_{k=0}^{N_0 -1} \overline{Y}_k \sum_{n=0}^{N_0 -1 }x[n] \ e^{-j\frac{2\pi kn}{N_0}} = \frac{1}{N_0} \sum_{k=0}^{N_0 -1} \overline{X}_k \ \overline{Y}^{*}_k
     \end{gather*}
         - Ponendo $x[n]=y[n]$ si ottiene la seconda relazione.
@@ -1003,7 +1005,7 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     Supponiamo quindi di avere valori *complessi* $z=a+jb$, ma **precalcolati**, ovvero già in memoria. Per il calcolo di un *singolo campione* $X[k]$ è necessario eseguire $N_0$ moltiplicazioni complesse
     e $N_0 -1$ addizioni complesse, le quali sono tradotte dai calcolatori in operazioni nel campo reale, eseguendole tra le parti reali e immaginari dei numeri complessi coinvolti:
     - per eseguire un’addizione complessa è necessario eseguire 2 addizioni reali: $(a + jb) + (c + jd) = (a + c) + j(b + d)$
-    - per eseguire una moltiplicazione complessa è necessario eseguire 4 moltiplicazioni reali e 2 addizioni reali, $(a + jb) · (c + jd) = (ac − bd) + j(ad + bc)$.
+    - per eseguire una moltiplicazione complessa è necessario eseguire 4 moltiplicazioni reali e 2 addizioni reali, $(a + jb) · (c + jd) = (ac - bd) + j(ad + bc)$.
 
     Quindi per un singolo campione $X[k]$ sono necessarie $N_0$ moltiplicazioni complesse e $N_0 -1$ somme complesse. Inoltre, per ogni valore di $k$ sono necessarie
     $8N_0 -2$ operazioni reali, e dato che la sequenza è composta da $N_0$ valori la complessità diventa **quadratica**
@@ -1220,7 +1222,7 @@ $$
 
     È il rapporto tra la *potenza del segnale* e la *potenza dell'errore di quantizzazione*:
     $$
-    \text{SNR}_q = \frac{S}{\delta^2_e}
+    \text{SNR}_q = \frac{S}{\sigma^2_e}
     $$
     Ciò vale con l'ipotesi di un quantizzatore che utilizzi l'arrotondamento. $S$ rappresenta la potenza del segnale (è necessario conoscerla oltre ai 
     parametri del quantizzatore)...  e $\Delta=\frac{D}{2^{B}}$:

@@ -40,12 +40,27 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{italian}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
 \usepackage{cancel}
 \usepackage{steinmetz}
 \usepackage{derivative}
 \usepackage{mathtools}
+\usepackage{siunitx}
 \DeclareMathOperator{\sinc}{sinc}
 \DeclareMathOperator{\rect}{rect}
+\DeclareMathOperator{\tfs}{TFS}
+\newcommand{\dft}{\operatorname{DFT}}
+\newcommand{\tf}[1]{\text{T}\Big[ #1 \Big]}
+\newcommand{\Abs}[1]{\Big| #1 \Big|}
+\newcommand{\ov}[1]{\overline{#1}}
 \usepackage{geometry}
     \geometry{
         a4paper,
@@ -56,10 +71,11 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
+  pdflang={it},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
@@ -602,7 +618,7 @@ continua}\label{proprietuxe0-della-trasformata-continua}
   \tightlist
   \item
     Dimostrazione: \[
-    \cdot \ \ \underline{\alpha > 0} \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} x(\alpha t) e^{-j2\pi ft} \,dt \text{, ponendo } z=\alpha t \to t = \frac{z}{\alpha}, \,dz = \alpha \,dt \to \,dt = \frac{\d,z}{\alpha} 
+    \cdot \ \ \underline{\alpha > 0} \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} x(\alpha t) e^{-j2\pi ft} \,dt \text{, ponendo } z=\alpha t \to t = \frac{z}{\alpha}, \,dz = \alpha \,dt \to \,dt = \frac{\,dz}{\alpha} 
     \] \[
     \Rightarrow x(\alpha t) \Longleftrightarrow \int_{-\infty}^{\infty} \frac{x(z) e^{-j2\pi f \frac{z}{\alpha}}}{\alpha} \,dz = \frac{1}{\alpha}\int_{-\infty}^{\infty} x(z) e^{-j2\pi f \frac{z}{\alpha}} \,dz = \frac{1}{\alpha} X(\frac{f}{\alpha})
     \] \[
@@ -885,5 +901,877 @@ Partiamo dalla definizione di autocorrelazione:
 R_{x} (\tau) = \int_{-\infty}^{\infty} x(\alpha) x(\alpha -t) \,d\alpha = \int_{-\infty}^{\infty} x(\alpha)x(-(t-\alpha)) \,d\alpha = x(\tau) \otimes x(-\tau) = \\
 R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f) \ X^{*}(-f) = |X(f)|^{2} = E_x(f)
 \end{gather*}
+
+\newpage
+
+\section{Secondo Parziale}\label{secondo-parziale}
+
+\subsection{Processi aleatori
+analogici}\label{processi-aleatori-analogici}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Un processo aleatorio \(X(t)\) filtrato da un SLS è all'uscita un
+  nuovo processo \(Y(t)\) WSS.
+
+  Per far sì che accada il processo \(y(t)\) deve avere:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Media costante;
+  \item
+    L'autocorrelazione funzione solo di \(\tau\)
+  \end{enumerate}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Dimostrazione:
+
+    \begin{enumerate}
+    \def\labelenumii{\arabic{enumii}.}
+    \tightlist
+    \item
+      \begin{align*}
+       E[y(t)]&= E[x(t)\otimes h(t)]= E\Big[\int_{-\infty}^{\infty} h(\alpha)\cdot x(t-\alpha) \,d\alpha\Big] =
+       =\int_{-\infty}^{\infty} h(\alpha) \ E[x(t-\alpha)] \,d\alpha \\ &= m_{X} \int_{-\infty}^{\infty} h(\alpha) \,d\alpha = m_{X} \ H(0) =  \text{ costante}
+       \end{align*}
+    \item
+      \begin{align*}
+       R_{yy}(t_{1},t_{2}) &= \left\{ \begin{array}{lcl}
+       t_{1} =t \\
+       t_{2} = t + \tau \to \tau &= t_{2}-t_{1}
+       \end{array} \right. \to \text{ cambio di variabile} \\
+       R_{yy}(t, t + \tau) &= E[y(t)\cdot y(t+\tau)] = E\Big[\int_{-\infty}^{\infty} h(\alpha) \ x(t-\alpha)\,d\,\alpha \ \int_{-\infty}^{\infty}h(\beta) \ x(t+\tau -\beta) d\,\beta\Big]\\
+       &=E\Big[\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} h(\alpha) \ h(\beta) \ x(t-\alpha) x(t+\tau -\beta) \,d\alpha \,d\beta \Big]= \\
+       &=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} h(\alpha) \ h(\beta) \ E \Big[x(t-\alpha) x(t+\tau -\beta) \Big] \,d\alpha \,d\beta \\
+       &=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} h(\alpha) \ h(\beta) \ R_{xx}(\tau -\beta +\alpha) \,d\alpha \,d\beta \\&\to R_{yy}(t, t+\tau) = R_{yy(\tau)}
+       \end{align*}
+    \end{enumerate}
+
+    Quindi il processo \(y(t)\) è WSS.
+  \end{itemize}
+\end{enumerate}
+
+\subsection{Segnali a tempo discreto
+aperiodici}\label{segnali-a-tempo-discreto-aperiodici}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Trasformata di Fourier per sequenze (definizione, periodo 1,
+  denormalizzazione);
+
+  Data la sequenza \emph{aperiodica} \(x[n]\) \textbf{discreta}:
+  \begin{align*}
+   \overline{X}(f) &= \sum_{n=-\infty}^{\infty}x[n]\ e^{-j2\pi nfT} = \longrightarrow f=F\cdot F_{c} = \frac{F}{T} = \si{\hertz} \longrightarrow
+   = \sum_{n=-\infty}^{\infty}x[n] \ e^{j2\pi nF}
+   \end{align*} \(\overline{X}(f)\) è \textbf{completamente nota} se
+  conosco il suo andamento in un intervallo delle frequenze
+  \emph{normalizzate} di ampiezza unitaria:
+  \(\underbrace{F\in [-\frac{1}{2}; \frac{1}{2}]}_{\text{Intervallo base}}\)
+
+  \begin{itemize}
+  \item
+    Periodica di periodo \(1\): \begin{align*}
+     \overline{X}(F+1) &= \sum_{n=-\infty}^{\infty} x[n] \ e^{-j2\pi n(F+1)} =
+     \sum_{n=-\infty}^{\infty} x[n] e^{-j2\pi nF}\underbrace{\cancel{e^{-j2\pi n}}}_{=1 \text{ (n intero)}} =
+     =\sum_{n=-\infty}^{\infty} x[n] e^{-j2\pi nF} = \\ &= \overline{X}(F)
+     \end{align*}
+  \item
+    \emph{Denormalizzazione}:
+  \end{itemize}
+
+  Necessaria in quanto se la sequenza \(x[n]\) deriva da un'operazione
+  di campionamento, la frequenza normalizzata \textbf{non permette} di
+  stabilire un legame con la frequenza (espressa in \si{\Hz}) delle
+  componenti nella trasformata del segnale analogico di partenza.
+
+  Se \(T\) è il periodo di campionamento,
+  \(\Rightarrow f \triangleq \frac{F}{T} = F \cdot f_{c}\) in
+  \si{\hertz}. Sostituendo ottengo \(F=fT\) in \si{\Hz} \begin{gather*}
+   \text{TFS}\Big[X[n]\Big] = \overline{X}(f) \triangleq \sum_{n=-\infty}^{\infty} x[n] e^{-j2\pi nfT}
+   \end{gather*} \(f\) continua in
+  \(\Big[ -\frac{1}{2T}; \frac{1}{2T} \Big] \to \overline{X}(f)\)
+  continua. Posso introdurre il \emph{modulo}
+  \(\overline{A}(f)=|\overline{X}(f)|\) e lo \emph{spettro di fase}
+  \(\overline{\theta}(f)= \phase{\overline{X}(f)}\).
+
+  \(X(f)\) è periodica di periodo pari a
+  \(f_c =\frac{1}{T} \Rightarrow \overline{X}(f+\frac{1}{T})= \sum x[n]e^{-j2\pi nFT} \cdot \underbrace{\cancel{e^{2\pi n \frac{1}{T}T}}}_{=1}=\overline{X}(f)\)
+\item
+  Relazione tra definizione di antitrasformata e trasformata; Criterio
+  di convergenza per TFS (solo definizione).
+
+  \[
+   x[n] = \text{ITFS}\Big [ \overline{X}(f) \Big] = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{j2\pi n ft} \,df
+   \]
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Dimostrazione: \begin{align*}
+     \overline{X}(f) &\triangleq \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi m fT} \to \text{ moltiplico e divido per osc.ni complesse alla frequenza } f \text{ e integro}\\
+     & =\int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{j2\pi n fT} \,df = \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi m fT} \ e^{j2\pi n fT} \,df = \\
+     & =\sum_{m=-\infty}^{\infty} x[m] \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi (m-n)fT}\,df \\
+     &\text{Studiamo } \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi (m-n)fT}\,df \longrightarrow
+     \left\{ \begin{array}{cl}
+     \frac{1}{T} & : \ m=n \to \int_{-\frac{1}{2T}}^{\frac{1}{2T}} 1\cdot \,df = \frac{1}{T} \\
+     0 & : \ m \neq n \to m-n=k \to \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi kfT} = 0
+     \end{array} \right. \\    
+     &\Rightarrow \text{ Riprendo la sommatoria } \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{-j2\pi nfT} \,df = \sum_{m=-\infty}^{\infty}
+     x[m] \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi(m-n)fT}\,df = \frac{1}{T}x[n] \\
+     & \Rightarrow x[n] = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}}\overline{X}(f)\ e^{j2\pi nfT}
+     \end{align*} Nota bene: nell'ultima sommatoria ho tutti elementi
+    pari a \(0\), tranne il caso \(m=n \to \frac{1}{T}\)
+  \item
+    Criterio di convergenza: \begin{gather*}
+     \sum_{n=-\infty}^{\infty} \Big|x[n]\Big| < +\infty \Rightarrow \exists \text{ TFS}
+     \end{gather*} Un criterio di convergenza per l'esistenza della
+    trasformata è la \textbf{assoluta sommabilità} della frequenza.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{Teoremi}\label{teoremi}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\item
+  Teorema di Linearità; \[
+   x[n]=ax_1[n]+bx_2[n] \Rightarrow \overline{X}(f) = a\overline{X_1}(f)+b\overline{X_2}(f)
+   \]\\
+\item
+  Teorema del Ritardo;
+
+  Sia \(x[n]\) una sequenza. \[
+   x[n-k] \Longleftrightarrow \overline{X}(f) \cdot e^{-j2\pi kfT}
+   \]
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Dimostrazione: \begin{gather*}
+     \mathop{\mathrm{TFS}}[x[n-k]] = \sum_{m=-\infty}^{\infty}x[n-k] \ e^{-j2\pi nfT} = \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi(m+k)fT} = e^{-j2\pi kfT}\sum_{m=-\infty}^{\infty}x[m] \ e^{-j2\pi mfT} =\overline{X}(f)e^{-j2\pi kfT}
+     \end{gather*}
+  \end{itemize}
+\item
+  Teorema della Modulazione; \[
+   x[n]\cdot e^{-j2\pi nf_{0}t} \Longleftrightarrow \overline{X}(f-f_{0})
+   \]
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Dimostrazione: \begin{gather*}
+     \mathop{\mathrm{TFS}}\Big[x[n]e^{j2\pi nf_{0}t}\Big] = \sum_{n=-\infty}^{\infty} x[n] \ e^{-j2\pi nfT} \cdot e^{j2\pi nf_{0}T}= \sum_{n=-\infty}^{\infty} x[n] \ e^{-j2\pi n(f-f_0)T} = \overline{X}(f-f_0)
+     \end{gather*}
+  \end{itemize}
+\item
+  Teorema della Somma di Convoluzione;
+
+  Sia \(s[n]\) la sequenza discreta \emph{somma di convoluzione} tra le
+  sequenze aperiodiche \(x[n]\) e \(y[n]\). \[
+   s[n]= x[n]\otimes y[n] = \sum_{k=-\infty}^{\infty} x[k]\ y[n-k] = \sum_{k=-\infty}^{\infty} y[k] \ x[n-k]
+   \] Gode delle stesse proprietà del caso continuo. \[
+   \Rightarrow \overline{S}(f) = \overline{X}(f) \cdot \overline{Y}(f)
+   \]
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Dimostrazione: \begin{align*}
+     \overline{S}(f) &= \sum_{n=-\infty}^{\infty} \sum_{k=-\infty}^{\infty} x[k]\ y[n-k] e^{-j2\pi nfT} = \sum_{k=-\infty}^{\infty} x[k] \underbrace{\sum_{n=-\infty}^{\infty}y[n-k]\ e^{-j2\pi nfT}}_{\text{ritardo}}= \\
+     &= \sum_{n=-\infty}^{\infty} x[k] \overline{Y}(f) \ e^{-j2\pi kfT} = \overline{Y}(f)  \sum_{n=-\infty}^{\infty} \ x[k]  e^{-j2\pi kfT} =\overline{Y}(f) \ \overline{X}(f)
+     \end{align*}
+  \end{itemize}
+\item
+  Teorema del Prodotto; \[
+   p[n]=x[n]\cdot y[n] \Longleftrightarrow \overline{P}(f) = \overline{X}(f) \otimes \overline{Y}(f)
+   \]
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Dimostrazione: \begin{align*}
+      \overline{P}(f)&=\sum_{n=-\infty}^{\infty} p[n] \ e^{-j2\pi nfT} =  \sum_{n=-\infty}^{\infty} x[n] \ y[n] \ e^{-j2\pi nfT} = \sum_{n=-\infty}^{\infty}
+      \underbrace{T\int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu)\ e^{-j2\pi n\nu T} \,d\nu}_{\text{antitrasformata di }\overline{X}(f)} y[n] \ e^{-j2\pi nfT} = \\
+      &= T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu)  \underbrace{\sum_{n=-\infty}^{\infty} y[n] \ e^{-j2\pi n(f-\nu)T}}_{\text{dalla modulazione }\to \overline{Y}(f-\nu)} \,d\nu=
+      T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu) \overline{Y}(f-\nu)\,d\nu  \\
+     &\Rightarrow \overline{P}(f) = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu) \overline{Y}(f-\nu)\,d\nu
+     \end{align*} Questa è la \textbf{convoluzione ciclica o periodica}.
+    Calcolato su un singolo periodo e il risultato è diviso per
+    l'ampiezza del periodo \(\frac{1}{T}\)
+  \end{itemize}
+\item
+  Teorema dell'Incremento; \[
+   \odv{X(t)}{t}\Big|_{t=nT} \cong \frac{x(nT)-x(nT-T)}{T} = \frac{x[n]-x[n-1]}{T}, \text{ con } x[n] \triangleq x(nT)  
+   \] Si introduce l'operatore \textbf{incremento}
+  \(\Delta x[n] \triangleq x[n] - x[n-1]\) \newline Usando il
+  \emph{teorema del ritardo}: \[
+   \Delta x[n] \Longleftrightarrow \overline{X}(f) - \overline{X}(f)\ e^{-j2\pi fT} = \overline{X}(f) \ (1-e^{-j2\pi fT})
+   \] È l'analogo del teorema di derivazione.
+\item
+  Teorema della Sequenza Somma.
+
+  Consideriamo la sequenza somma \(y[n]=\sum_{k=-\infty}^{\infty}x[k]\).
+  Dal teorema dell'incremento otteniamo la sua trasformata in sequenza:
+  \[
+  \overline{Y}(f) = \frac{\overline{X}(f)}{1-e^{-j2\pi fT}}
+  \] purché \(\overline{X}(0) = 0\).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Dimostrazione: \begin{gather*}
+    z[n] = \Delta y[n] \Longleftrightarrow \overline{Z}(f)=\overline{Y}(f)[1-e^{-j2\pi fT}] \text{ dal teorema dell'incremento} \\
+    \text{però } \Delta y[n] = y[n] - y[n-1] = \sum_{k=-\infty}^{n} x[k] - \sum_{k=-\infty}^{n-1} = x[n] \\
+    \text{quindi } \overline{X}(f) = \overline{Y}(f)[1-e^{-j2\pi fT}] \to \overline{Y}(f) = \frac{\overline{X}(f)}{1-e^{-j2\pi fT}}
+    \end{gather*}
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{Campionamento:}\label{campionamento}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{10}
+\item
+  Teorema del campionamento (``risultato'' dell'interpolazione
+  cardinale);
+
+  Un segnale il cui spettro è \emph{limitato} nella banda \(B\) può
+  essere ricostruito a partire dai propri campioni, \textbf{purché}
+  \(f_c \leq 2B\)
+
+  \(p(t)\) è un impulso ``diverso'' per generalizzare l'operazione
+  d'interpolazione, anche al fine di evitare le discontinuità che lo
+  stesso impulso \(p(t)\) introduce nell'interpolazione a mantenimento.
+  \begin{align*}
+  \hat{x}(t)&= \sum_{n=-\infty}^{\infty} x[n] \ p(t-nT), \ \text{scegliendo } p(t)= \mathop{\mathrm{sinc}}\Big(\frac{f}{T}\Big) \Rightarrow P(f)=T\mathop{\mathrm{rect}}(fT) \\ 
+  \hat{X}(f)&= P(f) \ \overline{X}(f) = \cancel{T}\mathop{\mathrm{rect}}\Big(\frac{f}{\frac{1}{T}}\Big)\frac{1}{\cancel{T}}\cdot  \sum_{k=-\infty}^{+\infty} X\Big(f-\frac{k}{T}\Big)= X(f) \\
+     &\boxed{\begin{array}{cl}
+    \text{ricampionando il segnale}
+    \\
+     \text{interpolato al generico istante } t=kT
+    \end{array}}&
+    \\
+  \hat{x}(kT) &=\sum_{n=-\infty}^{+\infty} x(nT) \ \mathop{\mathrm{sinc}}\Big(\frac{kT-nT}{T}\Big), \text{ ma } \mathop{\mathrm{sinc}}(k-n)=
+  \left\{ \begin{array}{cl}
+  0 & n\neq k \\
+  1 & k=n
+  \end{array} 
+  \right. \\
+  &\text{Quindi: } \hat{x}(kT)=\sum_{n=-\infty}^{+\infty}x[n] \ \underbrace{\delta[k-n]}_{1\text{ sse }n=k}= x[k] = x(kT)
+  \end{align*} Il segnale di partenza coincide con il segnale
+  interpolato.
+\item
+  Relazione tra TCF e TFS. \begin{align*}
+  \underset{\text{discreto}}{x[n]}=\underset{\text{continuo}}{x(nT)} \Longleftrightarrow \underset{\text{discreto}}{\overline{X}(f)} = \underset{\text{continuo}}{X(f)}
+  \end{align*} \begin{align*}
+  \overline{X}(f) &\triangleq \sum_{n=-\infty}^{\infty} x[n] \ e^{-j2\pi nfT} = \sum_{n=-\infty}^{\infty} x(nT) \ e^{-j2\pi nfT}=
+  \boxed{\text{Sapendo che: } x(nT)=\int_{-\infty}^{\infty}X(\alpha) e^{j2\pi\alpha nT}\,d\alpha} \\
+  &= \sum_{n=-\infty}^{\infty} \int_{-\infty}^{\infty} X(\alpha) \ e^{-j2\pi \alpha nT} \,d\alpha \cdot e^{-j2\pi nfT}
+  = \int_{-\infty}^{\infty} X(\alpha) \sum_{n=-\infty}^{\infty} e^{-j2\pi n(f-\alpha)T} \,d\alpha
+  \end{align*} ma il segnale \emph{pettine di Dirac} è esprimibile in
+  serie di Fourier con coefficienti pari a \(\frac{1}{T}\): \[
+  \displaystyle
+  \boxed{\displaystyle
+  \begin{array}{c} \displaystyle
+  \sum_{n=-\infty}^{\infty} \delta(t-nT) = \frac{1}{T} \sum_{k=-\infty}^{\infty} e^{\frac{j2\pi kt}{T}} \\
+  \text{Trasformata di Fourier} \updownarrow \\ \displaystyle
+  \sum_{n=-\infty}^{\infty} e^{-j2\pi nfT} = \frac{1}{T}\sum_{n=-\infty}^{\infty} \delta(f-\frac{k}{T})
+  \end{array}
+  }
+  \] \begin{align*}
+  &\int_{-\infty}^{\infty}X(\alpha) \frac{1}{T} \sum_{k=-\infty}^{\infty} \delta(f-\alpha -\frac{k}{T})\,d\alpha = \frac{1}{T}\sum_{k=-\infty}^{\infty} \int_{-\infty}^{\infty}X(\alpha) \delta(f-\alpha -\frac{k}{T})\,d\alpha = \\
+  &=\delta \text{ è pari } = \frac{1}{T}\sum_{k=-\infty}^{\infty} \int_{-\infty}^{\infty}X(\alpha) \delta\Big(\alpha -(f- \frac{k}{T})\Big)\,d\alpha = \text{ prodotto tra } X(\alpha) \text{ e Dirac centrato in } f -\frac{k}{T} \\
+  &=\text{per la proprietà campionatrice della delta di Dirac } \longrightarrow \overline{X}(f) = \frac{1}{T}\sum_{n=-\infty}^{\infty}X(f-\frac{k}{T})
+  \end{align*}
+\end{enumerate}
+
+\subsection{Segnali a tempo discreto
+periodici}\label{segnali-a-tempo-discreto-periodici}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{12}
+\item
+  Trasformata discreta di Fourier (definizione);
+
+  Supponiamo \(x[n]\) periodica di periodo \(N_0\) \[
+  \underset{\text{antitrasformata discreta di Fourier}}{x[n]=\frac{1}{N_0}\sum_{k=0}^{N_0 -1}\overline{X}_{k} \ e^{j\frac{2\pi kn}{N_0}}}; \
+  \underset{\text{Trasformata discreta di Fourier}} {\overline{X}_k = \sum_{n=0}^{N_0 -1} x[n] \ e^{-j \frac{2\pi kn}{N_0}}}
+  \]
+\item
+  La trasformata di una sequenza periodica è essa stessa periodica
+  (stesso periodo \(N_0\)); \begin{gather*}
+  \overline{X}_{k+N_0} = \sum_{n=0}^{N_0 -1} x[n] e^{-j2\pi(k+N_0)\frac{n}{N_0}} = \sum_{n=0}^{N_0 -1} x[n] e^{-j2\pi k\frac{n}{N_0}} \ e^{-j2\pi n} = \overline{X}_k
+  \end{gather*}
+\item
+  La relazione di sintesi di una TDF discende da quella di analisi;
+  \begin{align*}
+  x[n] &= \sum_{k=0}^{N_0 -1} \overline{X}_k \ e^{j2\pi k \frac{n}{N_0}} \Rightarrow \overline{X}_k = \sum_{n=0}^{N_0 -1} x[n] e^{-j\frac{2\pi nk}{N_0}} \\
+  &\text{Moltiplichiamo per } e^{-j \frac{2\pi nm}{N_0}} \text{ con } 0\leq m \leq N_0 - 1 \text{ ed effettuiamo una somma sul periodo} \\
+  &=\sum_{n=0}^{N_0 -1} x[n] e^{-j2\pi m\frac{n}{N_0}} = \sum_{n=0}^{N_0 -1} \sum_{k=0}^{N_0 -1}\overline{X}_k e^{-j2\pi n\frac{(k-m)}{N_0}} = \sum_{k=0}^{N_0 -1}\overline{X}_k \sum_{n=0}^{N_0 -1} e^{-j2\pi n\frac{(k-m)}{N_0}} = N_0 \overline{X}_k \\
+  &\Rightarrow \overline{X}_k = \frac{1}{N_0}\sum_{n=0}^{N_0 -1} x[n] \ e^{-j2\pi\frac{k}{N_0}}
+  \end{align*}
+\end{enumerate}
+
+\subsubsection{Proprietà:}\label{proprietuxe0-1}
+
+Notazione:
+\(\operatorname{DFT}_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k \leq N_0 -1\)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{15}
+\item
+  Proprietà di Linearità; \[
+  \operatorname{DFT}_{N_0}\Big\{ax[n]+by[n]\Big\} = a\overline{X}_k + b\overline{Y}_k
+  \]
+\item
+  Proprietà di Traslazione Circolare; \[
+  \operatorname{DFT}_{N_0}\Big\{ x[n-n_0] \Big\} = \overline{X}_k \ e^{-\frac{j2\pi kn_0}{N_0}}
+  \]
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Dimostrazione: \begin{align*}
+    \operatorname{DFT}_{N_0}\Big\{ x[n-n_0] \Big\} &= \sum_{n=0}^{N_0 -1} x[n-n_0] \ e^{-j2\pi\frac{n}{N_0}k} =
+    \boxed{
+    \begin{array}{cl}
+    \text{cambio di variabile} \\
+    p  = n - n_0 \\
+    n  = p + n_0
+    \end{array}} \\
+    &= \sum_{p=-n_0}^{N_0 - 1 - n_0} x[p] \ e^{-j\frac{2\pi}{N_0}(p+n_0)} = \sum_{p=-n_0}^{N_0 - 1 - n_0} x[p] \ e^{-j\frac{2\pi}{N_0}kp} \ e^{-j\frac{2\pi}{N_0}n_0}=\\
+    &= e^{-j\frac{2\pi}{N_0}kn_0} \sum_{p=-n_0}^{N_0 - 1 - n_0} x[p] \ e^{-j\frac{2\pi}{N_0}kp} = e^{-j\frac{2\pi}{N_0}kn_0} \sum_{p=0}^{N_0 - 1} x[p] \ e^{-j\frac{2\pi}{N_0}kp} \\
+    &\operatorname{DFT}_{N_0}\Big\{ x[n-n_0] \Big\} = e^{-j\frac{2\pi kn_0}{N_0}} \cdot \overline{X}_k &
+    \end{align*} Si dice traslazione \textbf{circolare} in quanto,
+    osservando la periodicità della sequenza originale e di quella
+    traslata, è possibile notare come i campioni che ``escono'' a destra
+    dell'intervallo rientrano alla sinistra dell'intervallo stesso.
+  \end{itemize}
+\item
+  Proprietà di Traslazione In Frequenza; \[
+  \operatorname{DFT}_{N_0}\Big\{ x[n] \ e^{-j\frac{2\pi k_0 n}{N_0}} \Big\} = \overline{X}_{k-k_0}
+  \]
+\item
+  Proprietà di Inversione Temporale; \begin{gather*}
+  \operatorname{DFT}_{N_0}\Big\{ x[-n] \Big\} = \overline{X}_{-k} = \overline{X}_{N_0 - k} 
+  \end{gather*}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Dimostrazione: \begin{align*}
+    \operatorname{DFT}_{N_0}\Big\{ x[-n] \Big\} &= \sum_{n=0}^{N_0 -1} x[-n] \ e^{-j\frac{2\pi}{N_0}kn} = \sum_{n=0}^{N_0 -1} x[n-n_0] \ e^{-j2\pi\frac{n}{N_0}k} =
+    \boxed{
+    \begin{array}{cl}
+    \text{cambio di variabile} \\
+    p  = N_0 - n \\
+    n  = N_0 - p
+    \end{array}}\\
+    &= \sum_{p=1}^{N_0} x[p] \ e^{-j\frac{2\pi}{N_0}k(N_0 -p)} = \underbrace{e^{-j2\pi k}}_{=1} \ \sum_{p=0}^{N_0 -1} x[p] \ e^{-j2\pi\frac{(-p)}{N_0}k} = \overline{X}_{-k} = \overline{X}_{N_0 - k}
+    \end{align*} dove nel primo passaggio, abbiamo usato la periodicità
+    della sequenza x{[}n{]} e nel penultimo passaggio, per cambiare gli
+    indici della sommatoria, abbiamo usato le proprietà di periodicità
+    della sequenza e della funzione esponenziale, come già visto.
+  \end{itemize}
+\item
+  Proprietà di coniugazione; \[
+  \operatorname{DFT}_{N_0}\Big\{ x^{*}[n] \Big\} = \overline{X}^{*}_{-k} = \overline{X}^{*}_{N_0 - k}
+  \]
+\item
+  Simmetria per sequenze reali (pari e dispari);
+
+  Per una sequenza reale \(x[n]\) abbiamo: \[
+  \operatorname{DFT}_{N_0}\Big\{ x[n] \Big\} = \operatorname{DFT}_{N_0}\Big\{x^{*}[n] \Big\} \to \overline{X}_k = \overline{X}^{*}_{-k} = \overline{X}^{*}_{N_0 -k}
+  \] da cui derivano le proprietà di simmetria per il modulo e per la
+  fase: \begin{gather*}
+  \Big|\overline{X}_k \Big| = \Big| \overline{X}_{N_0 - k} \Big| \\
+  \phase{\overline{X}_k} = -\phase{\overline{X}_{-k}}
+  \end{gather*} Tali relazioni implicano che il modulo della sequenza
+  \(X[k]\) è simmetrico rispetto al valore \(k = \frac{N}{2}\), mentre
+  la fase è antisimmetrica rispetto a tale valore.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    per sequenze di lunghezza \textbf{pari}, il centro di simmetria
+    coincide con un campione della sequenza;
+  \item
+    per sequenze di lunghezza \textbf{dispari}, invece, il centro di
+    simmetria coincide con un punto equidistante tra due campioni.
+  \end{itemize}
+\item
+  Teorema di Parseval per sequenze; \begin{gather*}
+  \left\{ \begin{array}{cl} \displaystyle
+  \sum_{n=0}^{N_0 -1} x[n] \ y^{*}[n] = \frac{1}{N_0} \sum_{k=0}^{N_0 -1}\overline{X}_k \ \overline{Y}^{*}_{k} \\
+  \displaystyle\sum_{n=0}^{N_0 -1} \Big|x[n]\Big|^{2} = \frac{1}{N_0} \sum_{k=0}^{N_0 -1}\overline{X}_k \ \Big|\overline{X}_{k}\Big|^{2}
+  \end{array} \right.
+  \end{gather*}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Dimostrazione: \begin{gather*}
+    \sum_{n=0}^{N_0 -1} x[n] \ y^{*}[n] =\sum_{n=0}^{N_0 -1}\overline{X}_k \ \Big(\frac{1}{N_0}\sum_{k=0}^{N_0 - 1}\overline{Y}_k \ e^{j\frac{2\pi kn}{N_0}}\Big)^{*} 
+    = \frac{1}{N_0} \sum_{k=0}^{N_0 -1} \overline{Y}_k \sum_{n=0}^{N_0 -1 }x[n] \ e^{-j\frac{2\pi kn}{N_0}} = \frac{1}{N_0} \sum_{k=0}^{N_0 -1} \overline{X}_k \ \overline{Y}^{*}_k
+    \end{gather*}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Ponendo \(x[n]=y[n]\) si ottiene la seconda relazione.
+    \end{itemize}
+  \end{itemize}
+\item
+  Teorema del Prodotto;
+
+  Consideriamo adesso la sequenza (periodica) \(p[n]\) data dal
+  \emph{prodotto} fra la sequenza \(x[n]\) e la sequenza \(y[n]\)
+  entrambe periodiche di periodo \(N_0\) \[
+  p[n] =x[n] \ y[n]
+  \] e calcoliamone la trasformata discreta di Fourier: \begin{align*}
+  \overline{P}_k &= \sum_{n=0}^{N_0 - 1} p[n] \ e^{-j2\pi\frac{nk}{N_0}} = \sum_{n=0}^{N_0 - 1}x[n] \ y[n] e^{-j2\pi\frac{nk}{N_0}} = \\
+  &= \sum_{n=0}^{N_0 -1}\frac{1}{N_0}\sum_{m=0}^{N_0 -1}\overline{X}_m \ e^{j2\pi\frac{nm}{N_0}}\cdot y[n] \ e^{-j2\pi\frac{nk}{N_0}}
+  \end{align*} Dove \(x[n]\) è stata scomposta in serie discreta di
+  Fourier. Inoltre è stata utilizzata una variabile ``muta'' \(m\)
+  nell'antitrasformata per non creare ambiguità con la variabile \(k\),
+  da cui dipende la trasformata. \begin{align*}
+  &= \frac{1}{N_0} \sum_{n=0}^{N_0 -1}\sum_{m=0}^{N_0 -1} \overline{X}_m \ e^{j2\pi \frac{nm}{N_0}} \cdot y[n] e^{-j2\pi\frac{nk}{N_0}}
+  \end{align*} Invertendo l'ordine delle sommatorie otteniamo:
+  \begin{align*}
+  \overline{P}_k &= \sum_{m=0}^{N_0 -1} \overline{X}_m \frac{1}{N_0}\sum_{n=0}^{N_0 -1} y[n] \ e^{-j2\pi{frac{n(k-m)}{N_0}}} = \frac{1}{N_0}\sum_{m=0}^{N_0 -1}\overline{X}_m \ \overline{Y}_{k-m}= \\ 
+  &= \frac{1}{N_0}\cdot \overline{X}_k \otimes \overline{Y}_k
+  \end{align*} La convoluzione tra le due trasformate discrete è una
+  somma di convoluzione \textbf{ciclica} tra le due sequenze periodiche
+  \(\overline{X}_k\) e \(\overline{Y}_k\) in ambito \emph{frequenziale}.
+  In conclusione: \begin{align*}
+  p[n] = x[n] \ y[n] \Longleftrightarrow \overline{P}_k = \frac{1}{N_0}\cdot \overline{X}_k \otimes \overline{Y}_k
+  \end{align*}
+\item
+  Teorema della Convoluzione (+ relazioni tra convoluzione lineare e
+  circolare).
+
+  Consideriamo ora la sequenza \(z[n]\) come somma di convoluzione
+  ciclica o circolare tra le due sequenze \(x[n]\) e \(y[n]\),
+  periodiche di periodo \(N_0\) \[
+  z[n] = x[n] \otimes y[n] = \sum_{m=0}^{N_0 -1}x[m] \ y[n-m] = \sum_{m=0}^{N_0 -1}y[m] \ x[n-m]
+  \] La somma di convoluzione gode di tutte le proprietà citate per la
+  somma di convoluzione tra sequenze periodiche. \newline Calcoliamo la
+  trasformata discreta di \(z[n]\): \begin{align*}
+  \overline{Z}_k &= \sum_{n=0}^{N_0 -1} z[n] \ e^{-j2\pi{\frac{nk}{N_0}}} = \sum_{n=0}^{N_0 -1} \sum_{m=0}^{N_0 -1} x[m] \ y[n-m] e^{-j2\pi{\frac{nk}{N_0}}} = 
+  \sum_{m=0}^{N_0 -1} x[m] \sum_{n=0}^{N_0 -1} y[n-m] e^{-j2\pi\frac{nk}{N_0}} = \\
+  &= \sum_{m=0}^{N_0 -1} x[m] \ \overline{Y}_k \ e^{-j2\pi\frac{mk}{N_0}} = \overline{Y}_k \sum_{m=0}^{N_0 -1} x[m] \ e^{-j2\pi\frac{mk}{N_0}}= \\
+  &= \overline{X}_k \cdot \overline{Y}_k
+  \end{align*} Quindi: \[
+  x[n]\otimes y[n] \Longleftrightarrow \overline{X}_k \cdot \overline{Y}_k
+  \]
+
+  \begin{itemize}
+  \item
+    Relazioni tra convoluzione lineare e circolare (per due sequenze di
+    lunghezza finita):
+
+    Siano \(x[n]\) e \(h[n]\) due sequenze di lunghezza \(L\) e \(M\):
+    il ``supporto'' sul quale le sequenze hanno campioni \emph{non
+    nulli} è \([0, L-1]\) e \([0, M-1]\).
+
+    \begin{itemize}
+    \tightlist
+    \item
+      La convoluzione \emph{lineare} è ottenuta dalla relazione: \[
+        y_{l}[n] = x[n] * h[n] = \sum_{k=-\infty}^{\infty} x[k] \ h[n-k]
+        \] dove le sequenze sono considerate \textbf{aperiodiche} e
+      \(y_l[n]\) ha una lunghezza \emph{finita} e pari a \(L+M-1\)
+      campioni, considerando il ``supporto'' dove le sequenze hanno
+      campioni non nulli. Vi è quindi una \emph{sovrapposizione} tra
+      campioni non nulli delle due sequenze in \([0, L+M-2]\)
+    \item
+      La convoluzione \emph{circolare} invece, a causa della diversa
+      lunghezza delle due sequenze, richiede di fissare un
+      \textbf{periodo comune} \(N\), per eseguire l'\textbf{estensione
+      periodica} delle sequenze: l'unico vincolo da porre diventa quindi
+      \(N \geq \text{max}(L,M)\), appendendo quindi in fondo alle
+      sequenze un numero di zeri (pari a \(N-L\) o \(N-M\)) prima di
+      estendere periodicamente le due sequenze. La convoluzione
+      circolare è data da: \[
+        y_{c}[n] = x[n] \otimes h[n] =\sum_{k=0}^{N-1}x[k] \ h[n-k]
+        \]
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{Generale:}\label{generale}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{24}
+\item
+  Fast Fourier Transform (FFT).
+
+  Supponiamo di avere in memoria un numero \(N_0\) di valori della
+  sequenza periodica \(x[n]\) e calcoliamone numericamente la
+  trasformata discreta: \[
+  \overline{X}_k = \sum_{n=0}^{N_0 -1} \  e^{-j\frac{1\pi kn}{N_0}} =\Big\{ x[0]\cdot e^{-j0}+x[1]\cdot e^{j\frac{2\pi k}{N_0}}+x[2]\cdot e^{-j\frac{2\pi 2k}{N_0}} + \cdots + x[N_0 -1]\cdot e^{-j\frac{2\pi(N_0 -1)k}{N_0}}\Big\}
+  \] Vogliamo quindi determinare il numero di \emph{operazioni
+  necessarie} sia per la trasformata che per l'antitrasformata
+  (ignorando il fattore di scala \(\frac{1}{N_0}\)): \[
+  x[n] = \overline{X}_0 \cdot e^{j0}+\overline{X}_1\cdot e^{j\frac{2\pi k}{N_0}}+\overline{X}_2\cdot e^{j\frac{2\pi 2k}{N_0}} + \cdots + \overline{X}_{N_0 -1}\cdot e^{j\frac{2\pi(N_0 -1)k}{N_0}}
+  \] Supponiamo quindi di avere valori \emph{complessi} \(z=a+jb\), ma
+  \textbf{precalcolati}, ovvero già in memoria. Per il calcolo di un
+  \emph{singolo campione} \(X[k]\) è necessario eseguire \(N_0\)
+  moltiplicazioni complesse e \(N_0 -1\) addizioni complesse, le quali
+  sono tradotte dai calcolatori in operazioni nel campo reale,
+  eseguendole tra le parti reali e immaginari dei numeri complessi
+  coinvolti:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    per eseguire un'addizione complessa è necessario eseguire 2
+    addizioni reali: \((a + jb) + (c + jd) = (a + c) + j(b + d)\)
+  \item
+    per eseguire una moltiplicazione complessa è necessario eseguire 4
+    moltiplicazioni reali e 2 addizioni reali,
+    \((a + jb) · (c + jd) = (ac - bd) + j(ad + bc)\).
+  \end{itemize}
+
+  Quindi per un singolo campione \(X[k]\) sono necessarie \(N_0\)
+  moltiplicazioni complesse e \(N_0 -1\) somme complesse. Inoltre, per
+  ogni valore di \(k\) sono necessarie \(8N_0 -2\) operazioni reali, e
+  dato che la sequenza è composta da \(N_0\) valori la complessità
+  diventa \textbf{quadratica} \[
+  (8N_0 -2)N_0 = 8N_{0}^{2} -2N_0 \approx 8N_{0}^2
+  \] Per velocizzare i calcoli è stato quindi introdotto l'algoritmo
+  \textbf{Fast Fourier Transform} o FFT, il quale viene applicato se
+  \emph{\(N_0\) è una potenza del \(2 \to N_0 = 2^{M}\)} \begin{align*}
+  \overline{X}_k &= \sum_{m=0}^{\frac{N_0}{2}-1} x[2m]\ e^{-j\frac{2\pi(2m)k}{N_0}} + \sum_{m=0}^{\frac{N_0}{2}-1} x[2m+1] \ e^{-j\frac{2\pi(2m-1)k}{N_0}}= \\
+  & = \overbrace{\sum_{m=0}^{\frac{N_0}{2}-1} x[2m]\ e^{-j\frac{2\pi mk}{\frac{N_0}{2}}}}^{\overline{P}_k}+e^{-j\frac{2\pi k}{\frac{N_0}{2}}} + \overbrace{\sum_{m=0}^{\frac{N_0}{2}-1} x[2m+1] \ e^{-j\frac{2\pi mk}{\frac{N_0}{2}}}}^{\overline{D}_k}
+  \end{align*} con \(k= 0, \dots , N_0 -1\). \(\overline{P}_k\) è la
+  trasformata ottenuta dai \(\frac{N_0}{2}\) campioni di \emph{indice
+  pari} di \(x[n]\), mentre \(\overline{D}_k\) indica la trasformata
+  della sequenza ottenuta dai \(\frac{N_0}{2}\) campioni di \emph{indice
+  dispari} Questa scomposizione è ricorsiva dell'ordine, in quanto la
+  trasformata di ordine \(N_0\) è espressa come combinazione lineare di
+  due trasformate di ordine \(\frac{N_0}{2}\): questo concetto può
+  essere esteso al numero di operazioni \(N_{FFT}\): \[
+  N_{FFT}(N_0)=N_{FFT}(\frac{N_0}{2})+N_{FFT}(\frac{N_0}{2})+6N_0 + 2N_0
+  \] tenendo conto che per ogni \(k\) (dei coefficienti dispari) è
+  necessario moltiplicare \(D_k\) per un esponenziale complesso
+  (precalcolato, 6 operazioni reali) e poi sommare con \(P_k\) (2
+  operazioni reali).
+
+  Il procedimento viene poi ripetuto ricorsivamente. Infine, iterando la
+  formula: \[
+  N_{FFT}(N_0) = 6N_0 + 8N_0\log_2 N_0 \approx 8N_0 \log_2 N_0
+  \] la complessità risulta \textbf{logaritmica}! Ad esempio, con
+  \(N_0=1024\) \[
+  \frac{N_{TDF}(N_0)}{N_{FFT}(N_0)} = \frac{8N_{0}^{\cancel{2}}}{\cancel{8N_0}\log_2 N_0} = \frac{N_0}{\log_2 N_0} \approx 100
+  \] Il vantaggio conseguito dall'utilizzo di FFT al posto della
+  trasformata classica aumenta al crescere di \(N_0\)
+\end{enumerate}
+
+\subsection{Sistemi monodimensionali a tempo
+discreto}\label{sistemi-monodimensionali-a-tempo-discreto}
+
+\[
+y[n] = \text{T}\Big[x[m], n\Big] = \text{T}\Big[x[n] \Big]
+\]
+
+\subsubsection{Proprietà dei sistemi;}\label{proprietuxe0-dei-sistemi}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{25}
+\item
+  SLS a tempo discreto: risposta impulsiva. \[
+  h[n] = \text{T}\Big[ \delta[n] \Big]
+  \] Nota \(h[n]\): \begin{align*}
+  y[n] &= \text{T}\Big[ x[n] \Big] = \text{T}\Big[ \sum_{k=-\infty}^{\infty}x[k] \ \delta[n-k] \Big] = \text{per la linearità} \\
+  &= \sum_{k=-\infty}^{\infty}x[k] \text{T}\Big[ \delta[n-k] \Big] = \text{per la stazionarietà: } \to
+  \left \{\begin{array}{cl}
+  \text{T}\Big[ \delta[n-k] \Big]=h[n-k]
+  \end{array}\right. \\
+  &= \sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = x[n] \otimes h[n]
+  \end{align*} Quindi l'uscita è una \emph{somma di convoluzione} tra la
+  sequenza in ingresso e la risposta impulsiva del sistema stesso!
+
+  Un sistema lineare e stazionario (SLS) può essere:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    FIR (Finite Impulse Response) se la sua risposta impulsiva è
+    costituita da un \textbf{numero finito di campioni};
+  \item
+    IIR (Infinite Impulse Response) se la sua risposta impulsiva è
+    costituita da un numero \textbf{infinito} di campioni.
+  \end{itemize}
+
+  È possibile dimostrare come la \emph{condizione necessaria e
+  sufficiente} per la stabilità in senso BIBO di un SLS è
+  l'\textbf{'assoluta sommabilità} della sua risposta impulsiva: \[
+  \sum_{k=-\infty}^{\infty} \Big| h[k] \Big| < \infty
+  \] Da ciò deriviamo che
+
+  \begin{itemize}
+  \tightlist
+  \item
+    i sistemi FIR sono stabili: la sommatoria diventa una somma
+    \emph{finita} di quantità \emph{limitate};
+  \item
+    mentre i sistemi IIR non lo sono sempre. Diventa necessario
+    controllare la validità della seguente condizione:
+
+    \begin{itemize}
+    \item
+      \textbf{sequenza causale}:
+
+      un SLS è causale se e solo se la sua risposta impulsiva è una
+      sequenza causale, cioè: \[
+        h[n] = 0 \text{ se } n<0, \text{ ovvero } h[n] = h[n] \ u[n] 
+        \]
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{Proprietà:}\label{proprietuxe0-2}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{26}
+\item
+  Sistemi a cascata e in parallelo;
+
+  \begin{itemize}
+  \tightlist
+  \item
+    In un sistema a \textbf{cascata} l'ordine degli stessi può essere
+    variato senza alterare l'uscita: \begin{align*}
+      h[n] = h_{1}[n] \otimes h_{2}[n] \to y[n] = x[n] \otimes \Big(h_{1}[n] \otimes h_{2}[n] \Big)
+      \end{align*} Questo per la proprietà commutativa del prodotto di
+    concoluzione discreta.
+  \item
+    Due sistemi \textbf{in parallelo}: \begin{align*}
+      h[n] = h_{1}[n] + h_{2}[n] \to y[n] = x[n] \otimes \Big[ h_{1}[n] + h_{2}[n] \Big]
+      \end{align*}
+  \end{itemize}
+\item
+  Risposta in frequenza;
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    La risposta in frequenza di un SLS a tempo discreto è la
+    \textbf{trasformata di Fourier} della risposta impulsiva \(h[n]\)
+    del sistema stesso \[
+     \overline{H}(f) = \sum_{n=-\infty}^{\infty} h[n] \ e^{-j2\pi nfT}
+     \]
+  \item
+    Inoltre \(\overline{H}(f)\) è pari al rapporto tra le trasformate
+    \(\overline{Y}(f)\) e \(\overline{X}(f)\) rispettivamente della
+    sequenza in uscita \(y[n]\) e in ingresso \(x[n]\): \[
+     \overline{H}(f)=\frac{\overline{Y}(f)}{\overline{X}(f)}
+     \]
+  \item
+    La risposta in frequenza è data dal rapporto fra la sequenza di
+    uscita y{[}n{]} e quella di ingresso x{[}n{]} quando x{[}n{]} è una
+    oscillazione complessa alla frequenza f: \[
+     \overline{H}(f) = \frac{y[n]}{x[n]}\Bigg|_{x[n]=e^{j2\pi nfT}}
+     \] È possibile inoltre definire, data la risposta in frequenza
+    \(\overline{H}(f)\), la \emph{risposta in ampiezza}
+    \(\overline{A}(f)=|\overline{H}(f)|\), la quale determina la
+    \textbf{selettività} di un SLS e la sua \emph{risposta in fase}
+    \(\overline{\theta}(f)=\phase{\overline{H}(f)}\)
+  \end{enumerate}
+\item
+  Filtri a tempo discreto.
+
+  La \textbf{condizione di non distorsione} viene riformulata come
+  segue: \[
+  y[n]=Kx[n-n_0]
+  \] \(K\) ed \(n_0\) rappresentano rispettivamente il guadagno ed il
+  ritardo del sistema. Nel dominio della frequenza, questa condizione si
+  traduce nei due seguenti requisiti per la risposta in ampiezza e la
+  risposta in fase: \[
+  \overline{A}(f) = K, \ \ \overline{\theta}(f)=-2\pi fn_{0}T
+  \] È sufficiente che queste condizioni siano verificate nell'ambito
+  della banda del segnale per garantire assenza di distorsioni
+
+  Le caratteristiche di selettività di un filtro a tempo discreto con
+  risposta in frequenza (che è una funzione periodica di periodo 1/T)
+  sono determinate dall'andamento della sua risposta in ampiezza in un
+  solo periodo della funzione (as esempio
+  \(\Big[-\frac{1}{2T}, \frac{1}{2T}\Big]\)).
+
+  Le basse frequenze sono sempre prossime alla frequenza nulla, mentre
+  le alte sono comunque prossime al limite superiore dell'intervallo,
+  ovvero \(\frac{1}{2T}\):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{passa basso} \begin{align*}
+      h_{\text{LP}}[n] &= 2BT \mathop{\mathrm{sinc}}(2nBT) \Longleftrightarrow \overline{H}_{\text{LP}} = \frac{1}{T}\sum_{k=-\infty}^{\infty} T \cdot \operatorname{rect}\left(\frac{f-\frac{k}{T}}{2 B}\right)
+      \end{align*}
+  \item
+    \textbf{passa alto} \begin{align*}
+      h_{\text{HP}}[n] = \delta[n] -2BT\mathop{\mathrm{sinc}}(2nBT) \Longleftrightarrow \overline{H}_{\text{HP}}(f) = 1- \overline{H}_{\text{LP}}(f) 
+      \end{align*} I filtri ideali \textbf{non sono causali!}
+  \end{itemize}
+\end{enumerate}
+
+\subsection{Quantizzazione (per alcune di queste domande guardare
+quesiti)}\label{quantizzazione-per-alcune-di-queste-domande-guardare-quesiti}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{29}
+\item
+  Formule e definizioni (passo, dinamica D, bit B, fattore di scala
+  A\ldots);
+
+  L'operazione di quantizzazione rende \textbf{discreta} l'ampiezza dei
+  campioni associando loro un valore di ampiezza scelto da un insieme
+  finito di possibili livelli (livelli di quantizzazione) \[
+  \hat{x} = \text{Q}\Big[x(nT)\Big]
+  \] La quantizzazione è un'operazione \emph{lossy}, in quanto essendo
+  un'operazione irreversibile, una volta quantizzato il segnale
+  l'informazione originale non potrà essere più recuperata, commettendo
+  un errore \[
+  e(nt)=\hat{x}(nT)-x(nT)
+  \] Per effettuare l'operazione di quantizzazione dividiamo
+  l'intervallo di variazione di ampiezza dei suoi campioni in intervalli
+  di quantizzazione contigui \((x_i, x_{i+1})\), dove gli estremi
+  rappresentano le \emph{soglie} di quantizzazione.
+
+  L'operazione quindi consiste nel \textbf{selezionare l'intervallo più
+  corretto per ogni campione} \(x(nt)\) e associare al suo interno un
+  valore \(\hat{x}_i\) detto \emph{livello} dell'intervallo selezionato.
+
+  \begin{itemize}
+  \item
+    ``Definizioni'':
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{Passo}: indicato con \(\Delta\), rappresenta la distanza
+      tra livelli di quantizzazione.
+    \item
+      \textbf{bit}: indicato con \(B\), serve a determinare il numero di
+      possibili livelli di quantizzazione, rappresentati con notazione
+      binaria, pari a \(2^{B}\)
+    \item
+      \textbf{dinamica}: indicata con \(D\) rappresenta l'ampiezza
+      dell'intervallo di valori che i livelli di quantizzazione riescono
+      a coprire.
+    \end{itemize}
+  \item
+    Quantizzatori uniformi
+
+    Ottenuti imponendo una distanza costante tra le soglie e i livelli
+    (\(\Delta\) costante).
+
+    Per avere una \emph{buona rappresentazione del segnale}, la dinamica
+    \(D \approx\) \textbf{intervallo variazione ampiezza dei campioni}!
+    \[
+      D > X_{\text{max}}-X_{\text{min}}
+      \] In un processo \emph{aleatorio gaussiano}, i cui campioni
+    seguono la distribuzione di probabilità Gaussiana (quindi con un
+    intervallo di variazione \emph{illimitato}), si rende necessario
+    ipotizzare un intervallo di variazione dei campi \textbf{finito} e
+    di dimensione tale da rendere \emph{minima} la probabilità che esca
+    da tale intervallo (\textbf{overflow}). Considerando il caso di
+    valor medio \emph{nullo}: \begin{align*}
+      E\Big[f(x)\Big]=0 &\to \text{gli intervalli sono: }
+      \left\{\begin{array}{cl}
+      [-3\Delta, 3\Delta] & \approx 95,45 \% \\ \relax 
+      [-4\Delta, 4\Delta] & \approx 99,73 \%
+      \end{array} \right. \to \Delta > 8\sigma
+      \end{align*}
+
+    Per far sì che il passo non sia né eccessivamente grande (livelli di
+    quantizzazione usati molto minori rispetto a quelli a disposizione),
+    né troppo piccolo (commessi errori rilevanti (di overflow), quando
+    si quantizzano campioni al di fuori della dinamica del
+    quantizzatore) \(\Delta, D, B\) sono legati secondo: \[
+      \Delta=\frac{D}{2^B}
+      \]
+  \end{itemize}
+\item
+  Tipologie di quantizzatori (midrise, midtread, arrotondamento e
+  troncamento);
+
+  Vedi risposte 33, 34 quesiti
+\item
+  Errore di quantizzazione e modello;
+
+  L'errore di quantizzazione può essere visto come una sequenza che
+  \emph{si somma} (modello additivo) al segnale campionato: \[
+  e(nT)=\hat{x}(nt)-x(nT) \Rightarrow \hat{x}(nT) = e(nT)+x(nT)
+  \] Modelliamo quindi \(e(nT)\) come un processo aleatorio, indicandolo
+  come \textbf{rumore di quantizzazione} e con le seguenti ipotesi:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    \(e(nT)\) sia un processo stazionario in senso lato: quindi media,
+    potenza e varianza \emph{costanti} e non dipendono da n;
+  \item
+    che la densità di probabilità di \(e(nT)\) sia di tipo
+    \textbf{uniforme}, permettendo di valutare tali costanti
+    distinguendo i casi di quantizzazione per troncamento e per
+    arrotondamento: \textbackslash{} densità probabilità errore
+    quantizzazione: \begin{align*}
+        P_e(e)= \left\{
+        \begin{array}{ll}
+        \frac{1}{\Delta}& -\frac{\Delta}{2}<e\leq\frac{\Delta}{2}\\
+        0 & \text{altrove}
+        \end{array}\right. \to E\Big[e(nT)\Big]= 0 = E\Big[e^{2}(nT)\Big] = \frac{\Delta^{2}}{12}
+        \end{align*}
+  \item
+    \(\{e(nT)\}\) incorrelato con processo \(\{x(nT)\}\);
+  \item
+    I campioni del processo \(\{e(nT)\}\) sono \textbf{incorrelati} tra
+    loro;
+  \end{enumerate}
+
+  Per la quantizzazione con troncamento si ha: \begin{align*}
+  E\Big[e(nT)\ e\Big((n+m)T\Big)\Big]=\left\{\begin{array}{ll}E[e^2(nT)]=\frac{\Delta^2}{3}&m=0\\
+  \\E[e(nT)]E\Big[e\Big((n+m)T\Big)\Big]=\frac{\Delta}{2}\cdot\frac{\Delta}{2} =\frac{\Delta^2}{4}&m\neq0,\end{array}\right.
+  \end{align*} mentre per la quantizzazione con arrotondamento abbiamo
+  \begin{align*}
+  E\Big[e(nT)e\Big((n+m)T\Big)\Big]=\left\{\begin{array}{ll}E[e^2(nT)]=\sigma_e^2=\frac{\Delta^2}{12}&m=0\\\\0&m\ne0.\end{array}\right.
+  \end{align*} In questo caso, l'errore di quantizzazione è un
+  \textbf{processo bianco}.
+\item
+  Definizione Signal To Noise Ratio (SNR) e formule.
+
+  È il rapporto tra la \emph{potenza del segnale} e la \emph{potenza
+  dell'errore di quantizzazione}: \[
+  \text{SNR}_q = \frac{S}{\sigma^2_e}
+  \] Ciò vale con l'ipotesi di un quantizzatore che utilizzi
+  l'arrotondamento. \(S\) rappresenta la potenza del segnale (è
+  necessario conoscerla oltre ai parametri del quantizzatore)\ldots{} e
+  \(\Delta=\frac{D}{2^{B}}\): \[
+  \text{SNR}_{q}=\frac{S}{\sigma_e^2}=\frac{S}{\frac{1}{12}\Delta^2}=\frac{S}{\frac{1}{12}(\frac{D}{2^B})^2}=\frac{12\cdot S\cdot2^{2B}}{D^2}
+  \] Esprimendo \(\text{SNR}_{q}\) in scala logaritmica \begin{align*}
+  SNR_{\mathrm{qdB}} &=10\log_{10}SNR_{\mathrm{q}}=10\log_{10}\left(\frac{12\cdot S\cdot2^{2B}}{D^{2}}\right) \\
+  &=(20 \log_{10}2)B+10\log_{\mathbf{1}0}\left(\frac{12S}{D^2}\right) \\
+  &\approx6.02B+10\log_{10}\left(\frac{12S}{D^2}\right)\ \mathrm{dB}. 
+  \end{align*}
+\end{enumerate}
 
 \end{document}
