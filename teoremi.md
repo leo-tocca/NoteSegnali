@@ -716,9 +716,9 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     x[n-k] \Longleftrightarrow \overline{X}(f) \cdot e^{-j2\pi kfT}
     $$
     - Dimostrazione:
-    \begin{gather*}
-    \tfs[x[n-k]] = \sum_{m=-\infty}^{\infty}x[n-k] \ e^{-j2\pi nfT} = \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi(m+k)fT} = e^{-j2\pi kfT}\sum_{m=-\infty}^{\infty}x[m] \ e^{-j2\pi mfT} =\overline{X}(f)e^{-j2\pi kfT}
-    \end{gather*}
+    \begin{align*}
+    \tfs[x[n-k]]& = \sum_{m=-\infty}^{\infty}x[n-k] \ e^{-j2\pi nfT} = \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi(m+k)fT} = e^{-j2\pi kfT}\sum_{m=-\infty}^{\infty}x[m] \ e^{-j2\pi mfT} =\\&=\overline{X}(f)e^{-j2\pi kfT}
+    \end{align*}
 6. Teorema della Modulazione;
     $$
     x[n]\cdot e^{-j2\pi nf_{0}t} \Longleftrightarrow \overline{X}(f-f_{0})
@@ -888,14 +888,14 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     \end{gather*}
     - Dimostrazione:
     \begin{align*}
-    \dft_{N_0}\Big\{ x[-n] \Big\} &= \sum_{n=0}^{N_0 -1} x[-n] \ e^{-j\frac{2\pi}{N_0}kn} = \sum_{n=0}^{N_0 -1} x[n-n_0] \ e^{-j2\pi\frac{n}{N_0}k} =
+    \dft_{N_0}\Big\{ x[-n] \Big\} &= \sum_{n=0}^{N_0 -1} x[-n] \ e^{-j\frac{2\pi}{N_0}kn} = \sum_{n=0}^{N_0 -1} x[N_0 -n] \ e^{-j\frac{2\pi}{N_0}kn} =
     \boxed{
     \begin{array}{cl}
     \text{cambio di variabile} \\
     p  = N_0 - n \\
     n  = N_0 - p
     \end{array}}\\
-    &= \sum_{p=1}^{N_0} x[p] \ e^{-j\frac{2\pi}{N_0}k(N_0 -p)} = \underbrace{e^{-j2\pi k}}_{=1} \ \sum_{p=0}^{N_0 -1} x[p] \ e^{-j2\pi\frac{(-p)}{N_0}k} = \overline{X}_{-k} = \overline{X}_{N_0 - k}
+    &= \sum_{p=1}^{N_0} x[p] \ e^{-j\frac{2\pi}{N_0}k(N_0 -p)} = \underbrace{e^{-j2\pi k}}_{=1} \ \sum_{p=0}^{N_0 -1} x[p] \ e^{-j\frac{2\pi}{N_0}(-k)(-k)p} = \overline{X}_{-k} = \overline{X}_{N_0 - k}
     \end{align*}
     dove nel primo passaggio, abbiamo usato la periodicità della sequenza x[n] e
     nel penultimo passaggio, per cambiare gli indici della sommatoria, abbiamo
@@ -905,7 +905,7 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     $$
     \dft_{N_0}\Big\{ x^{*}[n] \Big\} = \overline{X}^{*}_{-k} = \overline{X}^{*}_{N_0 - k}
     $$
-20. Simmetria per sequenze reali (pari e dispari);
+21. Simmetria per sequenze reali (pari e dispari);
     
     Per una sequenza reale $x[n]$ abbiamo:
     $$
@@ -919,11 +919,11 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     Tali relazioni implicano che il modulo della sequenza $X[k]$ è simmetrico rispetto al valore $k = \frac{N}{2}$, mentre la fase è antisimmetrica rispetto a tale valore.
     - per sequenze di lunghezza **pari**, il centro di simmetria coincide con un campione della sequenza;
     - per sequenze di lunghezza **dispari**, invece, il centro di simmetria coincide con un punto equidistante tra due campioni.
-21. Teorema di Parseval per sequenze;
+22. Teorema di Parseval per sequenze;
     \begin{gather*}
     \left\{ \begin{array}{cl} \displaystyle
     \sum_{n=0}^{N_0 -1} x[n] \ y^{*}[n] = \frac{1}{N_0} \sum_{k=0}^{N_0 -1}\overline{X}_k \ \overline{Y}^{*}_{k} \\
-    \displaystyle\sum_{n=0}^{N_0 -1} \Big|x[n]\Big|^{2} = \frac{1}{N_0} \sum_{k=0}^{N_0 -1}\overline{X}_k \ \Big|\overline{X}_{k}\Big|^{2}
+    \displaystyle\sum_{n=0}^{N_0 -1} \Big|x[n]\Big|^{2} = \frac{1}{N_0} \sum_{k=0}^{N_0 -1} \Big|\overline{X}_{k}\Big|^{2}
     \end{array} \right.
     \end{gather*}
     - Dimostrazione:
@@ -932,7 +932,7 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     = \frac{1}{N_0} \sum_{k=0}^{N_0 -1} \overline{Y}_k \sum_{n=0}^{N_0 -1 }x[n] \ e^{-j\frac{2\pi kn}{N_0}} = \frac{1}{N_0} \sum_{k=0}^{N_0 -1} \overline{X}_k \ \overline{Y}^{*}_k
     \end{gather*}
         - Ponendo $x[n]=y[n]$ si ottiene la seconda relazione.
-22. Teorema del Prodotto;
+23. Teorema del Prodotto;
 
     Consideriamo adesso la sequenza (periodica) $p[n]$ data dal *prodotto* fra la sequenza $x[n]$ e la sequenza $y[n]$ entrambe periodiche di periodo $N_0$
     $$
@@ -940,8 +940,8 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     $$
     e calcoliamone la trasformata discreta di Fourier:
     \begin{align*}
-    \overline{P}_k &= \sum_{n=0}^{N_0 - 1} p[n] \ e^{-j2\pi\frac{nk}{N_0}} = \sum_{n=0}^{N_0 - 1}x[n] \ y[n] e^{-j2\pi\frac{nk}{N_0}} = \\
-    &= \sum_{n=0}^{N_0 -1}\frac{1}{N_0}\sum_{m=0}^{N_0 -1}\overline{X}_m \ e^{j2\pi\frac{nm}{N_0}}\cdot y[n] \ e^{-j2\pi\frac{nk}{N_0}}
+    \overline{P}_k &= \sum_{n=0}^{N_0 - 1} p[n] \ e^{-j2\pi\frac{nk}{N_0}} = \sum_{n=0}^{N_0 - 1}x[n] \ y[n] e^{-j2\pi\frac{nk}{N_0}}
+    = \sum_{n=0}^{N_0 -1}\frac{1}{N_0}\sum_{m=0}^{N_0 -1}\overline{X}_m \ e^{j2\pi\frac{nm}{N_0}}\cdot y[n] \ e^{-j2\pi\frac{nk}{N_0}}
     \end{align*}
     Dove $x[n]$ è stata scomposta in serie discreta di Fourier. Inoltre è stata utilizzata una variabile "muta" $m$ nell'antitrasformata per non creare ambiguità con la 
     variabile $k$, da cui dipende la trasformata.
@@ -950,14 +950,14 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     \end{align*}
     Invertendo l'ordine delle sommatorie otteniamo:
     \begin{align*}
-    \overline{P}_k &= \sum_{m=0}^{N_0 -1} \overline{X}_m \frac{1}{N_0}\sum_{n=0}^{N_0 -1} y[n] \ e^{-j2\pi{frac{n(k-m)}{N_0}}} = \frac{1}{N_0}\sum_{m=0}^{N_0 -1}\overline{X}_m \ \overline{Y}_{k-m}= \\ 
+    \overline{P}_k &= \sum_{m=0}^{N_0 -1} \overline{X}_m \frac{1}{N_0}\sum_{n=0}^{N_0 -1} y[n] \ e^{-j2\pi{\frac{n(k-m)}{N_0}}} = \frac{1}{N_0}\sum_{m=0}^{N_0 -1}\overline{X}_m \ \overline{Y}_{k-m}= \\ 
     &= \frac{1}{N_0}\cdot \overline{X}_k \otimes \overline{Y}_k
     \end{align*}
     La convoluzione tra le due trasformate discrete è una somma di convoluzione **ciclica** tra le due sequenze periodiche $\overline{X}_k$ e $\overline{Y}_k$ in ambito *frequenziale*. In conclusione:
     \begin{align*}
     p[n] = x[n] \ y[n] \Longleftrightarrow \overline{P}_k = \frac{1}{N_0}\cdot \overline{X}_k \otimes \overline{Y}_k
     \end{align*}
-23. Teorema della Convoluzione (+ relazioni tra convoluzione lineare e circolare).
+24. Teorema della Convoluzione (+ relazioni tra convoluzione lineare e circolare).
     
     Consideriamo ora la sequenza $z[n]$ come somma di convoluzione ciclica o circolare tra le due sequenze $x[n]$ e $y[n]$, periodiche di periodo $N_0$
     $$
@@ -1008,7 +1008,7 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     - per eseguire una moltiplicazione complessa è necessario eseguire 4 moltiplicazioni reali e 2 addizioni reali, $(a + jb) · (c + jd) = (ac - bd) + j(ad + bc)$.
 
     Quindi per un singolo campione $X[k]$ sono necessarie $N_0$ moltiplicazioni complesse e $N_0 -1$ somme complesse. Inoltre, per ogni valore di $k$ sono necessarie
-    $8N_0 -2$ operazioni reali, e dato che la sequenza è composta da $N_0$ valori la complessità diventa **quadratica**
+    $8N_0 -2$ operazioni reali, e dato che la sequenza è composta da $N_0$ valori la complessità diventa **quadratica**:
     $$
     (8N_0 -2)N_0 = 8N_{0}^{2} -2N_0 \approx 8N_{0}^2
     $$

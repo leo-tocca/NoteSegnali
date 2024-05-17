@@ -1055,9 +1055,9 @@ aperiodici}\label{segnali-a-tempo-discreto-aperiodici}
   \begin{itemize}
   \tightlist
   \item
-    Dimostrazione: \begin{gather*}
-     \mathop{\mathrm{TFS}}[x[n-k]] = \sum_{m=-\infty}^{\infty}x[n-k] \ e^{-j2\pi nfT} = \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi(m+k)fT} = e^{-j2\pi kfT}\sum_{m=-\infty}^{\infty}x[m] \ e^{-j2\pi mfT} =\overline{X}(f)e^{-j2\pi kfT}
-     \end{gather*}
+    Dimostrazione: \begin{align*}
+     \mathop{\mathrm{TFS}}[x[n-k]]& = \sum_{m=-\infty}^{\infty}x[n-k] \ e^{-j2\pi nfT} = \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi(m+k)fT} = e^{-j2\pi kfT}\sum_{m=-\infty}^{\infty}x[m] \ e^{-j2\pi mfT} =\\&=\overline{X}(f)e^{-j2\pi kfT}
+     \end{align*}
   \end{itemize}
 \item
   Teorema della Modulazione; \[
@@ -1271,14 +1271,14 @@ Notazione:
   \tightlist
   \item
     Dimostrazione: \begin{align*}
-    \operatorname{DFT}_{N_0}\Big\{ x[-n] \Big\} &= \sum_{n=0}^{N_0 -1} x[-n] \ e^{-j\frac{2\pi}{N_0}kn} = \sum_{n=0}^{N_0 -1} x[n-n_0] \ e^{-j2\pi\frac{n}{N_0}k} =
+    \operatorname{DFT}_{N_0}\Big\{ x[-n] \Big\} &= \sum_{n=0}^{N_0 -1} x[-n] \ e^{-j\frac{2\pi}{N_0}kn} = \sum_{n=0}^{N_0 -1} x[N_0 -n] \ e^{-j\frac{2\pi}{N_0}kn} =
     \boxed{
     \begin{array}{cl}
     \text{cambio di variabile} \\
     p  = N_0 - n \\
     n  = N_0 - p
     \end{array}}\\
-    &= \sum_{p=1}^{N_0} x[p] \ e^{-j\frac{2\pi}{N_0}k(N_0 -p)} = \underbrace{e^{-j2\pi k}}_{=1} \ \sum_{p=0}^{N_0 -1} x[p] \ e^{-j2\pi\frac{(-p)}{N_0}k} = \overline{X}_{-k} = \overline{X}_{N_0 - k}
+    &= \sum_{p=1}^{N_0} x[p] \ e^{-j\frac{2\pi}{N_0}k(N_0 -p)} = \underbrace{e^{-j2\pi k}}_{=1} \ \sum_{p=0}^{N_0 -1} x[p] \ e^{-j\frac{2\pi}{N_0}(-k)(-k)p} = \overline{X}_{-k} = \overline{X}_{N_0 - k}
     \end{align*} dove nel primo passaggio, abbiamo usato la periodicità
     della sequenza x{[}n{]} e nel penultimo passaggio, per cambiare gli
     indici della sommatoria, abbiamo usato le proprietà di periodicità
@@ -1314,7 +1314,7 @@ Notazione:
   Teorema di Parseval per sequenze; \begin{gather*}
   \left\{ \begin{array}{cl} \displaystyle
   \sum_{n=0}^{N_0 -1} x[n] \ y^{*}[n] = \frac{1}{N_0} \sum_{k=0}^{N_0 -1}\overline{X}_k \ \overline{Y}^{*}_{k} \\
-  \displaystyle\sum_{n=0}^{N_0 -1} \Big|x[n]\Big|^{2} = \frac{1}{N_0} \sum_{k=0}^{N_0 -1}\overline{X}_k \ \Big|\overline{X}_{k}\Big|^{2}
+  \displaystyle\sum_{n=0}^{N_0 -1} \Big|x[n]\Big|^{2} = \frac{1}{N_0} \sum_{k=0}^{N_0 -1} \Big|\overline{X}_{k}\Big|^{2}
   \end{array} \right.
   \end{gather*}
 
@@ -1340,8 +1340,8 @@ Notazione:
   entrambe periodiche di periodo \(N_0\) \[
   p[n] =x[n] \ y[n]
   \] e calcoliamone la trasformata discreta di Fourier: \begin{align*}
-  \overline{P}_k &= \sum_{n=0}^{N_0 - 1} p[n] \ e^{-j2\pi\frac{nk}{N_0}} = \sum_{n=0}^{N_0 - 1}x[n] \ y[n] e^{-j2\pi\frac{nk}{N_0}} = \\
-  &= \sum_{n=0}^{N_0 -1}\frac{1}{N_0}\sum_{m=0}^{N_0 -1}\overline{X}_m \ e^{j2\pi\frac{nm}{N_0}}\cdot y[n] \ e^{-j2\pi\frac{nk}{N_0}}
+  \overline{P}_k &= \sum_{n=0}^{N_0 - 1} p[n] \ e^{-j2\pi\frac{nk}{N_0}} = \sum_{n=0}^{N_0 - 1}x[n] \ y[n] e^{-j2\pi\frac{nk}{N_0}}
+  = \sum_{n=0}^{N_0 -1}\frac{1}{N_0}\sum_{m=0}^{N_0 -1}\overline{X}_m \ e^{j2\pi\frac{nm}{N_0}}\cdot y[n] \ e^{-j2\pi\frac{nk}{N_0}}
   \end{align*} Dove \(x[n]\) è stata scomposta in serie discreta di
   Fourier. Inoltre è stata utilizzata una variabile ``muta'' \(m\)
   nell'antitrasformata per non creare ambiguità con la variabile \(k\),
@@ -1349,7 +1349,7 @@ Notazione:
   &= \frac{1}{N_0} \sum_{n=0}^{N_0 -1}\sum_{m=0}^{N_0 -1} \overline{X}_m \ e^{j2\pi \frac{nm}{N_0}} \cdot y[n] e^{-j2\pi\frac{nk}{N_0}}
   \end{align*} Invertendo l'ordine delle sommatorie otteniamo:
   \begin{align*}
-  \overline{P}_k &= \sum_{m=0}^{N_0 -1} \overline{X}_m \frac{1}{N_0}\sum_{n=0}^{N_0 -1} y[n] \ e^{-j2\pi{frac{n(k-m)}{N_0}}} = \frac{1}{N_0}\sum_{m=0}^{N_0 -1}\overline{X}_m \ \overline{Y}_{k-m}= \\ 
+  \overline{P}_k &= \sum_{m=0}^{N_0 -1} \overline{X}_m \frac{1}{N_0}\sum_{n=0}^{N_0 -1} y[n] \ e^{-j2\pi{\frac{n(k-m)}{N_0}}} = \frac{1}{N_0}\sum_{m=0}^{N_0 -1}\overline{X}_m \ \overline{Y}_{k-m}= \\ 
   &= \frac{1}{N_0}\cdot \overline{X}_k \otimes \overline{Y}_k
   \end{align*} La convoluzione tra le due trasformate discrete è una
   somma di convoluzione \textbf{ciclica} tra le due sequenze periodiche
@@ -1449,7 +1449,7 @@ Notazione:
   moltiplicazioni complesse e \(N_0 -1\) somme complesse. Inoltre, per
   ogni valore di \(k\) sono necessarie \(8N_0 -2\) operazioni reali, e
   dato che la sequenza è composta da \(N_0\) valori la complessità
-  diventa \textbf{quadratica} \[
+  diventa \textbf{quadratica}: \[
   (8N_0 -2)N_0 = 8N_{0}^{2} -2N_0 \approx 8N_{0}^2
   \] Per velocizzare i calcoli è stato quindi introdotto l'algoritmo
   \textbf{Fast Fourier Transform} o FFT, il quale viene applicato se
