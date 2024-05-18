@@ -38,28 +38,32 @@
 24. Scrivere i Teoremi del prodotto e della convoluzione della DFT
 25. Scrivere la proprietà di traslazione in frequenza della DFT
 26. Enunciare la proprietà di traslazione circolare della Trasformata Discreta di Fourier
-27. Sia data una sequenza finita $x[n]$, di lunghezza $N = 10$ campioni. Indicando con $X_{10}[k]$ e $X_{20}[k]$ le DFT di $x[n]$ calcolate, rispettivamente, con periodicità $L = 10$ e $L = 20$, quali campioni di $X_{20}[k]$ coincidono con campioni di $X_{10}[k]$? Giustificare la risposta.
+27. Enunciare e spiegare la Proprietà di Simmetria della Trasformata Discreta di Fourier per sequenze reali
+28. Sia data una sequenza finita $x[n]$, di lunghezza $N = 10$ campioni. Indicando con $X_{10}[k]$ e $X_{20}[k]$ le DFT di $x[n]$ calcolate, rispettivamente, con periodicità $L = 10$ e $L = 20$, quali campioni di $X_{20}[k]$ coincidono con campioni di $X_{10}[k]$? Giustificare la risposta.
 
 ##### Sistemi LTI discreti
-28. Scrivere la risposta impulsiva di un sistema discreto che implementa una finestra mobile
-29. Descrivere un filtro discreto a media mobile
-30. Descrivere il fitro detto accumulatore o integratore numerico
-31. Giustificare la seguente affermazione: "Un sistema LTI è stabile se la sua funzione di trasferimento ha una regione di convergenza che include la circonferenza unitaria del piano z". $^*$.
-32. Si supponga di voler usare un algoritmo di convoluzione veloce per eseguire il filtraggio di un segnale con un sistema LTI di tipo FIR, avente una risposta impulsiva lunga $N = 200$ campioni. Misurando la complessità in termini di moltiplicazioni reali per campione di uscita, è più conveniente usare (per il calcolo della convoluzione circolare) una FFT con periodicità $L = 2048$ oppure una con periodicità $L = 512$? Giustificare la risposta.
-33. In uno schema di convoluzione veloce, quante moltiplicazioni reali per campione di uscita devono essere effettuate? Giustificare la risposta
+29. Scrivere la risposta impulsiva di un sistema discreto che implementa una finestra mobile
+30. Scrivere la risposta impulsiva di un sistema discreto che implementa un accumulatore o integratore numerico
+31. Descrivere un filtro discreto a media mobile
+32. Descrivere il fitro detto accumulatore o integratore numerico
+33. Giustificare la seguente affermazione: "Un sistema LTI è stabile se la sua funzione di trasferimento ha una regione di convergenza che include la circonferenza unitaria del piano z". $^*$.
+34. Si supponga di voler usare un algoritmo di convoluzione veloce per eseguire il filtraggio di un segnale con un sistema LTI di tipo FIR, avente una risposta impulsiva lunga $N = 200$ campioni. Misurando la complessità in termini di moltiplicazioni reali per campione di uscita, è più conveniente usare (per il calcolo della convoluzione circolare) una FFT con periodicità $L = 2048$ oppure una con periodicità $L = 512$? Giustificare la risposta.
+35. In uno schema di convoluzione veloce, quante moltiplicazioni reali per campione di uscita devono essere effettuate? Giustificare la risposta
+36. Spiegare la differenza tra sistemi lineari e stazionari a tempo discreto di tipo FIR e di tipo IIR.
 
 ##### Quantizzazione
-34. Spiegare la differenza tra un quantizzatore uniforme (a passo $\Delta$ e a $B$ bit) di tipo midtread e uno di tipo midrise
-35. Dato un quantizzatore uniforme, scrivere le relazioni che permettono di trovare il valore quantizzato $\hat{x}(nT)$ a partire dal campione $x(nT)$ nel caso dell'operazione di arrotondamento e di troncamento
-36. Enunciare le ipotesi che usualmente vengono assunte per il rumore di quantizzazione.
-37. Giustificare la seguente affermazione: "Quantizzando un segnale sinusoidale di ampiezza unitaria con un convertitore analogico-digitale avente $B$ bit di quantizzazione e dinamica $[-1, 1]$ si ottiene un rapporto segnale-rumore 0(espresso in $dB$) dato da $SNR \approx 6.02B + 1.76$".
+37. Spiegare la differenza tra un quantizzatore uniforme (a passo $\Delta$ e a $B$ bit) di tipo midtread e uno di tipo midrise
+38. Dato un quantizzatore uniforme, scrivere le relazioni che permettono di trovare il valore quantizzato $\hat{x}(nT)$ a partire dal campione $x(nT)$ nel caso dell'operazione di arrotondamento e di troncamento
+39. Enunciare le ipotesi che usualmente vengono assunte per il rumore di quantizzazione.
+40. Giustificare la seguente affermazione: "Quantizzando un segnale sinusoidale di ampiezza unitaria con un convertitore analogico-digitale avente $B$ bit di quantizzazione e dinamica $[-1, 1]$ si ottiene un rapporto segnale-rumore 0(espresso in $dB$) dato da $SNR \approx 6.02B + 1.76$".
 
 ##### Sistemi di comunicazione digitale
-38. Spiegare il ruolo svolto dal codificatore di canale in un sistema di comunicazione digitale
-39. Spiegare il ruolo svolto da un codificatore di sorgente nella catena di trasmissione digitale.
-40. Spiegare il ruolo svolto da un modulatore digitale nella catena di trasmissione digitale.
-41. Spiegare il ruolo svolto dal codificatore di sorgente nella catena di trasmissione digitale.
-42. Descrivere gli schemi di base di modulazione digitale utilizzati in un sistema di comunicazione
+41. Spiegare il ruolo svolto dal codificatore di canale in un sistema di comunicazione digitale
+42. Spiegare il ruolo svolto da un codificatore di sorgente nella catena di trasmissione digitale.
+43. Spiegare il ruolo svolto da un modulatore digitale nella catena di trasmissione digitale.
+44. Spiegare il ruolo svolto dal codificatore di sorgente nella catena di trasmissione digitale.
+45. Descrivere gli schemi di base di modulazione digitale utilizzati in un sistema di comunicazione
+46. Spiegare quali sono le tecniche multiplex utilizzate in un sistema di trasmissione digitale
 
 ## DIMOSTRAZIONI
 
@@ -83,6 +87,8 @@ X[K] = \sum_{n=0}^{N-1} x[n] = e^{-j \frac{2\pi}{N} kn}, \ \ \ k = 0, 1 , \dots,
  $$
    
 8. Enunciare e dimostrare la relazione tra le trasformate di Fourier della sequenza somma $y[n]$ di una sequenza data $x[n]$, e la Trasformata di $x[n]$ stessa  [$^{***}$]
+9. Enunciare e dimostrare la relazione che esiste tra la trasformata di Fourier di una sequenza $x[n]$ ottenuta per campionamento di un segnale continuo $x(t)$, e la Trasformata di Fourier di $x(t)$ stesso
+10. Calcolare i parametri della densità di probabilità dell'ampiezza dell'errore di quantizzazione nei casi di arrotondamento e di troncamento
    
 NOTA BENE: con [$^{**}$] si intendono domande aggiunte da me!
 con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
