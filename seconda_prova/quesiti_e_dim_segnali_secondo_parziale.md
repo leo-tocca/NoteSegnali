@@ -2,6 +2,26 @@
 #title: "Dimostrazioni e quesiti per secondo parziale di Teoria dei Segnali"
 #author:[Leonardo Toccafondi]
 #date: 2024-04-18
+header-includes: |
+            \usepackage{cancel}
+            \usepackage{steinmetz}
+            \usepackage{derivative}
+            \usepackage{mathtools}
+            \usepackage{siunitx}
+            \DeclareMathOperator{\sinc}{sinc}
+            \DeclareMathOperator{\rect}{rect}
+            \DeclareMathOperator{\tfs}{TFS}
+            \newcommand{\dft}{\operatorname{DFT}}
+            \newcommand{\tf}[1]{\text{T}\Big[ #1 \Big]}
+            \newcommand{\Abs}[1]{\Big| #1 \Big|}
+            \newcommand{\ov}[1]{\overline{#1}}
+            \usepackage{geometry}
+				\geometry{
+					a4paper,
+					total={170mm,257mm},
+					left=20mm,
+					top=20mm,
+				}
 ...
 
 ## QUESITI
@@ -15,55 +35,56 @@
 ##### Trasformata di Fourier per una Sequenza
 6. Che significato ha l'espansione della sequenza $x[n]$?  [$^{**}$]
 7. Qual è la condizione sufficiente per l'esistenza della trasformata per sequenze?  [$^{**}$]
-8. Enunciare e spiegare la Proprietà di Simmetria della TDF per sequenze reali
-9. Enunciare e spiegare il teorema dell'Incremento della TDF per sequenze reali
-10. Enunciare e spiegare la condizione di convergenza della Trasformata di Fourier per sequenze (vedi n°6)
-11. Sia $x[n] = cos(2\pi 0.1 n), \ n \in \mathbb{Z}$. Quale è la sua trasformata di Fourier per sequenze? Giustificare la risposta.
-12. Se $x[n]$ ha trasformata di Fourier per sequenze $\overline{X}(F)$, quale sequenza $y[n]$ ha trasformata di Fourier $\overline{Y}(F) = \overline{X}(F - F_0)$? Giustificare la risposta.
-13. Calcolare la trasformata di Fourier della sequenza $x[n]$ formata dall'impulso rettangolare discreto, cioè $x[n]= u[n]-u[n-N]$
+8. Cosa s'intende per denormalizzazione e a cosa serve?
+9. Enunciare e spiegare la Proprietà di Simmetria della TDF per sequenze reali
+10. Enunciare e spiegare il teorema dell'Incremento della TDF per sequenze reali
+11. Enunciare e spiegare la condizione di convergenza della Trasformata di Fourier per sequenze (vedi n°6)
+12. Sia $x[n] = cos(2\pi 0.1 n), \ n \in \mathbb{Z}$. Quale è la sua trasformata di Fourier per sequenze? Giustificare la risposta.
+13. Se $x[n]$ ha trasformata di Fourier per sequenze $\overline{X}(F)$, quale sequenza $y[n]$ ha trasformata di Fourier $\overline{Y}(F) = \overline{X}(F - F_0)$? Giustificare la risposta.
+14. Calcolare la trasformata di Fourier della sequenza $x[n]$ formata dall'impulso rettangolare discreto, cioè $x[n]= u[n]-u[n-N]$
 
 ###### Campionamento e interpolazione
-14. Definizione teorema del campionamento e condizione di Nyquist [$^{**}$]
-15. Cosa si intende per *aliasing*? Come si evita e perché va evitato. [$^{**}$]
-16. Il segnale $x(t) = e^{-t} u(t)$ può essere campionato con assoluta assenza di aliasing? Giustificare la risposta.
-17. Data una serie di campioni $x(nT)$ ottenuti campionando il segnale analogico di partenza $x(t)$, scrivere la relazione che lega il segnale ricostruito $\hat{x}(t)$ ai campioni $x(nT)$, nel caso di interpolazione lineare. 
-18. Dato il segnale campionato $x_c(t)$ ottenuto campionando il segnale analogico di partenza $x(t)$, scrivere la relazione che lega lo spettro di $x_c(t)$ allo spettro di $x(t)$.
-19. Differenza tra interpolazione a mantenimento, cardinale (e/o lineare) $^{**}$
-20. Quali sono gli svantaggi e i vantaggi dell'interpolazione a mantenimento?  [$^{**}$]
-21. Scrivere l'espressione del segnale interpolato in funzione dei valori della sequenza di campioni nel caso di Interpolazione a mantenimento
+15. Definizione teorema del campionamento e condizione di Nyquist [$^{**}$]
+16. Cosa si intende per *aliasing*? Come si evita e perché va evitato. [$^{**}$]
+17. Il segnale $x(t) = e^{-t} u(t)$ può essere campionato con assoluta assenza di aliasing? Giustificare la risposta.
+18. Data una serie di campioni $x(nT)$ ottenuti campionando il segnale analogico di partenza $x(t)$, scrivere la relazione che lega il segnale ricostruito $\hat{x}(t)$ ai campioni $x(nT)$, nel caso di interpolazione lineare. 
+19. Dato il segnale campionato $x_c(t)$ ottenuto campionando il segnale analogico di partenza $x(t)$, scrivere la relazione che lega lo spettro di $x_c(t)$ allo spettro di $x(t)$.
+20. Differenza tra interpolazione a mantenimento, cardinale (e/o lineare) $^{**}$
+21. Quali sono gli svantaggi e i vantaggi dell'interpolazione a mantenimento?  [$^{**}$]
+22. Scrivere l'espressione del segnale interpolato in funzione dei valori della sequenza di campioni nel caso di Interpolazione a mantenimento
 
 ##### Trasformata di Fourier discreta
-22. Che differenza troviamo tra una trasformata discreta ed una per sequenze [$^{**}$]
-23. Da quanti campioni non nulli è composta la DFT a 20 campioni del segnale di durata finita $x[n] = cos^2(\frac{2\pi}{10}n)$, $n = 0, 1, . . . , 19$? Giustificare la risposta.
-24. Scrivere i Teoremi del prodotto e della convoluzione della DFT
-25. Scrivere la proprietà di traslazione in frequenza della DFT
-26. Enunciare la proprietà di traslazione circolare della Trasformata Discreta di Fourier
-27. Enunciare e spiegare la Proprietà di Simmetria della Trasformata Discreta di Fourier per sequenze reali
-28. Sia data una sequenza finita $x[n]$, di lunghezza $N = 10$ campioni. Indicando con $X_{10}[k]$ e $X_{20}[k]$ le DFT di $x[n]$ calcolate, rispettivamente, con periodicità $L = 10$ e $L = 20$, quali campioni di $X_{20}[k]$ coincidono con campioni di $X_{10}[k]$? Giustificare la risposta.
+23. Che differenza troviamo tra una trasformata discreta ed una per sequenze [$^{**}$]
+24. Da quanti campioni non nulli è composta la DFT a 20 campioni del segnale di durata finita $x[n] = cos^2(\frac{2\pi}{10}n)$, $n = 0, 1, . . . , 19$? Giustificare la risposta.
+25. Scrivere i Teoremi del prodotto e della convoluzione della DFT
+26. Scrivere la proprietà di traslazione in frequenza della DFT
+27. Enunciare la proprietà di traslazione circolare della Trasformata Discreta di Fourier
+28. Enunciare e spiegare la Proprietà di Simmetria della Trasformata Discreta di Fourier per sequenze reali
+29. Sia data una sequenza finita $x[n]$, di lunghezza $N = 10$ campioni. Indicando con $X_{10}[k]$ e $X_{20}[k]$ le DFT di $x[n]$ calcolate, rispettivamente, con periodicità $L = 10$ e $L = 20$, quali campioni di $X_{20}[k]$ coincidono con campioni di $X_{10}[k]$? Giustificare la risposta.
 
 ##### Sistemi LTI discreti
-29. Scrivere la risposta impulsiva di un sistema discreto che implementa una finestra mobile
-30. Scrivere la risposta impulsiva di un sistema discreto che implementa un accumulatore o integratore numerico
-31. Descrivere un filtro discreto a media mobile
-32. Descrivere il fitro detto accumulatore o integratore numerico
-33. Giustificare la seguente affermazione: "Un sistema LTI è stabile se la sua funzione di trasferimento ha una regione di convergenza che include la circonferenza unitaria del piano z". $^*$.
-34. Si supponga di voler usare un algoritmo di convoluzione veloce per eseguire il filtraggio di un segnale con un sistema LTI di tipo FIR, avente una risposta impulsiva lunga $N = 200$ campioni. Misurando la complessità in termini di moltiplicazioni reali per campione di uscita, è più conveniente usare (per il calcolo della convoluzione circolare) una FFT con periodicità $L = 2048$ oppure una con periodicità $L = 512$? Giustificare la risposta.
-35. In uno schema di convoluzione veloce, quante moltiplicazioni reali per campione di uscita devono essere effettuate? Giustificare la risposta
-36. Spiegare la differenza tra sistemi lineari e stazionari a tempo discreto di tipo FIR e di tipo IIR.
+30. Scrivere la risposta impulsiva di un sistema discreto che implementa una finestra mobile
+31. Scrivere la risposta impulsiva di un sistema discreto che implementa un accumulatore o integratore numerico
+32. Descrivere un filtro discreto a media mobile
+33. Descrivere il fitro detto accumulatore o integratore numerico
+34. Giustificare la seguente affermazione: "Un sistema LTI è stabile se la sua funzione di trasferimento ha una regione di convergenza che include la circonferenza unitaria del piano z". $^*$.
+35. Si supponga di voler usare un algoritmo di convoluzione veloce per eseguire il filtraggio di un segnale con un sistema LTI di tipo FIR, avente una risposta impulsiva lunga $N = 200$ campioni. Misurando la complessità in termini di moltiplicazioni reali per campione di uscita, è più conveniente usare (per il calcolo della convoluzione circolare) una FFT con periodicità $L = 2048$ oppure una con periodicità $L = 512$? Giustificare la risposta.
+36. In uno schema di convoluzione veloce, quante moltiplicazioni reali per campione di uscita devono essere effettuate? Giustificare la risposta
+37. Spiegare la differenza tra sistemi lineari e stazionari a tempo discreto di tipo FIR e di tipo IIR.
 
 ##### Quantizzazione
-37. Spiegare la differenza tra un quantizzatore uniforme (a passo $\Delta$ e a $B$ bit) di tipo midtread e uno di tipo midrise
-38. Dato un quantizzatore uniforme, scrivere le relazioni che permettono di trovare il valore quantizzato $\hat{x}(nT)$ a partire dal campione $x(nT)$ nel caso dell'operazione di arrotondamento e di troncamento
-39. Enunciare le ipotesi che usualmente vengono assunte per il rumore di quantizzazione.
-40. Giustificare la seguente affermazione: "Quantizzando un segnale sinusoidale di ampiezza unitaria con un convertitore analogico-digitale avente $B$ bit di quantizzazione e dinamica $[-1, 1]$ si ottiene un rapporto segnale-rumore 0(espresso in $dB$) dato da $SNR \approx 6.02B + 1.76$".
+38. Spiegare la differenza tra un quantizzatore uniforme (a passo $\Delta$ e a $B$ bit) di tipo midtread e uno di tipo midrise
+39. Dato un quantizzatore uniforme, scrivere le relazioni che permettono di trovare il valore quantizzato $\hat{x}(nT)$ a partire dal campione $x(nT)$ nel caso dell'operazione di arrotondamento e di troncamento
+40. Enunciare le ipotesi che usualmente vengono assunte per il rumore di quantizzazione.
+41. Giustificare la seguente affermazione: "Quantizzando un segnale sinusoidale di ampiezza unitaria con un convertitore analogico-digitale avente $B$ bit di quantizzazione e dinamica $[-1, 1]$ si ottiene un rapporto segnale-rumore 0(espresso in $dB$) dato da $SNR \approx 6.02B + 1.76$".
 
 ##### Sistemi di comunicazione digitale
-41. Spiegare il ruolo svolto dal codificatore di canale in un sistema di comunicazione digitale
-42. Spiegare il ruolo svolto da un codificatore di sorgente nella catena di trasmissione digitale.
-43. Spiegare il ruolo svolto da un modulatore digitale nella catena di trasmissione digitale.
-44. Spiegare il ruolo svolto dal codificatore di sorgente nella catena di trasmissione digitale.
-45. Descrivere gli schemi di base di modulazione digitale utilizzati in un sistema di comunicazione
-46. Spiegare quali sono le tecniche multiplex utilizzate in un sistema di trasmissione digitale
+42. Spiegare il ruolo svolto dal codificatore di canale in un sistema di comunicazione digitale
+43. Spiegare il ruolo svolto da un codificatore di sorgente nella catena di trasmissione digitale.
+44. Spiegare il ruolo svolto da un modulatore digitale nella catena di trasmissione digitale.
+45. Spiegare il ruolo svolto dal codificatore di sorgente nella catena di trasmissione digitale.
+46. Descrivere gli schemi di base di modulazione digitale utilizzati in un sistema di comunicazione
+47. Spiegare quali sono le tecniche multiplex utilizzate in un sistema di trasmissione digitale
 
 ## DIMOSTRAZIONI
 
@@ -148,17 +169,19 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
         colore bianco nello spettro dei colori
 
 5.  Sapendo che $y(t) = x(t) \otimes h(t)$
-    \begin{gather*}
-    E[y(t)] = E[x(t)\otimes h(t)] = E[\int_{-\infty}^{\infty} h(\alpha)x(t - \alpha) d\alpha]
-    //= \int_{-\infty}^{\infty} h(\alpha)E[x(t - \alpha)] d\alpha =
-       m_x \int_{-\infty}^{\infty} h(\alpha) d\alpha = m_x \cdot H(0)
-    // R_y(t_1, t_2) = E[y(t_1), y(t_2)] \to R_y(t, t-\tau) = \\
-      E[y(t)y(t-\tau)] \to R_y(\tau) = R_x(\tau) \otimes (\tau) h(\tau) h(-\tau)
-    // S_y(\tau) = S_x(f) \cdot H(f) \cdot H(-f) = S_x(f) \cdot H(f) \cdot H^*(-f) = S_x(f) \cdot |H(f)|^2
-    \end{gather*}
+    \begin{align*}
+    E[y(t)] &= E[x(t)\otimes h(t)] = E[\int_{-\infty}^{\infty} h(\alpha)x(t - \alpha) d\alpha]
+    = \int_{-\infty}^{\infty} h(\alpha)E[x(t - \alpha)] d\alpha =
+       m_x \int_{-\infty}^{\infty} h(\alpha) d\alpha =\\&= m_x \cdot H(0)
+    \\ R_y(t_1, t_2) &= E[y(t_1), y(t_2)] \to R_y(t, t-\tau) =
+      E[y(t)y(t-\tau)] \to R_y(\tau) = R_x(\tau) \otimes (\tau) h(\tau) h(-\tau)=
+    \ S_y(\tau) \\ &= S_x(f) \cdot H(f) \cdot H(-f) = S_x(f) \cdot H(f) \cdot H^*(-f) = S_x(f) \cdot |H(f)|^2
+    \end{align*}
     Quindi è nuovamente un processo WSS
 
-6.  Il segnale $x[n]$ viene espressi mediante la somma di molti termini
+##### Risposte tdf sequenze
+
+6.  Il segnale $x[n]$ viene espresso mediante la somma di molti termini
     $X(f)$ i quali, al variare della frequenza $\overline{X}(F)$ hanno
     un peso diverso (in ampiezza e in fase). A differenza di un segnale
     analogico, per esprimere una sequenza in ambito frequenziale sono
@@ -207,9 +230,13 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
 
 14. La trasformata di Fourier della sequenza $x[n]=u[n]-u[n-N]$, dove
     $u[n]$ è la funzione gradino unitario, è data da:
-    $$\displaystyle \overline{X}(f) = \sum_{n = -\infty}^{+\infty} (u[n]-u[n-N])e^{-2\pi nfT} = \sum_{n = 0}^{N-1}e^{-2\pi nfT} = \sum_{n = 0}^{N-1}(e^{-2\pi fT})^n =$$
-    $$\text{si applica la serie geometrica, con} \ q = e^{-j2\alpha}$$
-    $$= \frac{1-e^{-2\pi N\alpha}}{1-e^{-2\pi \alpha}} = \frac{e^{j \alpha N}}{e^{\alpha}} \cdot \frac{e^{j\alpha N} - e^{-j\alpha N}}{e^{j\alpha } - e^{-j\alpha }} = e^{j \alpha (N-1)} \cdot \frac{sen(\alpha N)}{sen(\alpha)} = e^{-j\pi (N-1)fT} \cdot \frac{sen(N\pi fT)}{sen(\pi fT)}$$
+    \begin{align*}
+    \displaystyle \overline{X}(f) &= \sum_{n = -\infty}^{+\infty} (u[n]-u[n-N])e^{-2\pi nfT} = \sum_{n = 0}^{N-1}e^{-2\pi nfT} = \sum_{n = 0}^{N-1}(e^{-2\pi fT})^n = \\
+    &\text{si applica la serie geometrica, con} \ q = e^{-j2\alpha}& \\
+    &= \frac{1-e^{-2\pi N\alpha}}{1-e^{-2\pi \alpha}} = \frac{e^{j \alpha N}}{e^{\alpha}} \cdot \frac{e^{j\alpha N} - e^{-j\alpha N}}{e^{j\alpha } - e^{-j\alpha }} = e^{j \alpha (N-1)} \cdot \frac{sen(\alpha N)}{sen(\alpha)} = e^{-j\pi (N-1)fT} \cdot \frac{sen(N\pi fT)}{sen(\pi fT)}
+    \end{align*}
+
+##### Risposte campionamento e interpolazione
 
 15. "Un segnale il cui spettro è **limitato** nella banda $B$ può essere
     ricostruito esattamente dai propri campioni, purché la frequenza di
@@ -278,6 +305,8 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
 
 22. $\hat{x}(t)=\sum_{n=-\infty}^{+\infty}x[n]\cdot p(t-nT)\text{, con } p(t)= rect(\frac{t-\frac{T}{2}}{T})$
 
+##### Risposte TDF discreta
+
 23. La differenza tra una trasformata discreta e una per sequenze
     risiede nel fatto che la trasformata discreta è definita solo per un
     numero finito di punti, mentre la trasformata per sequenze può
@@ -286,11 +315,11 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
     per sequenze non fa questa assunzione (?).
 
 24.
-\begin{gather*} 
-x[n] = \cos^2(\frac{2\pi n}{10}), \ n= 0, \cdots, 19 \\
-x[n] = \frac{1}{2}[1+\cos(2\frac{2\pi n}{10})] = \frac{1}{2} + \frac{1}{4}e^{\frac{j2\pi n}{20}} + \frac{1}{4}e^{\frac{-j2\pi n}{20}} \\
-x[k] = \frac{1}{2}\sum_{k=0}^{19} e^{\frac{-j2\pi kn}{20}} + \frac{1}{4}\sum_{k=0}^{19} e^{\frac{-j2\pi (k-4)n}{20}} +\frac{1}{4}\sum_{k=0}^{19} e^{\frac{-j2\pi (k+4)n}{20}} = x_1[k]+x_2[k]+x_3[k]
-\end{gather*}
+\begin{align*} 
+x[n] &= \cos^2(\frac{2\pi n}{10}), \ n= 0, \cdots, 19 \\
+x[n] &= \frac{1}{2}[1+\cos(2\frac{2\pi n}{10})] = \frac{1}{2} + \frac{1}{4}e^{\frac{j2\pi n}{20}} + \frac{1}{4}e^{\frac{-j2\pi n}{20}} \\
+x[k] &= \frac{1}{2}\sum_{k=0}^{19} e^{\frac{-j2\pi kn}{20}} + \frac{1}{4}\sum_{k=0}^{19} e^{\frac{-j2\pi (k-4)n}{20}} +\frac{1}{4}\sum_{k=0}^{19} e^{\frac{-j2\pi (k+4)n}{20}} = x_1[k]+x_2[k]+x_3[k]
+\end{align*}
 $$
 x_{1}[k] = \left\{ \begin{array}{cl}
 \frac{1}{2} \cdot 20 = 10 & \text{per } m=0 \\
@@ -299,11 +328,13 @@ x_{1}[k] = \left\{ \begin{array}{cl}
 x_{2}[k] = \left\{ \begin{array}{cl}
 \frac{1}{4} \cdot 20 = 5& \text{per } m=4 \\
 0 & \text{altrimenti}
-\end{array} \right.,\
+\end{array} \right.,
+$$
+$$
 x_{3}[k] = \left\{ \begin{array}{cl}
 \frac{1}{4} \cdot 20 = 5& \text{per } m=16 \\
 0 & \text{altrimenti}
-\end{array} \right.,\\
+\end{array} \right.,\
 x[k] = \left\{ \begin{array}{cl}
 10& \text{per } m=0 \\
 5 & \text{per }m=4, 16\\
@@ -320,6 +351,8 @@ $$
 26. La proprietà di traslazione in frequenza della DFT afferma che la
     DFT di una sequenza moltiplicata per un'onda esponenziale complessa
     è uguale alla DFT della sequenza originale spostata in frequenza.
+
+27.
 
 27. La proprietà di traslazione circolare della Trasformata Discreta di
     Fourier afferma che la DFT di una sequenza traslata circolarmente è
