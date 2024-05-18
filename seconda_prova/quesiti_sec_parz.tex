@@ -1,0 +1,798 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\ifLuaTeX
+  \usepackage{luacolor}
+  \usepackage[soul]{lua-ul}
+\else
+  \usepackage{soul}
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{cancel}
+\usepackage{steinmetz}
+\usepackage{derivative}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\rect}{rect}
+\DeclareMathOperator{\tfs}{TFS}
+\newcommand{\dft}{\operatorname{DFT}}
+\newcommand{\tf}[1]{\text{T}\Big[ #1 \Big]}
+\newcommand{\Abs}[1]{\Big| #1 \Big|}
+\newcommand{\ov}[1]{\overline{#1}}
+\usepackage{geometry}
+    \geometry{
+        a4paper,
+        total={170mm,257mm},
+        left=20mm,
+        top=20mm,
+    }
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\subsection{QUESITI}\label{quesiti}
+
+\subparagraph{Processo WSS}\label{processo-wss}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Enunciare le proprietà che devono essere soddisfatte affinché un
+  processo aleatorio sia stazionario in senso stretto {[}\(^{**}\){]}
+\item
+  Enunciare le proprietà che devono essere soddisfatte affinché un
+  processo aleatorio sia stazionario in senso lato
+\item
+  Elencare le proprietà che caratterizzano un processo aleatorio
+  stazionario in senso lato (WSS).
+\item
+  Cos'è il rumore bianco?{[}\(^{**}\){]}
+\item
+  Se \(x(t)\) è un processo WSS in ingresso ad un sistema SLS con
+  risposta impulsiva \(h(t)\), il segnale \(y(t)\) ottenuto in uscita è
+  a sua volta un processo WSS? {[}\(^{**}\){]}
+\end{enumerate}
+
+\subparagraph{Trasformata di Fourier per una
+Sequenza}\label{trasformata-di-fourier-per-una-sequenza}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Che significato ha l'espansione della sequenza \(x[n]\)?
+  {[}\(^{**}\){]}
+\item
+  Qual è la condizione sufficiente per l'esistenza della trasformata per
+  sequenze? {[}\(^{**}\){]}
+\item
+  Cosa s'intende per denormalizzazione e a cosa serve?
+\item
+  Enunciare e spiegare la Proprietà di Simmetria della TDF per sequenze
+  reali
+\item
+  Enunciare e spiegare il teorema dell'Incremento della TDF per sequenze
+  reali
+\item
+  Enunciare e spiegare la condizione di convergenza della Trasformata di
+  Fourier per sequenze (vedi n°6)
+\item
+  Sia \(x[n] = cos(2\pi 0.1 n), \ n \in \mathbb{Z}\). Quale è la sua
+  trasformata di Fourier per sequenze? Giustificare la risposta.
+\item
+  Se \(x[n]\) ha trasformata di Fourier per sequenze
+  \(\overline{X}(F)\), quale sequenza \(y[n]\) ha trasformata di Fourier
+  \(\overline{Y}(F) = \overline{X}(F - F_0)\)? Giustificare la risposta.
+\item
+  Calcolare la trasformata di Fourier della sequenza \(x[n]\) formata
+  dall'impulso rettangolare discreto, cioè \(x[n]= u[n]-u[n-N]\)
+\end{enumerate}
+
+Campionamento e interpolazione
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{14}
+\tightlist
+\item
+  Definizione teorema del campionamento e condizione di Nyquist
+  {[}\(^{**}\){]}
+\item
+  Cosa si intende per \emph{aliasing}? Come si evita e perché va
+  evitato. {[}\(^{**}\){]}
+\item
+  Il segnale \(x(t) = e^{-t} u(t)\) può essere campionato con assoluta
+  assenza di aliasing? Giustificare la risposta.
+\item
+  Data una serie di campioni \(x(nT)\) ottenuti campionando il segnale
+  analogico di partenza \(x(t)\), scrivere la relazione che lega il
+  segnale ricostruito \(\hat{x}(t)\) ai campioni \(x(nT)\), nel caso di
+  interpolazione lineare.
+\item
+  Dato il segnale campionato \(x_c(t)\) ottenuto campionando il segnale
+  analogico di partenza \(x(t)\), scrivere la relazione che lega lo
+  spettro di \(x_c(t)\) allo spettro di \(x(t)\).
+\item
+  Differenza tra interpolazione a mantenimento, cardinale (e/o lineare)
+  \(^{**}\)
+\item
+  Quali sono gli svantaggi e i vantaggi dell'interpolazione a
+  mantenimento? {[}\(^{**}\){]}
+\item
+  Scrivere l'espressione del segnale interpolato in funzione dei valori
+  della sequenza di campioni nel caso di Interpolazione a mantenimento
+\end{enumerate}
+
+\subparagraph{Trasformata di Fourier
+discreta}\label{trasformata-di-fourier-discreta}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{22}
+\tightlist
+\item
+  Che differenza troviamo tra una trasformata discreta ed una per
+  sequenze {[}\(^{**}\){]}
+\item
+  Da quanti campioni non nulli è composta la DFT a 20 campioni del
+  segnale di durata finita \(x[n] = cos^2(\frac{2\pi}{10}n)\),
+  \(n = 0, 1, . . . , 19\)? Giustificare la risposta.
+\item
+  Scrivere i Teoremi del prodotto e della convoluzione della DFT
+\item
+  Scrivere la proprietà di traslazione in frequenza della DFT
+\item
+  Enunciare la proprietà di traslazione circolare della Trasformata
+  Discreta di Fourier
+\item
+  Enunciare e spiegare la Proprietà di Simmetria della Trasformata
+  Discreta di Fourier per sequenze reali
+\item
+  Sia data una sequenza finita \(x[n]\), di lunghezza \(N = 10\)
+  campioni. Indicando con \(X_{10}[k]\) e \(X_{20}[k]\) le DFT di
+  \(x[n]\) calcolate, rispettivamente, con periodicità \(L = 10\) e
+  \(L = 20\), quali campioni di \(X_{20}[k]\) coincidono con campioni di
+  \(X_{10}[k]\)? Giustificare la risposta.
+\end{enumerate}
+
+\subparagraph{Sistemi LTI discreti}\label{sistemi-lti-discreti}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{29}
+\tightlist
+\item
+  Scrivere la risposta impulsiva di un sistema discreto che implementa
+  una finestra mobile
+\item
+  Scrivere la risposta impulsiva di un sistema discreto che implementa
+  un accumulatore o integratore numerico
+\item
+  Descrivere un filtro discreto a media mobile
+\item
+  Descrivere il fitro detto accumulatore o integratore numerico
+\item
+  Giustificare la seguente affermazione: ``Un sistema LTI è stabile se
+  la sua funzione di trasferimento ha una regione di convergenza che
+  include la circonferenza unitaria del piano z''. \(^*\).
+\item
+  Si supponga di voler usare un algoritmo di convoluzione veloce per
+  eseguire il filtraggio di un segnale con un sistema LTI di tipo FIR,
+  avente una risposta impulsiva lunga \(N = 200\) campioni. Misurando la
+  complessità in termini di moltiplicazioni reali per campione di
+  uscita, è più conveniente usare (per il calcolo della convoluzione
+  circolare) una FFT con periodicità \(L = 2048\) oppure una con
+  periodicità \(L = 512\)? Giustificare la risposta.
+\item
+  In uno schema di convoluzione veloce, quante moltiplicazioni reali per
+  campione di uscita devono essere effettuate? Giustificare la risposta
+\item
+  Spiegare la differenza tra sistemi lineari e stazionari a tempo
+  discreto di tipo FIR e di tipo IIR.
+\end{enumerate}
+
+\subparagraph{Quantizzazione}\label{quantizzazione}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{37}
+\tightlist
+\item
+  Spiegare la differenza tra un quantizzatore uniforme (a passo
+  \(\Delta\) e a \(B\) bit) di tipo midtread e uno di tipo midrise
+\item
+  Dato un quantizzatore uniforme, scrivere le relazioni che permettono
+  di trovare il valore quantizzato \(\hat{x}(nT)\) a partire dal
+  campione \(x(nT)\) nel caso dell'operazione di arrotondamento e di
+  troncamento
+\item
+  Enunciare le ipotesi che usualmente vengono assunte per il rumore di
+  quantizzazione.
+\item
+  Giustificare la seguente affermazione: ``Quantizzando un segnale
+  sinusoidale di ampiezza unitaria con un convertitore
+  analogico-digitale avente \(B\) bit di quantizzazione e dinamica
+  \([-1, 1]\) si ottiene un rapporto segnale-rumore 0(espresso in
+  \(dB\)) dato da \(SNR \approx 6.02B + 1.76\)''.
+\end{enumerate}
+
+\subparagraph{Sistemi di comunicazione
+digitale}\label{sistemi-di-comunicazione-digitale}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{41}
+\tightlist
+\item
+  Spiegare il ruolo svolto dal codificatore di canale in un sistema di
+  comunicazione digitale
+\item
+  Spiegare il ruolo svolto da un codificatore di sorgente nella catena
+  di trasmissione digitale.
+\item
+  Spiegare il ruolo svolto da un modulatore digitale nella catena di
+  trasmissione digitale.
+\item
+  Spiegare il ruolo svolto dal codificatore di sorgente nella catena di
+  trasmissione digitale.
+\item
+  Descrivere gli schemi di base di modulazione digitale utilizzati in un
+  sistema di comunicazione
+\item
+  Spiegare quali sono le tecniche multiplex utilizzate in un sistema di
+  trasmissione digitale
+\end{enumerate}
+
+\subsection{DIMOSTRAZIONI}\label{dimostrazioni}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Enunciare e dimostrare il Teorema del prodotto della TDF di una
+  sequenza
+\item
+  Mostrare come la TDF di una sequenza ottenuta per campionamento si
+  ricava come periodicizzazione della TDF del segnale di partenza
+  {[}\(^{**}\){]}
+\item
+  Enunciare e dimostrare la relazione che esiste tra la trasformata di
+  Fourier di una sequenza \(x[n]\) ottenuta per campionamento di un
+  segnale continuo \(x(t)\), e la Trasformata di Fourier di \(x(t)\)
+  stesso
+\item
+  Dimostrare che dalla relazione di antitrasformata discreta di Fourier
+  discende la relazione di trasformata discreta di Fourier
+\item
+  Enunciare e dimostrare il Teorema della convoluzione della Trasformata
+  discreta di Fourier
+\item
+  Enunciare e dimostrare il teorema di Parseval nella sua forma valida
+  per sequenze aperiodiche e relative trasformate di Fourier per
+  sequenze.
+\item
+  Dimostrare che, data una sequenza \(x[n]\) di \(N\) campioni,
+  definendo la sequenza DFT mediante la formula
+
+  \[
+  \displaystyle
+  X[K] = \sum_{n=0}^{N-1} x[n] = e^{-j \frac{2\pi}{N} kn}, \ \ \ k = 0, 1 , \dots, N-1
+  \]
+
+  allora la sequenza \(x[n]\) è ricavabile da \[
+  \displaystyle
+  x[n] = \frac{1}{N} \sum_{n=0}^{N-1} X[K] = e^{j \frac{2\pi}{N} kn}
+   \]
+\item
+  Enunciare e dimostrare la relazione tra le trasformate di Fourier
+  della sequenza somma \(y[n]\) di una sequenza data \(x[n]\), e la
+  Trasformata di \(x[n]\) stessa {[}\(^{***}\){]}
+\item
+  Enunciare e dimostrare la relazione che esiste tra la trasformata di
+  Fourier di una sequenza \(x[n]\) ottenuta per campionamento di un
+  segnale continuo \(x(t)\), e la Trasformata di Fourier di \(x(t)\)
+  stesso
+\item
+  Calcolare i parametri della densità di probabilità dell'ampiezza
+  dell'errore di quantizzazione nei casi di arrotondamento e di
+  troncamento
+\end{enumerate}
+
+NOTA BENE: con {[}\(^{**}\){]} si intendono domande aggiunte da me! con
+{[}\(^{***}\){]} si intende una domanda spostata dai quesiti alle
+dimostrazioni
+
+\newpage
+
+\subsection{RISPOSTE QUESITI}\label{risposte-quesiti}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Un processo aleatorio \(x\) è detto stazionario se la sua
+  \emph{funzione di autocorrelazione}
+  \(R_{XX}(t_1, t_2) = E[X(t_1), X(t_2)]\) dipende solo dalla distanza
+  (o \emph{lag}) tra i campioni e \textbf{non} dai singoli istanti
+  \(t_1\) e \(t_2\). - Un processo aleatorio è stazionario in senso
+  stretto (SSS) se tutte le sue proprietà statistiche rimangono
+  invariate nel tempo. Ovvero se la densità di probabilità rispetto ai
+  singoli campioni, sia quella congiunta rispetto a più campioni non
+  sono alterate da una transazione solidale nel tempo applicata agli
+  indici dei campioni. Va verificato per tutti gli ordini i con
+  \(i= 0, \dots, \ \infty\) \[f_x (x, t) = f_x(x, t+ \Delta t)\]
+  \[f_x(x_1, x_2, t_1, t_2) = f_x(x_1, x_2, t_1 + \Delta t_1, t_2 + \Delta t_2)
+    //
+    ...\]
+\item
+  Un processo aleatorio è stazionario in senso lato (WSS):
+
+  \begin{itemize}
+  \item
+    la sua media e la sua varianza rimangono costanti nel tempo
+    \(\to E[x(t)] = m_x(t) = m_x\)\\
+  \item
+    la sua autocorrelazione dipende solo dallo scarto temporale e non
+    dal tempo assoluto (funzione solo dello scarto \(\tau\)).
+    \(\to R_{xx}(t, t+\tau) = R_{xx}(\tau)\)
+  \end{itemize}
+\item
+  Le proprietà che caratterizzano un processo aleatorio WSS includono:
+
+  \begin{itemize}
+  \item
+    \(R_x(\tau) = R_x(-\tau) \to\) la funzione di autocorrelazione è una
+    funzione pari
+  \item
+    \(R_x(0)= E[X^2(t)] = P_x \geq 0 \to\) potenza costante
+  \item
+    \(|R_x(\tau)| \leq R_x(\tau) \to\) la funzione di correlazione ha il
+    proprio massimo in \(\tau = 0\)
+  \end{itemize}
+\item
+  Il rumore bianco è un tipo di segnale casuale che ha una potenza
+  spettrale costante in tutto lo spettro di frequenze. Questo significa
+  che tutte le frequenze sono presenti con la stessa intensità. Inoltre
+  il rumore/processo bianco \(w(t)\) ha campioni incorrelati
+
+  \begin{itemize}
+  \item
+    \(R_{ww}(\tau) = \frac{N_0}{2} \delta(\tau), \ \tau \neq 0\)
+  \item
+    \(E[w(t)] = 0\)
+  \item
+    \(S_ww(f) = \mathcal{F} \{\frac{N_0}{2}\} = \frac{N_0}{2} \to\)
+    Potenza \textbf{infinita}
+  \item
+    Nota: si chiama bianco in quanto possedendo nello spettro
+    \emph{tutte} componenti non nulle, si trova una similitudine con il
+    colore bianco nello spettro dei colori
+  \end{itemize}
+\item
+  Sapendo che \(y(t) = x(t) \otimes h(t)\) \begin{align*}
+  E[y(t)] &= E[x(t)\otimes h(t)] = E[\int_{-\infty}^{\infty} h(\alpha)x(t - \alpha) d\alpha]
+  = \int_{-\infty}^{\infty} h(\alpha)E[x(t - \alpha)] d\alpha =
+     m_x \int_{-\infty}^{\infty} h(\alpha) d\alpha =\\&= m_x \cdot H(0)
+  \\ R_y(t_1, t_2) &= E[y(t_1), y(t_2)] \to R_y(t, t-\tau) =
+    E[y(t)y(t-\tau)] \to R_y(\tau) = R_x(\tau) \otimes (\tau) h(\tau) h(-\tau)=
+  \ S_y(\tau) \\ &= S_x(f) \cdot H(f) \cdot H(-f) = S_x(f) \cdot H(f) \cdot H^*(-f) = S_x(f) \cdot |H(f)|^2
+  \end{align*} Quindi è nuovamente un processo WSS
+\end{enumerate}
+
+\subparagraph{Risposte tdf sequenze}\label{risposte-tdf-sequenze}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\item
+  Il segnale \(x[n]\) viene espresso mediante la somma di molti termini
+  \(X(f)\) i quali, al variare della frequenza \(\overline{X}(F)\) hanno
+  un peso diverso (in ampiezza e in fase). A differenza di un segnale
+  analogico, per esprimere una sequenza in ambito frequenziale sono
+  \textbf{sufficienti} le sole componenti con frequenze comprese tra
+  \([\frac{-1}{2T}, \frac{1}{2T}]\) (ciò è giustificato dalla
+  periodicità della trasformata di Fourier per sequenze)
+\item
+  La condizione sufficiente per l'esistenza della trasformata per
+  sequenze è che la sequenza sia \textbf{\emph{assolutamente
+  sommabile}}, ovvero la somma dei valori assoluti dei suoi elementi sia
+  finita.
+  \[\displaystyle \sum_{n=-\infty}^{\infty} |x[n]| < + \infty \to |X(f)| < +\infty\]
+  \[|\overline{X}(f)| = |\sum_{n=-\infty}^{\infty} x[n] e^{-j2\pi nfT}| \leq \sum_{n=-\infty}^{\infty} | x[n] e^{-j2\pi nfT}| \leq 
+    \sum_{n=-\infty}^{\infty} |x[n]|\]
+\item
+  La denormalizzazione è necessaria quando la sequenza \(x[n]\) deriva
+  da un'operazione di campionamento: in questo caso la frequenza \(F_0\)
+  \((= \frac{F}{F_c}\) dove \(F\) è la frequenza e \(F_c\) è la
+  frequenza di campionamento\()\) non permette di stabilire un legame
+  \emph{immediato} con la frequenza espressa in Hz (e quindi
+  \textbf{non} adimensionale) delle componenti nella trasformata del
+  segnale analogico di partenza. Quindi se \(T\) = al periodo di
+  campionamento e \(f=\frac{F}{T}=F\cdot F_c \to F=fT\) in Hz.
+\item
+  La Proprietà di Simmetria della Trasformata di Fourier per sequenze
+  reali afferma che lo spettro di una sequenza reale è simmetrico
+  rispetto all'origine. Questo significa che la parte positiva dello
+  spettro è l'immagine speculare della parte negativa.
+\item
+  Il teorema dell'Incremento della Trasformata di Fourier per sequenze
+  per sequenze reali afferma che l'incremento di una sequenza nel
+  dominio del tempo corrisponde a una modulazione nel dominio della
+  frequenza.
+\item
+  La condizione di convergenza della Trasformata di Fourier per sequenze
+  è che la sequenza sia assolutamente sommabile, ovvero la somma dei
+  valori assoluti dei suoi elementi sia finita.
+\item
+  \st{La trasformata di Fourier della sequenza...}
+\item
+  Se \(x[n]\) ha trasformata di Fourier per sequenze \(X(F)\), allora la
+  sequenza \(y[n]\) con TDF \(Y(F)=X(F-F_0)\) è data da
+  \(y[n]=x[n]ej2\pi F_0n\). Questo è dovuto alla proprietà di
+  traslazione in frequenza della trasformata di Fourier, che afferma che
+  la traslazione di una funzione nel dominio della frequenza corrisponde
+  a una modulazione esponenziale nel dominio del tempo.
+\item
+  La trasformata di Fourier della sequenza \(x[n]=u[n]-u[n-N]\), dove
+  \(u[n]\) è la funzione gradino unitario, è data da: \begin{align*}
+  \displaystyle \overline{X}(f) &= \sum_{n = -\infty}^{+\infty} (u[n]-u[n-N])e^{-2\pi nfT} = \sum_{n = 0}^{N-1}e^{-2\pi nfT} = \sum_{n = 0}^{N-1}(e^{-2\pi fT})^n = \\
+  &\text{si applica la serie geometrica, con} \ q = e^{-j2\alpha}& \\
+  &= \frac{1-e^{-2\pi N\alpha}}{1-e^{-2\pi \alpha}} = \frac{e^{j \alpha N}}{e^{\alpha}} \cdot \frac{e^{j\alpha N} - e^{-j\alpha N}}{e^{j\alpha } - e^{-j\alpha }} = e^{j \alpha (N-1)} \cdot \frac{sen(\alpha N)}{sen(\alpha)} = e^{-j\pi (N-1)fT} \cdot \frac{sen(N\pi fT)}{sen(\pi fT)}
+  \end{align*}
+\end{enumerate}
+
+\subparagraph{Risposte campionamento e
+interpolazione}\label{risposte-campionamento-e-interpolazione}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{14}
+\item
+  ``Un segnale il cui spettro è \textbf{limitato} nella banda \(B\) può
+  essere ricostruito esattamente dai propri campioni, purché la
+  frequenza di campionamento non sia inferiore a \(2B\)''. La condizione
+  di Nyquist: ``Una volta fissata \(B\) la frequenza di campionamento
+  \(f_c = \frac{1}{T} \geq 2B, \to T \leq \frac{1}{2B}\)
+\item
+  L'aliasing è un effetto indesiderato che si verifica quando \emph{non
+  viene rispettata} la frequenza di Nyquist (\(f_c < 2B\)). Può essere
+  evitato campionando il segnale a una frequenza almeno doppia della
+  frequenza di Nyquist. L'aliasing va evitato perché introduce
+  distorsioni nel segnale ricostruito dal momento che le repliche, a
+  causa della loro sovrapposizione si sommano, rendendo impossibile una
+  ricostruzione \textbf{fedele} del segnale originale .
+\item
+  Il segnale \(x(t)=e^{-t}u(t)\) può essere campionato senza aliasing
+  solo se la frequenza di campionamento è infinita. Questo perché il
+  segnale ha componenti di frequenza che si estendono all'infinito,
+  quindi non esiste una frequenza di Nyquist finita che possa essere
+  utilizzata per campionare il segnale senza aliasing.
+\item
+  \(\displaystyle x(nT) = x[n] \text{ ottenuti da:} \ \hat{x}(t)= \sum_{n= -\infty}^{\infty} x[n] \cdot tri(\frac{t-nT}{T})= \sum_{n= -\infty}^{\infty}x[n] (1-\frac{|t|}{T})rect(\frac{t}{2T})\)
+\item
+  \(\overline{X}(f) = \frac{1}{T}\sum_{k=-\infty}^{\infty}X(f-\frac{k}{T})\)
+\item
+  \begin{itemize}
+  \item
+    L'interpolazione a mantenimento, o interpolazione a gradino, è un
+    metodo di interpolazione che mantiene l'n-esimo valore della
+    sequenza \(x[n]\) a partire dall'istante \(nT\) fino a \(nT+1\).
+    Successivamente sarà mantenuto \(x[n+1]\) e così via\\
+    \(\hat{x}(t)=\sum_{n=-\infty}^{+\infty}x[n]\cdot p(t-nT)\text{, con } p(t)= rect(\frac{t-\frac{T}{2}}{T})\).
+  \item
+    L'interpolazione cardinale, o sinc, utilizza come impulso \(p(t)\)
+    una funzione sinc per interpolare tra i campioni:
+    \(\to p(t)=sinc(\frac{t}{T}) \to \hat{x}(t)=\sum_{x=-\infty}^{+\infty} x[n]\cdot sinc(\frac{f-nT}{T})\).
+    Rispetto alla interpolazione a mantenimento introduce meno
+    discontinuità, ma nella realtà non è applicabile, dal momento che
+    sono necessari un numero infinito di termini, dal fatto che non è
+    \textbf{causale} e a causa della impossibilità di ricostruire un
+    segnale rect in frequenza;
+  \item
+    L'interpolazione lineare utilizza un'impulso triangolare, in modo
+    tale che la risultante sia una spezzata che unisce i vertici dei
+    triangoli:
+    \(p(t) = tri(\frac{t-nT}{T}) \to \hat{x}(t) = \sum_n x[n]tri(\frac{t-nT}{T})\)
+
+    \begin{itemize}
+    \tightlist
+    \item
+      L'interpolazione a mantenimento è la più semplice, ma può
+      introdurre distorsioni significative. L'interpolazione cardinale
+      può fornire risultati più accurati, ma è computazionalmente più
+      intensiva.
+    \end{itemize}
+  \end{itemize}
+\item
+  L'interpolazione a mantenimento ha il vantaggio di essere semplice da
+  implementare e computazionalmente efficiente. Tuttavia, il segnale
+  interpolato \textbf{non è limitato in banda}: in questo modo sono
+  introdotte delle componenti frequenziali non presenti nel segnale
+  analogico \(x(t)\). Derivano dalla presenza di repliche dello spettro
+  del segnale a cavallo dei multipli delle frequenze di campionamento
+  (sono dette \emph{immagini}). Inoltre anche all'interno della
+  cosiddetta banda ``utile'' (intervallo base
+  \([-\frac{1}{2T}, \frac{1}{2T}]\)) il segnale \(x(t)\) viene distorto
+  in ampiezza (i due spettri nono legati dalla seguente relazione:
+  \(\hat{X}(f)=\frac{P(f)X(f)}{T}=X(f)sinc(fT)e^{-j\pi fT}\)). Bisogna
+  notare come sia possibile ridurre la presenza di immagini utilizzando
+  un filtro ``\emph{anti-immagine}'' all'uscita dell'interpolatore:
+  corrisponde ad un filtro passa-basso di banda B, che elimina le
+  immagini dallo spettro del segnale interpolato.
+\item
+  \(\hat{x}(t)=\sum_{n=-\infty}^{+\infty}x[n]\cdot p(t-nT)\text{, con } p(t)= rect(\frac{t-\frac{T}{2}}{T})\)
+\end{enumerate}
+
+\subparagraph{Risposte TDF discreta}\label{risposte-tdf-discreta}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{22}
+\item
+  La differenza tra una trasformata discreta e una per sequenze risiede
+  nel fatto che la trasformata discreta è definita solo per un numero
+  finito di punti, mentre la trasformata per sequenze può essere
+  definita per sequenze infinite. Inoltre, la trasformata discreta
+  assume che il segnale sia periodico, mentre la trasformata per
+  sequenze non fa questa assunzione (?).
+\item
+  \begin{align*} 
+  x[n] &= \cos^2(\frac{2\pi n}{10}), \ n= 0, \cdots, 19 \\
+  x[n] &= \frac{1}{2}[1+\cos(2\frac{2\pi n}{10})] = \frac{1}{2} + \frac{1}{4}e^{\frac{j2\pi n}{20}} + \frac{1}{4}e^{\frac{-j2\pi n}{20}} \\
+  x[k] &= \frac{1}{2}\sum_{k=0}^{19} e^{\frac{-j2\pi kn}{20}} + \frac{1}{4}\sum_{k=0}^{19} e^{\frac{-j2\pi (k-4)n}{20}} +\frac{1}{4}\sum_{k=0}^{19} e^{\frac{-j2\pi (k+4)n}{20}} = x_1[k]+x_2[k]+x_3[k]
+  \end{align*} \[
+  x_{1}[k] = \left\{ \begin{array}{cl}
+  \frac{1}{2} \cdot 20 = 10 & \text{per } m=0 \\
+  0 & \text{altrimenti}
+  \end{array} \right., \
+  x_{2}[k] = \left\{ \begin{array}{cl}
+  \frac{1}{4} \cdot 20 = 5& \text{per } m=4 \\
+  0 & \text{altrimenti}
+  \end{array} \right.,
+  \] \[
+  x_{3}[k] = \left\{ \begin{array}{cl}
+  \frac{1}{4} \cdot 20 = 5& \text{per } m=16 \\
+  0 & \text{altrimenti}
+  \end{array} \right.,\
+  x[k] = \left\{ \begin{array}{cl}
+  10& \text{per } m=0 \\
+  5 & \text{per }m=4, 16\\
+  0 & \text{altrimenti}
+  \end{array} \right.
+  \]
+\item
+  Il Teorema del prodotto per la DFT afferma che la DFT del prodotto di
+  due sequenze è uguale alla convoluzione circolare delle DFT delle due
+  sequenze. Il Teorema della convoluzione per la DFT afferma che la DFT
+  della convoluzione di due sequenze è uguale al prodotto delle DFT
+  delle due sequenze.
+\item
+  La proprietà di traslazione in frequenza della DFT afferma che la DFT
+  di una sequenza moltiplicata per un'onda esponenziale complessa è
+  uguale alla DFT della sequenza originale spostata in frequenza.
+\item
+  La proprietà di traslazione circolare della Trasformata Discreta di
+  Fourier afferma che la DFT di una sequenza traslata circolarmente è
+  uguale alla DFT della sequenza originale moltiplicata per un'onda
+  esponenziale complessa.
+\item
+  Per una sequenza reale \(x[n]\) abbiamo: \[
+  \operatorname{DFT}_{N_0}\Big\{ x[n] \Big\} = \operatorname{DFT}_{N_0}\Big\{x^{*}[n] \Big\} \to \overline{X}_k = \overline{X}^{*}_{-k} = \overline{X}^{*}_{N_0 -k}
+  \] da cui derivano le proprietà di simmetria per il modulo e per la
+  fase: \begin{gather*}
+  \Big|\overline{X}_k \Big| = \Big| \overline{X}_{N_0 - k} \Big| \\
+  \phase{\overline{X}_k} = -\phase{\overline{X}_{-k}}
+  \end{gather*} Tali relazioni implicano che il modulo della sequenza
+  \(X[k]\) è simmetrico rispetto al valore \(k = \frac{N}{2}\), mentre
+  la fase è antisimmetrica rispetto a tale valore.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    per sequenze di lunghezza \textbf{pari}, il centro di simmetria
+    coincide con un campione della sequenza;
+  \item
+    per sequenze di lunghezza \textbf{dispari}, invece, il centro di
+    simmetria coincide con un punto equidistante tra due campioni.
+  \end{itemize}
+\item
+  Se \(x[n]\) è una sequenza finita di lunghezza \(N=10\) campioni, e
+  \(X_{10}[k]\) e \(X_{20}[k]\) sono le DFT di \(x[n]\) calcolate con
+  periodicità \(L=10\) e \(L=20\) rispettivamente, allora i campioni di
+  \(X_{20}[k]\) che coincidono con i campioni di \(X_{10}[k]\) sono solo
+  i primi 10, in quanto i successivi 10 sono tutti pari a zero (?).
+\item
+  \(h(n) = \frac{1}{N}(u[n]-u[n-N])\)
+\item
+  Ha una risposta impulsiva uguale alla funzione gradino unitario, cioè
+  \(h(n) = u(n)\)
+\item
+  Un filtro a media mobile prende in ingresso un numero \(N\) di
+  campioni della sequenza d'ingresso, calcolandone la media aritmetica
+  degli ultimi \(N\) valori, a partire dall'istante \(n^{*}\) verso
+  tempi decrescenti, producendo un valore \(y[n^{*}]\) in uscita. Il
+  nome media mobile deriva dalla traslazione in avanti di un ``passo'',
+  al fine di ottenere il valore \(y[n^{*}+1]\)
+\item
+\item
+\item
+\item
+\item
+\item
+  Un quantizzatore uniforme è ottenuto imponendo una distanza costante
+  tra le soglie e i livelli di quantizzazione (quindi il \emph{passo}
+  \(\Delta\) è costante
+  \(\to x_{i+1}-x_i=\Delta; \ \hat{x}_{x+1}-\hat{x}_i = \Delta\)). Per
+  quanto riguarda i livelli di quantizzazione nei quantizzatori uniformi
+  si distinguono i:
+
+  \begin{itemize}
+  \item
+    Midtread: i livelli di quantizzazione si estendono su un intervallo
+    approssimativamente \emph{simmetrico}, dal momento che i livelli
+    sono un numero \emph{pari} ed è incluso lo 0 (come estremo?)
+    \(\to \{\hat{x}_i,i=0,\_,2^B -1\}= \{-2^{B-1}\Delta,\_,-\Delta,0,\Delta,\_,(2^{B-1}-1)=\Delta \}\)
+  \item
+    Midrise: in questo caso i livelli coprono un intervallo
+    \textbf{esattamente simmetrico} rispetto all'origine, tuttavia il
+    valore 0 \textbf{non} è compreso
+    nell'insieme:\(\to \{\hat{x}_i,i=0,\_,2^B -1\}= \{-(2^{B-1}-\frac{1}{2})\Delta,\_,-\frac{\Delta}{2},0,\frac{\Delta}{2},\_,(2^{B-1}-\frac{1}{2})=\Delta \}\)
+  \end{itemize}
+\item
+  In un quantizzatore uniforme, in base alla scelta della regola di
+  associazione tra \(x(nT)\leftrightarrow \hat{x}(nT)\) si può usare:
+
+  \begin{itemize}
+  \item
+    arrotondamento: dove ad \(x(nT)\) viene associato il livello
+    \(\hat{x}_i\) più vicino. Inoltre le soglie di quantizzazione
+    risultano essere posizionate nel \emph{punto medio} tra i due
+    livelli di quantizzazione. La relazione che permette di trovare il
+    valore quantizzato \(\hat{x}(nT)\) a partire dal campione \(x(nT)\)
+    è: \(\hat{x}(nT) = \{x_i \: i=arg \ min_k (|x(nT)=\hat{x}(k)| \}\).
+    L'errore è \(0 \leq |e(nT)| \leq \frac{\Delta}{2}\)
+  \item
+    troncamento: ad \(x(nT)\) viene associato il livello \(\hat{x}_i\)
+    più vicino tra tutti quelli minori o uguali a \(x(nT)\). Le soglie
+    di quantizzazione coincidono con i livelli di quantizzazione. La
+    relazione che permette di trovare il valore quantizzato
+    \(\hat{x}(nT)\) a partire dal campione \(x(nT)\)
+    \(\hat{x}(nT) = \{x_i \: i=arg \ max_k (\hat{x}_k \text{ con } \hat{x}_k \leq x(nT)) \}\)
+    L'errore è \(0 \leq |e(nT)| < \Delta\)
+  \end{itemize}
+\item
+  Il rumore di quantizzazione \(e(nT)\) è l'errore introdotto dal
+  processo di quantizzazione. Le ipotesi usualmente assunte per il
+  rumore di quantizzazione sono:
+
+  \begin{itemize}
+  \item
+    \(e(nT)\) sia un processo stazionario in senso lato: quindi media,
+    potenza e varianza \emph{costanti} e non dipendono da n;
+  \item
+    che la densità di probabilità di \(e(nT)\) sia di tipo
+    \textbf{uniforme}, permettendo di valutare tali costanti.
+  \item
+    \(\{e(nT)\}\) incorrelato con processo \(\{x(nT)\}\)
+  \item
+    I campioni del processo \(\{e(nT)\}\) sono \textbf{incorrelati} tra
+    loro
+  \end{itemize}
+\item
+  Dal momento che l'escursione (pari a due volte l'ampiezza della
+  sinusoide fratto la dinamica del quantizzatore = \(\frac{1}{\Delta}\))
+  è pari ad \(1\) (viene quindi occupata tutta la dinamica), la dinamica
+  \(D=2\) e la potenza sarà \(S=\frac{1}{2}\) allora
+  \(\sigma^2_e = \frac{\Delta^2}{12}=\frac{1}{12} = \frac{4}{2^{2B}}=\frac{1}{3} 2^{-2B} \to SNR_q=\frac{S}{\sigma^2_e}=\frac{3}{2}2^{2B} \to SNR=6.02+1.76dB\)
+\end{enumerate}
+
+\subparagraph{Risposte sistemi
+digitali}\label{risposte-sistemi-digitali}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{41}
+\item
+  Il codificatore di canale in un sistema di comunicazione digitale
+  introduce (in modo \emph{controllato}) una \textbf{ridondanza} nella
+  sequenza di informazioni binarie. In questo modo il ricevitore può
+  utilizzare questa ridondanza per \textbf{attenuare e/o correggere} gli
+  effetti negativi dovuti al rumore o alle interferenze incontrate nella
+  trasmissione del segnale. In questo modo viene aumentata
+  l'affidabilità e migliorata la fedeltà del segnale. Può essere
+  implementata con una:
+
+  \begin{itemize}
+  \item
+    codifica ``banale'': consiste nel ripetere una cifra binaria per
+    \(m\) volte (\(m>0\)). Se viene riscontrato un errore vi è una
+    decisione ``a maggioranza'' (se errori
+    \(\displaystyle < \frac{N}{2}\)). Tuttavia vi è un numero elevato di
+    bit da trasmettere.
+  \item
+    codifica ``non banale'': vengono mappati \(k\) bit (alla volta) di
+    una sequenza di \(n\) bit (\(k<n\)) andando a creare una
+    \textbf{parola in codice}. In questo caso vi è una ridondanza pari a
+    \(\frac{n}{k}\)
+  \end{itemize}
+\item
+  Il codificatore di sorgente in un sistema di comunicazione digitale è
+  il primo blocco del trasmettitore. Si occupa del processo di
+  conversione di una sequenza analogica o digitale in una sequenza di
+  bit (questo processo è detto \textbf{codifica di sorgente o
+  compressione dei dati}). Volendo \emph{minimizzare} il numero di bit
+  utilizzati, con la compressione è possibile rappresentare una data
+  quantità di informazioni con un numero di bit \emph{minore} rispetto
+  alla rappresentazione originale.
+\item
+  Un modulatore digitale in un sistema di comunicazione digitale è
+  l'interfaccia per il canale di comunicazione. Sceglie la forma d'onda
+  più adatta alla trasmissione sul canale scelto. Può essere:
+
+  \begin{itemize}
+  \item
+    binaria: la sequenza viene trasmessa un bit alla volta, con un
+    bit-rate costante e pari a R bit al secondo;
+    \(\left\{ \begin{array}{cl}0 \to \ \delta_0(t)\\1 \to \ \delta_1(t)\end{array} \right.\to \text{durata della forma d'onda}: \frac{1}{R}s\)\\
+  \item
+    in alternativa il modulatore può trasmettere \(b\) bits alla volta,
+    utilizzando \(M=2^b\) forme d'onda \textbf{distinte}
+    \(s_i(t), i:0, \_, M-1\). Ovvero, viene utilizzata una forma d'onda
+    per ognuna delle \(2^b\) possibili sequenze di bit possibili.
+  \end{itemize}
+\item
+  Gli effetti del rumore possono essere ridotti aumentando la potenza
+  del segnale trasmesso (limite nell'attrezzatura) (?)
+\end{enumerate}
+
+\end{document}

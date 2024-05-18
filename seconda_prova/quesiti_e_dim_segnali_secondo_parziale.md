@@ -352,14 +352,23 @@ $$
     DFT di una sequenza moltiplicata per un'onda esponenziale complessa
     è uguale alla DFT della sequenza originale spostata in frequenza.
 
-27.
-
 27. La proprietà di traslazione circolare della Trasformata Discreta di
     Fourier afferma che la DFT di una sequenza traslata circolarmente è
     uguale alla DFT della sequenza originale moltiplicata per un'onda
     esponenziale complessa.
 
-28. ?
+28. Per una sequenza reale $x[n]$ abbiamo:
+    $$
+    \dft_{N_0}\Big\{ x[n] \Big\} = \dft_{N_0}\Big\{x^{*}[n] \Big\} \to \overline{X}_k = \overline{X}^{*}_{-k} = \overline{X}^{*}_{N_0 -k}
+    $$
+    da cui derivano le proprietà di simmetria per il modulo e per la fase:
+    \begin{gather*}
+    \Big|\overline{X}_k \Big| = \Big| \overline{X}_{N_0 - k} \Big| \\
+    \phase{\overline{X}_k} = -\phase{\overline{X}_{-k}}
+    \end{gather*}
+    Tali relazioni implicano che il modulo della sequenza $X[k]$ è simmetrico rispetto al valore $k = \frac{N}{2}$, mentre la fase è antisimmetrica rispetto a tale valore.
+    - per sequenze di lunghezza **pari**, il centro di simmetria coincide con un campione della sequenza;
+    - per sequenze di lunghezza **dispari**, invece, il centro di simmetria coincide con un punto equidistante tra due campioni.
 
 29. Se $x[n]$ è una sequenza finita di lunghezza $N=10$ campioni, e
     $X_{10}[k]$ e $X_{20}[k]$ sono le DFT di $x[n]$ calcolate con
@@ -369,24 +378,24 @@ $$
 
 30. $h(n) = \frac{1}{N}(u[n]-u[n-N])$
 
-31. ~~Un sistema LTI (Lineare e Tempo-Invariante) è stabile se la sua
-    funzione di trasferimento ha una regione di convergenza che include
-    la circonferenza unitaria del piano z. Questo perché la stabilità di
-    un sistema LTI è legata alla posizione dei poli della sua funzione
-    di trasferimento: se tutti i poli sono all'interno della
-    circonferenza unitaria, il sistema è stabile.~~
+31. Ha una risposta impulsiva uguale alla funzione gradino unitario, cioè $h(n) = u(n)$
 
-32. ?
+32. Un filtro a media mobile prende in ingresso un numero $N$ di campioni della sequenza d'ingresso,
+    calcolandone la media aritmetica degli ultimi $N$ valori, a partire dall'istante $n^{*}$ verso
+    tempi decrescenti, producendo un valore $y[n^{*}]$ in uscita. Il nome media mobile deriva dalla 
+    traslazione in avanti di un "passo", al fine di ottenere il valore $y[n^{*}+1]$
 
-33. ~~In uno schema di convoluzione veloce, il numero di moltiplicazioni
-    reali per campione di uscita dipende dalla lunghezza del segnale e
-    dalla lunghezza della risposta impulsiva del sistema. In generale,
-    la convoluzione veloce richiede meno moltiplicazioni rispetto alla
-    convoluzione diretta, ma il numero esatto dipende dai dettagli
-    dell'implementazione dell'algoritmo FFT utilizzato per calcolare la
-    convoluzione(?).~~
+33. Il filtro accumulatore numerico
 
-34. Un quantizzatore uniforme è ottenuto imponendo una distanza costante
+34.
+
+35.
+
+36.
+
+37.
+
+38. Un quantizzatore uniforme è ottenuto imponendo una distanza costante
     tra le soglie e i livelli di quantizzazione (quindi il *passo*
     $\Delta$ è costante
     $\to x_{i+1}-x_i=\Delta; \ \hat{x}_{x+1}-\hat{x}_i = \Delta$). Per
@@ -403,7 +412,7 @@ $$
         valore 0 **non** è compreso
         nell'insieme:$\to \{\hat{x}_i,i=0,\_,2^B -1\}= \{-(2^{B-1}-\frac{1}{2})\Delta,\_,-\frac{\Delta}{2},0,\frac{\Delta}{2},\_,(2^{B-1}-\frac{1}{2})=\Delta \}$
 
-35. In un quantizzatore uniforme, in base alla scelta della regola di
+39. In un quantizzatore uniforme, in base alla scelta della regola di
     associazione tra $x(nT)\leftrightarrow \hat{x}(nT)$ si può usare:
 
     -   arrotondamento: dove ad $x(nT)$ viene associato il livello
@@ -423,7 +432,7 @@ $$
         $\hat{x}(nT) = \{x_i \: i=arg \ max_k (\hat{x}_k \text{ con } \hat{x}_k \leq x(nT)) \}$
         L'errore è $0 \leq |e(nT)| < \Delta$
 
-36. Il rumore di quantizzazione $e(nT)$ è l'errore introdotto dal
+40. Il rumore di quantizzazione $e(nT)$ è l'errore introdotto dal
     processo di quantizzazione. Le ipotesi usualmente assunte per il
     rumore di quantizzazione sono:
 
@@ -438,13 +447,16 @@ $$
     -   I campioni del processo $\{e(nT)\}$ sono **incorrelati** tra
         loro
 
-37. Dal momento che l'escursione (pari a due volte l'ampiezza della
+
+41. Dal momento che l'escursione (pari a due volte l'ampiezza della
     sinusoide fratto la dinamica del quantizzatore = $\frac{1}{\Delta}$)
     è pari ad $1$ (viene quindi occupata tutta la dinamica), la dinamica
     $D=2$ e la potenza sarà $S=\frac{1}{2}$ allora
     $\sigma^2_e = \frac{\Delta^2}{12}=\frac{1}{12} = \frac{4}{2^{2B}}=\frac{1}{3} 2^{-2B} \to SNR_q=\frac{S}{\sigma^2_e}=\frac{3}{2}2^{2B} \to SNR=6.02+1.76dB$
 
-38. Il codificatore di canale in un sistema di comunicazione digitale
+##### Risposte sistemi digitali
+
+42. Il codificatore di canale in un sistema di comunicazione digitale
     introduce (in modo *controllato*) una **ridondanza** nella sequenza
     di informazioni binarie. In questo modo il ricevitore può utilizzare
     questa ridondanza per **attenuare e/o correggere** gli effetti
@@ -464,7 +476,7 @@ $$
         codice**. In questo caso vi è una ridondanza pari a
         $\frac{n}{k}$
 
-39. Il codificatore di sorgente in un sistema di comunicazione digitale
+43. Il codificatore di sorgente in un sistema di comunicazione digitale
     è il primo blocco del trasmettitore. Si occupa del processo di
     conversione di una sequenza analogica o digitale in una sequenza di
     bit (questo processo è detto **codifica di sorgente o compressione
@@ -473,7 +485,7 @@ $$
     informazioni con un numero di bit *minore* rispetto alla
     rappresentazione originale.
 
-40. Un modulatore digitale in un sistema di comunicazione digitale è
+44. Un modulatore digitale in un sistema di comunicazione digitale è
     l'interfaccia per il canale di comunicazione. Sceglie la forma
     d'onda più adatta alla trasmissione sul canale scelto. Può essere:
 
@@ -487,5 +499,5 @@ $$
         d'onda per ognuna delle $2^b$ possibili sequenze di bit
         possibili.
 
-41. Gli effetti del rumore possono essere ridotti aumentando la potenza
-    del segnale trasmesso (limite nell'attrezzatura)
+45. Gli effetti del rumore possono essere ridotti aumentando la potenza
+    del segnale trasmesso (limite nell'attrezzatura) (?)
