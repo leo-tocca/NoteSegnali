@@ -222,7 +222,9 @@ discreta}\label{trasformata-di-fourier-discreta}
 \item
   Descrivere un filtro discreto a media mobile
 \item
-  Descrivere il fitro detto accumulatore o integratore numerico
+  Descrivere il filtro detto accumulatore o integratore numerico
+\item
+  Descrivere il filtro derivatore numerico o operatore
 \item
   Giustificare la seguente affermazione: ``Un sistema LTI è stabile se
   la sua funzione di trasferimento ha una regione di convergenza che
@@ -247,7 +249,7 @@ discreta}\label{trasformata-di-fourier-discreta}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{37}
+\setcounter{enumi}{38}
 \tightlist
 \item
   Spiegare la differenza tra un quantizzatore uniforme (a passo
@@ -273,7 +275,7 @@ digitale}\label{sistemi-di-comunicazione-digitale}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{41}
+\setcounter{enumi}{42}
 \tightlist
 \item
   Spiegare il ruolo svolto dal codificatore di canale in un sistema di
@@ -664,6 +666,22 @@ interpolazione}\label{risposte-campionamento-e-interpolazione}
   nome media mobile deriva dalla traslazione in avanti di un ``passo'',
   al fine di ottenere il valore \(y[n^{*}+1]\)
 \item
+  Il filtro accumulatore numerico è un sistema che somma di tutti i
+  campioni arrivati al suo ingresso fino all'istante \(n\). Ha un
+  risposta impulsiva uguale alla funzione gradino unitario, cioè
+  \(h(n)=u(n)\). Quindi: \begin{align*}
+  y[n] &=\sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = =\sum_{k=-\infty}^{\infty}x[k] \ u[n-k] = \\
+  & =\sum_{k=-\infty}^{n}x[k] \\ &\ u[n-k] = 1 \text{ sse } n\geq k
+  \end{align*} Il sistema è \emph{instabile}, ma l'uscita non è sempre
+  illimitata: ad esempio con ingressi limitati (ad esempio segnali
+  sinusoidali) per i quali l'uscita sarà comunque limitata.
+\item
+  Il filtro derivatore numerico o operatore differenza, e opera la
+  differenza tra due campioni adiacenti. La sua risposta impulsiva è
+  pari a: \begin{align*}
+  h[n] = \delta[n] - \delta[n-1], \text{ oppure } h[n]= \delta[n+1]-\delta[n] \\
+  y[n] = \sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = x[n] - x[n-1], \ y[n] = \sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = x[n+1] - x[n] 
+  \end{align*} Il primo è causale, il secondo no!
 \item
 \item
 \item
@@ -741,7 +759,7 @@ digitali}\label{risposte-sistemi-digitali}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{41}
+\setcounter{enumi}{42}
 \item
   Il codificatore di canale in un sistema di comunicazione digitale
   introduce (in modo \emph{controllato}) una \textbf{ridondanza} nella

@@ -66,25 +66,26 @@ header-includes: |
 30. Scrivere la risposta impulsiva di un sistema discreto che implementa una finestra mobile
 31. Scrivere la risposta impulsiva di un sistema discreto che implementa un accumulatore o integratore numerico
 32. Descrivere un filtro discreto a media mobile
-33. Descrivere il fitro detto accumulatore o integratore numerico
-34. Giustificare la seguente affermazione: "Un sistema LTI è stabile se la sua funzione di trasferimento ha una regione di convergenza che include la circonferenza unitaria del piano z". $^*$.
-35. Si supponga di voler usare un algoritmo di convoluzione veloce per eseguire il filtraggio di un segnale con un sistema LTI di tipo FIR, avente una risposta impulsiva lunga $N = 200$ campioni. Misurando la complessità in termini di moltiplicazioni reali per campione di uscita, è più conveniente usare (per il calcolo della convoluzione circolare) una FFT con periodicità $L = 2048$ oppure una con periodicità $L = 512$? Giustificare la risposta.
-36. In uno schema di convoluzione veloce, quante moltiplicazioni reali per campione di uscita devono essere effettuate? Giustificare la risposta
-37. Spiegare la differenza tra sistemi lineari e stazionari a tempo discreto di tipo FIR e di tipo IIR.
+33. Descrivere il filtro detto accumulatore o integratore numerico
+34. Descrivere il filtro derivatore numerico o operatore
+35. Giustificare la seguente affermazione: "Un sistema LTI è stabile se la sua funzione di trasferimento ha una regione di convergenza che include la circonferenza unitaria del piano z". $^*$.
+36. Si supponga di voler usare un algoritmo di convoluzione veloce per eseguire il filtraggio di un segnale con un sistema LTI di tipo FIR, avente una risposta impulsiva lunga $N = 200$ campioni. Misurando la complessità in termini di moltiplicazioni reali per campione di uscita, è più conveniente usare (per il calcolo della convoluzione circolare) una FFT con periodicità $L = 2048$ oppure una con periodicità $L = 512$? Giustificare la risposta.
+37. In uno schema di convoluzione veloce, quante moltiplicazioni reali per campione di uscita devono essere effettuate? Giustificare la risposta
+38. Spiegare la differenza tra sistemi lineari e stazionari a tempo discreto di tipo FIR e di tipo IIR.
 
 ##### Quantizzazione
-38. Spiegare la differenza tra un quantizzatore uniforme (a passo $\Delta$ e a $B$ bit) di tipo midtread e uno di tipo midrise
-39. Dato un quantizzatore uniforme, scrivere le relazioni che permettono di trovare il valore quantizzato $\hat{x}(nT)$ a partire dal campione $x(nT)$ nel caso dell'operazione di arrotondamento e di troncamento
-40. Enunciare le ipotesi che usualmente vengono assunte per il rumore di quantizzazione.
-41. Giustificare la seguente affermazione: "Quantizzando un segnale sinusoidale di ampiezza unitaria con un convertitore analogico-digitale avente $B$ bit di quantizzazione e dinamica $[-1, 1]$ si ottiene un rapporto segnale-rumore 0(espresso in $dB$) dato da $SNR \approx 6.02B + 1.76$".
+39. Spiegare la differenza tra un quantizzatore uniforme (a passo $\Delta$ e a $B$ bit) di tipo midtread e uno di tipo midrise
+40. Dato un quantizzatore uniforme, scrivere le relazioni che permettono di trovare il valore quantizzato $\hat{x}(nT)$ a partire dal campione $x(nT)$ nel caso dell'operazione di arrotondamento e di troncamento
+41. Enunciare le ipotesi che usualmente vengono assunte per il rumore di quantizzazione.
+42. Giustificare la seguente affermazione: "Quantizzando un segnale sinusoidale di ampiezza unitaria con un convertitore analogico-digitale avente $B$ bit di quantizzazione e dinamica $[-1, 1]$ si ottiene un rapporto segnale-rumore 0(espresso in $dB$) dato da $SNR \approx 6.02B + 1.76$".
 
 ##### Sistemi di comunicazione digitale
-42. Spiegare il ruolo svolto dal codificatore di canale in un sistema di comunicazione digitale
-43. Spiegare il ruolo svolto da un codificatore di sorgente nella catena di trasmissione digitale.
-44. Spiegare il ruolo svolto da un modulatore digitale nella catena di trasmissione digitale.
-45. Spiegare il ruolo svolto dal codificatore di sorgente nella catena di trasmissione digitale.
-46. Descrivere gli schemi di base di modulazione digitale utilizzati in un sistema di comunicazione
-47. Spiegare quali sono le tecniche multiplex utilizzate in un sistema di trasmissione digitale
+43. Spiegare il ruolo svolto dal codificatore di canale in un sistema di comunicazione digitale
+44. Spiegare il ruolo svolto da un codificatore di sorgente nella catena di trasmissione digitale.
+45. Spiegare il ruolo svolto da un modulatore digitale nella catena di trasmissione digitale.
+46. Spiegare il ruolo svolto dal codificatore di sorgente nella catena di trasmissione digitale.
+47. Descrivere gli schemi di base di modulazione digitale utilizzati in un sistema di comunicazione
+48. Spiegare quali sono le tecniche multiplex utilizzate in un sistema di trasmissione digitale
 
 ## DIMOSTRAZIONI
 
@@ -385,9 +386,22 @@ $$
     tempi decrescenti, producendo un valore $y[n^{*}]$ in uscita. Il nome media mobile deriva dalla 
     traslazione in avanti di un "passo", al fine di ottenere il valore $y[n^{*}+1]$
 
-33. Il filtro accumulatore numerico
+33. Il filtro accumulatore numerico è un sistema che somma di tutti i campioni arrivati al suo ingresso fino all’istante $n$.
+    Ha un risposta impulsiva uguale alla funzione gradino unitario, cioè $h(n)=u(n)$. Quindi:
+    \begin{align*}
+    y[n] &=\sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = =\sum_{k=-\infty}^{\infty}x[k] \ u[n-k] = \\
+    & =\sum_{k=-\infty}^{n}x[k] \\ &\ u[n-k] = 1 \text{ sse } n\geq k
+    \end{align*}
+    Il sistema è *instabile*, ma l'uscita non è sempre illimitata: ad esempio con ingressi limitati (ad esempio segnali sinusoidali)
+    per i quali l'uscita sarà comunque limitata.
 
-34.
+34. Il filtro derivatore numerico o operatore differenza, e opera la differenza tra due campioni adiacenti. La sua risposta impulsiva
+    è pari a:
+    \begin{align*}
+    h[n] = \delta[n] - \delta[n-1], \text{ oppure } h[n]= \delta[n+1]-\delta[n] \\
+    y[n] = \sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = x[n] - x[n-1], \ y[n] = \sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = x[n+1] - x[n] 
+    \end{align*}
+    Il primo è causale, il secondo no!
 
 35.
 
@@ -395,7 +409,9 @@ $$
 
 37.
 
-38. Un quantizzatore uniforme è ottenuto imponendo una distanza costante
+38.
+
+39. Un quantizzatore uniforme è ottenuto imponendo una distanza costante
     tra le soglie e i livelli di quantizzazione (quindi il *passo*
     $\Delta$ è costante
     $\to x_{i+1}-x_i=\Delta; \ \hat{x}_{x+1}-\hat{x}_i = \Delta$). Per
@@ -412,7 +428,7 @@ $$
         valore 0 **non** è compreso
         nell'insieme:$\to \{\hat{x}_i,i=0,\_,2^B -1\}= \{-(2^{B-1}-\frac{1}{2})\Delta,\_,-\frac{\Delta}{2},0,\frac{\Delta}{2},\_,(2^{B-1}-\frac{1}{2})=\Delta \}$
 
-39. In un quantizzatore uniforme, in base alla scelta della regola di
+40. In un quantizzatore uniforme, in base alla scelta della regola di
     associazione tra $x(nT)\leftrightarrow \hat{x}(nT)$ si può usare:
 
     -   arrotondamento: dove ad $x(nT)$ viene associato il livello
@@ -432,7 +448,7 @@ $$
         $\hat{x}(nT) = \{x_i \: i=arg \ max_k (\hat{x}_k \text{ con } \hat{x}_k \leq x(nT)) \}$
         L'errore è $0 \leq |e(nT)| < \Delta$
 
-40. Il rumore di quantizzazione $e(nT)$ è l'errore introdotto dal
+41. Il rumore di quantizzazione $e(nT)$ è l'errore introdotto dal
     processo di quantizzazione. Le ipotesi usualmente assunte per il
     rumore di quantizzazione sono:
 
@@ -448,7 +464,7 @@ $$
         loro
 
 
-41. Dal momento che l'escursione (pari a due volte l'ampiezza della
+42. Dal momento che l'escursione (pari a due volte l'ampiezza della
     sinusoide fratto la dinamica del quantizzatore = $\frac{1}{\Delta}$)
     è pari ad $1$ (viene quindi occupata tutta la dinamica), la dinamica
     $D=2$ e la potenza sarà $S=\frac{1}{2}$ allora
@@ -456,7 +472,7 @@ $$
 
 ##### Risposte sistemi digitali
 
-42. Il codificatore di canale in un sistema di comunicazione digitale
+43. Il codificatore di canale in un sistema di comunicazione digitale
     introduce (in modo *controllato*) una **ridondanza** nella sequenza
     di informazioni binarie. In questo modo il ricevitore può utilizzare
     questa ridondanza per **attenuare e/o correggere** gli effetti
@@ -476,7 +492,7 @@ $$
         codice**. In questo caso vi è una ridondanza pari a
         $\frac{n}{k}$
 
-43. Il codificatore di sorgente in un sistema di comunicazione digitale
+44. Il codificatore di sorgente in un sistema di comunicazione digitale
     è il primo blocco del trasmettitore. Si occupa del processo di
     conversione di una sequenza analogica o digitale in una sequenza di
     bit (questo processo è detto **codifica di sorgente o compressione
@@ -485,7 +501,7 @@ $$
     informazioni con un numero di bit *minore* rispetto alla
     rappresentazione originale.
 
-44. Un modulatore digitale in un sistema di comunicazione digitale è
+45. Un modulatore digitale in un sistema di comunicazione digitale è
     l'interfaccia per il canale di comunicazione. Sceglie la forma
     d'onda più adatta alla trasmissione sul canale scelto. Può essere:
 
@@ -499,5 +515,5 @@ $$
         d'onda per ognuna delle $2^b$ possibili sequenze di bit
         possibili.
 
-45. Gli effetti del rumore possono essere ridotti aumentando la potenza
+46. Gli effetti del rumore possono essere ridotti aumentando la potenza
     del segnale trasmesso (limite nell'attrezzatura) (?)
