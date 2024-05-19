@@ -8,6 +8,7 @@ header-includes: |
             \usepackage{derivative}
             \usepackage{mathtools}
             \usepackage{siunitx}
+            \usepackage[italian]{babel}
             \DeclareMathOperator{\sinc}{sinc}
             \DeclareMathOperator{\rect}{rect}
             \DeclareMathOperator{\tfs}{TFS}
@@ -83,7 +84,7 @@ header-includes: |
 43. Spiegare il ruolo svolto dal codificatore di canale in un sistema di comunicazione digitale
 44. Spiegare il ruolo svolto da un codificatore di sorgente nella catena di trasmissione digitale.
 45. Spiegare il ruolo svolto da un modulatore digitale nella catena di trasmissione digitale.
-46. Spiegare il ruolo svolto dal codificatore di sorgente nella catena di trasmissione digitale.
+46. Come ridurre gli effetti del rumore?
 47. Descrivere gli schemi di base di modulazione digitale utilizzati in un sistema di comunicazione
 48. Spiegare quali sono le tecniche multiplex utilizzate in un sistema di trasmissione digitale
 
@@ -403,13 +404,34 @@ $$
     \end{align*}
     Il primo è causale, il secondo no!
 
-35.
+35. Domanda sulla trasformata z, da non considerare
 
-36.
+36. ~~In uno schema di convoluzione veloce, il numero di moltiplicazioni
+    reali per campione di uscita dipende dalla lunghezza del segnale e
+    dalla lunghezza della risposta impulsiva del sistema. In generale,
+    la convoluzione veloce richiede meno moltiplicazioni rispetto alla
+    convoluzione diretta, ma il numero esatto dipende dai dettagli
+    dell'implementazione dell'algoritmo FFT utilizzato per calcolare la
+    convoluzione(?).~~
 
-37.
+37. 
 
-38.
+38. Un sistema SLS FIR (Finite Impulse Response) ha la sua risposta impulsiva  costituita
+    da un numero finito di campioni, mentre un sistema SLS è IIR (Infinite Impulse Response) se la sua risposta
+    impulsiva è costituita da un numero infinito di campioni.
+
+    Inoltre, condizione necessaria e sufficiente per la stabilità in senso
+    BIBO di un SLS è la assoluta sommabilità della sua risposta impulsiva:
+    $$
+    \sum_{k=-\infty}^{\infty}\Big|h[k]\Big| < +\infty
+    $$
+    I sistemi di tipo IIR, invece, non sono sempre stabili: per essi, è necessario controllare la validità o meno della condizione:
+    
+    un SLS è causale se e solo se la sua risposta impulsiva è una sequenza causale:
+    $$
+    h[n] = 0 \text{se } n < 0, \text{ ovvero } h[n] = h[n] \cdot u[n]
+    $$
+
 
 39. Un quantizzatore uniforme è ottenuto imponendo una distanza costante
     tra le soglie e i livelli di quantizzazione (quindi il *passo*
@@ -517,3 +539,13 @@ $$
 
 46. Gli effetti del rumore possono essere ridotti aumentando la potenza
     del segnale trasmesso (limite nell'attrezzatura) (?)
+
+47.
+
+48. L'operazione con cui diversi segnali sono trasmessi sullo stesso canale (cavo, fibra, radio, ...) senza interferenze
+    è chiamata multiplexing dei segnali e l'apparato che effettua tale operazione multiplex. 
+    Un multiplex riceve N segnali distinti $s_1 (t), s_2 (t), …, s_ N(t)$ e li invia su un 
+    unico canale utilizzando opportune regole (o tecniche multiplex)
+    
+    - multiplex a divisione di frequenze
+    - multiplex a divisione di tempo

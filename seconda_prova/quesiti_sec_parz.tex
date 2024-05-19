@@ -51,6 +51,7 @@
 \usepackage{derivative}
 \usepackage{mathtools}
 \usepackage{siunitx}
+\usepackage[italian]{babel}
 \DeclareMathOperator{\sinc}{sinc}
 \DeclareMathOperator{\rect}{rect}
 \DeclareMathOperator{\tfs}{TFS}
@@ -683,9 +684,33 @@ interpolazione}\label{risposte-campionamento-e-interpolazione}
   y[n] = \sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = x[n] - x[n-1], \ y[n] = \sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = x[n+1] - x[n] 
   \end{align*} Il primo è causale, il secondo no!
 \item
+  Domanda sulla trasformata z, da non considerare
+\item
+  \st{In uno schema di convoluzione veloce, il numero di moltiplicazioni
+  reali per campione di uscita dipende dalla lunghezza del segnale e
+  dalla lunghezza della risposta impulsiva del sistema. In generale, la
+  convoluzione veloce richiede meno moltiplicazioni rispetto alla
+  convoluzione diretta, ma il numero esatto dipende dai dettagli
+  dell'implementazione dell'algoritmo FFT utilizzato per calcolare la
+  convoluzione(?).}
 \item
 \item
-\item
+  Un sistema SLS FIR (Finite Impulse Response) ha la sua risposta
+  impulsiva costituita da un numero finito di campioni, mentre un
+  sistema SLS è IIR (Infinite Impulse Response) se la sua risposta
+  impulsiva è costituita da un numero infinito di campioni.
+
+  Inoltre, condizione necessaria e sufficiente per la stabilità in senso
+  BIBO di un SLS è la assoluta sommabilità della sua risposta impulsiva:
+  \[
+  \sum_{k=-\infty}^{\infty}\Big|h[k]\Big| < +\infty
+  \] I sistemi di tipo IIR, invece, non sono sempre stabili: per essi, è
+  necessario controllare la validità o meno della condizione:ù
+
+  un SLS è causale se e solo se la sua risposta impulsiva è una sequenza
+  causale: \[
+  h[n] = 0 \text{se } n < 0, \text{ ovvero } h[n] = h[n] \cdot u[n]
+  \]
 \item
   Un quantizzatore uniforme è ottenuto imponendo una distanza costante
   tra le soglie e i livelli di quantizzazione (quindi il \emph{passo}
