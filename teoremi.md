@@ -782,7 +782,7 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
 ### Campionamento:
 11. Teorema del campionamento ("risultato" dell'interpolazione cardinale);
 
-    Un segnale il cui spettro è *limitato* nella banda $B$ può essere ricostruito a partire dai propri campioni, **purché** $f_c \leq 2B$
+    Un segnale il cui spettro è *limitato* nella banda $B$ può essere ricostruito a partire dai propri campioni, **purché** $f_c \geq 2B$
     
     $p(t)$ è un impulso "diverso" per generalizzare l'operazione d'interpolazione, anche al fine di evitare le discontinuità che lo stesso impulso $p(t)$ introduce nell'interpolazione a mantenimento.
     \begin{align*}
