@@ -227,7 +227,7 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
 
 13. Se $x[n]$ ha trasformata di Fourier per sequenze $X(F)$, allora la
     sequenza $y[n]$ con TDF $Y(F)=X(F-F_0)$ è data da
-    $y[n]=x[n]ej2\pi F_0n$. Questo è dovuto alla proprietà di
+    $y[n]=x[n]e^{j2\pi F_0n}$. Questo è dovuto alla proprietà di
     traslazione in frequenza della trasformata di Fourier, che afferma
     che la traslazione di una funzione nel dominio della frequenza
     corrisponde a una modulazione esponenziale nel dominio del tempo.
