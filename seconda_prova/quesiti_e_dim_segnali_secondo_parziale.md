@@ -129,10 +129,12 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
     singoli campioni, sia quella congiunta rispetto a più campioni non
     sono alterate da una transazione solidale nel tempo applicata agli
     indici dei campioni. Va verificato per tutti gli ordini i con
-    $i= 0, \dots, \ \infty$ $$f_x (x, t) = f_x(x, t+ \Delta t)$$
-    $$f_x(x_1, x_2, t_1, t_2) = f_x(x_1, x_2, t_1 + \Delta t_1, t_2 + \Delta t_2)
-      //
-      ...$$
+    $i= 0, \dots, \infty$
+    $$
+    f_x (x, t) = f_x(x, t+ \Delta t)$$
+    $$
+    f_x(x_1, x_2, t_1, t_2) = f_x(x_1, x_2, t_1 + \Delta t_1, t_2 + \Delta t_2)...
+    $$
 
 2.  Un processo aleatorio è stazionario in senso lato (WSS):
 
@@ -399,8 +401,8 @@ $$
 34. Il filtro derivatore numerico o operatore differenza, e opera la differenza tra due campioni adiacenti. La sua risposta impulsiva
     è pari a:
     \begin{align*}
-    h[n] = \delta[n] - \delta[n-1], \text{ oppure } h[n]= \delta[n+1]-\delta[n] \\
-    y[n] = \sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = x[n] - x[n-1], \ y[n] = \sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = x[n+1] - x[n] 
+    h[n] &= \delta[n] - \delta[n-1], \text{ oppure } h[n]= \delta[n+1]-\delta[n]& \\
+    y[n] &= \sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = x[n] - x[n-1], \ y[n] = \sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = x[n+1] - x[n] 
     \end{align*}
     Il primo è causale, il secondo no!
 
@@ -429,7 +431,7 @@ $$
     
     un SLS è causale se e solo se la sua risposta impulsiva è una sequenza causale:
     $$
-    h[n] = 0 \text{se } n < 0, \text{ ovvero } h[n] = h[n] \cdot u[n]
+    h[n] = 0 \text{ se } n < 0, \text{ ovvero } h[n] = h[n] \cdot u[n]
     $$
 
 
@@ -540,12 +542,33 @@ $$
 46. Gli effetti del rumore possono essere ridotti aumentando la potenza
     del segnale trasmesso (limite nell'attrezzatura) (?)
 
-47.
+47. Vedi sottopunti 45.
 
-48. L'operazione con cui diversi segnali sono trasmessi sullo stesso canale (cavo, fibra, radio, ...) senza interferenze
-    è chiamata multiplexing dei segnali e l'apparato che effettua tale operazione multiplex. 
+48. L'operazione con cui diversi segnali sono trasmessi sullo stesso
+    canale (cavo, fibra, radio,...) senza interferenze è chiamata
+    multiplexing dei segnali e l'apparato che effettua tale operazione multiplex. 
     Un multiplex riceve N segnali distinti $s_1 (t), s_2 (t), …, s_ N(t)$ e li invia su un 
-    unico canale utilizzando opportune regole (o tecniche multiplex)
+    unico canale utilizzando opportune regole (o tecniche multiplex).
+    Il segnale in uscita è una combinazione degli $N$ segnali in ingresso,
+    da cui possiamo ricavare nuovamente i segnali in ingresso con un'operazione
+    di multiplexing
     
-    - multiplex a divisione di frequenze
-    - multiplex a divisione di tempo
+    - multiplex a **divisione di frequenze** (o FDM - Frequency Division Multiplex):
+    
+      Se in ingresso al sistema abbiamo $N$ segnali con lo spettro diverso da zero 
+      nell'intervallo $(0, B)$, in frequenza l'i-esimo segnale viene shiftato di
+      una frequenza $f_i = f_1 + iB$.
+      
+      Il canale di comunicazione in uscita, utilizzando per trasmettere il 
+      segnale $y(t)$, deve avere una larghezza di banda $NB$. I singoli segnali 
+      sono recuperabili senza distorsioni da $y(t)$ poiché occupano zone di
+      frequenza diverse!
+    - multiplex a **divisione di tempo** (o TDM - Time Division Multiplex):
+    
+         I diversi segnali si differenziano sostanzialmente per l'intervallo di tempo
+         utilizzato per la trasmissione. Se abbiamo $N$ segnali da trasmettere in un 
+         intervallo di tempo $\tau$, ad ognuno di essi viene assegnato un proprio
+         sotto intervallo: ciò vale anche negli intervalli successivi.
+         
+         L'intervallo $\tau$ è denominato *frame* ed il suo valore varia nell'ordine
+         di centinaia-decine di millisecondi.
