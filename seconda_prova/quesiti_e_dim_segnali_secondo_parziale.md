@@ -321,7 +321,7 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
 24.
 \begin{align*} 
 x[n] &= \cos^2(\frac{2\pi n}{10}), \ n= 0, \cdots, 19 \\
-x[n] &= \frac{1}{2}[1+\cos(2\frac{2\pi n}{10})] = \frac{1}{2} + \frac{1}{4}e^{\frac{j2\pi n}{20}} + \frac{1}{4}e^{\frac{-j2\pi n}{20}} \\
+x[n] &= \frac{1}{2}[1+\cos(2\frac{2\pi n}{10})] = \frac{1}{2} + \frac{1}{4}e^{\frac{j2\pi 4n}{20}} + \frac{1}{4}e^{\frac{-j2\pi 4n}{20}} \\
 x[k] &= \frac{1}{2}\sum_{k=0}^{19} e^{\frac{-j2\pi kn}{20}} + \frac{1}{4}\sum_{k=0}^{19} e^{\frac{-j2\pi (k-4)n}{20}} +\frac{1}{4}\sum_{k=0}^{19} e^{\frac{-j2\pi (k+4)n}{20}} = x_1[k]+x_2[k]+x_3[k]
 \end{align*}
 $$
@@ -370,7 +370,7 @@ $$
     \Big|\overline{X}_k \Big| = \Big| \overline{X}_{N_0 - k} \Big| \\
     \phase{\overline{X}_k} = -\phase{\overline{X}_{-k}}
     \end{gather*}
-    Tali relazioni implicano che il modulo della sequenza $X[k]$ è simmetrico rispetto al valore $k = \frac{N}{2}$, mentre la fase è antisimmetrica rispetto a tale valore.
+    Tali relazioni implicano che il modulo della sequenza $X[k]$ è simmetrico rispetto al valore $k = \frac{N_0}{2}$, mentre la fase è antisimmetrica rispetto a tale valore.
     - per sequenze di lunghezza **pari**, il centro di simmetria coincide con un campione della sequenza;
     - per sequenze di lunghezza **dispari**, invece, il centro di simmetria coincide con un punto equidistante tra due campioni.
 
