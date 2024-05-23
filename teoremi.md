@@ -749,7 +749,7 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     - Dimostrazione:
     \begin{align*}
      \overline{P}(f)&=\sum_{n=-\infty}^{\infty} p[n] \ e^{-j2\pi nfT} =  \sum_{n=-\infty}^{\infty} x[n] \ y[n] \ e^{-j2\pi nfT} = \sum_{n=-\infty}^{\infty}
-     \underbrace{T\int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu)\ e^{-j2\pi n\nu T} \,d\nu}_{\text{antitrasformata di }\overline{X}(f)} y[n] \ e^{-j2\pi nfT} = \\
+     \underbrace{\Big[T\int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu)\ e^{j2\pi n\nu T} \,d\nu\Big]}_{\text{antitrasformata di }\overline{X}(f)} y[n] \ e^{-j2\pi nfT} = \\
      &= T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu)  \underbrace{\sum_{n=-\infty}^{\infty} y[n] \ e^{-j2\pi n(f-\nu)T}}_{\text{dalla modulazione }\to \overline{Y}(f-\nu)} \,d\nu=
      T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu) \overline{Y}(f-\nu)\,d\nu  \\
     &\Rightarrow \overline{P}(f) = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu) \overline{Y}(f-\nu)\,d\nu
@@ -767,7 +767,7 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     È l'analogo del teorema di derivazione.
 10. Teorema della Sequenza Somma.
 
-    Consideriamo la sequenza somma $y[n]=\sum_{k=-\infty}^{\infty}x[k]$. Dal teorema dell'incremento otteniamo la sua trasformata in sequenza:
+    Consideriamo la sequenza somma $\displaystyle y[n]=\sum_{k=-\infty}^{n}x[k]$. Dal teorema dell'incremento otteniamo la sua trasformata in sequenza:
     $$
     \overline{Y}(f) = \frac{\overline{X}(f)}{1-e^{-j2\pi fT}}
     $$
@@ -775,7 +775,7 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     - Dimostrazione:
     \begin{gather*}
     z[n] = \Delta y[n] \Longleftrightarrow \overline{Z}(f)=\overline{Y}(f)[1-e^{-j2\pi fT}] \text{ dal teorema dell'incremento} \\
-    \text{però } \Delta y[n] = y[n] - y[n-1] = \sum_{k=-\infty}^{n} x[k] - \sum_{k=-\infty}^{n-1} = x[n] \\
+    \text{però } \Delta y[n] = y[n] - y[n-1] = \sum_{k=-\infty}^{n} x[k] - \sum_{k=-\infty}^{n-1}x[k] = x[n] \\
     \text{quindi } \overline{X}(f) = \overline{Y}(f)[1-e^{-j2\pi fT}] \to \overline{Y}(f) = \frac{\overline{X}(f)}{1-e^{-j2\pi fT}}
     \end{gather*}
 
