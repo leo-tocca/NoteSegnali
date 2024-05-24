@@ -78,7 +78,7 @@ header-includes: |
 39. Spiegare la differenza tra un quantizzatore uniforme (a passo $\Delta$ e a $B$ bit) di tipo midtread e uno di tipo midrise
 40. Dato un quantizzatore uniforme, scrivere le relazioni che permettono di trovare il valore quantizzato $\hat{x}(nT)$ a partire dal campione $x(nT)$ nel caso dell'operazione di arrotondamento e di troncamento
 41. Enunciare le ipotesi che usualmente vengono assunte per il rumore di quantizzazione.
-42. Giustificare la seguente affermazione: "Quantizzando un segnale sinusoidale di ampiezza unitaria con un convertitore analogico-digitale avente $B$ bit di quantizzazione e dinamica $[-1, 1]$ si ottiene un rapporto segnale-rumore 0(espresso in $dB$) dato da $SNR \approx 6.02B + 1.76$".
+42. Giustificare la seguente affermazione: "Quantizzando un segnale sinusoidale di ampiezza unitaria con un convertitore analogico-digitale avente $B$ bit di quantizzazione e dinamica $[-1, 1]$ si ottiene un rapporto segnale-rumore 0 (espresso in $dB$) dato da $SNR \approx 6.02B + 1.76$".
 
 ##### Sistemi di comunicazione digitale
 43. Spiegare il ruolo svolto dal codificatore di canale in un sistema di comunicazione digitale
@@ -299,7 +299,7 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
     del segnale a cavallo dei multipli delle frequenze di campionamento
     (sono dette *immagini*). Inoltre anche all'interno della cosiddetta
     banda "utile" (intervallo base $[-\frac{1}{2T}, \frac{1}{2T}]$) il
-    segnale $x(t)$ viene distorto in ampiezza (i due spettri nono legati
+    segnale $x(t)$ viene distorto in ampiezza (i due spettri sono legati
     dalla seguente relazione:
     $\hat{X}(f)=\frac{P(f)X(f)}{T}=X(f)sinc(fT)e^{-j\pi fT}$). Bisogna
     notare come sia possibile ridurre la presenza di immagini
@@ -380,6 +380,8 @@ $$
     $X_{20}[k]$ che coincidono con i campioni di $X_{10}[k]$ sono solo i
     primi 10, in quanto i successivi 10 sono tutti pari a zero (?).
 
+
+
 30. $h(n) = \frac{1}{N}(u[n]-u[n-N])$
 
 31. Ha una risposta impulsiva uguale alla funzione gradino unitario, cioè $h(n) = u(n)$
@@ -392,7 +394,7 @@ $$
 33. Il filtro accumulatore numerico è un sistema che somma di tutti i campioni arrivati al suo ingresso fino all’istante $n$.
     Ha un risposta impulsiva uguale alla funzione gradino unitario, cioè $h(n)=u(n)$. Quindi:
     \begin{align*}
-    y[n] &=\sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = =\sum_{k=-\infty}^{\infty}x[k] \ u[n-k] = \\
+    y[n] &=\sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = \sum_{k=-\infty}^{\infty}x[k] \ u[n-k] = \\
     & =\sum_{k=-\infty}^{n}x[k] \\ &\ u[n-k] = 1 \text{ sse } n\geq k
     \end{align*}
     Il sistema è *instabile*, ma l'uscita non è sempre illimitata: ad esempio con ingressi limitati (ad esempio segnali sinusoidali)
@@ -492,7 +494,7 @@ $$
     sinusoide fratto la dinamica del quantizzatore = $\frac{1}{\Delta}$)
     è pari ad $1$ (viene quindi occupata tutta la dinamica), la dinamica
     $D=2$ e la potenza sarà $S=\frac{1}{2}$ allora
-    $\sigma^2_e = \frac{\Delta^2}{12}=\frac{1}{12} = \frac{4}{2^{2B}}=\frac{1}{3} 2^{-2B} \to SNR_q=\frac{S}{\sigma^2_e}=\frac{3}{2}2^{2B} \to SNR=6.02+1.76dB$
+    $\sigma^2_e = \frac{\Delta^2}{12}=\frac{1}{12} = \frac{4}{2^{2B}}=\frac{1}{3} 2^{-2B} \to SNR_q=\frac{S}{\sigma^2_e}=\frac{3}{2}2^{2B} \to SNR=6.02B+1.76dB$
 
 ##### Risposte sistemi digitali
 
