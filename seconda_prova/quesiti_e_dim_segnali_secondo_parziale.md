@@ -152,7 +152,7 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
 
     -   $R_x(0)= E[X^2(t)] = P_x \geq 0 \to$ potenza costante
 
-    -   $|R_x(\tau)| \leq R_x(\tau) \to$ la funzione di correlazione ha
+    -   $|R_x(\tau)| \leq R_x(0) \to$ la funzione di correlazione ha
         il proprio massimo in $\tau = 0$
 
 4.  Il rumore bianco è un tipo di segnale casuale che ha una potenza
