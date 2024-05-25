@@ -140,7 +140,6 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
 
     -   la sua media e la sua varianza rimangono costanti nel tempo
         $\to E[x(t)] = m_x(t) = m_x$\
-
     -   la sua autocorrelazione dipende solo dallo scarto temporale e
         non dal tempo assoluto (funzione solo dello scarto $\tau$).
         $\to R_{xx}(t, t+\tau) = R_{xx}(\tau)$
@@ -165,7 +164,7 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
 
     -   $E[w(t)] = 0$
 
-    -   $S_ww(f) = \mathcal{F} \{\frac{N_0}{2}\} = \frac{N_0}{2} \to$
+    -   $S_{ww}(f) = \mathcal{F} \{\frac{N_0}{2}\} = \frac{N_0}{2} \to$
         Potenza **infinita**
 
     -   Nota: si chiama bianco in quanto possedendo nello spettro
@@ -446,13 +445,18 @@ $$
 
     -   Midtread: i livelli di quantizzazione si estendono su un
         intervallo approssimativamente *simmetrico*, dal momento che i
-        livelli sono un numero *pari* ed è incluso lo 0 (come estremo?)
-        $\to \{\hat{x}_i,i=0,\_,2^B -1\}= \{-2^{B-1}\Delta,\_,-\Delta,0,\Delta,\_,(2^{B-1}-1)=\Delta \}$
+        livelli sono un numero *pari* ed è incluso lo 0
+        $$
+        \to \{\hat{x}_i : i=0,\_,2^B -1\}= \{-2^{B-1}\Delta,\_,-\Delta,0,\Delta,\_,(2^{B-1}-1)=\Delta \}
+        $$
 
     -   Midrise: in questo caso i livelli coprono un intervallo
         **esattamente simmetrico** rispetto all'origine, tuttavia il
-        valore 0 **non** è compreso
-        nell'insieme:$\to \{\hat{x}_i,i=0,\_,2^B -1\}= \{-(2^{B-1}-\frac{1}{2})\Delta,\_,-\frac{\Delta}{2},0,\frac{\Delta}{2},\_,(2^{B-1}-\frac{1}{2})=\Delta \}$
+        valore 0 **non** è compreso nell'insieme (il passo è $\Delta$ e
+        parto da $\frac{\Delta}{2}$):
+        $$
+        \to \{\hat{x}_i : i=0,\_,2^B -1\}= \{-(2^{B-1}-\frac{1}{2})\Delta,\_,-\frac{\Delta}{2},0,\frac{\Delta}{2},\_,(2^{B-1}-\frac{1}{2})=\Delta \}
+        $$
 
 40. In un quantizzatore uniforme, in base alla scelta della regola di
     associazione tra $x(nT)\leftrightarrow \hat{x}(nT)$ si può usare:
@@ -463,7 +467,9 @@ $$
         di quantizzazione. La relazione che permette di trovare il
         valore quantizzato $\hat{x}(nT)$ a partire dal campione $x(nT)$
         è:
-        $\hat{x}(nT) = \{x_i \: i=arg \ min_k (|x(nT)=\hat{x}(k)| \}$.
+        $$
+        \hat{x}(nT) = \{x_i \: i=arg \ min_k (|x(nT)=\hat{x}(k)| \}
+        $$
         L'errore è $0 \leq |e(nT)| \leq \frac{\Delta}{2}$
 
     -   troncamento: ad $x(nT)$ viene associato il livello $\hat{x}_i$
@@ -471,7 +477,9 @@ $$
         di quantizzazione coincidono con i livelli di quantizzazione. La
         relazione che permette di trovare il valore quantizzato
         $\hat{x}(nT)$ a partire dal campione $x(nT)$
-        $\hat{x}(nT) = \{x_i \: i=arg \ max_k (\hat{x}_k \text{ con } \hat{x}_k \leq x(nT)) \}$
+        $$
+        \hat{x}(nT) = \{x_i \: i=arg \ max_k (\hat{x}_k \text{ con } \hat{x}_k \leq x(nT)) \}
+        $$
         L'errore è $0 \leq |e(nT)| < \Delta$
 
 41. Il rumore di quantizzazione $e(nT)$ è l'errore introdotto dal

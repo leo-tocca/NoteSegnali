@@ -267,7 +267,7 @@ discreta}\label{trasformata-di-fourier-discreta}
   Giustificare la seguente affermazione: ``Quantizzando un segnale
   sinusoidale di ampiezza unitaria con un convertitore
   analogico-digitale avente \(B\) bit di quantizzazione e dinamica
-  \([-1, 1]\) si ottiene un rapporto segnale-rumore 0(espresso in
+  \([-1, 1]\) si ottiene un rapporto segnale-rumore 0 (espresso in
   \(dB\)) dato da \(SNR \approx 6.02B + 1.76\)''.
 \end{enumerate}
 
@@ -380,6 +380,7 @@ dimostrazioni
   Un processo aleatorio è stazionario in senso lato (WSS):
 
   \begin{itemize}
+  \tightlist
   \item
     la sua media e la sua varianza rimangono costanti nel tempo
     \(\to E[x(t)] = m_x(t) = m_x\)\\
@@ -413,7 +414,7 @@ dimostrazioni
   \item
     \(E[w(t)] = 0\)
   \item
-    \(S_ww(f) = \mathcal{F} \{\frac{N_0}{2}\} = \frac{N_0}{2} \to\)
+    \(S_{ww}(f) = \mathcal{F} \{\frac{N_0}{2}\} = \frac{N_0}{2} \to\)
     Potenza \textbf{infinita}
   \item
     Nota: si chiama bianco in quanto possedendo nello spettro
@@ -565,7 +566,7 @@ interpolazione}\label{risposte-campionamento-e-interpolazione}
   (sono dette \emph{immagini}). Inoltre anche all'interno della
   cosiddetta banda ``utile'' (intervallo base
   \([-\frac{1}{2T}, \frac{1}{2T}]\)) il segnale \(x(t)\) viene distorto
-  in ampiezza (i due spettri nono legati dalla seguente relazione:
+  in ampiezza (i due spettri sono legati dalla seguente relazione:
   \(\hat{X}(f)=\frac{P(f)X(f)}{T}=X(f)sinc(fT)e^{-j\pi fT}\)). Bisogna
   notare come sia possibile ridurre la presenza di immagini utilizzando
   un filtro ``\emph{anti-immagine}'' all'uscita dell'interpolatore:
@@ -670,7 +671,7 @@ interpolazione}\label{risposte-campionamento-e-interpolazione}
   campioni arrivati al suo ingresso fino all'istante \(n\). Ha un
   risposta impulsiva uguale alla funzione gradino unitario, cioè
   \(h(n)=u(n)\). Quindi: \begin{align*}
-  y[n] &=\sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = =\sum_{k=-\infty}^{\infty}x[k] \ u[n-k] = \\
+  y[n] &=\sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = \sum_{k=-\infty}^{\infty}x[k] \ u[n-k] = \\
   & =\sum_{k=-\infty}^{n}x[k] \\ &\ u[n-k] = 1 \text{ sse } n\geq k
   \end{align*} Il sistema è \emph{instabile}, ma l'uscita non è sempre
   illimitata: ad esempio con ingressi limitati (ad esempio segnali
@@ -722,13 +723,16 @@ interpolazione}\label{risposte-campionamento-e-interpolazione}
   \item
     Midtread: i livelli di quantizzazione si estendono su un intervallo
     approssimativamente \emph{simmetrico}, dal momento che i livelli
-    sono un numero \emph{pari} ed è incluso lo 0 (come estremo?)
-    \(\to \{\hat{x}_i,i=0,\_,2^B -1\}= \{-2^{B-1}\Delta,\_,-\Delta,0,\Delta,\_,(2^{B-1}-1)=\Delta \}\)
+    sono un numero \emph{pari} ed è incluso lo 0 \[
+    \to \{\hat{x}_i : i=0,\_,2^B -1\}= \{-2^{B-1}\Delta,\_,-\Delta,0,\Delta,\_,(2^{B-1}-1)=\Delta \}
+    \]
   \item
     Midrise: in questo caso i livelli coprono un intervallo
     \textbf{esattamente simmetrico} rispetto all'origine, tuttavia il
-    valore 0 \textbf{non} è compreso
-    nell'insieme:\(\to \{\hat{x}_i,i=0,\_,2^B -1\}= \{-(2^{B-1}-\frac{1}{2})\Delta,\_,-\frac{\Delta}{2},0,\frac{\Delta}{2},\_,(2^{B-1}-\frac{1}{2})=\Delta \}\)
+    valore 0 \textbf{non} è compreso nell'insieme (il passo è \(\Delta\)
+    e parto da \(\frac{\Delta}{2}\)): \[
+    \to \{\hat{x}_i : i=0,\_,2^B -1\}= \{-(2^{B-1}-\frac{1}{2})\Delta,\_,-\frac{\Delta}{2},0,\frac{\Delta}{2},\_,(2^{B-1}-\frac{1}{2})=\Delta \}
+    \]
   \end{itemize}
 \item
   In un quantizzatore uniforme, in base alla scelta della regola di
@@ -741,16 +745,17 @@ interpolazione}\label{risposte-campionamento-e-interpolazione}
     risultano essere posizionate nel \emph{punto medio} tra i due
     livelli di quantizzazione. La relazione che permette di trovare il
     valore quantizzato \(\hat{x}(nT)\) a partire dal campione \(x(nT)\)
-    è: \(\hat{x}(nT) = \{x_i \: i=arg \ min_k (|x(nT)=\hat{x}(k)| \}\).
-    L'errore è \(0 \leq |e(nT)| \leq \frac{\Delta}{2}\)
+    è: \[
+    \hat{x}(nT) = \{x_i \: i=arg \ min_k (|x(nT)=\hat{x}(k)| \}
+    \] L'errore è \(0 \leq |e(nT)| \leq \frac{\Delta}{2}\)
   \item
     troncamento: ad \(x(nT)\) viene associato il livello \(\hat{x}_i\)
     più vicino tra tutti quelli minori o uguali a \(x(nT)\). Le soglie
     di quantizzazione coincidono con i livelli di quantizzazione. La
     relazione che permette di trovare il valore quantizzato
-    \(\hat{x}(nT)\) a partire dal campione \(x(nT)\)
-    \(\hat{x}(nT) = \{x_i \: i=arg \ max_k (\hat{x}_k \text{ con } \hat{x}_k \leq x(nT)) \}\)
-    L'errore è \(0 \leq |e(nT)| < \Delta\)
+    \(\hat{x}(nT)\) a partire dal campione \(x(nT)\) \[
+    \hat{x}(nT) = \{x_i \: i=arg \ max_k (\hat{x}_k \text{ con } \hat{x}_k \leq x(nT)) \}
+    \] L'errore è \(0 \leq |e(nT)| < \Delta\)
   \end{itemize}
 \item
   Il rumore di quantizzazione \(e(nT)\) è l'errore introdotto dal
@@ -775,7 +780,7 @@ interpolazione}\label{risposte-campionamento-e-interpolazione}
   sinusoide fratto la dinamica del quantizzatore = \(\frac{1}{\Delta}\))
   è pari ad \(1\) (viene quindi occupata tutta la dinamica), la dinamica
   \(D=2\) e la potenza sarà \(S=\frac{1}{2}\) allora
-  \(\sigma^2_e = \frac{\Delta^2}{12}=\frac{1}{12} = \frac{4}{2^{2B}}=\frac{1}{3} 2^{-2B} \to SNR_q=\frac{S}{\sigma^2_e}=\frac{3}{2}2^{2B} \to SNR=6.02+1.76dB\)
+  \(\sigma^2_e = \frac{\Delta^2}{12}=\frac{1}{12} = \frac{4}{2^{2B}}=\frac{1}{3} 2^{-2B} \to SNR_q=\frac{S}{\sigma^2_e}=\frac{3}{2}2^{2B} \to SNR=6.02B+1.76dB\)
 \end{enumerate}
 
 \subparagraph{Risposte sistemi
