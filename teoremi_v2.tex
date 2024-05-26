@@ -40,15 +40,6 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
-\ifLuaTeX
-\usepackage[bidi=basic]{babel}
-\else
-\usepackage[bidi=default]{babel}
-\fi
-\babelprovide[main,import]{italian}
-% get rid of language-specific shorthands (see #6817):
-\let\LanguageShortHands\languageshorthands
-\def\languageshorthands#1{}
 \usepackage{cancel}
 \usepackage{steinmetz}
 \usepackage{derivative}
@@ -71,11 +62,10 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\usepackage{bookmark}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdflang={it},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
@@ -1215,10 +1205,28 @@ periodici}\label{segnali-a-tempo-discreto-periodici}
 \item
   La relazione di sintesi di una TDF discende da quella di analisi;
   \begin{align*}
-  x[n] &= \sum_{k=0}^{N_0 -1} \overline{X}_k \ e^{j2\pi k \frac{n}{N_0}} \Rightarrow \overline{X}_k = \sum_{n=0}^{N_0 -1} x[n] e^{-j\frac{2\pi nk}{N_0}} \\
-  &\text{Moltiplichiamo per } e^{-j \frac{2\pi nm}{N_0}} \text{ con } 0\leq m \leq N_0 - 1 \text{ ed effettuiamo una somma sul periodo} \\
-  &=\sum_{n=0}^{N_0 -1} x[n] e^{-j2\pi m\frac{n}{N_0}} = \sum_{n=0}^{N_0 -1} \sum_{k=0}^{N_0 -1}\overline{X}_k e^{-j2\pi n\frac{(k-m)}{N_0}} = \sum_{k=0}^{N_0 -1}\overline{X}_k \sum_{n=0}^{N_0 -1} e^{-j2\pi n\frac{(k-m)}{N_0}} = N_0 \overline{X}_k \\
-  &\Rightarrow \overline{X}_k = \frac{1}{N_0}\sum_{n=0}^{N_0 -1} x[n] \ e^{-j2\pi\frac{k}{N_0}}
+  x[n] &=\frac{1}{N_0} \sum_{k=0}^{N_0 -1} \overline{X}_k \ e^{j\frac{2\pi kn}{N_0}} \Rightarrow \overline{X}_k = \sum_{n=0}^{N_0 -1} x[n] e^{-j\frac{2\pi kn}{N_0}} \\
+  &\text{Moltiplichiamo per } e^{-j \frac{2\pi nm}{N_0}} \text{ con } (0\leq m \leq N_0 - 1) \text{ ed effettuiamo una somma sul periodo } (n)& \\
+  &\sum_{n=0}^{N_0 -1} x[n] e^{-\frac{j2\pi mn}{N_0}} =\frac{1}{N_0} \sum_{n=0}^{N_0 -1} \sum_{k=0}^{N_0 -1}\overline{X}_k e^{j\frac{2\pi n(k-m)}{N_0}} = \end{align*}
+  \begin{align*}
+  \boxed{
+      \begin{array}{cl}
+          \text{Sviluppando il secondo membro:}
+          \displaystyle\sum_{k=0}^{N_0 -1}\overline{X}_k \sum_{n=0}^{N_0 -1} e^{j\frac{2\pi n(k-m)}{N_0}} \\
+          \text{La seconda sommatoria si sviluppa come}: \\
+          \displaystyle 
+          \sum_{n=0}^{N_0-1}e^{j\frac{2\pi n(k-m)}{N_0}}=\sum_{n=0}^{N_0-1}\Bigg(e^{j\frac{2\pi(k-m)}{N_0}}\Bigg)^{n}=
+          \left\{
+          \begin{array}{cl}
+              \displaystyle \frac{1-e^{j2\pi(k-m)}}{1-e^{j\frac{2\pi(k-m)}{N_0}}}=0 & k\neq n\\
+              \displaystyle \sum_{n=0}^{N_0-1}e^{j\frac{2\pi n(k-m)}{N_0}}=\sum_{n=0}^{N_0-1}1=N_0 & k=m
+          \end{array}\right. \\
+          \text{ovvero: } \displaystyle\sum_{n=0}^{N_0-1}e^{j\frac{2\pi n(k-m)}{N_0}}=\left\{\begin{array}{cl}\text{N}_0&\text{per n=m}\\0&\text{per}\ne\text{m}\end{array}\right.= \delta[k-m] N_0
+      \end{array}
+  }
+  \end{align*} \begin{align*}
+  &\frac{1}{N_0} \sum_{n=0}^{N_0 -1} \sum_{k=0}^{N_0 -1} \overline{X}_k e^{-j\frac{2\pi mn}{N_0}} \ e^{j\frac{2\pi nk}{N_0}} = \frac{1}{N_0}\sum_{n=0}^{N_0 -1} \overline{X}_k \ \delta[k-m] N_0 = \frac{\cancel{N_0}}{\cancel{N_0}} \overline{X}_m \Rightarrow \overline{X}_k = \frac{1}{N_0}\sum_{n=0}^{N_0 -1} x[n] \ e^{-j2\pi\frac{k}{N_0}} \\
+  &\text{ per sostituzione infine: } \sum_{n=0}^{N_0 -1} x[n] e^{-j\frac{2\pi nm}{N_0}} = \overline{X}_m&
   \end{align*}
 \end{enumerate}
 

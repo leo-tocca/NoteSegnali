@@ -844,12 +844,31 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     \end{gather*}
     
 15. La relazione di sintesi di una TDF discende da quella di analisi;
-    \begin{align*}
+\begin{align*}
     x[n] &=\frac{1}{N_0} \sum_{k=0}^{N_0 -1} \overline{X}_k \ e^{j\frac{2\pi kn}{N_0}} \Rightarrow \overline{X}_k = \sum_{n=0}^{N_0 -1} x[n] e^{-j\frac{2\pi kn}{N_0}} \\
-    &\text{Moltiplichiamo per } e^{-j \frac{2\pi nm}{N_0}} \text{ con } (0\leq m \leq N_0 - 1) \text{ ed effettuiamo una somma sul periodo } (n) \\
-    &=\sum_{n=0}^{N_0 -1} x[n] e^{-\frac{j2\pi mn}{N_0}} =\frac{1}{N_0} \sum_{n=0}^{N_0 -1} \sum_{k=0}^{N_0 -1}\overline{X}_k e^{j\frac{2\pi n(k-m)}{N_0}} = \sum_{k=0}^{N_0 -1}\overline{X}_k \sum_{n=0}^{N_0 -1} e^{j\frac{2\pi n(k-m)}{N_0}} = N_0 \overline{X}_k \\
-    &\Rightarrow \overline{X}_k = \frac{1}{N_0}\sum_{n=0}^{N_0 -1} x[n] \ e^{-j2\pi\frac{k}{N_0}}
+    &\text{Moltiplichiamo per } e^{-j \frac{2\pi nm}{N_0}} \text{ con } (0\leq m \leq N_0 - 1) \text{ ed effettuiamo una somma sul periodo } (n)& \\
+    &\sum_{n=0}^{N_0 -1} x[n] e^{-\frac{j2\pi mn}{N_0}} =\frac{1}{N_0} \sum_{n=0}^{N_0 -1} \sum_{k=0}^{N_0 -1}\overline{X}_k e^{j\frac{2\pi n(k-m)}{N_0}} = \end{align*}
+\begin{align*}
+    \boxed{
+        \begin{array}{cl}
+            \text{Sviluppando il secondo membro:}
+            \displaystyle\sum_{k=0}^{N_0 -1}\overline{X}_k \sum_{n=0}^{N_0 -1} e^{j\frac{2\pi n(k-m)}{N_0}} \\
+            \text{La seconda sommatoria si sviluppa come}: \\
+            \displaystyle 
+            \sum_{n=0}^{N_0-1}e^{j\frac{2\pi n(k-m)}{N_0}}=\sum_{n=0}^{N_0-1}\Bigg(e^{j\frac{2\pi(k-m)}{N_0}}\Bigg)^{n}=
+            \left\{
+            \begin{array}{cl}
+                \displaystyle \frac{1-e^{j2\pi(k-m)}}{1-e^{j\frac{2\pi(k-m)}{N_0}}}=0 & k\neq n\\
+                \displaystyle \sum_{n=0}^{N_0-1}e^{j\frac{2\pi n(k-m)}{N_0}}=\sum_{n=0}^{N_0-1}1=N_0 & k=m
+            \end{array}\right. \\
+            \text{ovvero: } \displaystyle\sum_{n=0}^{N_0-1}e^{j\frac{2\pi n(k-m)}{N_0}}=\left\{\begin{array}{cl}\text{N}_0&\text{per n=m}\\0&\text{per}\ne\text{m}\end{array}\right.= \delta[k-m] N_0
+        \end{array}
+    }
     \end{align*}
+\begin{align*}
+    &\frac{1}{N_0} \sum_{n=0}^{N_0 -1} \sum_{k=0}^{N_0 -1} \overline{X}_k e^{-j\frac{2\pi mn}{N_0}} \ e^{j\frac{2\pi nk}{N_0}} = \frac{1}{N_0}\sum_{n=0}^{N_0 -1} \overline{X}_k \ \delta[k-m] N_0 = \frac{\cancel{N_0}}{\cancel{N_0}} \overline{X}_m \Rightarrow \overline{X}_k = \frac{1}{N_0}\sum_{n=0}^{N_0 -1} x[n] \ e^{-j2\pi\frac{k}{N_0}} \\
+    &\text{ per sostituzione infine: } \sum_{n=0}^{N_0 -1} x[n] e^{-j\frac{2\pi nm}{N_0}} = \overline{X}_m&
+\end{align*}
 
 ### Proprietà:
 

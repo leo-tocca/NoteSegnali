@@ -100,7 +100,7 @@ header-includes: |
    
    $$
    \displaystyle
-X[K] = \sum_{n=0}^{N-1} x[n] = e^{-j \frac{2\pi}{N} kn}, \ \ \ k = 0, 1 , \dots, N-1
+X[K] = \sum_{n=0}^{N-1} x[n] e^{-j \frac{2\pi}{N} kn}, \ \ \ k = 0, 1 , \dots, N-1
    $$
    
    allora la sequenza $x[n]$ è ricavabile da 
