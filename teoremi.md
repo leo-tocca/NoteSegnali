@@ -757,14 +757,14 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     Questa è la **convoluzione ciclica o periodica**. Calcolato su un singolo periodo e il risultato è diviso per l'ampiezza del periodo $\frac{1}{T}$
 9. Teorema dell'Incremento;
     $$
-    \odv{X(t)}{t}\Big|_{t=nT} \cong \frac{x(nT)-x(nT-T)}{T} = \frac{x[n]-x[n-1]}{T}, \text{ con } x[n] \triangleq x(nT)  
+    \odv{x(t)}{t}\Big|_{t=nT} \cong \frac{x(nT)-x(nT-T)}{T} = \frac{x[n]-x[n-1]}{T}, \text{ con } x[n] \triangleq x(nT)  
     $$
     Si introduce l'operatore **incremento** $\Delta x[n] \triangleq x[n] - x[n-1]$ \newline
     Usando il *teorema del ritardo*:
     $$
     \Delta x[n] \Longleftrightarrow \overline{X}(f) - \overline{X}(f)\ e^{-j2\pi fT} = \overline{X}(f) \ (1-e^{-j2\pi fT})
     $$
-    È l'analogo del teorema di derivazione.
+    È l'analogo del teorema di derivazione: approssima la derivata del rapporto incrementale.
 10. Teorema della Sequenza Somma.
 
     Consideriamo la sequenza somma $\displaystyle y[n]=\sum_{k=-\infty}^{n}x[k]$. Dal teorema dell'incremento otteniamo la sua trasformata in sequenza:
@@ -820,7 +820,7 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     \begin{array}{c} \displaystyle
     \sum_{n=-\infty}^{\infty} \delta(t-nT) = \frac{1}{T} \sum_{k=-\infty}^{\infty} e^{\frac{j2\pi kt}{T}} \\
     \text{Trasformata di Fourier} \updownarrow \\ \displaystyle
-    \sum_{n=-\infty}^{\infty} e^{-j2\pi nfT} = \frac{1}{T}\sum_{n=-\infty}^{\infty} \delta(f-\frac{k}{T})
+    \sum_{n=-\infty}^{\infty} e^{-j2\pi nfT} = \frac{1}{T}\sum_{k=-\infty}^{\infty} \delta(f-\frac{k}{T})
     \end{array}
     }
     $$
@@ -866,7 +866,7 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     }
     \end{align*}
 \begin{align*}
-    &\frac{1}{N_0} \sum_{n=0}^{N_0 -1} \sum_{k=0}^{N_0 -1} \overline{X}_k e^{-j\frac{2\pi mn}{N_0}} \ e^{j\frac{2\pi nk}{N_0}} = \frac{1}{N_0}\sum_{n=0}^{N_0 -1} \overline{X}_k \ \delta[k-m] N_0 = \frac{\cancel{N_0}}{\cancel{N_0}} \overline{X}_m \Rightarrow \overline{X}_k = \frac{1}{N_0}\sum_{n=0}^{N_0 -1} x[n] \ e^{-j2\pi\frac{k}{N_0}} \\
+    &=\frac{1}{N_0} \sum_{n=0}^{N_0 -1} \sum_{k=0}^{N_0 -1} \overline{X}_k e^{-j\frac{2\pi mn}{N_0}} \ e^{j\frac{2\pi nk}{N_0}} = \frac{1}{N_0}\sum_{k=0}^{N_0 -1} \overline{X}_k \ \delta[k-m] N_0 = \frac{\cancel{N_0}}{\cancel{N_0}} \overline{X}_m \Rightarrow \overline{X}_k = \frac{1}{N_0}\sum_{n=0}^{N_0 -1} x[n] \ e^{-j2\pi\frac{k}{N_0}} \\
     &\text{ per sostituzione infine: } \sum_{n=0}^{N_0 -1} x[n] e^{-j\frac{2\pi nm}{N_0}} = \overline{X}_m&
 \end{align*}
 
@@ -891,8 +891,8 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     p  = n - n_0 \\
     n  = p + n_0
     \end{array}} \\
-    &= \sum_{p=-n_0}^{N_0 - 1 - n_0} x[p] \ e^{-j\frac{2\pi}{N_0}(p+n_0)} = \sum_{p=-n_0}^{N_0 - 1 - n_0} x[p] \ e^{-j\frac{2\pi}{N_0}kp} \ e^{-j\frac{2\pi}{N_0}n_0}=\\
-    &= e^{-j\frac{2\pi}{N_0}kn_0} \sum_{p=-n_0}^{N_0 - 1 - n_0} x[p] \ e^{-j\frac{2\pi}{N_0}kp} = e^{-j\frac{2\pi}{N_0}kn_0} \sum_{p=0}^{N_0 - 1} x[p] \ e^{-j\frac{2\pi}{N_0}kp} \\
+    &= \sum_{p=-n_0}^{N_0 - 1 - n_0} x[p] \ e^{-j\frac{2\pi(p+n_0)k}{N_0}} = \sum_{p=-n_0}^{N_0 - 1 - n_0} x[p] \ e^{-j\frac{2\pi kp}{N_0}} \ e^{-j\frac{2\pi n_{0}k}{N_0}}=\\
+    &= e^{-j\frac{2\pi kn_0}{N_0}} \sum_{p=-n_0}^{N_0 - 1 - n_0} x[p] \ e^{-j\frac{2\pi kp}{N_0}} = e^{-j\frac{2\pi kn_0}{N_0}} \sum_{p=0}^{N_0 - 1} x[p] \ e^{-j\frac{2\pi kp}{N_0}} \\
     &\dft_{N_0}\Big\{ x[n-n_0] \Big\} = e^{-j\frac{2\pi kn_0}{N_0}} \cdot \overline{X}_k &
     \end{align*}
     Si dice traslazione **circolare** in quanto, osservando la periodicità della sequenza originale e di quella traslata,
@@ -907,14 +907,14 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     \end{gather*}
     - Dimostrazione:
     \begin{align*}
-    \dft_{N_0}\Big\{ x[-n] \Big\} &= \sum_{n=0}^{N_0 -1} x[-n] \ e^{-j\frac{2\pi}{N_0}kn} = \sum_{n=0}^{N_0 -1} x[N_0 -n] \ e^{-j\frac{2\pi}{N_0}kn} =
+    \dft_{N_0}\Big\{ x[-n] \Big\} &= \sum_{n=0}^{N_0 -1} x[-n] \ e^{-j\frac{2\pi kn}{N_0}} = \sum_{n=0}^{N_0 -1} x[N_0 -n] \ e^{-j\frac{2\pi kn}{N_0}} =
     \boxed{
     \begin{array}{cl}
     \text{cambio di variabile} \\
     p  = N_0 - n \\
     n  = N_0 - p
     \end{array}}\\
-    &= \sum_{p=1}^{N_0} x[p] \ e^{-j\frac{2\pi}{N_0}k(N_0 -p)} = \underbrace{e^{-j2\pi k}}_{=1} \ \sum_{p=0}^{N_0 -1} x[p] \ e^{-j\frac{2\pi}{N_0}(-k)(-k)p} = \overline{X}_{-k} = \overline{X}_{N_0 - k}
+    &= \sum_{p=1}^{N_0} x[p] \ e^{-j\frac{2\pi k(N_0 -p)}{N_0}} = \underbrace{e^{-j2\pi k}}_{=1} \ \sum_{p=0}^{N_0 -1} x[p] \ e^{-j\frac{2\pi(-k)p}{N_0}} = \overline{X}_{-k} = \overline{X}_{N_0 - k}
     \end{align*}
     dove nel primo passaggio, abbiamo usato la periodicità della sequenza x[n] e
     nel penultimo passaggio, per cambiare gli indici della sommatoria, abbiamo
