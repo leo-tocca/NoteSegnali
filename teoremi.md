@@ -858,7 +858,7 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
             \sum_{n=0}^{N_0-1}e^{j\frac{2\pi n(k-m)}{N_0}}=\sum_{n=0}^{N_0-1}\Bigg(e^{j\frac{2\pi(k-m)}{N_0}}\Bigg)^{n}=
             \left\{
             \begin{array}{cl}
-                \displaystyle \frac{1-e^{j2\pi(k-m)}}{1-e^{j\frac{2\pi(k-m)}{N_0}}}=0 & k\neq n\\
+                \displaystyle \frac{1-e^{j2\pi(k-m)}}{1-e^{j\frac{2\pi(k-m)}{N_0}}}=0 & k\neq m\\
                 \displaystyle \sum_{n=0}^{N_0-1}e^{j\frac{2\pi n(k-m)}{N_0}}=\sum_{n=0}^{N_0-1}1=N_0 & k=m
             \end{array}\right. \\
             \text{ovvero: } \displaystyle\sum_{n=0}^{N_0-1}e^{j\frac{2\pi n(k-m)}{N_0}}=\left\{\begin{array}{cl}\text{N}_0&\text{per n=m}\\0&\text{per}\ne\text{m}\end{array}\right.= \delta[k-m] N_0
@@ -866,7 +866,7 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     }
     \end{align*}
 \begin{align*}
-    &=\frac{1}{N_0} \sum_{n=0}^{N_0 -1} \sum_{k=0}^{N_0 -1} \overline{X}_k e^{-j\frac{2\pi mn}{N_0}} \ e^{j\frac{2\pi nk}{N_0}} = \frac{1}{N_0}\sum_{k=0}^{N_0 -1} \overline{X}_k \ \delta[k-m] N_0 = \frac{\cancel{N_0}}{\cancel{N_0}} \overline{X}_m \Rightarrow \overline{X}_k = \frac{1}{N_0}\sum_{n=0}^{N_0 -1} x[n] \ e^{-j2\pi\frac{k}{N_0}} \\
+    &=\frac{1}{N_0} \sum_{n=0}^{N_0 -1} \sum_{k=0}^{N_0 -1} \overline{X}_k e^{-j\frac{2\pi mn}{N_0}} \ e^{j\frac{2\pi nk}{N_0}} = \frac{1}{N_0}\sum_{k=0}^{N_0 -1} \overline{X}_k \ \delta[k-m] N_0 = \frac{\cancel{N_0}}{\cancel{N_0}} \overline{X}_m  \\
     &\text{ per sostituzione infine: } \sum_{n=0}^{N_0 -1} x[n] e^{-j\frac{2\pi nm}{N_0}} = \overline{X}_m&
 \end{align*}
 
@@ -932,8 +932,8 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     $$
     da cui derivano le proprietà di simmetria per il modulo e per la fase:
     \begin{gather*}
-    \Big|\overline{X}_k \Big| = \Big| \overline{X}_{N_0 - k} \Big| \\
-    \phase{\overline{X}_k} = -\phase{\overline{X}_{-k}}
+    \Big|\overline{X}_k \Big| = \Big|\overline{X}_{-k}\Big| = \Big| \overline{X}_{N_0 - k} \Big| \\
+    \phase{\overline{X}_k} = -\phase{\overline{X}_{-k}} = -\phase{\overline{X}_{N_0 -k}}
     \end{gather*}
     Tali relazioni implicano che il modulo della sequenza $X[k]$ è simmetrico rispetto al valore $k = \frac{N}{2}$, mentre la fase è antisimmetrica rispetto a tale valore.
     - per sequenze di lunghezza **pari**, il centro di simmetria coincide con un campione della sequenza;
