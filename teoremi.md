@@ -625,7 +625,7 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
 
 ## Processi aleatori analogici
 
-1. Un processo aleatorio $X(t)$ filtrato da un SLS è all'uscita un nuovo processo $Y(t)$ WSS.
+1. Un processo aleatorio WSS $X(t)$ filtrato da un SLS è all'uscita un nuovo processo $Y(t)$ WSS.
     
     Per far sì che accada il processo $y(t)$ deve avere:
     1. Media costante;
@@ -947,10 +947,12 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     \end{gather*}
     - Dimostrazione:
     \begin{gather*}
-    \sum_{n=0}^{N_0 -1} x[n] \ y^{*}[n] =\sum_{n=0}^{N_0 -1}\overline{X}_k \ \Big(\frac{1}{N_0}\sum_{k=0}^{N_0 - 1}\overline{Y}_k \ e^{j\frac{2\pi kn}{N_0}}\Big)^{*} 
+    \sum_{n=0}^{N_0 -1} x[n] \ y^{*}[n] =\sum_{n=0}^{N_0 -1}x[n] \ \Big(\frac{1}{N_0}\sum_{k=0}^{N_0 - 1}\overline{Y}_k^{*} \ e^{j\frac{2\pi kn}{N_0}}\Big)^{*} 
     = \frac{1}{N_0} \sum_{k=0}^{N_0 -1} \overline{Y}_k \sum_{n=0}^{N_0 -1 }x[n] \ e^{-j\frac{2\pi kn}{N_0}} = \frac{1}{N_0} \sum_{k=0}^{N_0 -1} \overline{X}_k \ \overline{Y}^{*}_k
     \end{gather*}
         - Ponendo $x[n]=y[n]$ si ottiene la seconda relazione.
+
+    > L'energia si mantiene nei domini.
 23. Teorema del Prodotto;
 
     Consideriamo adesso la sequenza (periodica) $p[n]$ data dal *prodotto* fra la sequenza $x[n]$ e la sequenza $y[n]$ entrambe periodiche di periodo $N_0$
@@ -1034,7 +1036,7 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     Per velocizzare i calcoli è stato quindi introdotto l'algoritmo **Fast Fourier Transform** o FFT, il quale viene applicato se *$N_0$ è una potenza del $2 \to N_0 = 2^{M}$*
     \begin{align*}
     \overline{X}_k &= \sum_{m=0}^{\frac{N_0}{2}-1} x[2m]\ e^{-j\frac{2\pi(2m)k}{N_0}} + \sum_{m=0}^{\frac{N_0}{2}-1} x[2m+1] \ e^{-j\frac{2\pi(2m-1)k}{N_0}}= \\
-    & = \overbrace{\sum_{m=0}^{\frac{N_0}{2}-1} x[2m]\ e^{-j\frac{2\pi mk}{\frac{N_0}{2}}}}^{\overline{P}_k}+e^{-j\frac{2\pi k}{\frac{N_0}{2}}} + \overbrace{\sum_{m=0}^{\frac{N_0}{2}-1} x[2m+1] \ e^{-j\frac{2\pi mk}{\frac{N_0}{2}}}}^{\overline{D}_k}
+    & = \overbrace{\sum_{m=0}^{\frac{N_0}{2}-1} x[2m]\ e^{-j\frac{2\pi mk}{\frac{N_0}{2}}}}^{\overline{P}_k}+e^{-j\frac{2\pi k}{\frac{N_0}{2}}} \cdot \overbrace{\sum_{m=0}^{\frac{N_0}{2}-1} x[2m+1] \ e^{-j\frac{2\pi mk}{\frac{N_0}{2}}}}^{\overline{D}_k}
     \end{align*}
     con $k= 0, \dots , N_0 -1$. $\overline{P}_k$ è la trasformata ottenuta dai $\frac{N_0}{2}$ campioni di *indice pari* di $x[n]$, mentre $\overline{D}_k$ indica la trasformata
     della sequenza ottenuta dai $\frac{N_0}{2}$ campioni di *indice dispari* Questa scomposizione è ricorsiva dell'ordine, in quanto la trasformata di ordine $N_0$ è espressa come combinazione lineare

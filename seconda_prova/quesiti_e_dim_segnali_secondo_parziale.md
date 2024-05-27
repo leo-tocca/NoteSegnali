@@ -164,8 +164,8 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
 
     -   $E[w(t)] = 0$
 
-    -   $S_{ww}(f) = \mathcal{F} \{\frac{N_0}{2}\} = \frac{N_0}{2} \to$
-        Potenza **infinita**
+    -   $S_{ww}(f) = \mathcal{F} \{\frac{N_0}{2}\} = \frac{N_0}{2} \to$''
+        Potenza **infinita** $\to$ densità spettrale di potenza
 
     -   Nota: si chiama bianco in quanto possedendo nello spettro
         *tutte* componenti non nulle, si trova una similitudine con il
@@ -250,7 +250,7 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
 16. L'aliasing è un effetto indesiderato che si verifica quando *non
     viene rispettata* la frequenza di Nyquist ($f_c < 2B$). Può essere
     evitato campionando il segnale a una frequenza almeno doppia della
-    frequenza di Nyquist. L'aliasing va evitato perché introduce
+    banda. L'aliasing va evitato perché introduce
     distorsioni nel segnale ricostruito dal momento che le repliche, a
     causa della loro sovrapposizione si sommano, rendendo impossibile
     una ricostruzione **fedele** del segnale originale .
@@ -273,7 +273,7 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
 
     -   L'interpolazione cardinale, o sinc, utilizza come impulso $p(t)$
         una funzione sinc per interpolare tra i campioni:
-        $\to p(t)=sinc(\frac{t}{T}) \to \hat{x}(t)=\sum_{x=-\infty}^{+\infty} x[n]\cdot sinc(\frac{f-nT}{T})$.
+        $\to p(t)=sinc(\frac{t}{T}) \to \hat{x}(t)=\sum_{x=-\infty}^{+\infty} x[n]\cdot sinc(\frac{t-nT}{T})$.
         Rispetto alla interpolazione a mantenimento introduce meno
         discontinuità, ma nella realtà non è applicabile, dal momento
         che sono necessari un numero infinito di termini, dal fatto che
@@ -283,7 +283,7 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
     -   L'interpolazione lineare utilizza un'impulso triangolare, in
         modo tale che la risultante sia una spezzata che unisce i
         vertici dei triangoli:
-        $p(t) = tri(\frac{t-nT}{T}) \to \hat{x}(t) = \sum_n x[n]tri(\frac{t-nT}{T})$
+        $p(t) = tri(\frac{t}{T}) \to \hat{x}(t) = \sum_n x[n]tri(\frac{t-nT}{T})$
 
         -   L'interpolazione a mantenimento è la più semplice, ma può
             introdurre distorsioni significative. L'interpolazione
@@ -297,7 +297,7 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
     analogico $x(t)$. Derivano dalla presenza di repliche dello spettro
     del segnale a cavallo dei multipli delle frequenze di campionamento
     (sono dette *immagini*). Inoltre anche all'interno della cosiddetta
-    banda "utile" (intervallo base $[-\frac{1}{2T}, \frac{1}{2T}]$) il
+    banda "utile" (intervallo base $f \in[-\frac{1}{2T}, \frac{1}{2T}]$) il
     segnale $x(t)$ viene distorto in ampiezza (i due spettri sono legati
     dalla seguente relazione:
     $\hat{X}(f)=\frac{P(f)X(f)}{T}=X(f)sinc(fT)e^{-j\pi fT}$). Bisogna
@@ -396,7 +396,7 @@ $$
     y[n] &=\sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = \sum_{k=-\infty}^{\infty}x[k] \ u[n-k] = \\
     & =\sum_{k=-\infty}^{n}x[k] \\ &\ u[n-k] = 1 \text{ sse } n\geq k
     \end{align*}
-    Il sistema è *instabile*, ma l'uscita non è sempre illimitata: ad esempio con ingressi limitati (ad esempio segnali sinusoidali)
+    Il sistema è *instabile*, ma l'uscita non è sempre illimitata: ad esempio esistono ingressi limitati (ad esempio segnali sinusoidali)
     per i quali l'uscita sarà comunque limitata.
 
 34. Il filtro derivatore numerico o operatore differenza, e opera la differenza tra due campioni adiacenti. La sua risposta impulsiva

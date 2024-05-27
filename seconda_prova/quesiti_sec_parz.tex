@@ -69,7 +69,7 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\usepackage{bookmark}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
@@ -329,7 +329,7 @@ digitale}\label{sistemi-di-comunicazione-digitale}
 
   \[
   \displaystyle
-  X[K] = \sum_{n=0}^{N-1} x[n] = e^{-j \frac{2\pi}{N} kn}, \ \ \ k = 0, 1 , \dots, N-1
+  X[K] = \sum_{n=0}^{N-1} x[n] e^{-j \frac{2\pi}{N} kn}, \ \ \ k = 0, 1 , \dots, N-1
   \]
 
   allora la sequenza \(x[n]\) è ricavabile da \[
@@ -414,8 +414,8 @@ dimostrazioni
   \item
     \(E[w(t)] = 0\)
   \item
-    \(S_{ww}(f) = \mathcal{F} \{\frac{N_0}{2}\} = \frac{N_0}{2} \to\)
-    Potenza \textbf{infinita}
+    \(S_{ww}(f) = \mathcal{F} \{\frac{N_0}{2}\} = \frac{N_0}{2} \to\)'\,'
+    Potenza \textbf{infinita} \(\to\) densità spettrale di potenza
   \item
     Nota: si chiama bianco in quanto possedendo nello spettro
     \emph{tutte} componenti non nulle, si trova una similitudine con il
@@ -510,10 +510,10 @@ interpolazione}\label{risposte-campionamento-e-interpolazione}
   L'aliasing è un effetto indesiderato che si verifica quando \emph{non
   viene rispettata} la frequenza di Nyquist (\(f_c < 2B\)). Può essere
   evitato campionando il segnale a una frequenza almeno doppia della
-  frequenza di Nyquist. L'aliasing va evitato perché introduce
-  distorsioni nel segnale ricostruito dal momento che le repliche, a
-  causa della loro sovrapposizione si sommano, rendendo impossibile una
-  ricostruzione \textbf{fedele} del segnale originale .
+  banda. L'aliasing va evitato perché introduce distorsioni nel segnale
+  ricostruito dal momento che le repliche, a causa della loro
+  sovrapposizione si sommano, rendendo impossibile una ricostruzione
+  \textbf{fedele} del segnale originale .
 \item
   Il segnale \(x(t)=e^{-t}u(t)\) può essere campionato senza aliasing
   solo se la frequenza di campionamento è infinita. Questo perché il
@@ -535,7 +535,7 @@ interpolazione}\label{risposte-campionamento-e-interpolazione}
   \item
     L'interpolazione cardinale, o sinc, utilizza come impulso \(p(t)\)
     una funzione sinc per interpolare tra i campioni:
-    \(\to p(t)=sinc(\frac{t}{T}) \to \hat{x}(t)=\sum_{x=-\infty}^{+\infty} x[n]\cdot sinc(\frac{f-nT}{T})\).
+    \(\to p(t)=sinc(\frac{t}{T}) \to \hat{x}(t)=\sum_{x=-\infty}^{+\infty} x[n]\cdot sinc(\frac{t-nT}{T})\).
     Rispetto alla interpolazione a mantenimento introduce meno
     discontinuità, ma nella realtà non è applicabile, dal momento che
     sono necessari un numero infinito di termini, dal fatto che non è
@@ -545,7 +545,7 @@ interpolazione}\label{risposte-campionamento-e-interpolazione}
     L'interpolazione lineare utilizza un'impulso triangolare, in modo
     tale che la risultante sia una spezzata che unisce i vertici dei
     triangoli:
-    \(p(t) = tri(\frac{t-nT}{T}) \to \hat{x}(t) = \sum_n x[n]tri(\frac{t-nT}{T})\)
+    \(p(t) = tri(\frac{t}{T}) \to \hat{x}(t) = \sum_n x[n]tri(\frac{t-nT}{T})\)
 
     \begin{itemize}
     \tightlist
@@ -565,8 +565,9 @@ interpolazione}\label{risposte-campionamento-e-interpolazione}
   del segnale a cavallo dei multipli delle frequenze di campionamento
   (sono dette \emph{immagini}). Inoltre anche all'interno della
   cosiddetta banda ``utile'' (intervallo base
-  \([-\frac{1}{2T}, \frac{1}{2T}]\)) il segnale \(x(t)\) viene distorto
-  in ampiezza (i due spettri sono legati dalla seguente relazione:
+  \(f \in[-\frac{1}{2T}, \frac{1}{2T}]\)) il segnale \(x(t)\) viene
+  distorto in ampiezza (i due spettri sono legati dalla seguente
+  relazione:
   \(\hat{X}(f)=\frac{P(f)X(f)}{T}=X(f)sinc(fT)e^{-j\pi fT}\)). Bisogna
   notare come sia possibile ridurre la presenza di immagini utilizzando
   un filtro ``\emph{anti-immagine}'' all'uscita dell'interpolatore:
@@ -674,7 +675,7 @@ interpolazione}\label{risposte-campionamento-e-interpolazione}
   y[n] &=\sum_{k=-\infty}^{\infty}x[k] \ h[n-k] = \sum_{k=-\infty}^{\infty}x[k] \ u[n-k] = \\
   & =\sum_{k=-\infty}^{n}x[k] \\ &\ u[n-k] = 1 \text{ sse } n\geq k
   \end{align*} Il sistema è \emph{instabile}, ma l'uscita non è sempre
-  illimitata: ad esempio con ingressi limitati (ad esempio segnali
+  illimitata: ad esempio esistono ingressi limitati (ad esempio segnali
   sinusoidali) per i quali l'uscita sarà comunque limitata.
 \item
   Il filtro derivatore numerico o operatore differenza, e opera la
