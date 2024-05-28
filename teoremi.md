@@ -1158,17 +1158,20 @@ $$
 30. Formule e definizioni (passo, dinamica D, bit B, fattore di scala A...);
 
     L’operazione di quantizzazione rende **discreta** l’ampiezza dei campioni associando loro
-    un valore di ampiezza scelto da un insieme finito di possibili livelli (livelli di quantizzazione)
+    un valore di ampiezza scelto da un insieme finito di possibili *valori* (detti livelli di quantizzazione: essi sono i "rappresentanti" di intervalli
+    di quantizzazione contigui: gli estremi di questi intervalli sono detti "soglie").
     $$
-    \hat{x} = \text{Q}\Big[x(nT)\Big]
+    \hat{x}(nT) = \text{Q}\Big[x(nT)\Big]
     $$
     La quantizzazione è un'operazione *lossy*, in quanto essendo un'operazione irreversibile, una volta quantizzato il segnale l'informazione originale
     non potrà essere più recuperata, commettendo un errore
     $$
-    e(nt)=\hat{x}(nT)-x(nT)
+    e(nT)=\hat{x}(nT)-x(nT)
     $$
     Per effettuare l'operazione di quantizzazione dividiamo l’intervallo di variazione di ampiezza dei suoi campioni in intervalli di quantizzazione contigui $(x_i, x_{i+1})$,
-    dove gli estremi rappresentano le *soglie* di quantizzazione. 
+    dove gli estremi rappresentano le *soglie* di quantizzazione.
+
+    Al momento della progettazione del quantizzatore sono fissate sia le soglie che i livelli!
 
     L'operazione quindi consiste nel **selezionare l'intervallo più corretto per ogni campione** $x(nt)$ e associare al suo interno un valore $\hat{x}_i$ detto *livello* dell'intervallo selezionato.
     
@@ -1214,10 +1217,10 @@ $$
     $$
     Modelliamo quindi $e(nT)$ come un processo aleatorio, indicandolo come **rumore di quantizzazione** e con le seguenti ipotesi:
     1. $e(nT)$ sia un processo stazionario in senso lato: quindi media,
-        potenza e varianza *costanti* e non dipendono da n;
-    2.   che la densità di probabilità di $e(nT)$ sia di tipo
-        **uniforme**, permettendo di valutare tali costanti distinguendo i casi di quantizzazione per troncamento e per arrotondamento: \\
-        densità probabilità errore quantizzazione:
+        potenza e varianza *costanti* e non dipendono da n (distanza tra i campioni);
+    2.   che la densità di probabilità dell'**ampiezza dell'errore di quantizzazione** sia di tipo
+        **uniforme**, permettendo di valutare tali costanti distinguendo i casi di quantizzazione per troncamento e per arrotondamento:
+        - densità probabilità errore troncamento:
         \begin{align*}
         P_e(e)= \left\{
         \begin{array}{ll}
@@ -1225,6 +1228,9 @@ $$
         0 & \text{altrove}
         \end{array}\right. \to E\Big[e(nT)\Big]= 0 = E\Big[e^{2}(nT)\Big] = \frac{\Delta^{2}}{12}
         \end{align*}
+        \begin{align*}E[e(nT)]&=\int\limits_{-\Delta}^{0}e p_{e}(e) de=-\frac{\Delta}{2},\quad=\quad\frac{1}{\Delta}\cdot\frac{e^{2}}{2}\Bigg|_{-\Delta}^{0}\\E[e^{2}(nT)]&=\int\limits_{-\Delta}^{0}e^{2} p_{e}(e) de=\frac{\Delta^{2}}{3},\quad=\quad\frac{1}{\Delta} \frac{e^{3}}{3}\Bigg|_{-\Delta}^{0}\\\sigma_{e}^{2}&=E[(e(nT)-E[e(nT)])^{2}]=\int\limits_{-\Delta}^{0}\left(e+\frac{\Delta}{2}\right)^{2} p_{e}(e) de=\frac{\Delta^{2}}{12}\quad= E[e^{2}]-E[e]^{2}\end{align*}
+        - densità errore arrotondamento:
+        \begin{align*}&p_e(e)=\begin{cases}\frac{1}{\Delta}&-\frac{\Delta}{2}<e\leq\frac{\Delta}{2}\\0&\text{altrove,}\end{cases}\\&E[e(nT)]=\int\limits_{-\frac{\Delta}{2}}^{\frac{\Delta}{2}}e p_e(e) de=0,&=\frac{1}{\Delta}\quad\frac{e^{2}}{2}\Bigg|_{-\Delta/\ell}^{\Delta/2}\\&E[e^2(nT)]=\sigma_e^2=\int\limits_{-\frac{\Delta}{2}}^{\frac{\Delta}{2}}e^2 p_e(e) de=\frac{\Delta^2}{12}.&=\quad\frac{1}{\Delta}\quad\frac{e^3}{3}\Bigg|_{-\Delta/\ell}^{\Delta/2}\end{align*}
     3.   $\{e(nT)\}$ incorrelato con processo $\{x(nT)\}$;
     4.   I campioni del processo $\{e(nT)\}$ sono **incorrelati** tra loro;
 
