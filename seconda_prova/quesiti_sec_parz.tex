@@ -69,7 +69,7 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
@@ -121,9 +121,6 @@ Sequenza}\label{trasformata-di-fourier-per-una-sequenza}
 \item
   Cosa s'intende per denormalizzazione e a cosa serve?
 \item
-  Enunciare e spiegare la Proprietà di Simmetria della TDF per sequenze
-  reali
-\item
   Enunciare e spiegare il teorema dell'Incremento della TDF per sequenze
   reali
 \item
@@ -145,7 +142,7 @@ Campionamento e interpolazione
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{14}
+\setcounter{enumi}{13}
 \tightlist
 \item
   Definizione teorema del campionamento e condizione di Nyquist
@@ -181,7 +178,7 @@ discreta}\label{trasformata-di-fourier-discreta}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{22}
+\setcounter{enumi}{21}
 \tightlist
 \item
   Che differenza troviamo tra una trasformata discreta ed una per
@@ -192,6 +189,9 @@ discreta}\label{trasformata-di-fourier-discreta}
   \(n = 0, 1, . . . , 19\)? Giustificare la risposta.
 \item
   Scrivere i Teoremi del prodotto e della convoluzione della DFT
+\item
+  Enunciare e spiegare la Proprietà di Simmetria della TDF per sequenze
+  reali
 \item
   Scrivere la proprietà di traslazione in frequenza della DFT
 \item
@@ -463,11 +463,6 @@ dimostrazioni
   segnale analogico di partenza. Quindi se \(T\) = al periodo di
   campionamento e \(f=\frac{F}{T}=F\cdot F_c \to F=fT\) in Hz.
 \item
-  La Proprietà di Simmetria della Trasformata di Fourier per sequenze
-  reali afferma che lo spettro di una sequenza reale è simmetrico
-  rispetto all'origine. Questo significa che la parte positiva dello
-  spettro è l'immagine speculare della parte negativa.
-\item
   Il teorema dell'Incremento della Trasformata di Fourier per sequenze
   per sequenze reali afferma che l'incremento di una sequenza nel
   dominio del tempo corrisponde a una modulazione nel dominio della
@@ -499,7 +494,7 @@ interpolazione}\label{risposte-campionamento-e-interpolazione}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{14}
+\setcounter{enumi}{13}
 \item
   ``Un segnale il cui spettro è \textbf{limitato} nella banda \(B\) può
   essere ricostruito esattamente dai propri campioni, purché la
@@ -581,7 +576,7 @@ interpolazione}\label{risposte-campionamento-e-interpolazione}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{22}
+\setcounter{enumi}{21}
 \item
   La differenza tra una trasformata discreta e una per sequenze risiede
   nel fatto che la trasformata discreta è definita solo per un numero
@@ -621,6 +616,11 @@ interpolazione}\label{risposte-campionamento-e-interpolazione}
   della convoluzione di due sequenze è uguale al prodotto delle DFT
   delle due sequenze.
 \item
+  La Proprietà di Simmetria della Trasformata di Fourier per sequenze
+  reali afferma che lo spettro di una sequenza reale è simmetrico
+  rispetto all'origine. Questo significa che la parte positiva dello
+  spettro è l'immagine speculare della parte negativa.
+\item
   La proprietà di traslazione in frequenza della DFT afferma che la DFT
   di una sequenza moltiplicata per un'onda esponenziale complessa è
   uguale alla DFT della sequenza originale spostata in frequenza.
@@ -655,6 +655,13 @@ interpolazione}\label{risposte-campionamento-e-interpolazione}
   periodicità \(L=10\) e \(L=20\) rispettivamente, allora i campioni di
   \(X_{20}[k]\) che coincidono con i campioni di \(X_{10}[k]\) sono solo
   i primi 10, in quanto i successivi 10 sono tutti pari a zero (?).
+\end{enumerate}
+
+\subparagraph{Risposte sistemi}\label{risposte-sistemi}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{29}
 \item
   \(h(n) = \frac{1}{N}(u[n]-u[n-N])\)
 \item

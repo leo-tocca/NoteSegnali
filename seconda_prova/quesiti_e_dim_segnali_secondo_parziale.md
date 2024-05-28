@@ -37,27 +37,27 @@ header-includes: |
 6. Che significato ha l'espansione della sequenza $x[n]$?  [$^{**}$]
 7. Qual è la condizione sufficiente per l'esistenza della trasformata per sequenze?  [$^{**}$]
 8. Cosa s'intende per denormalizzazione e a cosa serve?
-9. Enunciare e spiegare la Proprietà di Simmetria della TDF per sequenze reali
-10. Enunciare e spiegare il teorema dell'Incremento della TDF per sequenze reali
-11. Enunciare e spiegare la condizione di convergenza della Trasformata di Fourier per sequenze (vedi n°6)
-12. Sia $x[n] = cos(2\pi 0.1 n), \ n \in \mathbb{Z}$. Quale è la sua trasformata di Fourier per sequenze? Giustificare la risposta.
-13. Se $x[n]$ ha trasformata di Fourier per sequenze $\overline{X}(F)$, quale sequenza $y[n]$ ha trasformata di Fourier $\overline{Y}(F) = \overline{X}(F - F_0)$? Giustificare la risposta.
-14. Calcolare la trasformata di Fourier della sequenza $x[n]$ formata dall'impulso rettangolare discreto, cioè $x[n]= u[n]-u[n-N]$
+9. Enunciare e spiegare il teorema dell'Incremento della TDF per sequenze reali
+10. Enunciare e spiegare la condizione di convergenza della Trasformata di Fourier per sequenze (vedi n°6)
+11. Sia $x[n] = cos(2\pi 0.1 n), \ n \in \mathbb{Z}$. Quale è la sua trasformata di Fourier per sequenze? Giustificare la risposta.
+12. Se $x[n]$ ha trasformata di Fourier per sequenze $\overline{X}(F)$, quale sequenza $y[n]$ ha trasformata di Fourier $\overline{Y}(F) = \overline{X}(F - F_0)$? Giustificare la risposta.
+13. Calcolare la trasformata di Fourier della sequenza $x[n]$ formata dall'impulso rettangolare discreto, cioè $x[n]= u[n]-u[n-N]$
 
 ###### Campionamento e interpolazione
-15. Definizione teorema del campionamento e condizione di Nyquist [$^{**}$]
-16. Cosa si intende per *aliasing*? Come si evita e perché va evitato. [$^{**}$]
-17. Il segnale $x(t) = e^{-t} u(t)$ può essere campionato con assoluta assenza di aliasing? Giustificare la risposta.
-18. Data una serie di campioni $x(nT)$ ottenuti campionando il segnale analogico di partenza $x(t)$, scrivere la relazione che lega il segnale ricostruito $\hat{x}(t)$ ai campioni $x(nT)$, nel caso di interpolazione lineare. 
-19. Dato il segnale campionato $x_c(t)$ ottenuto campionando il segnale analogico di partenza $x(t)$, scrivere la relazione che lega lo spettro di $x_c(t)$ allo spettro di $x(t)$.
-20. Differenza tra interpolazione a mantenimento, cardinale (e/o lineare) $^{**}$
-21. Quali sono gli svantaggi e i vantaggi dell'interpolazione a mantenimento?  [$^{**}$]
-22. Scrivere l'espressione del segnale interpolato in funzione dei valori della sequenza di campioni nel caso di Interpolazione a mantenimento
+14. Definizione teorema del campionamento e condizione di Nyquist [$^{**}$]
+15. Cosa si intende per *aliasing*? Come si evita e perché va evitato. [$^{**}$]
+16. Il segnale $x(t) = e^{-t} u(t)$ può essere campionato con assoluta assenza di aliasing? Giustificare la risposta.
+17. Data una serie di campioni $x(nT)$ ottenuti campionando il segnale analogico di partenza $x(t)$, scrivere la relazione che lega il segnale ricostruito $\hat{x}(t)$ ai campioni $x(nT)$, nel caso di interpolazione lineare. 
+18. Dato il segnale campionato $x_c(t)$ ottenuto campionando il segnale analogico di partenza $x(t)$, scrivere la relazione che lega lo spettro di $x_c(t)$ allo spettro di $x(t)$.
+19. Differenza tra interpolazione a mantenimento, cardinale (e/o lineare) $^{**}$
+20. Quali sono gli svantaggi e i vantaggi dell'interpolazione a mantenimento?  [$^{**}$]
+21. Scrivere l'espressione del segnale interpolato in funzione dei valori della sequenza di campioni nel caso di Interpolazione a mantenimento
 
 ##### Trasformata di Fourier discreta
-23. Che differenza troviamo tra una trasformata discreta ed una per sequenze [$^{**}$]
-24. Da quanti campioni non nulli è composta la DFT a 20 campioni del segnale di durata finita $x[n] = cos^2(\frac{2\pi}{10}n)$, $n = 0, 1, . . . , 19$? Giustificare la risposta.
-25. Scrivere i Teoremi del prodotto e della convoluzione della DFT
+22. Che differenza troviamo tra una trasformata discreta ed una per sequenze [$^{**}$]
+23. Da quanti campioni non nulli è composta la DFT a 20 campioni del segnale di durata finita $x[n] = cos^2(\frac{2\pi}{10}n)$, $n = 0, 1, . . . , 19$? Giustificare la risposta.
+24. Scrivere i Teoremi del prodotto e della convoluzione della DFT
+25. Enunciare e spiegare la Proprietà di Simmetria della TDF per sequenze reali
 26. Scrivere la proprietà di traslazione in frequenza della DFT
 27. Enunciare la proprietà di traslazione circolare della Trasformata Discreta di Fourier
 28. Enunciare e spiegare la Proprietà di Simmetria della Trasformata Discreta di Fourier per sequenze reali
@@ -208,30 +208,25 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
     Quindi se $T$ = al periodo di campionamento e
     $f=\frac{F}{T}=F\cdot F_c \to F=fT$ in Hz.
 
-9.  La Proprietà di Simmetria della Trasformata di Fourier per sequenze
-    reali afferma che lo spettro di una sequenza reale è simmetrico
-    rispetto all'origine. Questo significa che la parte positiva dello
-    spettro è l'immagine speculare della parte negativa.
-
-10. Il teorema dell'Incremento della Trasformata di Fourier per sequenze
+9. Il teorema dell'Incremento della Trasformata di Fourier per sequenze
     per sequenze reali afferma che l'incremento di una sequenza nel
     dominio del tempo corrisponde a una modulazione nel dominio della
     frequenza.
 
-11. La condizione di convergenza della Trasformata di Fourier per
+10. La condizione di convergenza della Trasformata di Fourier per
     sequenze è che la sequenza sia assolutamente sommabile, ovvero la
     somma dei valori assoluti dei suoi elementi sia finita.
 
-12. ~~La trasformata di Fourier della sequenza\...~~
+11. ~~La trasformata di Fourier della sequenza\...~~
 
-13. Se $x[n]$ ha trasformata di Fourier per sequenze $X(F)$, allora la
+12. Se $x[n]$ ha trasformata di Fourier per sequenze $X(F)$, allora la
     sequenza $y[n]$ con TDF $Y(F)=X(F-F_0)$ è data da
     $y[n]=x[n]e^{j2\pi F_0n}$. Questo è dovuto alla proprietà di
     traslazione in frequenza della trasformata di Fourier, che afferma
     che la traslazione di una funzione nel dominio della frequenza
     corrisponde a una modulazione esponenziale nel dominio del tempo.
 
-14. La trasformata di Fourier della sequenza $x[n]=u[n]-u[n-N]$, dove
+13. La trasformata di Fourier della sequenza $x[n]=u[n]-u[n-N]$, dove
     $u[n]$ è la funzione gradino unitario, è data da:
     \begin{align*}
     \displaystyle \overline{X}(f) &= \sum_{n = -\infty}^{+\infty} (u[n]-u[n-N])e^{-2\pi nfT} = \sum_{n = 0}^{N-1}e^{-2\pi nfT} = \sum_{n = 0}^{N-1}(e^{-2\pi fT})^n = \\
@@ -241,13 +236,13 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
 
 ##### Risposte campionamento e interpolazione
 
-15. "Un segnale il cui spettro è **limitato** nella banda $B$ può essere
+14. "Un segnale il cui spettro è **limitato** nella banda $B$ può essere
     ricostruito esattamente dai propri campioni, purché la frequenza di
     campionamento non sia inferiore a $2B$". La condizione di Nyquist:
     "Una volta fissata $B$ la frequenza di campionamento
     $f_c = \frac{1}{T} \geq 2B, \to T \leq \frac{1}{2B}$
 
-16. L'aliasing è un effetto indesiderato che si verifica quando *non
+15. L'aliasing è un effetto indesiderato che si verifica quando *non
     viene rispettata* la frequenza di Nyquist ($f_c < 2B$). Può essere
     evitato campionando il segnale a una frequenza almeno doppia della
     banda. L'aliasing va evitato perché introduce
@@ -255,17 +250,17 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
     causa della loro sovrapposizione si sommano, rendendo impossibile
     una ricostruzione **fedele** del segnale originale .
 
-17. Il segnale $x(t)=e^{-t}u(t)$ può essere campionato senza aliasing
+16. Il segnale $x(t)=e^{-t}u(t)$ può essere campionato senza aliasing
     solo se la frequenza di campionamento è infinita. Questo perché il
     segnale ha componenti di frequenza che si estendono all'infinito,
     quindi non esiste una frequenza di Nyquist finita che possa essere
     utilizzata per campionare il segnale senza aliasing.
 
-18. $\displaystyle x(nT) = x[n] \text{ ottenuti da:} \ \hat{x}(t)= \sum_{n= -\infty}^{\infty} x[n] \cdot tri(\frac{t-nT}{T})= \sum_{n= -\infty}^{\infty}x[n] (1-\frac{|t|}{T})rect(\frac{t}{2T})$
+17. $\displaystyle x(nT) = x[n] \text{ ottenuti da:} \ \hat{x}(t)= \sum_{n= -\infty}^{\infty} x[n] \cdot tri(\frac{t-nT}{T})= \sum_{n= -\infty}^{\infty}x[n] (1-\frac{|t|}{T})rect(\frac{t}{2T})$
 
-19. $\overline{X}(f) = \frac{1}{T}\sum_{k=-\infty}^{\infty}X(f-\frac{k}{T})$
+18. $\overline{X}(f) = \frac{1}{T}\sum_{k=-\infty}^{\infty}X(f-\frac{k}{T})$
 
-20. -   L'interpolazione a mantenimento, o interpolazione a gradino, è
+19. -   L'interpolazione a mantenimento, o interpolazione a gradino, è
         un metodo di interpolazione che mantiene l'n-esimo valore della
         sequenza $x[n]$ a partire dall'istante $nT$ fino a $nT+1$.
         Successivamente sarà mantenuto $x[n+1]$ e così via\
@@ -290,7 +285,7 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
             cardinale può fornire risultati più accurati, ma è
             computazionalmente più intensiva.
 
-21. L'interpolazione a mantenimento ha il vantaggio di essere semplice
+20. L'interpolazione a mantenimento ha il vantaggio di essere semplice
     da implementare e computazionalmente efficiente. Tuttavia, il
     segnale interpolato **non è limitato in banda**: in questo modo sono
     introdotte delle componenti frequenziali non presenti nel segnale
@@ -306,18 +301,18 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
     dell'interpolatore: corrisponde ad un filtro passa-basso di banda B,
     che elimina le immagini dallo spettro del segnale interpolato.
 
-22. $\hat{x}(t)=\sum_{n=-\infty}^{+\infty}x[n]\cdot p(t-nT)\text{, con } p(t)= rect(\frac{t-\frac{T}{2}}{T})$
+21. $\hat{x}(t)=\sum_{n=-\infty}^{+\infty}x[n]\cdot p(t-nT)\text{, con } p(t)= rect(\frac{t-\frac{T}{2}}{T})$
 
 ##### Risposte TDF discreta
 
-23. La differenza tra una trasformata discreta e una per sequenze
+22. La differenza tra una trasformata discreta e una per sequenze
     risiede nel fatto che la trasformata discreta è definita solo per un
     numero finito di punti, mentre la trasformata per sequenze può
     essere definita per sequenze infinite. Inoltre, la trasformata
     discreta assume che il segnale sia periodico, mentre la trasformata
     per sequenze non fa questa assunzione (?).
 
-24.
+23. 
 \begin{align*} 
 x[n] &= \cos^2(\frac{2\pi n}{10}), \ n= 0, \cdots, 19 \\
 x[n] &= \frac{1}{2}[1+\cos(2\frac{2\pi n}{10})] = \frac{1}{2} + \frac{1}{4}e^{\frac{j2\pi 4n}{20}} + \frac{1}{4}e^{\frac{-j2\pi 4n}{20}} \\
@@ -345,11 +340,18 @@ x[k] = \left\{ \begin{array}{cl}
 \end{array} \right.
 $$
    
-25. Il Teorema del prodotto per la DFT afferma che la DFT del prodotto
+24. Il Teorema del prodotto per la DFT afferma che la DFT del prodotto
     di due sequenze è uguale alla convoluzione circolare delle DFT delle
     due sequenze. Il Teorema della convoluzione per la DFT afferma che
     la DFT della convoluzione di due sequenze è uguale al prodotto delle
     DFT delle due sequenze.
+
+
+25.  La Proprietà di Simmetria della Trasformata di Fourier per sequenze
+    reali afferma che lo spettro di una sequenza reale è simmetrico
+    rispetto all'origine. Questo significa che la parte positiva dello
+    spettro è l'immagine speculare della parte negativa.
+
 
 26. La proprietà di traslazione in frequenza della DFT afferma che la
     DFT di una sequenza moltiplicata per un'onda esponenziale complessa
@@ -379,7 +381,7 @@ $$
     $X_{20}[k]$ che coincidono con i campioni di $X_{10}[k]$ sono solo i
     primi 10, in quanto i successivi 10 sono tutti pari a zero (?).
 
-
+##### Risposte sistemi
 
 30. $h(n) = \frac{1}{N}(u[n]-u[n-N])$
 
