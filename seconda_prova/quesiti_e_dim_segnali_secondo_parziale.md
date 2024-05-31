@@ -375,11 +375,26 @@ $$
     - per sequenze di lunghezza **pari**, il centro di simmetria coincide con un campione della sequenza;
     - per sequenze di lunghezza **dispari**, invece, il centro di simmetria coincide con un punto equidistante tra due campioni.
 
-29. Se $x[n]$ è una sequenza finita di lunghezza $N=10$ campioni, e
+29. ~~Se $x[n]$ è una sequenza finita di lunghezza $N=10$ campioni, e
     $X_{10}[k]$ e $X_{20}[k]$ sono le DFT di $x[n]$ calcolate con
     periodicità $L=10$ e $L=20$ rispettivamente, allora i campioni di
     $X_{20}[k]$ che coincidono con i campioni di $X_{10}[k]$ sono solo i
-    primi 10, in quanto i successivi 10 sono tutti pari a zero (?).
+    primi 10, in quanto i successivi 10 sono tutti pari a zero (?).~~ \newline
+    $x[n]$ sequenza di 10 campioni (per esempio posti ad 1) \newline
+    $X_{10}[k] \rightarrow$ DFT con periodicità 10 \newline
+    $X_{10}[k] \rightarrow$ DFT con periodicità 20 \newline
+\begin{align*}
+x_{10}[n]&=x[n], \quad 
+x_{20}[n] = \begin{cases}x[n] & n=0,\dots,9 \\
+0 & n=10,\dots,19\end{cases} \\
+X_{10}[k]&=\sum_{n=0}^9 x[n]  \\
+X_{20}[k]&=\sum_{n=0}^{19} x[n] \cdot e^{\frac{-j2\pi nk}{20}} \\
+& =\sum_{n=0}^9 x[n] e^{\frac{-j2\pi nk}{20}} \\
+X_{20}[2k]&=\sum_{n=0}^9 x[n] e^{\frac{-2 \pi n \cdot \cancel{2}k}{\cancel{20}_{10}}}
+ =\sum_{n=0}^{9} x[n] e^{\frac{-j2\pi nk}{10}} \\
+& =X_{10}[K] \\
+\end{align*}
+    Quindi corrispondono i campioni **pari** delle sequenze!
 
 ##### Risposte sistemi
 
