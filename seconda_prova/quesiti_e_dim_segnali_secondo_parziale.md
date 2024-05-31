@@ -388,10 +388,10 @@ x_{10}[n]&=x[n], \quad
 x_{20}[n] = \begin{cases}x[n] & n=0,\dots,9 \\
 0 & n=10,\dots,19\end{cases} \\
 X_{10}[k]&=\sum_{n=0}^9 x[n]  \\
-X_{20}[k]&=\sum_{n=0}^{19} x[n] \cdot e^{\frac{-j2\pi nk}{20}} \\
+X_{20}[k]&=\sum_{n=0}^{19} x[n] \cdot e^{\frac{-j2\pi nk}{20}}= \\
 & =\sum_{n=0}^9 x[n] e^{\frac{-j2\pi nk}{20}} \\
-X_{20}[2k]&=\sum_{n=0}^9 x[n] e^{\frac{-2 \pi n \cdot \cancel{2}k}{\cancel{20}_{10}}}
- =\sum_{n=0}^{9} x[n] e^{\frac{-j2\pi nk}{10}} \\
+X_{20}[2k]&=\sum_{n=0}^9 x[n] e^{\frac{-2 \pi n \cdot \cancel{2}k}{\cancel{20}_{10}}} =
+ =\sum_{n=0}^{9} x[n] e^{\frac{-j2\pi nk}{10}}= \\
 & =X_{10}[K] \\
 \end{align*}
     Quindi corrispondono i campioni **pari** delle sequenze!
@@ -528,20 +528,30 @@ X_{20}[2k]&=\sum_{n=0}^9 x[n] e^{\frac{-2 \pi n \cdot \cancel{2}k}{\cancel{20}_{
     di informazioni binarie. In questo modo il ricevitore può utilizzare
     questa ridondanza per **attenuare e/o correggere** gli effetti
     negativi dovuti al rumore o alle interferenze incontrate nella
-    trasmissione del segnale. In questo modo viene aumentata
-    l'affidabilità e migliorata la fedeltà del segnale. Può essere
-    implementata con una:
+    trasmissione del segnale, riducendo quindi la probabilità d'errore
+    dei bit di "informazione". In questo modo viene aumentata
+    l'affidabilità e migliorata la fedeltà del segnale. \newline
+    Ci sono due strategie per impiegare i codici a controllo di errore:
+        - rivelare gli errori, per poi richiedere una ritrasmissione
+        - correggere gli errori, non richiedendo eventualmente una ritrasmissione
+    Può essere implementata con una:
 
-    -   codifica "banale": consiste nel ripetere una cifra binaria per
+    -   codici a blocchi (n/k): 
+        Il messaggio è diviso in blocchi di $k$ simboli, a cui vengono associate
+        parole di codice formate da $n=k+q$ simboli. Si introducono quindi $q$ bit di
+        ridondanza.
+        - codice a ripetizione:
+        consiste nel ripetere una cifra binaria per
         $m$ volte ($m>0$). Se viene riscontrato un errore vi è una
-        decisione "a maggioranza" (se errori
-        $\displaystyle < \frac{N}{2}$). Tuttavia vi è un numero elevato
-        di bit da trasmettere.
+        decisione "a maggioranza" (se errori $\displaystyle < \frac{N}{2}$).
+        Tuttavia vi è un numero elevato di bit da trasmettere.
 
-    -   codifica "non banale": vengono mappati $k$ bit (alla volta) di
+        - codifica "non banale" (controllo di parità): vengono mappati $k$ bit (alla volta) di
         una sequenza di $n$ bit ($k<n$) andando a creare una **parola in
-        codice**. In questo caso vi è una ridondanza pari a
-        $\frac{n}{k}$
+        codice**. Il suo funzionamento si basa su una combinazione di k 
+        bit di dati e $(n-k$) bit di parità, che vengono calcolati in modo
+        da rendere rilevabili e correggibili determinati tipi di errori.
+        In questo caso vi è una ridondanza pari a $\frac{n}{k}$
 
 44. Il codificatore di sorgente in un sistema di comunicazione digitale
     è il primo blocco del trasmettitore. Si occupa del processo di
