@@ -554,7 +554,15 @@ X_{20}[2k]&=\sum_{n=0}^9 x[n] e^{\frac{-2 \pi n \cdot \cancel{2}k}{\cancel{20}_{
 
 45. Un modulatore digitale in un sistema di comunicazione digitale è
     l'interfaccia per il canale di comunicazione. Sceglie la forma
-    d'onda più adatta alla trasmissione sul canale scelto. Può essere:
+    d'onda più adatta alla trasmissione sul canale selezionato, in quanto
+    è necessario spostare l'intervallo di frequenze in banda base
+    (ovvero dalle frequenze "originali") in altri intervalli
+    più adatti. \newline
+    Per modulazione s'intende il processo mediante il quale alcune
+    caratteristiche di una portante vengono variate in accordo
+    con un'onda modulante (segnale).
+
+    La modulazione può essere:
 
     -   binaria: la sequenza viene trasmessa un bit alla volta, con un
         bit-rate costante e pari a R bit al secondo;
