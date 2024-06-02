@@ -151,7 +151,7 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
 
     -   $R_x(0)= E[X^2(t)] = P_x \geq 0 \to$ potenza costante
 
-    -   $|R_x(\tau)| \leq R_x(0) \to$ la funzione di correlazione ha
+    -   $|R_x(\tau)| \leq R_x(0) \to$ la funzione di autocorrelazione ha
         il proprio massimo in $\tau = 0$
 
 4.  Il rumore bianco è un tipo di segnale casuale che ha una potenza
@@ -182,7 +182,7 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
     \end{align*}
     Quindi è nuovamente un processo WSS
 
-##### Risposte tdf sequenze
+##### Risposte tdf sequenze aperiodiche
 
 6.  Il segnale $x[n]$ viene espresso mediante la somma di molti termini
     $X(f)$ i quali, al variare della frequenza $\overline{X}(F)$ hanno
@@ -268,7 +268,7 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
 
     -   L'interpolazione cardinale, o sinc, utilizza come impulso $p(t)$
         una funzione sinc per interpolare tra i campioni:
-        $\to p(t)=sinc(\frac{t}{T}) \to \hat{x}(t)=\sum_{x=-\infty}^{+\infty} x[n]\cdot sinc(\frac{t-nT}{T})$.
+        $\to p(t)=sinc(\frac{t}{T}) \to \hat{x}(t)=\sum_{n=-\infty}^{+\infty} x[n]\cdot sinc(\frac{t-nT}{T})$.
         Rispetto alla interpolazione a mantenimento introduce meno
         discontinuità, ma nella realtà non è applicabile, dal momento
         che sono necessari un numero infinito di termini, dal fatto che
@@ -375,12 +375,7 @@ $$
     - per sequenze di lunghezza **pari**, il centro di simmetria coincide con un campione della sequenza;
     - per sequenze di lunghezza **dispari**, invece, il centro di simmetria coincide con un punto equidistante tra due campioni.
 
-29. ~~Se $x[n]$ è una sequenza finita di lunghezza $N=10$ campioni, e
-    $X_{10}[k]$ e $X_{20}[k]$ sono le DFT di $x[n]$ calcolate con
-    periodicità $L=10$ e $L=20$ rispettivamente, allora i campioni di
-    $X_{20}[k]$ che coincidono con i campioni di $X_{10}[k]$ sono solo i
-    primi 10, in quanto i successivi 10 sono tutti pari a zero (?).~~ \newline
-    $x[n]$ sequenza di 10 campioni (per esempio posti ad 1) \newline
+29. $x[n]$ sequenza di 10 campioni (per esempio posti ad 1) \newline
     $X_{10}[k] \rightarrow$ DFT con periodicità 10 \newline
     $X_{10}[k] \rightarrow$ DFT con periodicità 20 \newline
 \begin{align*}
@@ -405,7 +400,8 @@ X_{20}[2k]&=\sum_{n=0}^9 x[n] e^{\frac{-2 \pi n \cdot \cancel{2}k}{\cancel{20}_{
 32. Un filtro a media mobile prende in ingresso un numero $N$ di campioni della sequenza d'ingresso,
     calcolandone la media aritmetica degli ultimi $N$ valori, a partire dall'istante $n^{*}$ verso
     tempi decrescenti, producendo un valore $y[n^{*}]$ in uscita. Il nome media mobile deriva dalla 
-    traslazione in avanti di un "passo", al fine di ottenere il valore $y[n^{*}+1]$
+    traslazione in avanti di un "passo", al fine di ottenere il valore $y[n^{*}+1]$ (la media viene
+    ricalcolata!)
 
 33. Il filtro accumulatore numerico è un sistema che somma di tutti i campioni arrivati al suo ingresso fino all’istante $n$.
     Ha un risposta impulsiva uguale alla funzione gradino unitario, cioè $h(n)=u(n)$. Quindi:
@@ -456,15 +452,15 @@ X_{20}[2k]&=\sum_{n=0}^9 x[n] e^{\frac{-2 \pi n \cdot \cancel{2}k}{\cancel{20}_{
 39. Un quantizzatore uniforme è ottenuto imponendo una distanza costante
     tra le soglie e i livelli di quantizzazione (quindi il *passo*
     $\Delta$ è costante
-    $\to x_{i+1}-x_i=\Delta; \ \hat{x}_{x+1}-\hat{x}_i = \Delta$). Per
-    quanto riguarda i livelli di quantizzazione nei quantizzatori
+    $\to x_{i+1}-x_i=\Delta; \ \hat{x}_{i+1}-\hat{x}_i = \Delta$). Per
+    quanto riguarda la "scelta" dei livelli di quantizzazione nei quantizzatori
     uniformi si distinguono i:
 
     -   Midtread: i livelli di quantizzazione si estendono su un
         intervallo approssimativamente *simmetrico*, dal momento che i
         livelli sono un numero *pari* ed è incluso lo 0
         $$
-        \to \{\hat{x}_i : i=0,\_,2^B -1\}= \{-2^{B-1}\Delta,\_,-\Delta,0,\Delta,\_,(2^{B-1}-1)=\Delta \}
+        \to \{\hat{x}_i : i=0,\_,2^B -1\}= \{-2^{B-1}\Delta,\cdots,-\Delta,0,\Delta,\cdots,(2^{B-1}-1)\Delta \}
         $$
 
     -   Midrise: in questo caso i livelli coprono un intervallo
@@ -472,7 +468,7 @@ X_{20}[2k]&=\sum_{n=0}^9 x[n] e^{\frac{-2 \pi n \cdot \cancel{2}k}{\cancel{20}_{
         valore 0 **non** è compreso nell'insieme (il passo è $\Delta$ e
         parto da $\frac{\Delta}{2}$):
         $$
-        \to \{\hat{x}_i : i=0,\_,2^B -1\}= \{-(2^{B-1}-\frac{1}{2})\Delta,\_,-\frac{\Delta}{2},0,\frac{\Delta}{2},\_,(2^{B-1}-\frac{1}{2})=\Delta \}
+        \to \{\hat{x}_i : i=0,\_,2^B -1\}= \{-(2^{B-1}-\frac{1}{2})\Delta,\cdots,-\frac{\Delta}{2},\frac{\Delta}{2},\cdots,(2^{B-1}-\frac{1}{2})\Delta \}
         $$
 
 40. In un quantizzatore uniforme, in base alla scelta della regola di
@@ -485,7 +481,7 @@ X_{20}[2k]&=\sum_{n=0}^9 x[n] e^{\frac{-2 \pi n \cdot \cancel{2}k}{\cancel{20}_{
         valore quantizzato $\hat{x}(nT)$ a partire dal campione $x(nT)$
         è:
         $$
-        \hat{x}(nT) = \{x_i \: i=arg \ min_k (|x(nT)=\hat{x}(k)| \}
+        \hat{x}(nT) = \{\hat{x}_i : i=arg \ min_k (|x(nT)=\hat{x}_k| \}
         $$
         L'errore è $0 \leq |e(nT)| \leq \frac{\Delta}{2}$
 
@@ -493,15 +489,16 @@ X_{20}[2k]&=\sum_{n=0}^9 x[n] e^{\frac{-2 \pi n \cdot \cancel{2}k}{\cancel{20}_{
         più vicino tra tutti quelli minori o uguali a $x(nT)$. Le soglie
         di quantizzazione coincidono con i livelli di quantizzazione. La
         relazione che permette di trovare il valore quantizzato
-        $\hat{x}(nT)$ a partire dal campione $x(nT)$
+        $\hat{x}(nT)$ a partire dal campione $x(nT)$:
         $$
-        \hat{x}(nT) = \{x_i \: i=arg \ max_k (\hat{x}_k \text{ con } \hat{x}_k \leq x(nT)) \}
+        \hat{x}(nT) = \{\hat{x}_i : i=arg \ max_k (\hat{x}_k \text{ con } \hat{x}_k \leq x(nT)) \}
         $$
         L'errore è $0 \leq |e(nT)| < \Delta$
 
 41. Il rumore di quantizzazione $e(nT)$ è l'errore introdotto dal
-    processo di quantizzazione. Le ipotesi usualmente assunte per il
-    rumore di quantizzazione sono:
+    processo di quantizzazione, modellato come processo
+    aleatorio *additivo*: $\hat{x}(nT)=x(nT)+e(nT)$.
+    Le ipotesi usualmente assunte per il rumore di quantizzazione sono:
 
     -   $e(nT)$ sia un processo stazionario in senso lato: quindi media,
         potenza e varianza *costanti* e non dipendono da n;

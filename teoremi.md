@@ -654,10 +654,10 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
 
     Data la sequenza *aperiodica* $x[n]$ **discreta**:
     \begin{align*}
-    \overline{X}(f) &= \sum_{n=-\infty}^{\infty}x[n]\ e^{-j2\pi nfT} = \longrightarrow f=F\cdot F_{c} = \frac{F}{T} = \si{\hertz} \longrightarrow
+    \overline{X}(f) &= \sum_{n=-\infty}^{\infty}x[n]\ e^{-j2\pi nfT} = \longrightarrow f=F\cdot F_{c} = \frac{F}{T} = \si{\hertz} \longrightarrow \overline{X}(F)
     = \sum_{n=-\infty}^{\infty}x[n] \ e^{j2\pi nF}
     \end{align*}
-    $\overline{X}(f)$ è **completamente nota** se conosco il suo andamento in un intervallo delle frequenze *normalizzate* di ampiezza unitaria:  $\underbrace{F\in [-\frac{1}{2}; \frac{1}{2}]}_{\text{Intervallo base}}$
+    $\overline{X}(F)$ è **completamente nota** se conosco il suo andamento in un intervallo delle frequenze *normalizzate* di ampiezza unitaria:  $\underbrace{F\in [-\frac{1}{2}; \frac{1}{2}]}_{\text{Intervallo base}}$
 
     - Periodica di periodo $1$:
     \begin{align*}
@@ -681,19 +681,19 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
 3. Relazione tra definizione di antitrasformata e trasformata; Criterio di convergenza per TFS (solo definizione).
     
     $$
-    x[n] = \text{ITFS}\Big [ \overline{X}(f) \Big] = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{j2\pi n ft} \,df
+    x[n] = \text{ITFS}\Big [ \overline{X}(f) \Big] = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{j2\pi n fT} \,df
     $$
     - Dimostrazione:
     \begin{align*}
-    \overline{X}(f) &\triangleq \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi m fT} \to \text{ moltiplico e divido per osc.ni complesse alla frequenza } f \text{ e integro}\\
-    & =\int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{j2\pi n fT} \,df = \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi m fT} \ e^{j2\pi n fT} \,df = \\
+    \overline{X}(f) &\triangleq \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi m fT} \to \begin{array}{cl}&\text{ moltiplico per osc.ni} \\ &\text{complesse alla frequenza } f \text{ e integro}\end{array}\\
+    \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{j2\pi n fT} \,df &= \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \sum_{m=-\infty}^{\infty} x[m] \ e^{-j2\pi m fT} \ e^{j2\pi n fT} \,df = \\
     & =\sum_{m=-\infty}^{\infty} x[m] \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi (m-n)fT}\,df \\
-    &\text{Studiamo } \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi (m-n)fT}\,df \longrightarrow
+    \text{Studiamo } \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi (m-n)fT}\,df &\longrightarrow
     \left\{ \begin{array}{cl}
     \frac{1}{T} & : \ m=n \to \int_{-\frac{1}{2T}}^{\frac{1}{2T}} 1\cdot \,df = \frac{1}{T} \\
     0 & : \ m \neq n \to m-n=k \to \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi kfT} = 0
     \end{array} \right. \\    
-    &\Rightarrow \text{ Riprendo la sommatoria } \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{-j2\pi nfT} \,df = \sum_{m=-\infty}^{\infty}
+    \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(f) \ e^{-j2\pi nfT} \,df &= \sum_{m=-\infty}^{\infty}
     x[m] \int_{-\frac{1}{2T}}^{\frac{1}{2T}} e^{-j2\pi(m-n)fT}\,df = \frac{1}{T}x[n] \\
     & \Rightarrow x[n] = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}}\overline{X}(f)\ e^{j2\pi nfT}
     \end{align*}
@@ -721,7 +721,7 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     \end{align*}
 6. Teorema della Modulazione;
     $$
-    x[n]\cdot e^{-j2\pi nf_{0}t} \Longleftrightarrow \overline{X}(f-f_{0})
+    x[n]\cdot e^{j2\pi nf_{0}t} \Longleftrightarrow \overline{X}(f-f_{0})
     $$
     - Dimostrazione:
     \begin{gather*}
@@ -747,20 +747,20 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     p[n]=x[n]\cdot y[n] \Longleftrightarrow \overline{P}(f) = \overline{X}(f) \otimes \overline{Y}(f)
     $$
     - Dimostrazione:
-    \begin{align*}
-     \overline{P}(f)&=\sum_{n=-\infty}^{\infty} p[n] \ e^{-j2\pi nfT} =  \sum_{n=-\infty}^{\infty} x[n] \ y[n] \ e^{-j2\pi nfT} = \sum_{n=-\infty}^{\infty}
-     \underbrace{\Big[T\int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu)\ e^{j2\pi n\nu T} \,d\nu\Big]}_{\text{antitrasformata di }\overline{X}(f)} y[n] \ e^{-j2\pi nfT} = \\
-     &= T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu)  \underbrace{\sum_{n=-\infty}^{\infty} y[n] \ e^{-j2\pi n(f-\nu)T}}_{\text{dalla modulazione }\to \overline{Y}(f-\nu)} \,d\nu=
-     T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu) \overline{Y}(f-\nu)\,d\nu  \\
-    &\Rightarrow \overline{P}(f) = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\nu) \overline{Y}(f-\nu)\,d\nu
-    \end{align*}
-    Questa è la **convoluzione ciclica o periodica**. Calcolato su un singolo periodo e il risultato è diviso per l'ampiezza del periodo $\frac{1}{T}$
+	\begin{align*}
+	\overline{P}(f)&=\sum_{n=-\infty}^{\infty} p[n] \ e^{-j2\pi nfT} =  \sum_{n=-\infty}^{\infty} x[n] \ y[n] \ e^{-j2\pi nfT} = \sum_{n=-\infty}^{\infty}
+	\underbrace{\Big[T\int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\alpha)\ e^{j2\pi n\alpha T} \,d\alpha\Big]}_{\text{antitrasformata di }\overline{X}(f)} y[n] \ e^{-j2\pi nfT} = \\
+	&= T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\alpha)  \underbrace{\sum_{n=-\infty}^{\infty} y[n] \ e^{-j2\pi n(f-\alpha)T}}_{\text{dalla modulazione }\to \overline{Y}(f-\alpha)} \,d\alpha=
+	T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\alpha) \overline{Y}(f-\alpha)\,d\alpha  \\
+	&\Rightarrow \overline{P}(f) = T \int_{-\frac{1}{2T}}^{\frac{1}{2T}} \overline{X}(\alpha) \overline{Y}(f-\alpha)\,d\alpha
+	\end{align*}
+    Questa è la **convoluzione ciclica o periodica**. L' integrale viene calcolato su un singolo periodo e il risultato è diviso per l'ampiezza del periodo $\frac{1}{T}$
 9. Teorema dell'Incremento;
     $$
     \odv{x(t)}{t}\Big|_{t=nT} \cong \frac{x(nT)-x(nT-T)}{T} = \frac{x[n]-x[n-1]}{T}, \text{ con } x[n] \triangleq x(nT)  
     $$
     Si introduce l'operatore **incremento** $\Delta x[n] \triangleq x[n] - x[n-1]$ \newline
-    Usando il *teorema del ritardo*:
+    Usando il *teorema del ritardo* per ottenere la trasformata:
     $$
     \Delta x[n] \Longleftrightarrow \overline{X}(f) - \overline{X}(f)\ e^{-j2\pi fT} = \overline{X}(f) \ (1-e^{-j2\pi fT})
     $$
@@ -1189,13 +1189,13 @@ $$
         D > X_{\text{max}}-X_{\text{min}}
         $$
         In un processo *aleatorio gaussiano*, i cui campioni seguono la distribuzione di probabilità Gaussiana (quindi con un intervallo di variazione *illimitato*),
-        si rende necessario ipotizzare un intervallo di variazione dei campi **finito** e di dimensione tale da rendere *minima* la probabilità che esca da tale intervallo
+        si rende necessario ipotizzare un intervallo di variazione dei campioni **finito** e di dimensione tale da rendere *minima* la probabilità che esca da tale intervallo
         (**overflow**). Considerando il caso di valor medio *nullo*:
         \begin{align*}
         E\Big[f(x)\Big]=0 &\to \text{gli intervalli sono: }
         \left\{\begin{array}{cl}
-        [-3\Delta, 3\Delta] & \approx 95,45 \% \\ \relax 
-        [-4\Delta, 4\Delta] & \approx 99,73 \%
+        [-3\sigma, 3\sigma] & \approx 95,45 \% \\ \relax 
+        [-4\sigma, 4\sigma] & \approx 99,73 \%
         \end{array} \right. \to \Delta > 8\sigma
         \end{align*}
 
