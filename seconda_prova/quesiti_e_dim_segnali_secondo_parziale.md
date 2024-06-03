@@ -217,7 +217,34 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
     sequenze è che la sequenza sia assolutamente sommabile, ovvero la
     somma dei valori assoluti dei suoi elementi sia finita.
 
-11. ~~La trasformata di Fourier della sequenza\...~~
+11. Dagli appunti del Prof. Argenti (lezione 02/05/22):
+
+    $x[n]=\cos(2\pi 0.1n)$ è un segnale sinusoidale di durata infinita alla
+    frequenza normalizzata $F_0 = 0,1 = \frac{1}{10}, |F_0|<\frac{1}{2}$.
+    È una sequenza **non** assolutamente sommabile, ma riusciamo ad ottenere la
+    sua TFS mediante segnali impulsivi ($\delta$ di Dirac):
+    \begin{align*}
+    x[n] = \cos(2\pi 0.1n) \longleftrightarrow
+    \ov{X}(f) &= \frac{1}{2}\Big[ \delta(F-F_0)+\delta(F+F_0) \Big] = \\
+    &= \frac{1}{2}\Big[ \delta\Big(F-\frac{1}{10}\Big)+\delta\Big(F+\frac{1}{10}\Big) \Big] 
+    \end{align*}
+    Si può dimostrare utilizzando la trasformata *inversa*:
+    \begin{align*}
+    \int_{-\frac{1}{2}}^{\frac{1}{2}}\ov{X}(f) \ e^{j2\pi nF}\,df &=
+    \int_{-\frac{1}{2}}^{\frac{1}{2}} \frac{1}{2}\Big[ \delta(F-F_0)+\delta(F+F_0) \Big] \ e^{j2\pi nF}\ \,df= \\
+    &=\int_{-\frac{1}{2}}^{\frac{1}{2}} \frac{1}{2}\Big[ \delta\Big(F-\frac{1}{10}\Big)+\delta\Big(F+\frac{1}{10}\Big) \Big]\ e^{j2\pi nF}\ \,df= \\
+    &=\frac{1}{2}(e^{j2\pi\frac{1}{10}} + e^{-j2\pi\frac{1}{10}})= \\
+    &=\cos(\frac{2\pi n}{10}) = \cos(2\pi 0.1n)
+    \end{align*}
+    Nel caso generale in cui sia richiesta la TFS di un coseno $\cos(2\pi nf_0 T)$ è necessario utilizzare:
+    $$
+    \ov{X}(f) = \frac{1}{T}\sum_{n=-\infty}^{\infty}X\Big(f-\frac{k}{T}\Big)
+    $$
+    Dalla trasformata della sequenza costante, dal teorema del campionamento e dal teorema della modulazione:
+    \begin{align*}
+    e^{j2\pi nf_0 T} &\Leftrightarrow \frac{1}{T}\sum_{n=-\infty}^{\infty}\delta\Big(f-\frac{k}{T}\Big) \\
+    \ov{X}(f) &= \frac{1}{2T}\Big[\sum_{k=-\infty}^{\infty}\delta\Big(f -f_0 -\frac{k}{T}\Big) + \sum_{k=-infty}^{\infty}\delta\Big(f+f_0 -\frac{k}{T}\Big) \Big]
+    \end{align*}
 
 12. Se $x[n]$ ha trasformata di Fourier per sequenze $X(F)$, allora la
     sequenza $y[n]$ con TDF $Y(F)=X(F-F_0)$ è data da
