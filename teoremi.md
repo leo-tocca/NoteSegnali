@@ -804,9 +804,8 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     \end{align*}
     Il segnale di partenza coincide con il segnale interpolato.
 12. Relazione tra TCF e TFS.
-    \begin{align*}
-    \underset{\text{discreto}}{x[n]}=\underset{\text{continuo}}{x(nT)} \Longleftrightarrow \underset{\text{discreto}}{\overline{X}(f)} = \underset{\text{continuo}}{X(f)}
-    \end{align*}
+    
+    Sappiamo che nel dominio "temporale" è valida la relazione $x[n]=x(nT)$: vogliamo trovare una relazione simile anche dal punto di vista frequenziale:   
     \begin{align*}
     \overline{X}(f) &\triangleq \sum_{n=-\infty}^{\infty} x[n] \ e^{-j2\pi nfT} = \sum_{n=-\infty}^{\infty} x(nT) \ e^{-j2\pi nfT}=
     \boxed{\text{Sapendo che: } x(nT)=\int_{-\infty}^{\infty}X(\alpha) e^{j2\pi\alpha nT}\,d\alpha} \\
@@ -827,8 +826,10 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     \begin{align*}
     &\int_{-\infty}^{\infty}X(\alpha) \frac{1}{T} \sum_{k=-\infty}^{\infty} \delta(f-\alpha -\frac{k}{T})\,d\alpha = \frac{1}{T}\sum_{k=-\infty}^{\infty} \int_{-\infty}^{\infty}X(\alpha) \delta(f-\alpha -\frac{k}{T})\,d\alpha = \\
     &=\delta \text{ è pari } = \frac{1}{T}\sum_{k=-\infty}^{\infty} \int_{-\infty}^{\infty}X(\alpha) \delta\Big(\alpha -(f- \frac{k}{T})\Big)\,d\alpha = \text{ prodotto tra } X(\alpha) \text{ e Dirac centrato in } f -\frac{k}{T} \\
-    &=\text{per la proprietà campionatrice della delta di Dirac } \longrightarrow \overline{X}(f) = \frac{1}{T}\sum_{n=-\infty}^{\infty}X(f-\frac{k}{T})
+    &=\text{per la proprietà campionatrice della delta di Dirac } \longrightarrow \overline{X}(f) = \frac{1}{T}\sum_{k=-\infty}^{\infty}X(f-\frac{k}{T})
     \end{align*}
+    Quindi questa relazione dimostra che la trasformata di Fourier di una sequenza ottenuta per campionamento si può ricavare come _periodicizzazione_ della trasformata del segnale analogico di partenza,
+    con un periodo di ripetizione in frequenza pari alla frequenza di campionamento $\frac{1}{T}$!
 
 ## Segnali a tempo discreto periodici
 13. Trasformata discreta di Fourier (definizione);
@@ -847,12 +848,13 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
 \begin{align*}
     x[n] &=\frac{1}{N_0} \sum_{k=0}^{N_0 -1} \overline{X}_k \ e^{j\frac{2\pi kn}{N_0}} \Rightarrow \overline{X}_k = \sum_{n=0}^{N_0 -1} x[n] e^{-j\frac{2\pi kn}{N_0}} \\
     &\text{Moltiplichiamo per } e^{-j \frac{2\pi nm}{N_0}} \text{ con } (0\leq m \leq N_0 - 1) \text{ ed effettuiamo una somma sul periodo } (n)& \\
-    &\sum_{n=0}^{N_0 -1} x[n] e^{-\frac{j2\pi mn}{N_0}} =\frac{1}{N_0} \sum_{n=0}^{N_0 -1} \sum_{k=0}^{N_0 -1}\overline{X}_k e^{j\frac{2\pi n(k-m)}{N_0}} = \end{align*}
+    &\sum_{n=0}^{N_0 -1} x[n] e^{-\frac{j2\pi mn}{N_0}} =\frac{1}{N_0} \sum_{n=0}^{N_0 -1} \sum_{k=0}^{N_0 -1}\overline{X}_k e^{j\frac{2\pi n(k-m)}{N_0}} = \frac{1}{N_0}\sum_{k=0}^{N_0 -1}\overline{X}_k \sum_{n=0}^{N_0 -1} e^{j\frac{2\pi n(k-m)}{N_0}}= 
+\end{align*}
 \begin{align*}
     \boxed{
         \begin{array}{cl}
             \text{Sviluppando il secondo membro:}
-            \displaystyle\sum_{k=0}^{N_0 -1}\overline{X}_k \sum_{n=0}^{N_0 -1} e^{j\frac{2\pi n(k-m)}{N_0}} \\
+            \displaystyle\frac{1}{N_0}\sum_{k=0}^{N_0 -1}\overline{X}_k \sum_{n=0}^{N_0 -1} e^{j\frac{2\pi n(k-m)}{N_0}} \\
             \text{La seconda sommatoria si sviluppa come}: \\
             \displaystyle 
             \sum_{n=0}^{N_0-1}e^{j\frac{2\pi n(k-m)}{N_0}}=\sum_{n=0}^{N_0-1}\Bigg(e^{j\frac{2\pi(k-m)}{N_0}}\Bigg)^{n}=
