@@ -40,6 +40,15 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{italian}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
 \usepackage{cancel}
 \usepackage{steinmetz}
 \usepackage{derivative}
@@ -62,10 +71,11 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
+  pdflang={it},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
@@ -1462,7 +1472,7 @@ Notazione:
   \item
     per eseguire una moltiplicazione complessa è necessario eseguire 4
     moltiplicazioni reali e 2 addizioni reali,
-    \((a + jb) · (c + jd) = (ac - bd) + j(ad + bc)\).
+    \((a + jb) \cdot (c + jd) = (ac - bd) + j(ad + bc)\).
   \end{itemize}
 
   Quindi per un singolo campione \(X[k]\) sono necessarie \(N_0\)
@@ -1692,7 +1702,7 @@ quesiti)}\label{quantizzazione-per-alcune-di-queste-domande-guardare-quesiti}
     \tightlist
     \item
       \textbf{Passo}: indicato con \(\Delta\), rappresenta la distanza
-      tra livelli di quantizzazione.
+      tra livelli (e soglie) di quantizzazione.
     \item
       \textbf{bit}: indicato con \(B\), serve a determinare il numero di
       possibili livelli di quantizzazione, rappresentati con notazione
@@ -1750,41 +1760,54 @@ quesiti)}\label{quantizzazione-per-alcune-di-queste-domande-guardare-quesiti}
 
   \begin{enumerate}
   \def\labelenumii{\arabic{enumii}.}
-  \tightlist
   \item
     \(e(nT)\) sia un processo stazionario in senso lato: quindi media,
-    potenza e varianza \emph{costanti} e non dipendono da n (distanza
-    tra i campioni);
+    potenza e varianza \emph{costanti} e \textbf{non} dipendono da n
+    (distanza tra i campioni);
   \item
     che la densità di probabilità dell'\textbf{ampiezza dell'errore di
     quantizzazione} sia di tipo \textbf{uniforme}, permettendo di
     valutare tali costanti distinguendo i casi di quantizzazione per
-    troncamento e per arrotondamento: - densità probabilità errore
-    troncamento: \begin{align*}
-        P_e(e)= \left\{
-        \begin{array}{ll}
-        \frac{1}{\Delta}& -\frac{\Delta}{2}<e\leq\frac{\Delta}{2}\\
-        0 & \text{altrove}
-        \end{array}\right. \to E\Big[e(nT)\Big]= 0 = E\Big[e^{2}(nT)\Big] = \frac{\Delta^{2}}{12}
-        \end{align*}
-    \begin{align*}E[e(nT)]&=\int\limits_{-\Delta}^{0}e p_{e}(e) de=-\frac{\Delta}{2},\quad=\quad\frac{1}{\Delta}\cdot\frac{e^{2}}{2}\Bigg|_{-\Delta}^{0}\\E[e^{2}(nT)]&=\int\limits_{-\Delta}^{0}e^{2} p_{e}(e) de=\frac{\Delta^{2}}{3},\quad=\quad\frac{1}{\Delta} \frac{e^{3}}{3}\Bigg|_{-\Delta}^{0}\\\sigma_{e}^{2}&=E[(e(nT)-E[e(nT)])^{2}]=\int\limits_{-\Delta}^{0}\left(e+\frac{\Delta}{2}\right)^{2} p_{e}(e) de=\frac{\Delta^{2}}{12}\quad= E[e^{2}]-E[e]^{2}\end{align*}
-    - densità errore arrotondamento:
-    \begin{align*}&p_e(e)=\begin{cases}\frac{1}{\Delta}&-\frac{\Delta}{2}<e\leq\frac{\Delta}{2}\\0&\text{altrove,}\end{cases}\\&E[e(nT)]=\int\limits_{-\frac{\Delta}{2}}^{\frac{\Delta}{2}}e p_e(e) de=0,&=\frac{1}{\Delta}\quad\frac{e^{2}}{2}\Bigg|_{-\Delta/\ell}^{\Delta/2}\\&E[e^2(nT)]=\sigma_e^2=\int\limits_{-\frac{\Delta}{2}}^{\frac{\Delta}{2}}e^2 p_e(e) de=\frac{\Delta^2}{12}.&=\quad\frac{1}{\Delta}\quad\frac{e^3}{3}\Bigg|_{-\Delta/\ell}^{\Delta/2}\end{align*}
+    troncamento e per arrotondamento:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      densità probabilità errore troncamento: \begin{align*}
+          P_e(e)&= \left\{
+          \begin{array}{ll}
+          \frac{1}{\Delta}& -\Delta<e\leq 0\\
+          0 & \text{altrove}
+          \end{array}\right. \to E\Big[e(nT)\Big]= 0 = E\Big[e^{2}(nT)\Big] = \frac{\Delta^{2}}{12} \\
+          E[e(nT)]&=\int\limits_{-\Delta}^{0}e\ p_{e}(e) \,de=\frac{1}{\Delta}\cdot\frac{e^{2}}{2}\Bigg|_{-\Delta}^{0}=-\frac{\Delta}{2} \\
+          E[e^{2}(nT)]&=\int\limits_{-\Delta}^{0}e^{2} p_{e}(e) de=\frac{\Delta^{2}}{3}=\frac{1}{\Delta} \frac{e^{3}}{3}\Bigg|_{-\Delta}^{0} \\
+          \sigma_{e}^{2}&=E[(e(nT)-E[e(nT)])^{2}]=E[e^{2}(nT)]-\Big(E[e(nT)]\Big)^{2} =\\
+          &= \int\limits_{-\Delta}^{0}\left(e+\frac{\Delta}{2}\right)^{2} p_{e}(e) de=\frac{\Delta^{2}}{12}
+          \end{align*}
+    \item
+      densità errore arrotondamento: \begin{align*}
+          p_e(e)&=\begin{cases}\frac{1}{\Delta}&-\frac{\Delta}{2}<e\leq\frac{\Delta}{2}\\0&\text{altrove,}\end{cases}\\
+          E[e(nT)]&=\int\limits_{-\frac{\Delta}{2}}^{\frac{\Delta}{2}}e\ p_e(e) \,de=\frac{1}{\Delta}\frac{e^{2}}{2}\Bigg|_{-\frac{\Delta}{2}}^{\frac{\Delta}{2}}=0\\
+          E[e^2(nT)]&=\sigma_{e}^2=\int\limits_{-\frac{\Delta}{2}}^{\frac{\Delta}{2}}e^2\ p_e(e) \,de=\frac{1}{\Delta}\frac{e^3}{3}\Bigg|_{-\frac{\Delta}{2}}^{\frac{\Delta}{2}}=\frac{\Delta^2}{12}
+      \end{align*}
+    \end{itemize}
   \item
     \(\{e(nT)\}\) incorrelato con processo \(\{x(nT)\}\);
+
+    \(\displaystyle E\Big[\{x(nT)\} \{e(nT)\}\Big] = E\Big[\{x(nT)\}\Big]\cdot E\Big[\{e(nT)\}\Big]\)
   \item
     I campioni del processo \(\{e(nT)\}\) sono \textbf{incorrelati} tra
     loro;
-  \end{enumerate}
 
-  Per la quantizzazione con troncamento si ha: \begin{align*}
-  E\Big[e(nT)\ e\Big((n+m)T\Big)\Big]=\left\{\begin{array}{ll}E[e^2(nT)]=\frac{\Delta^2}{3}&m=0\\
-  \\E[e(nT)]E\Big[e\Big((n+m)T\Big)\Big]=\frac{\Delta}{2}\cdot\frac{\Delta}{2} =\frac{\Delta^2}{4}&m\neq0,\end{array}\right.
-  \end{align*} mentre per la quantizzazione con arrotondamento abbiamo
-  \begin{align*}
-  E\Big[e(nT)e\Big((n+m)T\Big)\Big]=\left\{\begin{array}{ll}E[e^2(nT)]=\sigma_e^2=\frac{\Delta^2}{12}&m=0\\\\0&m\ne0.\end{array}\right.
-  \end{align*} In questo caso, l'errore di quantizzazione è un
-  \textbf{processo bianco}.
+    Per la quantizzazione con troncamento si ha: \begin{align*}
+    E\Big[e(nT)\ e\Big((n+m)T\Big)\Big]=\left\{\begin{array}{ll}E[e^2(nT)]=\frac{\Delta^2}{3}&m=0\\
+    \\E[e(nT)]E\Big[e\Big((n+m)T\Big)\Big]=\frac{\Delta}{2}\cdot\frac{\Delta}{2} =\frac{\Delta^2}{4}&m\neq0,\end{array}\right.
+    \end{align*} mentre per la quantizzazione con arrotondamento abbiamo
+    \begin{align*}
+    E\Big[e(nT)e\Big((n+m)T\Big)\Big]=\left\{\begin{array}{ll}E[e^2(nT)]=\sigma_e^2=\frac{\Delta^2}{12}&m=0\\\\0&m\ne0.\end{array}\right.
+    \end{align*} In questo caso, l'errore di quantizzazione è un
+    \textbf{processo bianco}.
+  \end{enumerate}
 \item
   Definizione Signal To Noise Ratio (SNR) e formule.
 
@@ -1797,7 +1820,7 @@ quesiti)}\label{quantizzazione-per-alcune-di-queste-domande-guardare-quesiti}
   \(\Delta=\frac{D}{2^{B}}\): \[
   \text{SNR}_{q}=\frac{S}{\sigma_e^2}=\frac{S}{\frac{1}{12}\Delta^2}=\frac{S}{\frac{1}{12}(\frac{D}{2^B})^2}=\frac{12\cdot S\cdot2^{2B}}{D^2}
   \] Esprimendo \(\text{SNR}_{q}\) in scala logaritmica \begin{align*}
-  SNR_{\mathrm{qdB}} &=10\log_{10}SNR_{\mathrm{q}}=10\log_{10}\left(\frac{12\cdot S\cdot2^{2B}}{D^{2}}\right) \\
+  \text{SNR}_{q, \text{dB}} &=10\log_{10}SNR_{\mathrm{q}}=10\log_{10}\left(\frac{12\cdot S\cdot2^{2B}}{D^{2}}\right) \\
   &=(20 \log_{10}2)B+10\log_{\mathbf{1}0}\left(\frac{12S}{D^2}\right) \\
   &\approx6.02B+10\log_{10}\left(\frac{12S}{D^2}\right)\ \mathrm{dB}. 
   \end{align*}

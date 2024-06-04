@@ -1028,7 +1028,7 @@ Notazione: $\dft_{N_0}\Big\{x[n]\Big\} = \overline{X}_k, \text{ con } 0\leq n, k
     Supponiamo quindi di avere valori *complessi* $z=a+jb$, ma **precalcolati**, ovvero già in memoria. Per il calcolo di un *singolo campione* $X[k]$ è necessario eseguire $N_0$ moltiplicazioni complesse
     e $N_0 -1$ addizioni complesse, le quali sono tradotte dai calcolatori in operazioni nel campo reale, eseguendole tra le parti reali e immaginari dei numeri complessi coinvolti:
     - per eseguire un’addizione complessa è necessario eseguire 2 addizioni reali: $(a + jb) + (c + jd) = (a + c) + j(b + d)$
-    - per eseguire una moltiplicazione complessa è necessario eseguire 4 moltiplicazioni reali e 2 addizioni reali, $(a + jb) · (c + jd) = (ac - bd) + j(ad + bc)$.
+    - per eseguire una moltiplicazione complessa è necessario eseguire 4 moltiplicazioni reali e 2 addizioni reali, $(a + jb) \cdot (c + jd) = (ac - bd) + j(ad + bc)$.
 
     Quindi per un singolo campione $X[k]$ sono necessarie $N_0$ moltiplicazioni complesse e $N_0 -1$ somme complesse. Inoltre, per ogni valore di $k$ sono necessarie
     $8N_0 -2$ operazioni reali, e dato che la sequenza è composta da $N_0$ valori la complessità diventa **quadratica**:
@@ -1178,7 +1178,7 @@ $$
     L'operazione quindi consiste nel **selezionare l'intervallo più corretto per ogni campione** $x(nt)$ e associare al suo interno un valore $\hat{x}_i$ detto *livello* dell'intervallo selezionato.
     
     - "Definizioni":
-        - **Passo**: indicato con $\Delta$, rappresenta la distanza tra livelli di quantizzazione.
+        - **Passo**: indicato con $\Delta$, rappresenta la distanza tra livelli (e soglie) di quantizzazione.
         - **bit**: indicato con $B$, serve a determinare il numero di possibili livelli di quantizzazione, rappresentati con notazione binaria, pari a $2^{B}$
         - **dinamica**: indicata con $D$ rappresenta l'ampiezza dell'intervallo di valori che i livelli di quantizzazione riescono a coprire.
     
@@ -1219,29 +1219,38 @@ $$
     $$
     Modelliamo quindi $e(nT)$ come un processo aleatorio, indicandolo come **rumore di quantizzazione** e con le seguenti ipotesi:
     1. $e(nT)$ sia un processo stazionario in senso lato: quindi media,
-        potenza e varianza *costanti* e non dipendono da n (distanza tra i campioni);
+        potenza e varianza *costanti* e **non** dipendono da n (distanza tra i campioni);
     2.   che la densità di probabilità dell'**ampiezza dell'errore di quantizzazione** sia di tipo
         **uniforme**, permettendo di valutare tali costanti distinguendo i casi di quantizzazione per troncamento e per arrotondamento:
-        - densità probabilità errore troncamento:
+            - densità probabilità errore troncamento:
         \begin{align*}
-        P_e(e)= \left\{
+        P_e(e)&= \left\{
         \begin{array}{ll}
-        \frac{1}{\Delta}& -\frac{\Delta}{2}<e\leq\frac{\Delta}{2}\\
+        \frac{1}{\Delta}& -\Delta<e\leq 0\\
         0 & \text{altrove}
-        \end{array}\right. \to E\Big[e(nT)\Big]= 0 = E\Big[e^{2}(nT)\Big] = \frac{\Delta^{2}}{12}
+        \end{array}\right. \to E\Big[e(nT)\Big]= 0 = E\Big[e^{2}(nT)\Big] = \frac{\Delta^{2}}{12} \\
+        E[e(nT)]&=\int\limits_{-\Delta}^{0}e\ p_{e}(e) \,de=\frac{1}{\Delta}\cdot\frac{e^{2}}{2}\Bigg|_{-\Delta}^{0}=-\frac{\Delta}{2} \\
+        E[e^{2}(nT)]&=\int\limits_{-\Delta}^{0}e^{2} p_{e}(e) de=\frac{\Delta^{2}}{3}=\frac{1}{\Delta} \frac{e^{3}}{3}\Bigg|_{-\Delta}^{0} \\
+        \sigma_{e}^{2}&=E[(e(nT)-E[e(nT)])^{2}]=E[e^{2}(nT)]-\Big(E[e(nT)]\Big)^{2} =\\
+        &= \int\limits_{-\Delta}^{0}\left(e+\frac{\Delta}{2}\right)^{2} p_{e}(e) de=\frac{\Delta^{2}}{12}
         \end{align*}
-        \begin{align*}E[e(nT)]&=\int\limits_{-\Delta}^{0}e p_{e}(e) de=-\frac{\Delta}{2},\quad=\quad\frac{1}{\Delta}\cdot\frac{e^{2}}{2}\Bigg|_{-\Delta}^{0}\\E[e^{2}(nT)]&=\int\limits_{-\Delta}^{0}e^{2} p_{e}(e) de=\frac{\Delta^{2}}{3},\quad=\quad\frac{1}{\Delta} \frac{e^{3}}{3}\Bigg|_{-\Delta}^{0}\\\sigma_{e}^{2}&=E[(e(nT)-E[e(nT)])^{2}]=\int\limits_{-\Delta}^{0}\left(e+\frac{\Delta}{2}\right)^{2} p_{e}(e) de=\frac{\Delta^{2}}{12}\quad= E[e^{2}]-E[e]^{2}\end{align*}
-        - densità errore arrotondamento:
-        \begin{align*}&p_e(e)=\begin{cases}\frac{1}{\Delta}&-\frac{\Delta}{2}<e\leq\frac{\Delta}{2}\\0&\text{altrove,}\end{cases}\\&E[e(nT)]=\int\limits_{-\frac{\Delta}{2}}^{\frac{\Delta}{2}}e p_e(e) de=0,&=\frac{1}{\Delta}\quad\frac{e^{2}}{2}\Bigg|_{-\Delta/\ell}^{\Delta/2}\\&E[e^2(nT)]=\sigma_e^2=\int\limits_{-\frac{\Delta}{2}}^{\frac{\Delta}{2}}e^2 p_e(e) de=\frac{\Delta^2}{12}.&=\quad\frac{1}{\Delta}\quad\frac{e^3}{3}\Bigg|_{-\Delta/\ell}^{\Delta/2}\end{align*}
+            - densità errore arrotondamento:
+        \begin{align*}
+        p_e(e)&=\begin{cases}\frac{1}{\Delta}&-\frac{\Delta}{2}<e\leq\frac{\Delta}{2}\\0&\text{altrove,}\end{cases}\\
+        E[e(nT)]&=\int\limits_{-\frac{\Delta}{2}}^{\frac{\Delta}{2}}e\ p_e(e) \,de=\frac{1}{\Delta}\frac{e^{2}}{2}\Bigg|_{-\frac{\Delta}{2}}^{\frac{\Delta}{2}}=0\\
+        E[e^2(nT)]&=\sigma_{e}^2=\int\limits_{-\frac{\Delta}{2}}^{\frac{\Delta}{2}}e^2\ p_e(e) \,de=\frac{1}{\Delta}\frac{e^3}{3}\Bigg|_{-\frac{\Delta}{2}}^{\frac{\Delta}{2}}=\frac{\Delta^2}{12}
+    \end{align*}
     3.   $\{e(nT)\}$ incorrelato con processo $\{x(nT)\}$;
-    4.   I campioni del processo $\{e(nT)\}$ sono **incorrelati** tra loro;
 
-    Per la quantizzazione con troncamento si ha:
+            $\displaystyle E\Big[\{x(nT)\} \{e(nT)\}\Big] = E\Big[\{x(nT)\}\Big]\cdot E\Big[\{e(nT)\}\Big]$
+    4.  I campioni del processo $\{e(nT)\}$ sono **incorrelati** tra loro;
+
+         Per la quantizzazione con troncamento si ha:
     \begin{align*}
     E\Big[e(nT)\ e\Big((n+m)T\Big)\Big]=\left\{\begin{array}{ll}E[e^2(nT)]=\frac{\Delta^2}{3}&m=0\\
     \\E[e(nT)]E\Big[e\Big((n+m)T\Big)\Big]=\frac{\Delta}{2}\cdot\frac{\Delta}{2} =\frac{\Delta^2}{4}&m\neq0,\end{array}\right.
     \end{align*}
-    mentre per la quantizzazione con arrotondamento abbiamo
+        mentre per la quantizzazione con arrotondamento abbiamo
     \begin{align*}
     E\Big[e(nT)e\Big((n+m)T\Big)\Big]=\left\{\begin{array}{ll}E[e^2(nT)]=\sigma_e^2=\frac{\Delta^2}{12}&m=0\\\\0&m\ne0.\end{array}\right.
     \end{align*}
@@ -1260,7 +1269,7 @@ $$
     $$
     Esprimendo $\text{SNR}_{q}$ in scala logaritmica
     \begin{align*}
-    SNR_{\mathrm{qdB}} &=10\log_{10}SNR_{\mathrm{q}}=10\log_{10}\left(\frac{12\cdot S\cdot2^{2B}}{D^{2}}\right) \\
+    \text{SNR}_{q, \text{dB}} &=10\log_{10}SNR_{\mathrm{q}}=10\log_{10}\left(\frac{12\cdot S\cdot2^{2B}}{D^{2}}\right) \\
     &=(20 \log_{10}2)B+10\log_{\mathbf{1}0}\left(\frac{12S}{D^2}\right) \\
     &\approx6.02B+10\log_{10}\left(\frac{12S}{D^2}\right)\ \mathrm{dB}. 
     \end{align*}
