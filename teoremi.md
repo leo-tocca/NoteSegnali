@@ -787,7 +787,7 @@ R_{x} (\tau) =  x(\tau) \otimes x(-\tau) \Longleftrightarrow X(f) \ X(-f) = X(f)
     $p(t)$ è un impulso "diverso" per generalizzare l'operazione d'interpolazione, anche al fine di evitare le discontinuità che lo stesso impulso $p(t)$ introduce nell'interpolazione a mantenimento.
     \begin{align*}
     \hat{x}(t)&= \sum_{n=-\infty}^{\infty} x[n] \ p(t-nT), \ \text{scegliendo } p(t)= \sinc\Big(\frac{f}{T}\Big) \Rightarrow P(f)=T\rect (fT) \\ 
-    \hat{X}(f)&= P(f) \ \overline{X}(f) = \cancel{T}\rect \Big(\frac{f}{\frac{1}{T}}\Big)\frac{1}{\cancel{T}}\cdot  \sum_{k=-\infty}^{+\infty} X\Big(f-\frac{k}{T}\Big)= X(f) \\
+    \hat{X}(f)&= P(f) \ \overline{X}(f) = \cancel{T}\rect \Big(fT\Big)\frac{1}{\cancel{T}}\cdot  \sum_{k=-\infty}^{+\infty} X\Big(f-\frac{k}{T}\Big) \\ &= X(f) \to \text{ molto importante!} \\
    &\boxed{\begin{array}{cl}
   \text{ricampionando il segnale}
   \\

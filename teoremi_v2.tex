@@ -1154,7 +1154,7 @@ aperiodici}\label{segnali-a-tempo-discreto-aperiodici}
   stesso impulso \(p(t)\) introduce nell'interpolazione a mantenimento.
   \begin{align*}
   \hat{x}(t)&= \sum_{n=-\infty}^{\infty} x[n] \ p(t-nT), \ \text{scegliendo } p(t)= \mathop{\mathrm{sinc}}\Big(\frac{f}{T}\Big) \Rightarrow P(f)=T\mathop{\mathrm{rect}}(fT) \\ 
-  \hat{X}(f)&= P(f) \ \overline{X}(f) = \cancel{T}\mathop{\mathrm{rect}}\Big(\frac{f}{\frac{1}{T}}\Big)\frac{1}{\cancel{T}}\cdot  \sum_{k=-\infty}^{+\infty} X\Big(f-\frac{k}{T}\Big)= X(f) \\
+  \hat{X}(f)&= P(f) \ \overline{X}(f) = \cancel{T}\mathop{\mathrm{rect}}\Big(fT\Big)\frac{1}{\cancel{T}}\cdot  \sum_{k=-\infty}^{+\infty} X\Big(f-\frac{k}{T}\Big) \\ &= X(f) \to \text{ molto importante!} \\
      &\boxed{\begin{array}{cl}
     \text{ricampionando il segnale}
     \\
