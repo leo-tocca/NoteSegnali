@@ -38,7 +38,7 @@ header-includes: |
 7. Qual è la condizione sufficiente per l'esistenza della trasformata per sequenze?  [$^{**}$]
 8. Cosa s'intende per denormalizzazione e a cosa serve?
 9. Enunciare e spiegare il teorema dell'Incremento della TDF per sequenze reali
-10. Enunciare e spiegare la condizione di convergenza della Trasformata di Fourier per sequenze (vedi n°6)
+10. Enunciare e spiegare la condizione di convergenza della Trasformata di Fourier per sequenze (vedi n°7)
 11. Sia $x[n] = cos(2\pi 0.1 n), \ n \in \mathbb{Z}$. Quale è la sua trasformata di Fourier per sequenze? Giustificare la risposta.
 12. Se $x[n]$ ha trasformata di Fourier per sequenze $\overline{X}(F)$, quale sequenza $y[n]$ ha trasformata di Fourier $\overline{Y}(F) = \overline{X}(F - F_0)$? Giustificare la risposta.
 13. Calcolare la trasformata di Fourier della sequenza $x[n]$ formata dall'impulso rettangolare discreto, cioè $x[n]= u[n]-u[n-N]$
@@ -140,7 +140,7 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
 
     -   la sua media e la sua varianza rimangono costanti nel tempo
         $\to E[x(t)] = m_x(t) = m_x$\
-    -   la sua autocorrelazione dipende solo dallo scarto temporale e
+    -   la sua funzione di autocorrelazione dipende solo dallo scarto temporale e
         non dal tempo assoluto (funzione solo dello scarto $\tau$).
         $\to R_{xx}(t, t+\tau) = R_{xx}(\tau)$
 
@@ -164,7 +164,7 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
 
     -   $E[w(t)] = 0$
 
-    -   $S_{ww}(f) = \mathcal{F} \{\frac{N_0}{2}\} = \frac{N_0}{2} \to$''
+    -   $S_{ww}(f) = \mathcal{F} \{\frac{N_0}{2}\} = \frac{N_0}{2} \to$
         Potenza **infinita** $\to$ densità spettrale di potenza
 
     -   Nota: si chiama bianco in quanto possedendo nello spettro
@@ -185,7 +185,7 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
 ##### Risposte tdf sequenze aperiodiche
 
 6.  Il segnale $x[n]$ viene espresso mediante la somma di molti termini
-    $X(f)$ i quali, al variare della frequenza $\overline{X}(F)$ hanno
+    $\ov{X}(f)$ i quali, al variare della frequenza $f$ hanno
     un peso diverso (in ampiezza e in fase). A differenza di un segnale
     analogico, per esprimere una sequenza in ambito frequenziale sono
     **sufficienti** le sole componenti con frequenze comprese tra
@@ -195,8 +195,9 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
 7.  La condizione sufficiente per l'esistenza della trasformata per
     sequenze è che la sequenza sia ***assolutamente sommabile***, ovvero
     la somma dei valori assoluti dei suoi elementi sia finita.
-    $$\displaystyle \sum_{n=-\infty}^{\infty} |x[n]| < + \infty \to |X(f)| < +\infty$$
-    $$|\overline{X}(f)| = |\sum_{n=-\infty}^{\infty} x[n] e^{-j2\pi nfT}| \leq \sum_{n=-\infty}^{\infty} | x[n] e^{-j2\pi nfT}| \leq 
+    $$\displaystyle \sum_{n=-\infty}^{\infty} |x[n]| < + \infty \to |\ov{X}(f)| < +\infty$$
+    $$|\overline{X}(f)| = |\sum_{n=-\infty}^{\infty} x[n]\  e^{-j2\pi nfT}|
+    \leq \sum_{n=-\infty}^{\infty} | x[n] \ e^{-j2\pi nfT}| \leq 
       \sum_{n=-\infty}^{\infty} |x[n]|$$
 
 8.  La denormalizzazione è necessaria quando la sequenza $x[n]$ deriva
@@ -256,9 +257,9 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
 13. La trasformata di Fourier della sequenza $x[n]=u[n]-u[n-N]$, dove
     $u[n]$ è la funzione gradino unitario, è data da:
     \begin{align*}
-    \displaystyle \overline{X}(f) &= \sum_{n = -\infty}^{+\infty} (u[n]-u[n-N])e^{-2\pi nfT} = \sum_{n = 0}^{N-1}e^{-2\pi nfT} = \sum_{n = 0}^{N-1}(e^{-2\pi fT})^n = \\
+    \displaystyle \overline{X}(f) &= \sum_{n = -\infty}^{+\infty} (u[n]-u[n-N])e^{-j2\pi nfT} = \sum_{n = 0}^{N-1}e^{-j2\pi nfT} = \sum_{n = 0}^{N-1}(e^{-j2\pi fT})^n = \\
     &\text{si applica la serie geometrica, con} \ q = e^{-j2\alpha}& \\
-    &= \frac{1-e^{-2\pi N\alpha}}{1-e^{-2\pi \alpha}} = \frac{e^{j \alpha N}}{e^{\alpha}} \cdot \frac{e^{j\alpha N} - e^{-j\alpha N}}{e^{j\alpha } - e^{-j\alpha }} = e^{j \alpha (N-1)} \cdot \frac{sen(\alpha N)}{sen(\alpha)} = e^{-j\pi (N-1)fT} \cdot \frac{sen(N\pi fT)}{sen(\pi fT)}
+    &= \frac{1-e^{-j2\pi N\alpha}}{1-e^{-j2\pi \alpha}} = \frac{e^{j \alpha N}}{e^{j\alpha}} \cdot \frac{e^{j\alpha N} - e^{-j\alpha N}}{e^{j\alpha } - e^{-j\alpha }} = e^{j \alpha (N-1)} \cdot \frac{sen(\alpha N)}{sen(\alpha)} = e^{-j\pi (N-1)fT} \cdot \frac{sen(N\pi fT)}{sen(\pi fT)}
     \end{align*}
 
 ##### Risposte campionamento e interpolazione
@@ -275,7 +276,7 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
     banda. L'aliasing va evitato perché introduce
     distorsioni nel segnale ricostruito dal momento che le repliche, a
     causa della loro sovrapposizione si sommano, rendendo impossibile
-    una ricostruzione **fedele** del segnale originale .
+    una ricostruzione **fedele** del segnale originale.
 
 16. Il segnale $x(t)=e^{-t}u(t)$ può essere campionato senza aliasing
     solo se la frequenza di campionamento è infinita. Questo perché il
@@ -313,7 +314,7 @@ con [$^{***}$] si intende una domanda spostata dai quesiti alle dimostrazioni
             computazionalmente più intensiva.
 
 20. L'interpolazione a mantenimento ha il vantaggio di essere semplice
-    da implementare e computazionalmente efficiente. Tuttavia, il
+    da implementare e di essere computazionalmente efficiente. Tuttavia, il
     segnale interpolato **non è limitato in banda**: in questo modo sono
     introdotte delle componenti frequenziali non presenti nel segnale
     analogico $x(t)$. Derivano dalla presenza di repliche dello spettro
@@ -404,7 +405,7 @@ $$
 
 29. $x[n]$ sequenza di 10 campioni (per esempio posti ad 1) \newline
     $X_{10}[k] \rightarrow$ DFT con periodicità 10 \newline
-    $X_{10}[k] \rightarrow$ DFT con periodicità 20 \newline
+    $X_{20}[k] \rightarrow$ DFT con periodicità 20 \newline
 \begin{align*}
 x_{10}[n]&=x[n], \quad 
 x_{20}[n] = \begin{cases}x[n] & n=0,\dots,9 \\
